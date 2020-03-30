@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+    app:
+        working_dir: ${PROJECT_CONTAINER_PATH}
+        volumes:
+            - ../.:${PROJECT_CONTAINER_PATH}
+            - ./php/100-app.ini:/usr/local/etc/php/conf.d/100-app.ini
