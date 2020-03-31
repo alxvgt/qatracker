@@ -2,26 +2,32 @@
 
 namespace App\Chart;
 
+use App\DataSerie\DataSerie;
 use Goat1000\SVGGraph\SVGGraph;
 
 class ChartGenerator
 {
-    public static function generate($values)
+    /**
+     * @param       $values
+     * @param array $settings
+     * @return SVGGraph
+     */
+    public static function generate($values, $settings = []): SVGGraph
     {
-        $settings = [
-            'back_colour' => '#fff',
-            'axis_font' => 'Arial',
-        ];
+        $settings = array_merge([
+            'datetime_keys'       => true,
+            'datetime_key_format' => DataSerie::DATE_FORMAT,
+            'datetime_text_format' => 'j M',
+            'back_colour'         => '#fff',
+            'axis_font'           => 'Arial',
+        ], $settings);
 
         $width = 500;
         $height = 300;
-        $type = 'LineGraph';
 
-        $colours = [ [ 'red', 'yellow' ], [ 'blue', 'white' ] ];
         $graph = new SVGGraph($width, $height, $settings);
-        $graph->colours($colours);
-
         $graph->values($values);
-        return $graph->fetch($type);
+
+        return $graph;
     }
 }
