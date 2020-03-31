@@ -11,7 +11,7 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
 
 class DataSerie
 {
-    public const DATA_SERIES_DIR = TrackCommand::BASE_DIR.'/'.'data-series';
+    public const DATA_SERIES_DIR = 'data-series';
     public const DATE_FORMAT = 'YmdHis';
     protected string $storageFilePath;
     protected string $name;
@@ -28,7 +28,8 @@ class DataSerie
         $slugger = new AsciiSlugger();
         $name = $slugger->slug($name);
 
-        $this->storageFilePath = static::DATA_SERIES_DIR.'/'.$name.'.json';
+        $storageDir = TrackCommand::getBaseDir().'/'.static::DATA_SERIES_DIR;
+        $this->storageFilePath = $storageDir.'/'.$name.'.json';
         $this->name = $name;
 
         $this->load();

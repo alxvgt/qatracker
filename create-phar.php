@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 // The php.ini setting phar.readonly must be set to 0
-$pharFile = 'trackqa.phar';
+$pharFile = 'qatracker.phar';
 
 // clean up
 if (file_exists($pharFile)) {
@@ -18,10 +18,12 @@ $p = new Phar($pharFile);
 $p->buildFromDirectory('app/');
 
 // pointing main file which requires all classes
-$p->setDefaultStub('track.php', '/track.php');
+$p->setDefaultStub('qatracker.php', '/qatracker.php');
 
 // plus - compressing it into gzip
 $p->compress(Phar::GZ);
 
+echo "\n";
 echo "$pharFile successfully created";
-echo '';
+echo "\n";
+echo "\n";

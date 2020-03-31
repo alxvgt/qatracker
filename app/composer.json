@@ -13,6 +13,7 @@
         "goat1000/svggraph": "^3.5",
         "twig/twig": "^3.0",
         "symfony/var-dumper": "^5.0",
-        "symfony/string": "^5.0"
+        "symfony/string": "^5.0",
+        "symfony/yaml": "^5.0"
     }
 }
