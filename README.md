@@ -11,7 +11,7 @@ throught exported files. This specific collected data are stored in an other fil
 
 ## Installation
 Install the phar :
-`wget https://github.com/alxvgt/qa-tracker/raw/master/qatracker.phar --no-cache`
+`rm qatracker.phar; wget https://github.com/alxvgt/qa-tracker/raw/master/qatracker.phar --no-cache`
 
 ## Usage
 Launch the command line
