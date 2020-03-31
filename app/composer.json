@@ -9,6 +9,7 @@
     "require": {
         "php": "7.4",
         "ext-xml": "*",
+        "ext-json": "*",
         "symfony/console": "^5.0",
         "goat1000/svggraph": "^3.5",
         "twig/twig": "^3.0",
