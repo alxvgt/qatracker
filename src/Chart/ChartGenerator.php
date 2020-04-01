@@ -15,6 +15,7 @@ class ChartGenerator
     public static function generate($values, $settings = []): SVGGraph
     {
         $settings = array_merge([
+            'auto_fit' => true,
             'graph_title_font_size' => 16,
             'datetime_keys'       => true,
             'datetime_key_format' => DataSerie::DATE_FORMAT,
@@ -23,7 +24,7 @@ class ChartGenerator
             'axis_font'           => 'Arial',
         ], $settings);
 
-        $width = 500;
+        $width = 550;
         $height = 300;
 
         $graph = new SVGGraph($width, $height, $settings);

@@ -3,14 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>QA Tracker</title>
+    <link href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBjbGFzcz0ic3ZnLWlubGluZS0tZmEgZmEtY2hhcnQtbGluZSBmYS13LTE2Ij4KCiA8Zz4KICA8dGl0bGU+YmFja2dyb3VuZDwvdGl0bGU+CiAgPHJlY3QgZmlsbD0ibm9uZSIgaWQ9ImNhbnZhc19iYWNrZ3JvdW5kIiBoZWlnaHQ9IjQwMiIgd2lkdGg9IjU4MiIgeT0iLTEiIHg9Ii0xIi8+CiA8L2c+CiA8Zz4KICA8dGl0bGU+TGF5ZXIgMTwvdGl0bGU+CiAgPHBhdGggaWQ9InN2Z18xIiBkPSJtNDk2LDM4NGwtNDMyLDBsMCwtMzA0YzAsLTguODQgLTcuMTYsLTE2IC0xNiwtMTZsLTMyLDBjLTguODQsMCAtMTYsNy4xNiAtMTYsMTZsMCwzMzZjMCwxNy42NyAxNC4zMywzMiAzMiwzMmw0NjQsMGM4Ljg0LDAgMTYsLTcuMTYgMTYsLTE2bDAsLTMyYzAsLTguODQgLTcuMTYsLTE2IC0xNiwtMTZ6bS0zMiwtMjg4bC0xMTguMDYsMGMtMjEuMzgsMCAtMzIuMDksMjUuODUgLTE2Ljk3LDQwLjk3bDMyLjQsMzIuNGwtNzMuMzcsNzMuMzhsLTczLjM3LC03My4zN2MtMTIuNSwtMTIuNSAtMzIuNzYsLTEyLjUgLTQ1LjI1LDBsLTY4LjY5LDY4LjY5Yy02LjI1LDYuMjUgLTYuMjUsMTYuMzggMCwyMi42M2wyMi42MiwyMi42MmM2LjI1LDYuMjUgMTYuMzgsNi4yNSAyMi42MywwbDQ2LjA2LC00Ni4wN2w3My4zNyw3My4zN2MxMi41LDEyLjUgMzIuNzYsMTIuNSA0NS4yNSwwbDk2LC05NmwzMi40LDMyLjRjMTUuMTIsMTUuMTIgNDAuOTcsNC40MSA0MC45NywtMTYuOTdsMCwtMTE4LjA1YzAuMDEsLTguODQgLTcuMTUsLTE2IC0xNS45OSwtMTZ6IiBmaWxsPSIjODREM0RCIi8+CiA8L2c+Cjwvc3ZnPg==" rel="icon" type="image/svg+xml" />
+    <style>
+        body {
+            padding: 1rem;
+            background-color: rgb(43, 43, 43);
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .chart {
+            padding: 1rem;
+            height: 300px;
+        }
+
+        .charts {
+            margin: 0 auto;
+            display: grid;
+            grid-gap: 1rem;
+        }
+
+        @media (min-width: 1000px) {
+            .charts { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (min-width: 1400px) {
+            .charts { grid-template-columns: repeat(3, 1fr); }
+        }
+    </style>
 </head>
 <body>
 <h1>QA Tracker</h1>
-{% for graphData in graphs %}
-    <div class="chart">
-        {{ graphData.graph|raw }}
-    </div>
-{% endfor %}
+<div class="charts">
+    {% for graphData in graphs %}
+        <div class="chart">
+            {{ graphData.graph|raw }}
+        </div>
+    {% endfor %}
+</div>
 {{ js|raw }}
 </body>
 </html>
