@@ -3,7 +3,9 @@ QATracker is a tool to collect, store and render quality assurance indicators.
 For example, you can run on your project some static code analysis tools like phploc or phpcpd then collect som metrics
 throught exported files. This specific collected data are stored in an other file that you can push to your repository if you want.
 
-<img alt="QATracker report image" src="https://alxvgt.github.io/qatracker/images/qatracker.jpg" width="600" />
+<div style="text-align: center">
+    <img alt="QATracker report image" src="https://alxvgt.github.io/qatracker/images/qatracker.jpg" width="600" />
+</div>
 
 ## Demo
 You can view an example of a report here : [Demo](https://alxvgt.github.io/qatracker/)
