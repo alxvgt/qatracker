@@ -17,31 +17,25 @@
         }
 
         .chart {
-            padding: 1rem;
+            min-width: 550px;
             height: 300px;
+            padding: 10px;
+            flex: 1 1 auto;
         }
 
         .charts {
-            margin: 0 auto;
-            display: grid;
-            grid-gap: 1rem;
+            display: flex;
+            flex-wrap: wrap;
         }
 
-        @media (min-width: 1000px) {
-            .charts { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        @media (min-width: 1400px) {
-            .charts { grid-template-columns: repeat(3, 1fr); }
-        }
     </style>
 </head>
 <body>
 <h1>QA Tracker</h1>
 <div class="charts">
-    {% for graphData in graphs %}
+    {% for graph in graphs %}
         <div class="chart">
-            {{ graphData.graph|raw }}
+            {{ graph|raw }}
         </div>
     {% endfor %}
 </div>

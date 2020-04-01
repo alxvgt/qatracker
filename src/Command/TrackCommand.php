@@ -6,7 +6,6 @@ use App\Chart\ChartGenerator;
 use App\Configuration\Configuration;
 use App\DataSerie\DataSerie;
 use App\Twig\TwigFactory;
-use Goat1000\SVGGraph\LineGraph;
 use Goat1000\SVGGraph\SVGGraph;
 use JsonException;
 use RuntimeException;
@@ -111,15 +110,28 @@ class TrackCommand extends Command
             $io->text('done.');
             $io->newLine();
 
-            $noTrack = $input->getOption('no-track');
+            $withTrack = !$input->getOption('no-track');
+            $withReport = !$input->getOption('no-report');
             $graphs = [];
-            if (!$noTrack) {
-                $series = $config['qatracker']['series'];
-                $graphs = $this->trackDataSeries($series, $io);
+
+            $series = $config['qatracker']['series'];
+            foreach ($series as $serie) {
+
+                $serie = new DataSerie($serie);
+
+                if ($withTrack) {
+                    $this->trackDataSerie($io, $serie);
+                }
+
+                if ($withReport) {
+                    $settings = [
+                        'graph_title' => $serie->getName(),
+                    ];
+                    $graphs [] = ChartGenerator::generate($serie->getData(), $settings);
+                }
             }
 
-            $noReport = $input->getOption('no-report');
-            if (!$noReport) {
+            if (!empty($graphs)) {
                 $io->section('Rendering report...');
                 $html = $twig->render(static::DEFAULT_TEMPLATE, [
                     'graphs' => $graphs,
@@ -130,7 +142,6 @@ class TrackCommand extends Command
                 $io->text('Report generated at : '.$outputFilePath);
                 $io->newLine();
             }
-
 
             $io->success('Well done ! You have track new QA indicators !');
 
@@ -159,14 +170,11 @@ class TrackCommand extends Command
 
     /**
      * @param SymfonyStyle $io
-     * @param array        $serieConfig
-     * @return SVGGraph
+     * @param DataSerie    $serie
      * @throws JsonException
      */
-    protected function trackDataSerie(SymfonyStyle $io, array $serieConfig): SVGGraph
+    protected function trackDataSerie(SymfonyStyle $io, DataSerie $serie): void
     {
-        $serie = new DataSerie($serieConfig);
-
         $io->section(sprintf('Processing "%s" data serie', $serie->getName()));
 
         $io->text('Collecting new indicator value...');
@@ -180,32 +188,6 @@ class TrackCommand extends Command
         $serie->addData($value);
         $serie->save();
         $io->text('done.');
-
-        $settings = [
-            'graph_title' => $serie->getName(),
-        ];
-
-        return ChartGenerator::generate($serie->getData(), $settings);
-    }
-
-    /**
-     * @param array        $series
-     * @param SymfonyStyle $io
-     * @return array
-     * @throws JsonException
-     */
-    protected function trackDataSeries(array $series, SymfonyStyle $io): array
-    {
-        $graphs = [];
-        foreach ($series as $serie) {
-            $graph = $this->trackDataSerie($io, $serie);
-            $graphs [] = [
-                'graph' => $graph->fetch(LineGraph::class),
-                'js'    => $graph::fetchJavascript(),
-            ];
-        }
-
-        return $graphs;
     }
 
     /**
