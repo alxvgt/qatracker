@@ -43,7 +43,7 @@ class TrackCommand extends Command
 
         $this
             ->setDescription('Track your QA indicators')
-            ->setHelp('This command allows you to fetch some indicators and build simple QA chats...')
+            ->setHelp('This command allows you to fetch some indicators and build simple QA charts...')
             ->addOption('no-report', null, InputOption::VALUE_NONE, 'Do not execute the report rendering step')
             ->addOption('no-track', null, InputOption::VALUE_NONE, 'Do not execute the tracking step')
             ->addOption('report-html-path', null, InputOption::VALUE_OPTIONAL,

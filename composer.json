@@ -1,6 +1,6 @@
 {
-    "name": "alxvng/qa-tracker",
-    "description": "qa-tracker",
+    "name": "alxvng/qatracker",
+    "description": "This command allows you to fetch some indicators and build simple QA charts...",
     "autoload": {
         "psr-4": {
             "App\\": "src/"
