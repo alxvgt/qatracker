@@ -28,7 +28,7 @@ class DataSerie
         $slugger = new AsciiSlugger();
         $name = $slugger->slug($name);
 
-        $storageDir = TrackCommand::getBaseDir().'/'.static::DATA_SERIES_DIR;
+        $storageDir = TrackCommand::getGeneratedDir().'/'.static::DATA_SERIES_DIR;
         $this->storageFilePath = $storageDir.'/'.$name.'.json';
         $this->name = $name;
 

@@ -4,5 +4,5 @@ qatracker:
             name : 'loc'
             provider: App\DataProvider\XpathProvider
             arguments:
-                - 'qa/phploc/log.xml'
+                - 'qa.loc/phploc/log.xml'
                 - '/phploc/loc'

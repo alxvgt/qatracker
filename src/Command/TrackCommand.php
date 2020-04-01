@@ -3,7 +3,7 @@
 namespace App\Command;
 
 use App\Chart\ChartGenerator;
-use App\Configuration\ConfigurationLoader;
+use App\Configuration\Configuration;
 use App\DataSerie\DataSerie;
 use App\Twig\TwigFactory;
 use Goat1000\SVGGraph\LineGraph;
@@ -14,7 +14,9 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Filesystem\Filesystem;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
@@ -24,16 +26,20 @@ class TrackCommand extends Command
     public const EXIT_SUCCESS = 0;
     public const EXIT_FAILURE = 1;
     public const BASE_DIR = '.qatracker';
-    public const OUTPUT_DIR = 'output';
+    public const GENERATED_DIR = 'generated';
+    public const OUTPUT_DIR = 'report';
     public const OUTPUT_FILENAME = 'index.html';
     public const DEFAULT_TEMPLATE = 'index.html.twig';
     public const CONFIG_FILENAME = 'config.yaml';
 
+    protected static string $baseDir = self::BASE_DIR;
+
     protected static $defaultName = 'track';
+
 
     protected function configure()
     {
-        $outputDir = static::getBaseDir().'/'.static::OUTPUT_DIR;
+        $outputDir = static::getGeneratedDir().'/'.static::OUTPUT_DIR;
 
         $this
             ->setDescription('Track your QA indicators')
@@ -43,10 +49,43 @@ class TrackCommand extends Command
             ->addOption('report-html-path', null, InputOption::VALUE_OPTIONAL,
                 'Define a custom path for the html report',
                 $outputDir.'/'.static::OUTPUT_FILENAME)
-            ->addOption('config-path', null, InputOption::VALUE_OPTIONAL,
-                'Define a custom path for the configuration file',
-                static::getBaseDir().'/'.static::CONFIG_FILENAME);
+            ->addOption('base-dir', null, InputOption::VALUE_OPTIONAL,
+                'Define a custom base directory for qatracker',
+                static::getBaseDir());
     }
+
+    /**
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     */
+    protected function interact(InputInterface $input, OutputInterface $output)
+    {
+        $io = new SymfonyStyle($input, $output);
+
+        static::$baseDir = (string)$input->getOption('base-dir');
+
+        if (file_exists(static::getConfigPath())) {
+            return;
+        }
+
+        $helper = $this->getHelper('question');
+        $question = new ConfirmationQuestion(sprintf('File %s does not exists. Do you want to create it from the sample file ? (Y/n)',
+            static::getConfigPath()), true);
+
+        if (!$helper->ask($input, $output, $question)) {
+            $io->warning(sprintf('The config file has not been created'));
+            exit(static::EXIT_SUCCESS);
+        }
+
+        $fs = new Filesystem();
+        $fs->copy(Configuration::EXAMPLE_CONFIG_PATH, static::getConfigPath());
+
+        $io->success(sprintf("The config file has been created at \"%s\".\nYou can now edit it to put your own configuration.",
+            static::getConfigPath()));
+
+        exit(static::EXIT_SUCCESS);
+    }
+
 
     /**
      * @param InputInterface  $input
@@ -68,8 +107,7 @@ class TrackCommand extends Command
             $io->text('Initializing...');
             $outputFilePath = $input->getOption('report-html-path');
             $this->initializeOutputDir($outputFilePath);
-            $configPath = $input->getOption('config-path');
-            $config = ConfigurationLoader::load($configPath);
+            $config = Configuration::load(static::getConfigPath());
             $io->text('done.');
             $io->newLine();
 
@@ -172,18 +210,23 @@ class TrackCommand extends Command
      */
     public static function getBaseDir(): string
     {
-        $baseDir = static::BASE_DIR;
-        if (file_exists($baseDir)) {
-            return $baseDir;
-        }
-
-        $baseDir = static::BASE_DIR.'.dist';
-        if (file_exists($baseDir)) {
-            return $baseDir;
-        }
-
-        throw new \RuntimeException('Unable to find base directory');
+        return static::$baseDir;
     }
 
+    /**
+     * @return string
+     */
+    public static function getGeneratedDir(): string
+    {
+        return static::getBaseDir().'/'.static::GENERATED_DIR;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getConfigPath(): string
+    {
+        return static::getBaseDir().'/'.static::CONFIG_FILENAME;
+    }
 
 }

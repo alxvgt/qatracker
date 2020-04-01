@@ -9,7 +9,7 @@ use Twig\Loader\FilesystemLoader;
 
 class TwigFactory
 {
-    public const TEMPLATE_DIR = 'templates';
+    public const TEMPLATE_DIR = __DIR__.'/../../templates';
 
     /**
      * @var Environment

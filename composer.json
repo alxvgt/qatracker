@@ -15,6 +15,8 @@
         "twig/twig": "^3.0",
         "symfony/var-dumper": "^5.0",
         "symfony/string": "^5.0",
-        "symfony/yaml": "^5.0"
+        "symfony/yaml": "^5.0",
+        "symfony/filesystem": "^5.0",
+        "symfony/finder": "^5.0"
     }
 }

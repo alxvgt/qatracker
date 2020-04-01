@@ -1,1 +1,5 @@
 .idea
+vendor
+*.loc
+.qatracker
+.qatracker.dist/generated
