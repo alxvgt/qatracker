@@ -3,15 +3,9 @@
 
 namespace App\DataProvider;
 
+use App\DataProvider\Reducer\CountReducerTrait;
+
 class XpathCountProvider extends AbstractXpathReducerProvider
 {
-    /**
-     * @param int $result
-     * @param int $node
-     * @return int
-     */
-    protected function reduceMethod(int $result, $node): int
-    {
-        return ++$result;
-    }
+    use CountReducerTrait;
 }

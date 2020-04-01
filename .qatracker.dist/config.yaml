@@ -1,8 +1,38 @@
 qatracker:
     series:
         -
-            name : 'loc'
+            name : 'Lines of Code'
             provider: App\DataProvider\XpathProvider
             arguments:
                 - 'qa.loc/phploc/log.xml'
                 - '/phploc/loc'
+        -
+            name : 'Non-Comment Lines of Code'
+            provider: App\DataProvider\XpathProvider
+            arguments:
+                - 'qa.loc/phploc/log.xml'
+                - '/phploc/ncloc'
+        -
+            name : 'Average Complexity per Class'
+            provider: App\DataProvider\XpathProvider
+            arguments:
+                - 'qa.loc/phploc/log.xml'
+                - '/phploc/classCcnAvg'
+        -
+            name : 'Total duplicated lines'
+            provider: App\DataProvider\XpathSumProvider
+            arguments:
+                - 'qa.loc/phpcpd/log.xml'
+                - '/pmd-cpd/duplication/@lines'
+        -
+            name : 'Total duplications'
+            provider: App\DataProvider\XpathCountProvider
+            arguments:
+                - 'qa.loc/phpcpd/log.xml'
+                - '/pmd-cpd/duplication'
+        -
+            name : 'Average maintenance index'
+            provider: App\DataProvider\JsonPathAverageProvider
+            arguments:
+                - 'qa.loc/phpmetrics/report.json'
+                - '$.*.mi'

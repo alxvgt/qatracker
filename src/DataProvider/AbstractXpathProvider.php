@@ -17,6 +17,10 @@ abstract class AbstractXpathProvider implements DataProviderInterface
     {
         $this->inputFilePath = $inputFilePath;
         $this->xpathQuery = $xpathQuery;
+
+        if (!file_exists($this->inputFilePath)) {
+            throw new \RuntimeException(sprintf('Unable to find file at %s', $this->inputFilePath));
+        }
     }
 
     /**

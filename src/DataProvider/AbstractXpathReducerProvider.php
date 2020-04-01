@@ -12,26 +12,16 @@ abstract class AbstractXpathReducerProvider extends AbstractXpathProvider
      */
     public function fetchData(): int
     {
-        if (!file_exists($this->inputFilePath)) {
-            throw new \RuntimeException(sprintf('Unable to find file at %s', $this->inputFilePath));
-        }
-
         $xml = new SimpleXMLElement(file_get_contents($this->inputFilePath));
 
         $nodes = $xml->xpath($this->xpathQuery);
 
-        $result = 0;
-        foreach ($nodes as $node) {
-            $result = $this->reduceMethod($result, (int)$node);
-        }
-
-        return $result;
+        return $this->reduceMethod($nodes);
     }
 
     /**
-     * @param int $result
-     * @param int $node
+     * @param array $nodes
      * @return int
      */
-    abstract protected function reduceMethod(int $result, int $node): int;
+    abstract protected function reduceMethod(array $nodes): int;
 }
