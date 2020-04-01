@@ -15,6 +15,7 @@ class ChartGenerator
     public static function generate($values, $settings = []): SVGGraph
     {
         $settings = array_merge([
+            'graph_title_font_size' => 16,
             'datetime_keys'       => true,
             'datetime_key_format' => DataSerie::DATE_FORMAT,
             'datetime_text_format' => 'j M',

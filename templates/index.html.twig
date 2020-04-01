@@ -7,8 +7,10 @@
 <body>
 <h1>QA Tracker</h1>
 {% for graphData in graphs %}
-    {{ graphData.graph|raw }}
-    {{ graphData.js|raw }}
+    <div class="chart">
+        {{ graphData.graph|raw }}
+    </div>
 {% endfor %}
+{{ js|raw }}
 </body>
 </html>

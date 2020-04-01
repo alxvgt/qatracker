@@ -29,28 +29,36 @@ class Configuration
 
         $series = $config['qatracker']['series'];
         foreach ($series as $serie) {
-            $name = $serie['name'] ?? null;
-            if (!$name) {
-                throw new RuntimeException('You must defined a name for your data serie');
-            }
-
-            $provider = $serie['provider'] ?? null;
-            if (!$provider) {
-                throw new RuntimeException(sprintf('You must defined a provider class for your data serie "%s"',
-                    $name));
-            }
-            if (!class_exists($provider)) {
-                throw new RuntimeException(sprintf('You must defined a valid provider class for your data serie, got "%s"',
-                    $provider));
-            }
-
-            $arguments = $serie['arguments'] ?? null;
-            if (!$arguments || !is_array($arguments)) {
-                throw new RuntimeException(sprintf('You must defined a valid provider arguments for your data serie "%s"',
-                    $name));
-            }
+            self::validateSerie($serie);
         }
 
         return $config;
+    }
+
+    /**
+     * @param $serie
+     */
+    public static function validateSerie(array $serie): void
+    {
+        $name = $serie['name'] ?? null;
+        if (!$name) {
+            throw new RuntimeException('You must defined a name for your data serie');
+        }
+
+        $provider = $serie['provider'] ?? null;
+        if (!$provider) {
+            throw new RuntimeException(sprintf('You must defined a provider class for your data serie "%s"',
+                $name));
+        }
+        if (!class_exists($provider)) {
+            throw new RuntimeException(sprintf('You must defined a valid provider class for your data serie, got "%s"',
+                $provider));
+        }
+
+        $arguments = $serie ?? null;
+        if (!$arguments || !is_array($arguments)) {
+            throw new RuntimeException(sprintf('You must defined a valid provider arguments for your data serie "%s"',
+                $name));
+        }
     }
 }

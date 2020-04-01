@@ -112,6 +112,7 @@ class TrackCommand extends Command
             $io->newLine();
 
             $noTrack = $input->getOption('no-track');
+            $graphs = [];
             if (!$noTrack) {
                 $series = $config['qatracker']['series'];
                 $graphs = $this->trackDataSeries($series, $io);
@@ -119,12 +120,14 @@ class TrackCommand extends Command
 
             $noReport = $input->getOption('no-report');
             if (!$noReport) {
-                $io->text('Rendering report...');
+                $io->section('Rendering report...');
                 $html = $twig->render(static::DEFAULT_TEMPLATE, [
                     'graphs' => $graphs,
+                    'js'     => SVGGraph::fetchJavascript(),
                 ]);
                 file_put_contents($outputFilePath, $html);
-                $io->text('done. Report generated at : '.$outputFilePath);
+                $io->text('done.');
+                $io->text('Report generated at : '.$outputFilePath);
                 $io->newLine();
             }
 
@@ -156,28 +159,33 @@ class TrackCommand extends Command
 
     /**
      * @param SymfonyStyle $io
-     * @param string       $name
-     * @param string       $provider
-     * @param array        $arguments
+     * @param array        $serieConfig
      * @return SVGGraph
      * @throws JsonException
      */
-    protected function trackDataSerie(SymfonyStyle $io, string $name, string $provider, array $arguments): SVGGraph
+    protected function trackDataSerie(SymfonyStyle $io, array $serieConfig): SVGGraph
     {
-        $io->section(sprintf('Processing "%s" data serie', $name));
+        $serie = new DataSerie($serieConfig);
+
+        $io->section(sprintf('Processing "%s" data serie', $serie->getName()));
 
         $io->text('Collecting new indicator value...');
-        $provider = new $provider(...$arguments);
+
+        $providerClass = $serie->getProvider();
+        $provider = new $providerClass(...$serie->getArguments());
         $value = $provider->fetchData();
         $io->text('done.');
 
         $io->text('Updating data serie...');
-        $dataSerie = new DataSerie($name);
-        $dataSerie->addData($value);
-        $dataSerie->save();
+        $serie->addData($value);
+        $serie->save();
         $io->text('done.');
 
-        return ChartGenerator::generate($dataSerie->getData());
+        $settings = [
+            'graph_title' => $serie->getName(),
+        ];
+
+        return ChartGenerator::generate($serie->getData(), $settings);
     }
 
     /**
@@ -190,12 +198,7 @@ class TrackCommand extends Command
     {
         $graphs = [];
         foreach ($series as $serie) {
-            $graph = null;
-            $name = $serie['name'];
-            $provider = $serie['provider'];
-            $arguments = $serie['arguments'];
-
-            $graph = $this->trackDataSerie($io, $name, $provider, $arguments);
+            $graph = $this->trackDataSerie($io, $serie);
             $graphs [] = [
                 'graph' => $graph->fetch(LineGraph::class),
                 'js'    => $graph::fetchJavascript(),

@@ -6,31 +6,37 @@ namespace App\DataSerie;
 
 use App\Command\TrackCommand;
 use JsonException;
-use Symfony\Component\String\AbstractUnicodeString;
 use Symfony\Component\String\Slugger\AsciiSlugger;
+use function Symfony\Component\String\u;
 
 class DataSerie
 {
     public const DATA_SERIES_DIR = 'data-series';
     public const DATE_FORMAT = 'YmdHis';
+
     protected string $storageFilePath;
     protected string $name;
-
+    protected string $slug;
     protected array $data = [];
+    protected string $provider;
+    protected array $arguments;
 
     /**
      * DataSerie constructor.
-     * @param string $name
+     * @param array $config
      * @throws JsonException
      */
-    public function __construct(string $name)
+    public function __construct(array $config)
     {
         $slugger = new AsciiSlugger();
-        $name = $slugger->slug($name);
+        $this->slug = u($slugger->slug($config['name']))->lower();
 
         $storageDir = TrackCommand::getGeneratedDir().'/'.static::DATA_SERIES_DIR;
-        $this->storageFilePath = $storageDir.'/'.$name.'.json';
-        $this->name = $name;
+        $this->storageFilePath = $storageDir.'/'.$this->getSlug().'.json';
+
+        $this->name = $config['name'];
+        $this->provider = $config['provider'];
+        $this->arguments = $config['arguments'];
 
         $this->load();
     }
@@ -69,9 +75,9 @@ class DataSerie
     }
 
     /**
-     * @return string|AbstractUnicodeString
+     * @return string
      */
-    public function getName()
+    public function getName() : string
     {
         return $this->name;
     }
@@ -91,6 +97,30 @@ class DataSerie
     {
         $today = new \DateTime();
         $this->data[$today->format(static::DATE_FORMAT)] = $value;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug() : string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @return mixed|string
+     */
+    public function getProvider()
+    {
+        return $this->provider;
+    }
+
+    /**
+     * @return array|mixed
+     */
+    public function getArguments()
+    {
+        return $this->arguments;
     }
 
 }
