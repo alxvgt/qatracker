@@ -1,5 +1,5 @@
 qatracker:
-    providers:
+    dataSeries:
         -   id: 'lines-of-code'
             class: App\DataProvider\XpathProvider
             arguments:
@@ -20,6 +20,9 @@ qatracker:
             arguments:
                 - 'docs/qa-tools/phpcpd/log.xml'
                 - '/pmd-cpd/duplication/@lines'
+        -   id: 'total-duplicated-lines-percent'
+            provider: 'total-duplicated-lines'
+            totalPercentProvider: 'lines-of-code'
         -   id: 'total-duplications'
             class: App\DataProvider\XpathCountProvider
             arguments:
@@ -46,19 +49,33 @@ qatracker:
             arguments:
                 - 'docs/qa-tools/phpstan/log.json'
                 - '$.totals.file_errors'
+
+    # documentation :
+    # graphSettings : documentation is available at https://goat1000.com/svggraph-options.php
+
+    # note :
+    # at the moment only the first serie is used to generate chart
+    # multiple data series chart is not available, maybe soon ... PR accepted ;-)
     charts:
         -   type: Goat1000\SVGGraph\LineGraph
-            providers:
+            dataSeries:
                 - 'lines-of-code'
             withHistory: true
             graphSettings:
                 graph_title: 'Lines of code'
         -   type: Goat1000\SVGGraph\BarGraph
-            providers:
+            dataSeries:
                 - 'lines-of-code'
             withHistory: true
             graphSettings:
                 graph_title: 'Lines of code'
+        -   type: Goat1000\SVGGraph\LineGraph
+            dataSeries:
+                - 'total-duplicated-lines-percent'
+            withHistory: true
+            graphSettings:
+                graph_title: 'Duplication pourcentage'
+                units_y: '%'
 #        -   name: 'Maintainability'
-#            providers: {'total-crap', 'average-maintenance-index', 'total-phpstan-errors'}
+#            dataSeries: {'total-crap', 'average-maintenance-index', 'total-phpstan-errors'}
 #            withHistory: false

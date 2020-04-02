@@ -5,7 +5,9 @@ namespace App\Command;
 use App\Chart\Chart;
 use App\Chart\ChartGenerator;
 use App\Configuration\Configuration;
-use App\DataProvider\Model\DataProvider;
+use App\DataProvider\Model\AbstractDataSerie;
+use App\DataProvider\Model\DataPercentSerie;
+use App\DataProvider\Model\DataStandardSerie;
 use App\Twig\TwigFactory;
 use Goat1000\SVGGraph\SVGGraph;
 use JsonException;
@@ -111,23 +113,23 @@ class TrackCommand extends Command
             $section = $output->section();
             $message = 'Initializing...';
             $section->writeln($message);
-
             $outputFilePath = $input->getOption('report-html-path');
             $this->initializeOutputDir($outputFilePath);
             $config = Configuration::load(static::getConfigPath());
+            $section->overwrite($message.static::OUTPUT_DONE);
+
+            /** @var ConsoleSectionOutput $section */
+            $section = $output->section();
+            $message = 'Loading providers...';
+            $section->writeln($message);
+            $providersConfig = $config['qatracker']['dataSeries'];
+            $providersStack = $this->loadProviders($providersConfig);
             $section->overwrite($message.static::OUTPUT_DONE);
             $io->newLine();
 
             $withTrack = !$input->getOption('no-track');
             $withReport = !$input->getOption('no-report');
             $graphs = [];
-
-            $providersConfig = $config['qatracker']['providers'];
-            $providersStack = [];
-            foreach ($providersConfig as $provider) {
-                $provider = new DataProvider($provider);
-                $providersStack [$provider->getId()] = $provider;
-            }
 
             if ($withTrack) {
                 foreach ($providersStack as $provider) {
@@ -145,7 +147,7 @@ class TrackCommand extends Command
 
                 /** @var ConsoleSectionOutput $section */
                 $section = $output->section();
-                $message = sprintf('Generating charts : ');
+                $message = 'Generating charts : ';
                 $section->writeln($message);
 
                 $charts = $config['qatracker']['charts'];
@@ -235,6 +237,44 @@ class TrackCommand extends Command
     public static function getConfigPath(): string
     {
         return static::getBaseDir().'/'.static::CONFIG_FILENAME;
+    }
+
+    /**
+     * @param $providersConfig
+     * @return array
+     * @throws JsonException
+     */
+    protected function loadProviders($providersConfig): array
+    {
+        $providersStack = [];
+
+        /**
+         * Load standard providers on a first time
+         */
+        foreach ($providersConfig as $key => $provider) {
+            if (!AbstractDataSerie::isStandard($provider)) {
+                continue;
+            }
+
+            $provider = new DataStandardSerie($provider);
+            $providersStack [$provider->getId()] = $provider;
+            unset($providersConfig[$key]);
+        }
+
+        /**
+         * Load other providers on a second time
+         */
+        foreach ($providersConfig as $key => $provider) {
+            if (!AbstractDataSerie::isPercent($provider)) {
+                continue;
+            }
+
+            $provider = new DataPercentSerie($provider, $providersStack);
+            $providersStack [$provider->getId()] = $provider;
+            unset($providersConfig[$key]);
+        }
+
+        return $providersStack;
     }
 
 }

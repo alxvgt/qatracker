@@ -2,7 +2,7 @@
 
 namespace App\Tests\DataSerie;
 
-use App\DataProvider\Model\DataProvider;
+use App\DataProvider\Model\DataStandardSerie;
 use JsonException;
 use PHPUnit\Framework\TestCase;
 use TypeError;
@@ -17,7 +17,7 @@ class DataSerieTest extends TestCase
     {
         $this->expectException(TypeError::class);
 
-        $dataSerie = new DataProvider([
+        $dataSerie = new DataStandardSerie([
             'name' => 'serie test',
         ]);
     }

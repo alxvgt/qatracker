@@ -4,7 +4,7 @@
 namespace App\Chart;
 
 
-use App\DataProvider\Model\DataProvider;
+use App\DataProvider\Model\AbstractDataSerie;
 
 class Chart
 {
@@ -23,7 +23,7 @@ class Chart
         $this->type = $config['type'];
         $this->withHistory = $config['withHistory'];
         $this->graphSettings = $config['graphSettings'];
-        $this->providers = array_intersect_key($providersStack, array_flip($config['providers']));
+        $this->providers = array_intersect_key($providersStack, array_flip($config['dataSeries']));
     }
 
     /**
@@ -43,12 +43,11 @@ class Chart
     }
 
     /**
-     * @return DataProvider
+     * @return AbstractDataSerie
      */
-    public function getFirstProvider(): DataProvider
+    public function getFirstProvider(): AbstractDataSerie
     {
         $providers = $this->getProviders();
-
         return reset($providers);
     }
 

@@ -2,7 +2,7 @@
 
 namespace App\Chart;
 
-use App\DataProvider\Model\DataProvider;
+use App\DataProvider\Model\AbstractDataSerie;
 use Goat1000\SVGGraph\LineGraph;
 use Goat1000\SVGGraph\SVGGraph;
 
@@ -20,7 +20,7 @@ class ChartGenerator
             'auto_fit'              => true,
             'graph_title_font_size' => 16,
             'datetime_keys'         => true,
-            'datetime_key_format'   => DataProvider::DATE_FORMAT,
+            'datetime_key_format'   => AbstractDataSerie::DATE_FORMAT,
             'datetime_text_format'  => "j M\nY",
             'back_colour'           => '#fff',
             'axis_font'             => 'Arial',

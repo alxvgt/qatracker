@@ -2,6 +2,7 @@
 
 namespace App\Configuration;
 
+use App\DataProvider\Model\AbstractDataSerie;
 use RuntimeException;
 use Symfony\Component\Yaml\Yaml;
 
@@ -23,7 +24,7 @@ class Configuration
 
         $config = Yaml::parseFile($configPath);
 
-        if (!isset($config['qatracker']['providers'])) {
+        if (!isset($config['qatracker']['dataSeries'])) {
             throw new RuntimeException('You must define at least one provider in the config file');
         }
 
@@ -31,7 +32,7 @@ class Configuration
             throw new RuntimeException('You must define at least one chart in the config file');
         }
 
-        $providers = $config['qatracker']['providers'];
+        $providers = $config['qatracker']['dataSeries'];
         foreach ($providers as $provider) {
             static::validateProvider($provider);
         }
@@ -54,20 +55,12 @@ class Configuration
             throw new RuntimeException('You must defined an id for your provider');
         }
 
-        $class = $provider['class'] ?? null;
-        if (!$class) {
-            throw new RuntimeException(sprintf('You must defined a class for your provider "%s"',
-                $id));
-        }
-        if (!class_exists($class)) {
-            throw new RuntimeException(sprintf('You must defined a valid class for your provider, got "%s"',
-                $class));
-        }
+        $isValid = false;
+        $isValid = $isValid ?: $isValid || static::validateStandardProvider($provider);
+        $isValid = $isValid ?: $isValid || static::validatePercentProvider($provider);
 
-        $arguments = $provider ?? null;
-        if (!$arguments || !is_array($arguments)) {
-            throw new RuntimeException(sprintf('You must defined valid arguments for your provider "%s"',
-                $id));
+        if (!$isValid) {
+            throw new RuntimeException('Your providers configuration is not valid');
         }
     }
 
@@ -75,5 +68,48 @@ class Configuration
     {
         // TODO implement configuration validation for this part
         return;
+    }
+
+    /**
+     * @param array $provider
+     * @return bool
+     */
+    protected static function validateStandardProvider(array $provider): bool
+    {
+        if (!AbstractDataSerie::isStandard($provider)) {
+            return false;
+        }
+
+        $id = $provider['id'];
+
+        $class = $provider['class'] ?? null;
+        if (!$class) {
+            throw new RuntimeException(sprintf('You must defined a class for your provider "%s"', $id));
+        }
+        if (!class_exists($class)) {
+            throw new RuntimeException(sprintf('You must defined a valid class for your provider, got "%s"',
+                $class));
+        }
+
+        $arguments = $provider['arguments'] ?? null;
+        if (!$arguments || !is_array($arguments)) {
+            throw new RuntimeException(sprintf('You must defined valid arguments for your provider "%s"',
+                $id));
+        }
+
+        return true;
+    }
+
+    /**
+     * @param array $provider
+     * @return bool
+     */
+    protected static function validatePercentProvider(array $provider): bool
+    {
+        if (!AbstractDataSerie::isPercent($provider)) {
+            return false;
+        }
+
+        return true;
     }
 }
