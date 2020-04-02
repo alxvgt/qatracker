@@ -23,42 +23,57 @@ class Configuration
 
         $config = Yaml::parseFile($configPath);
 
-        if (!isset($config['qatracker']['series'])) {
-            throw new RuntimeException('You must define one serie at least a path qatracker[series] in the config file');
+        if (!isset($config['qatracker']['providers'])) {
+            throw new RuntimeException('You must define at least one provider in the config file');
         }
 
-        $series = $config['qatracker']['series'];
-        foreach ($series as $serie) {
-            self::validateSerie($serie);
+        if (!isset($config['qatracker']['charts'])) {
+            throw new RuntimeException('You must define at least one chart in the config file');
+        }
+
+        $providers = $config['qatracker']['providers'];
+        foreach ($providers as $provider) {
+            static::validateProvider($provider);
+        }
+
+        $charts = $config['qatracker']['charts'];
+        foreach ($charts as $chart) {
+            static::validateChart($chart);
         }
 
         return $config;
     }
 
     /**
-     * @param $serie
+     * @param $provider
      */
-    public static function validateSerie(array $serie): void
+    protected static function validateProvider(array $provider): void
     {
-        $name = $serie['name'] ?? null;
-        if (!$name) {
-            throw new RuntimeException('You must defined a name for your data serie');
+        $id = $provider['id'] ?? null;
+        if (!$id) {
+            throw new RuntimeException('You must defined an id for your provider');
         }
 
-        $provider = $serie['provider'] ?? null;
-        if (!$provider) {
-            throw new RuntimeException(sprintf('You must defined a provider class for your data serie "%s"',
-                $name));
+        $class = $provider['class'] ?? null;
+        if (!$class) {
+            throw new RuntimeException(sprintf('You must defined a class for your provider "%s"',
+                $id));
         }
-        if (!class_exists($provider)) {
-            throw new RuntimeException(sprintf('You must defined a valid provider class for your data serie, got "%s"',
-                $provider));
+        if (!class_exists($class)) {
+            throw new RuntimeException(sprintf('You must defined a valid class for your provider, got "%s"',
+                $class));
         }
 
-        $arguments = $serie ?? null;
+        $arguments = $provider ?? null;
         if (!$arguments || !is_array($arguments)) {
-            throw new RuntimeException(sprintf('You must defined a valid provider arguments for your data serie "%s"',
-                $name));
+            throw new RuntimeException(sprintf('You must defined valid arguments for your provider "%s"',
+                $id));
         }
+    }
+
+    protected static function validateChart(array $chart)
+    {
+        // TODO implement configuration validation for this part
+        return;
     }
 }

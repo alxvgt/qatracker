@@ -2,9 +2,10 @@
 
 namespace App\Command;
 
+use App\Chart\Chart;
 use App\Chart\ChartGenerator;
 use App\Configuration\Configuration;
-use App\DataSerie\DataSerie;
+use App\DataProvider\Model\DataProvider;
 use App\Twig\TwigFactory;
 use Goat1000\SVGGraph\SVGGraph;
 use JsonException;
@@ -12,6 +13,7 @@ use RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\ConsoleSectionOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -30,6 +32,7 @@ class TrackCommand extends Command
     public const OUTPUT_FILENAME = 'index.html';
     public const DEFAULT_TEMPLATE = 'index.html.twig';
     public const CONFIG_FILENAME = 'config.yaml';
+    const OUTPUT_DONE = ' <fg=green>done</>.';
 
     protected static string $baseDir = self::BASE_DIR;
 
@@ -104,47 +107,87 @@ class TrackCommand extends Command
 
             $io->title('Track your QA indicators');
 
-            $io->text('Initializing...');
+            /** @var ConsoleSectionOutput $section */
+            $section = $output->section();
+            $message = 'Initializing...';
+            $section->writeln($message);
+
             $outputFilePath = $input->getOption('report-html-path');
             $this->initializeOutputDir($outputFilePath);
             $config = Configuration::load(static::getConfigPath());
-            $io->text('done.');
+            $section->overwrite($message.static::OUTPUT_DONE);
             $io->newLine();
 
             $withTrack = !$input->getOption('no-track');
             $withReport = !$input->getOption('no-report');
             $graphs = [];
 
-            $series = $config['qatracker']['series'];
-            foreach ($series as $serie) {
-
-                $serie = new DataSerie($serie);
-
-                if ($withTrack) {
-                    $this->trackDataSerie($io, $serie);
-                }
-
-                if ($withReport) {
-                    $settings = [
-                        'graph_title' => $serie->getName(),
-                    ];
-                    $graphs [] = ChartGenerator::generate($serie->getData(), $settings);
-                }
+            $providersConfig = $config['qatracker']['providers'];
+            $providersStack = [];
+            foreach ($providersConfig as $provider) {
+                $provider = new DataProvider($provider);
+                $providersStack [$provider->getId()] = $provider;
             }
 
+            if ($withTrack) {
+                foreach ($providersStack as $provider) {
+                    /** @var ConsoleSectionOutput $section */
+                    $section = $output->section();
+                    $message = sprintf('Collecting new indicator for "%s"...', $provider->getId());
+                    $section->writeln($message);
+                    $provider->collect();
+                    $section->overwrite($message.static::OUTPUT_DONE);
+                }
+                $io->newLine();
+            }
+
+            if ($withReport) {
+
+                /** @var ConsoleSectionOutput $section */
+                $section = $output->section();
+                $message = sprintf('Generating charts : ');
+                $section->writeln($message);
+
+                $charts = $config['qatracker']['charts'];
+                foreach ($charts as $chart) {
+
+                    $chart = new Chart($chart, $providersStack);
+
+                    $graphs [] = ChartGenerator::generate(
+                        $chart->getFirstProvider()->getData(),
+                        $chart->getType(),
+                        $chart->getGraphSettings()
+                    );
+                    $message .= '.';
+                    $section->overwrite($message);
+                }
+                $io->newLine();
+            }
+
+
             if (!empty($graphs)) {
-                $io->section('Rendering report...');
+
+                /** @var ConsoleSectionOutput $section */
+                $section = $output->section();
+                $message = sprintf('Rendering report...');
+                $section->writeln($message);
+
                 $html = $twig->render(static::DEFAULT_TEMPLATE, [
                     'graphs' => $graphs,
                     'js'     => SVGGraph::fetchJavascript(),
                 ]);
                 file_put_contents($outputFilePath, $html);
-                $io->text('done.');
-                $io->text('Report generated at : '.$outputFilePath);
+                $section->overwrite($message.static::OUTPUT_DONE);
                 $io->newLine();
             }
 
-            $io->success('Well done ! You have track new QA indicators !');
+            $io->success(
+                [
+                    sprintf(
+                        "Well done ! You have track new QA indicators !\n".
+                        'Report generated at : %s', $outputFilePath
+                    ),
+                ]);
 
             return static::EXIT_SUCCESS;
 
@@ -165,30 +208,8 @@ class TrackCommand extends Command
         $outputFileDir = dirname($outputFilePath);
 
         if (!is_dir($outputFileDir) && !mkdir($outputFileDir, 0777, true)) {
-            throw new RuntimeException(sprintf('Directory "%s" was not created', $outputFileDir));
+            throw new RuntimeException(sprintf('Directory " % s" was not created', $outputFileDir));
         }
-    }
-
-    /**
-     * @param SymfonyStyle $io
-     * @param DataSerie    $serie
-     * @throws JsonException
-     */
-    protected function trackDataSerie(SymfonyStyle $io, DataSerie $serie): void
-    {
-        $io->section(sprintf('Processing "%s" data serie', $serie->getName()));
-
-        $io->text('Collecting new indicator value...');
-
-        $providerClass = $serie->getProvider();
-        $provider = new $providerClass(...$serie->getArguments());
-        $value = $provider->fetchData();
-        $io->text('done.');
-
-        $io->text('Updating data serie...');
-        $serie->addData($value);
-        $serie->save();
-        $io->text('done.');
     }
 
     /**

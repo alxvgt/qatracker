@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\DataSerie;
+namespace App\DataProvider\Model;
 
 
 use App\Command\TrackCommand;
@@ -9,33 +9,33 @@ use JsonException;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use function Symfony\Component\String\u;
 
-class DataSerie
+class DataProvider
 {
-    public const DATA_SERIES_DIR = 'data-series';
+    public const PROVIDERS_DIR = 'providers-data';
     public const DATE_FORMAT = 'YmdHis';
 
     protected string $storageFilePath;
-    protected string $name;
+    protected string $id;
     protected string $slug;
     protected array $data = [];
-    protected string $provider;
+    protected string $class;
     protected array $arguments;
 
     /**
-     * DataSerie constructor.
+     * DataProvider constructor.
      * @param array $config
      * @throws JsonException
      */
     public function __construct(array $config)
     {
         $slugger = new AsciiSlugger();
-        $this->slug = u($slugger->slug($config['name']))->lower();
+        $this->slug = u($slugger->slug($config['id']))->lower();
 
-        $storageDir = TrackCommand::getGeneratedDir().'/'.static::DATA_SERIES_DIR;
+        $storageDir = TrackCommand::getGeneratedDir().'/'.static::PROVIDERS_DIR;
         $this->storageFilePath = $storageDir.'/'.$this->getSlug().'.json';
 
-        $this->name = $config['name'];
-        $this->provider = $config['provider'];
+        $this->id = $config['id'];
+        $this->class = $config['class'];
         $this->arguments = $config['arguments'];
 
         $this->load();
@@ -77,9 +77,9 @@ class DataSerie
     /**
      * @return string
      */
-    public function getName() : string
+    public function getId() : string
     {
-        return $this->name;
+        return $this->id;
     }
 
     /**
@@ -110,9 +110,9 @@ class DataSerie
     /**
      * @return mixed|string
      */
-    public function getProvider()
+    public function getClass()
     {
-        return $this->provider;
+        return $this->class;
     }
 
     /**
@@ -121,6 +121,18 @@ class DataSerie
     public function getArguments()
     {
         return $this->arguments;
+    }
+
+    /**
+     * @throws JsonException
+     */
+    public function collect(): void
+    {
+        $providerClass = $this->getClass();
+        $provider = new $providerClass(...$this->getArguments());
+        $value = $provider->fetchData();
+        $this->addData($value);
+        $this->save();
     }
 
 }

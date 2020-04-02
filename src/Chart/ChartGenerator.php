@@ -2,24 +2,25 @@
 
 namespace App\Chart;
 
-use App\DataSerie\DataSerie;
+use App\DataProvider\Model\DataProvider;
 use Goat1000\SVGGraph\LineGraph;
 use Goat1000\SVGGraph\SVGGraph;
 
 class ChartGenerator
 {
     /**
-     * @param       $values
-     * @param array $settings
+     * @param        $values
+     * @param string $type
+     * @param array  $settings
      * @return mixed
      */
-    public static function generate($values, $settings = [])
+    public static function generate($values, $type = LineGraph::class, $settings = [])
     {
         $settings = array_merge([
             'auto_fit'              => true,
             'graph_title_font_size' => 16,
             'datetime_keys'         => true,
-            'datetime_key_format'   => DataSerie::DATE_FORMAT,
+            'datetime_key_format'   => DataProvider::DATE_FORMAT,
             'datetime_text_format'  => "j M\nY",
             'back_colour'           => '#fff',
             'axis_font'             => 'Arial',
@@ -33,6 +34,6 @@ class ChartGenerator
         $graph = new SVGGraph($width, $height, $settings);
         $graph->values($values);
 
-        return $graph->fetch(LineGraph::class);
+        return $graph->fetch($type);
     }
 }

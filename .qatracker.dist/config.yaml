@@ -1,43 +1,64 @@
 qatracker:
-    series:
-        -   name: 'Lines of Code'
-            provider: App\DataProvider\XpathProvider
+    providers:
+        -   id: 'lines-of-code'
+            class: App\DataProvider\XpathProvider
             arguments:
                 - 'docs/qa-tools/phploc/log.xml'
                 - '/phploc/loc'
-        -   name: 'Non-Comment Lines of Code'
-            provider: App\DataProvider\XpathProvider
+        -   id: 'non-comment-lines-of-code'
+            class: App\DataProvider\XpathProvider
             arguments:
                 - 'docs/qa-tools/phploc/log.xml'
                 - '/phploc/ncloc'
-        -   name: 'Average Complexity per Class'
-            provider: App\DataProvider\XpathProvider
+        -   id: 'average-complexity-per-class'
+            class: App\DataProvider\XpathProvider
             arguments:
                 - 'docs/qa-tools/phploc/log.xml'
                 - '/phploc/classCcnAvg'
-        -   name: 'Total duplicated lines'
-            provider: App\DataProvider\XpathSumProvider
+        -   id: 'total-duplicated-lines'
+            class: App\DataProvider\XpathSumProvider
             arguments:
                 - 'docs/qa-tools/phpcpd/log.xml'
                 - '/pmd-cpd/duplication/@lines'
-        -   name: 'Total duplications'
-            provider: App\DataProvider\XpathCountProvider
+        -   id: 'total-duplications'
+            class: App\DataProvider\XpathCountProvider
             arguments:
                 - 'docs/qa-tools/phpcpd/log.xml'
                 - '/pmd-cpd/duplication'
-        -   name: 'Average maintenance index'
-            provider: App\DataProvider\JsonPathAverageProvider
+        -   id: 'average-maintenance-index'
+            class: App\DataProvider\JsonPathAverageProvider
             arguments:
                 - 'docs/qa-tools/phpmetrics/report.json'
                 - '$.*.mi'
-        -   name: 'Total Code coverage (lines)'
-            provider: App\DataProvider\XpathProvider
+        -   id: 'total-code-coverage-(lines)'
+            class: App\DataProvider\XpathProvider
             arguments:
                 - 'docs/qa-tools/phpunit/coverage.xml/index.xml'
                 - '/ns:phpunit/ns:project/ns:directory/ns:totals/ns:lines/@percent'
                 - {prefix: 'ns', namespace: 'https://schema.phpunit.de/coverage/1.0'}
-        -   name: 'Total CRAP'
-            provider: App\DataProvider\XpathProvider
+        -   id: 'total-crap'
+            class: App\DataProvider\XpathProvider
             arguments:
                 - 'docs/qa-tools/phpunit/coverage.crap4j'
                 - '/crap_result/stats/totalCrap'
+        -   id: 'total-phpstan-errors'
+            class: App\DataProvider\JsonPathProvider
+            arguments:
+                - 'docs/qa-tools/phpstan/log.json'
+                - '$.totals.file_errors'
+    charts:
+        -   type: Goat1000\SVGGraph\LineGraph
+            providers:
+                - 'lines-of-code'
+            withHistory: true
+            graphSettings:
+                graph_title: 'Lines of code'
+        -   type: Goat1000\SVGGraph\BarGraph
+            providers:
+                - 'lines-of-code'
+            withHistory: true
+            graphSettings:
+                graph_title: 'Lines of code'
+#        -   name: 'Maintainability'
+#            providers: {'total-crap', 'average-maintenance-index', 'total-phpstan-errors'}
+#            withHistory: false
