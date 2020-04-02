@@ -1,38 +1,43 @@
 qatracker:
     series:
-        -
-            name : 'Lines of Code'
+        -   name: 'Lines of Code'
             provider: App\DataProvider\XpathProvider
             arguments:
-                - 'qa.loc/phploc/log.xml'
+                - 'docs/qa-tools/phploc/log.xml'
                 - '/phploc/loc'
-        -
-            name : 'Non-Comment Lines of Code'
+        -   name: 'Non-Comment Lines of Code'
             provider: App\DataProvider\XpathProvider
             arguments:
-                - 'qa.loc/phploc/log.xml'
+                - 'docs/qa-tools/phploc/log.xml'
                 - '/phploc/ncloc'
-        -
-            name : 'Average Complexity per Class'
+        -   name: 'Average Complexity per Class'
             provider: App\DataProvider\XpathProvider
             arguments:
-                - 'qa.loc/phploc/log.xml'
+                - 'docs/qa-tools/phploc/log.xml'
                 - '/phploc/classCcnAvg'
-        -
-            name : 'Total duplicated lines'
+        -   name: 'Total duplicated lines'
             provider: App\DataProvider\XpathSumProvider
             arguments:
-                - 'qa.loc/phpcpd/log.xml'
+                - 'docs/qa-tools/phpcpd/log.xml'
                 - '/pmd-cpd/duplication/@lines'
-        -
-            name : 'Total duplications'
+        -   name: 'Total duplications'
             provider: App\DataProvider\XpathCountProvider
             arguments:
-                - 'qa.loc/phpcpd/log.xml'
+                - 'docs/qa-tools/phpcpd/log.xml'
                 - '/pmd-cpd/duplication'
-        -
-            name : 'Average maintenance index'
+        -   name: 'Average maintenance index'
             provider: App\DataProvider\JsonPathAverageProvider
             arguments:
-                - 'qa.loc/phpmetrics/report.json'
+                - 'docs/qa-tools/phpmetrics/report.json'
                 - '$.*.mi'
+        -   name: 'Total Code coverage (lines)'
+            provider: App\DataProvider\XpathProvider
+            arguments:
+                - 'docs/qa-tools/phpunit/coverage.xml/index.xml'
+                - '/ns:phpunit/ns:project/ns:directory/ns:totals/ns:lines/@percent'
+                - {prefix: 'ns', namespace: 'https://schema.phpunit.de/coverage/1.0'}
+        -   name: 'Total CRAP'
+            provider: App\DataProvider\XpathProvider
+            arguments:
+                - 'docs/qa-tools/phpunit/coverage.crap4j'
+                - '/crap_result/stats/totalCrap'
