@@ -22,9 +22,4 @@ abstract class AbstractJsonPathProvider implements DataProviderInterface
             throw new \RuntimeException(sprintf('Unable to find file at %s', $this->inputFilePath));
         }
     }
-
-    /**
-     * @return int
-     */
-    abstract public function fetchData(): int;
 }

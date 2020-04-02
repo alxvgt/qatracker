@@ -11,11 +11,11 @@ use RuntimeException;
 class JsonPathProvider extends AbstractJsonPathProvider
 {
     /**
-     * @return int
+     * @return float
      * @throws JSONPathException
      * @throws JsonException
      */
-    public function fetchData(): int
+    public function fetchData(): float
     {
         $data = json_decode(file_get_contents($this->inputFilePath), true, 512, JSON_THROW_ON_ERROR);
         $jsonFinder = new JSONPath($data);
@@ -28,6 +28,6 @@ class JsonPathProvider extends AbstractJsonPathProvider
             throw new RuntimeException(sprintf('The result of must be a numeric value, got "%s"', $result));
         }
 
-        return (int)$result;
+        return (float)$result;
     }
 }

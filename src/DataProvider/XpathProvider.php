@@ -8,15 +8,16 @@ use SimpleXMLElement;
 class XpathProvider extends AbstractXpathProvider
 {
     /**
-     * @return int
+     * @return float
      */
-    public function fetchData(): int
+    public function fetchData(): float
     {
         if (!file_exists($this->inputFilePath)) {
             throw new \RuntimeException(sprintf('Unable to find file at %s', $this->inputFilePath));
         }
 
         $xml = new SimpleXMLElement(file_get_contents($this->inputFilePath));
+        $xml->registerXPathNamespace($this->namespaceParameters[static::NS_PREFIX], $this->namespaceParameters[static::NS_VALUE]);
 
         $result = $xml->xpath($this->xpathQuery);
         $result = reset($result);
@@ -25,6 +26,6 @@ class XpathProvider extends AbstractXpathProvider
             throw new \RuntimeException(sprintf('The result of must be a numeric value, got "%s"', $result));
         }
 
-        return (int)$result;
+        return (float)$result;
     }
 }

@@ -5,12 +5,12 @@ namespace App\DataProvider;
 
 use SimpleXMLElement;
 
-abstract class AbstractXpathReducerProvider extends AbstractXpathProvider
+abstract class AbstractXpathReducerProvider extends AbstractXpathProvider implements ReducerProviderInterface
 {
     /**
-     * @return int
+     * @return float
      */
-    public function fetchData(): int
+    public function fetchData(): float
     {
         $xml = new SimpleXMLElement(file_get_contents($this->inputFilePath));
 
@@ -18,10 +18,4 @@ abstract class AbstractXpathReducerProvider extends AbstractXpathProvider
 
         return $this->reduceMethod($nodes);
     }
-
-    /**
-     * @param array $nodes
-     * @return int
-     */
-    abstract protected function reduceMethod(array $nodes): int;
 }

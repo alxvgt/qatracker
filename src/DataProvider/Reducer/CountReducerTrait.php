@@ -8,9 +8,9 @@ trait CountReducerTrait
 {
     /**
      * @param array $nodes
-     * @return int
+     * @return float
      */
-    protected function reduceMethod(array $nodes): int
+    public function reduceMethod(array $nodes): float
     {
         return count($nodes);
     }

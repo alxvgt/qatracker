@@ -3,5 +3,5 @@ namespace App\DataProvider;
 
 interface DataProviderInterface
 {
-    public function fetchData(): int;
+    public function fetchData(): float;
 }
