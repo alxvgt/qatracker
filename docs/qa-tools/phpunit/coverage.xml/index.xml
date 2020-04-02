@@ -1,0 +1,273 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <build time="Thu Apr 2 8:19:25 GMT+0000 2020" phpunit="9.0.2" coverage="8.0.1">
+    <runtime name="PHP" version="7.4.0" url="https://secure.php.net/"/>
+    <driver name="xdebug" version="2.9.4"/>
+  </build>
+  <project source="/var/www/qa-tracker/src">
+    <tests>
+      <test name="App\Tests\DataSerie\DataSerieTest::testGetSlug" size="unknown" result="0" status="PASSED"/>
+    </tests>
+    <directory name="/">
+      <totals>
+        <lines total="774" comments="130" code="644" executable="190" executed="9" percent="4.74"/>
+        <methods count="31" tested="3" percent="9.68"/>
+        <functions count="0" tested="0" percent="0"/>
+        <classes count="11" tested="0" percent="0.00"/>
+        <traits count="3" tested="0" percent="0.00"/>
+      </totals>
+      <directory name="Chart">
+        <totals>
+          <lines total="37" comments="5" code="32" executable="13" executed="0" percent="0.00"/>
+          <methods count="1" tested="0" percent="0.00"/>
+          <functions count="0" tested="0" percent="0"/>
+          <classes count="1" tested="0" percent="0.00"/>
+          <traits count="0" tested="0" percent="0"/>
+        </totals>
+        <file name="ChartGenerator.php" href="Chart/ChartGenerator.php.xml">
+          <totals>
+            <lines total="37" comments="5" code="32" executable="13" executed="0" percent="0.00"/>
+            <methods count="1" tested="0" percent="0.00"/>
+            <functions count="0" tested="0" percent="0"/>
+            <classes count="1" tested="0" percent="0.00"/>
+            <traits count="0" tested="0" percent="0"/>
+          </totals>
+        </file>
+      </directory>
+      <directory name="Command">
+        <totals>
+          <lines total="216" comments="30" code="186" executable="79" executed="2" percent="2.53"/>
+          <methods count="8" tested="2" percent="25.00"/>
+          <functions count="0" tested="0" percent="0"/>
+          <classes count="1" tested="0" percent="0.00"/>
+          <traits count="0" tested="0" percent="0"/>
+        </totals>
+        <file name="TrackCommand.php" href="Command/TrackCommand.php.xml">
+          <totals>
+            <lines total="216" comments="30" code="186" executable="79" executed="2" percent="2.53"/>
+            <methods count="8" tested="2" percent="25.00"/>
+            <functions count="0" tested="0" percent="0"/>
+            <classes count="1" tested="0" percent="0.00"/>
+            <traits count="0" tested="0" percent="0"/>
+          </totals>
+        </file>
+      </directory>
+      <directory name="Configuration">
+        <totals>
+          <lines total="63" comments="7" code="56" executable="22" executed="0" percent="0.00"/>
+          <methods count="2" tested="0" percent="0.00"/>
+          <functions count="0" tested="0" percent="0"/>
+          <classes count="1" tested="0" percent="0.00"/>
+          <traits count="0" tested="0" percent="0"/>
+        </totals>
+        <file name="Configuration.php" href="Configuration/Configuration.php.xml">
+          <totals>
+            <lines total="63" comments="7" code="56" executable="22" executed="0" percent="0.00"/>
+            <methods count="2" tested="0" percent="0.00"/>
+            <functions count="0" tested="0" percent="0"/>
+            <classes count="1" tested="0" percent="0.00"/>
+            <traits count="0" tested="0" percent="0"/>
+          </totals>
+        </file>
+      </directory>
+      <directory name="DataProvider">
+        <totals>
+          <lines total="303" comments="50" code="253" executable="45" executed="0" percent="0.00"/>
+          <methods count="9" tested="0" percent="0.00"/>
+          <functions count="0" tested="0" percent="0"/>
+          <classes count="6" tested="0" percent="0.00"/>
+          <traits count="3" tested="0" percent="0.00"/>
+        </totals>
+        <directory name="Reducer">
+          <totals>
+            <lines total="65" comments="12" code="53" executable="13" executed="0" percent="0.00"/>
+            <methods count="3" tested="0" percent="0.00"/>
+            <functions count="0" tested="0" percent="0"/>
+            <classes count="0" tested="0" percent="0"/>
+            <traits count="3" tested="0" percent="0.00"/>
+          </totals>
+          <file name="AverageReducerTrait.php" href="DataProvider/Reducer/AverageReducerTrait.php.xml">
+            <totals>
+              <lines total="24" comments="4" code="20" executable="6" executed="0" percent="0.00"/>
+              <methods count="1" tested="0" percent="0.00"/>
+              <functions count="0" tested="0" percent="0"/>
+              <classes count="0" tested="0" percent="0"/>
+              <traits count="1" tested="0" percent="0.00"/>
+            </totals>
+          </file>
+          <file name="CountReducerTrait.php" href="DataProvider/Reducer/CountReducerTrait.php.xml">
+            <totals>
+              <lines total="16" comments="4" code="12" executable="1" executed="0" percent="0.00"/>
+              <methods count="1" tested="0" percent="0.00"/>
+              <functions count="0" tested="0" percent="0"/>
+              <classes count="0" tested="0" percent="0"/>
+              <traits count="1" tested="0" percent="0.00"/>
+            </totals>
+          </file>
+          <file name="SumReducerTrait.php" href="DataProvider/Reducer/SumReducerTrait.php.xml">
+            <totals>
+              <lines total="25" comments="4" code="21" executable="6" executed="0" percent="0.00"/>
+              <methods count="1" tested="0" percent="0.00"/>
+              <functions count="0" tested="0" percent="0"/>
+              <classes count="0" tested="0" percent="0"/>
+              <traits count="1" tested="0" percent="0.00"/>
+            </totals>
+          </file>
+        </directory>
+        <file name="AbstractJsonPathProvider.php" href="DataProvider/AbstractJsonPathProvider.php.xml">
+          <totals>
+            <lines total="29" comments="8" code="21" executable="5" executed="0" percent="0.00"/>
+            <methods count="1" tested="0" percent="0.00"/>
+            <functions count="0" tested="0" percent="0"/>
+            <classes count="1" tested="0" percent="0.00"/>
+            <traits count="0" tested="0" percent="0"/>
+          </totals>
+        </file>
+        <file name="AbstractJsonPathReducerProvider.php" href="DataProvider/AbstractJsonPathReducerProvider.php.xml">
+          <totals>
+            <lines total="27" comments="7" code="20" executable="4" executed="0" percent="0.00"/>
+            <methods count="1" tested="0" percent="0.00"/>
+            <functions count="0" tested="0" percent="0"/>
+            <classes count="1" tested="0" percent="0.00"/>
+            <traits count="0" tested="0" percent="0"/>
+          </totals>
+        </file>
+        <file name="AbstractXpathProvider.php" href="DataProvider/AbstractXpathProvider.php.xml">
+          <totals>
+            <lines total="29" comments="8" code="21" executable="5" executed="0" percent="0.00"/>
+            <methods count="1" tested="0" percent="0.00"/>
+            <functions count="0" tested="0" percent="0"/>
+            <classes count="1" tested="0" percent="0.00"/>
+            <traits count="0" tested="0" percent="0"/>
+          </totals>
+        </file>
+        <file name="AbstractXpathReducerProvider.php" href="DataProvider/AbstractXpathReducerProvider.php.xml">
+          <totals>
+            <lines total="26" comments="7" code="19" executable="3" executed="0" percent="0.00"/>
+            <methods count="1" tested="0" percent="0.00"/>
+            <functions count="0" tested="0" percent="0"/>
+            <classes count="1" tested="0" percent="0.00"/>
+            <traits count="0" tested="0" percent="0"/>
+          </totals>
+        </file>
+        <file name="DataProviderInterface.php" href="DataProvider/DataProviderInterface.php.xml">
+          <totals>
+            <lines total="6" comments="0" code="6" executable="0" executed="0" percent="0"/>
+            <methods count="0" tested="0" percent="0"/>
+            <functions count="0" tested="0" percent="0"/>
+            <classes count="0" tested="0" percent="0"/>
+            <traits count="0" tested="0" percent="0"/>
+          </totals>
+        </file>
+        <file name="JsonPathAverageProvider.php" href="DataProvider/JsonPathAverageProvider.php.xml">
+          <totals>
+            <lines total="10" comments="0" code="10" executable="0" executed="0" percent="0"/>
+            <methods count="0" tested="0" percent="0"/>
+            <functions count="0" tested="0" percent="0"/>
+            <classes count="0" tested="0" percent="0"/>
+            <traits count="0" tested="0" percent="0"/>
+          </totals>
+        </file>
+        <file name="JsonPathCountProvider.php" href="DataProvider/JsonPathCountProvider.php.xml">
+          <totals>
+            <lines total="10" comments="0" code="10" executable="0" executed="0" percent="0"/>
+            <methods count="0" tested="0" percent="0"/>
+            <functions count="0" tested="0" percent="0"/>
+            <classes count="0" tested="0" percent="0"/>
+            <traits count="0" tested="0" percent="0"/>
+          </totals>
+        </file>
+        <file name="JsonPathProvider.php" href="DataProvider/JsonPathProvider.php.xml">
+          <totals>
+            <lines total="32" comments="5" code="27" executable="7" executed="0" percent="0.00"/>
+            <methods count="1" tested="0" percent="0.00"/>
+            <functions count="0" tested="0" percent="0"/>
+            <classes count="1" tested="0" percent="0.00"/>
+            <traits count="0" tested="0" percent="0"/>
+          </totals>
+        </file>
+        <file name="JsonPathSumProvider.php" href="DataProvider/JsonPathSumProvider.php.xml">
+          <totals>
+            <lines total="10" comments="0" code="10" executable="0" executed="0" percent="0"/>
+            <methods count="0" tested="0" percent="0"/>
+            <functions count="0" tested="0" percent="0"/>
+            <classes count="0" tested="0" percent="0"/>
+            <traits count="0" tested="0" percent="0"/>
+          </totals>
+        </file>
+        <file name="XpathAverageProvider.php" href="DataProvider/XpathAverageProvider.php.xml">
+          <totals>
+            <lines total="10" comments="0" code="10" executable="0" executed="0" percent="0"/>
+            <methods count="0" tested="0" percent="0"/>
+            <functions count="0" tested="0" percent="0"/>
+            <classes count="0" tested="0" percent="0"/>
+            <traits count="0" tested="0" percent="0"/>
+          </totals>
+        </file>
+        <file name="XpathCountProvider.php" href="DataProvider/XpathCountProvider.php.xml">
+          <totals>
+            <lines total="10" comments="0" code="10" executable="0" executed="0" percent="0"/>
+            <methods count="0" tested="0" percent="0"/>
+            <functions count="0" tested="0" percent="0"/>
+            <classes count="0" tested="0" percent="0"/>
+            <traits count="0" tested="0" percent="0"/>
+          </totals>
+        </file>
+        <file name="XpathProvider.php" href="DataProvider/XpathProvider.php.xml">
+          <totals>
+            <lines total="29" comments="3" code="26" executable="8" executed="0" percent="0.00"/>
+            <methods count="1" tested="0" percent="0.00"/>
+            <functions count="0" tested="0" percent="0"/>
+            <classes count="1" tested="0" percent="0.00"/>
+            <traits count="0" tested="0" percent="0"/>
+          </totals>
+        </file>
+        <file name="XpathSumProvider.php" href="DataProvider/XpathSumProvider.php.xml">
+          <totals>
+            <lines total="10" comments="0" code="10" executable="0" executed="0" percent="0"/>
+            <methods count="0" tested="0" percent="0"/>
+            <functions count="0" tested="0" percent="0"/>
+            <classes count="0" tested="0" percent="0"/>
+            <traits count="0" tested="0" percent="0"/>
+          </totals>
+        </file>
+      </directory>
+      <directory name="DataSerie">
+        <totals>
+          <lines total="125" comments="32" code="93" executable="27" executed="7" percent="25.93"/>
+          <methods count="10" tested="1" percent="10.00"/>
+          <functions count="0" tested="0" percent="0"/>
+          <classes count="1" tested="0" percent="0.00"/>
+          <traits count="0" tested="0" percent="0"/>
+        </totals>
+        <file name="DataSerie.php" href="DataSerie/DataSerie.php.xml">
+          <totals>
+            <lines total="125" comments="32" code="93" executable="27" executed="7" percent="25.93"/>
+            <methods count="10" tested="1" percent="10.00"/>
+            <functions count="0" tested="0" percent="0"/>
+            <classes count="1" tested="0" percent="0.00"/>
+            <traits count="0" tested="0" percent="0"/>
+          </totals>
+        </file>
+      </directory>
+      <directory name="Twig">
+        <totals>
+          <lines total="30" comments="6" code="24" executable="4" executed="0" percent="0.00"/>
+          <methods count="1" tested="0" percent="0.00"/>
+          <functions count="0" tested="0" percent="0"/>
+          <classes count="1" tested="0" percent="0.00"/>
+          <traits count="0" tested="0" percent="0"/>
+        </totals>
+        <file name="TwigFactory.php" href="Twig/TwigFactory.php.xml">
+          <totals>
+            <lines total="30" comments="6" code="24" executable="4" executed="0" percent="0.00"/>
+            <methods count="1" tested="0" percent="0.00"/>
+            <functions count="0" tested="0" percent="0"/>
+            <classes count="1" tested="0" percent="0.00"/>
+            <traits count="0" tested="0" percent="0"/>
+          </totals>
+        </file>
+      </directory>
+    </directory>
+  </project>
+</phpunit>

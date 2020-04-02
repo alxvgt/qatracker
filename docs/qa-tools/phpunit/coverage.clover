@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1585815565">
+  <project timestamp="1585815565">
+    <package name="App\Chart">
+      <file name="/var/www/qa-tracker/src/Chart/ChartGenerator.php">
+        <class name="App\Chart\ChartGenerator" namespace="App\Chart">
+          <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="0" elements="14" coveredelements="0"/>
+        </class>
+        <line num="16" type="method" name="generate" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="20" type="stmt" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="33" type="stmt" count="0"/>
+        <line num="34" type="stmt" count="0"/>
+        <line num="36" type="stmt" count="0"/>
+        <metrics loc="37" ncloc="32" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="13" coveredstatements="0" elements="14" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="App\Command">
+      <file name="/var/www/qa-tracker/src/Command/TrackCommand.php">
+        <class name="App\Command\TrackCommand" namespace="App\Command">
+          <metrics complexity="17" methods="8" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="79" coveredstatements="2" elements="87" coveredelements="4"/>
+        </class>
+        <line num="39" type="method" name="configure" visibility="protected" complexity="1" crap="2" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="46" type="stmt" count="0"/>
+        <line num="47" type="stmt" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <line num="52" type="stmt" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <line num="54" type="stmt" count="0"/>
+        <line num="60" type="method" name="interact" visibility="protected" complexity="3" crap="12" count="0"/>
+        <line num="62" type="stmt" count="0"/>
+        <line num="64" type="stmt" count="0"/>
+        <line num="66" type="stmt" count="0"/>
+        <line num="67" type="stmt" count="0"/>
+        <line num="70" type="stmt" count="0"/>
+        <line num="71" type="stmt" count="0"/>
+        <line num="72" type="stmt" count="0"/>
+        <line num="74" type="stmt" count="0"/>
+        <line num="75" type="stmt" count="0"/>
+        <line num="76" type="stmt" count="0"/>
+        <line num="79" type="stmt" count="0"/>
+        <line num="80" type="stmt" count="0"/>
+        <line num="82" type="stmt" count="0"/>
+        <line num="83" type="stmt" count="0"/>
+        <line num="85" type="stmt" count="0"/>
+        <line num="98" type="method" name="execute" visibility="protected" complexity="6" crap="42" count="0"/>
+        <line num="100" type="stmt" count="0"/>
+        <line num="101" type="stmt" count="0"/>
+        <line num="104" type="stmt" count="0"/>
+        <line num="106" type="stmt" count="0"/>
+        <line num="107" type="stmt" count="0"/>
+        <line num="108" type="stmt" count="0"/>
+        <line num="109" type="stmt" count="0"/>
+        <line num="110" type="stmt" count="0"/>
+        <line num="111" type="stmt" count="0"/>
+        <line num="113" type="stmt" count="0"/>
+        <line num="114" type="stmt" count="0"/>
+        <line num="115" type="stmt" count="0"/>
+        <line num="117" type="stmt" count="0"/>
+        <line num="118" type="stmt" count="0"/>
+        <line num="120" type="stmt" count="0"/>
+        <line num="122" type="stmt" count="0"/>
+        <line num="123" type="stmt" count="0"/>
+        <line num="126" type="stmt" count="0"/>
+        <line num="128" type="stmt" count="0"/>
+        <line num="130" type="stmt" count="0"/>
+        <line num="134" type="stmt" count="0"/>
+        <line num="135" type="stmt" count="0"/>
+        <line num="136" type="stmt" count="0"/>
+        <line num="137" type="stmt" count="0"/>
+        <line num="138" type="stmt" count="0"/>
+        <line num="140" type="stmt" count="0"/>
+        <line num="141" type="stmt" count="0"/>
+        <line num="142" type="stmt" count="0"/>
+        <line num="143" type="stmt" count="0"/>
+        <line num="146" type="stmt" count="0"/>
+        <line num="148" type="stmt" count="0"/>
+        <line num="150" type="stmt" count="0"/>
+        <line num="152" type="stmt" count="0"/>
+        <line num="154" type="stmt" count="0"/>
+        <line num="162" type="method" name="initializeOutputDir" visibility="protected" complexity="3" crap="12" count="0"/>
+        <line num="164" type="stmt" count="0"/>
+        <line num="166" type="stmt" count="0"/>
+        <line num="167" type="stmt" count="0"/>
+        <line num="169" type="stmt" count="0"/>
+        <line num="176" type="method" name="trackDataSerie" visibility="protected" complexity="1" crap="2" count="0"/>
+        <line num="178" type="stmt" count="0"/>
+        <line num="180" type="stmt" count="0"/>
+        <line num="182" type="stmt" count="0"/>
+        <line num="183" type="stmt" count="0"/>
+        <line num="184" type="stmt" count="0"/>
+        <line num="185" type="stmt" count="0"/>
+        <line num="187" type="stmt" count="0"/>
+        <line num="188" type="stmt" count="0"/>
+        <line num="189" type="stmt" count="0"/>
+        <line num="190" type="stmt" count="0"/>
+        <line num="191" type="stmt" count="0"/>
+        <line num="196" type="method" name="getBaseDir" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="198" type="stmt" count="1"/>
+        <line num="204" type="method" name="getGeneratedDir" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="206" type="stmt" count="1"/>
+        <line num="212" type="method" name="getConfigPath" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="214" type="stmt" count="0"/>
+        <metrics loc="216" ncloc="186" classes="1" methods="8" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="79" coveredstatements="2" elements="87" coveredelements="4"/>
+      </file>
+    </package>
+    <package name="App\Configuration">
+      <file name="/var/www/qa-tracker/src/Configuration/Configuration.php">
+        <class name="App\Configuration\Configuration" namespace="App\Configuration">
+          <metrics complexity="10" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="0" elements="24" coveredelements="0"/>
+        </class>
+        <line num="16" type="method" name="load" visibility="public" complexity="4" crap="20" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="20" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="30" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <line num="32" type="stmt" count="0"/>
+        <line num="35" type="stmt" count="0"/>
+        <line num="41" type="method" name="validateSerie" visibility="public" complexity="6" crap="42" count="0"/>
+        <line num="43" type="stmt" count="0"/>
+        <line num="44" type="stmt" count="0"/>
+        <line num="45" type="stmt" count="0"/>
+        <line num="48" type="stmt" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="53" type="stmt" count="0"/>
+        <line num="54" type="stmt" count="0"/>
+        <line num="58" type="stmt" count="0"/>
+        <line num="59" type="stmt" count="0"/>
+        <line num="60" type="stmt" count="0"/>
+        <line num="63" type="stmt" count="0"/>
+        <metrics loc="63" ncloc="56" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="0" elements="24" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="App\DataProvider">
+      <file name="/var/www/qa-tracker/src/DataProvider/AbstractJsonPathProvider.php">
+        <class name="App\DataProvider\AbstractJsonPathProvider" namespace="App\DataProvider">
+          <metrics complexity="3" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="6" coveredelements="0"/>
+        </class>
+        <line num="16" type="method" name="__construct" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <metrics loc="29" ncloc="21" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="6" coveredelements="0"/>
+      </file>
+      <file name="/var/www/qa-tracker/src/DataProvider/AbstractJsonPathReducerProvider.php">
+        <class name="App\DataProvider\AbstractJsonPathReducerProvider" namespace="App\DataProvider">
+          <metrics complexity="2" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="5" coveredelements="0"/>
+        </class>
+        <line num="13" type="method" name="fetchData" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <line num="16" type="stmt" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <line num="20" type="stmt" count="0"/>
+        <metrics loc="27" ncloc="20" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="5" coveredelements="0"/>
+      </file>
+      <file name="/var/www/qa-tracker/src/DataProvider/AbstractXpathProvider.php">
+        <class name="App\DataProvider\AbstractXpathProvider" namespace="App\DataProvider">
+          <metrics complexity="3" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="6" coveredelements="0"/>
+        </class>
+        <line num="16" type="method" name="__construct" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <metrics loc="29" ncloc="21" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="6" coveredelements="0"/>
+      </file>
+      <file name="/var/www/qa-tracker/src/DataProvider/AbstractXpathReducerProvider.php">
+        <class name="App\DataProvider\AbstractXpathReducerProvider" namespace="App\DataProvider">
+          <metrics complexity="2" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
+        </class>
+        <line num="13" type="method" name="fetchData" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <metrics loc="26" ncloc="19" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="4" coveredelements="0"/>
+      </file>
+      <file name="/var/www/qa-tracker/src/DataProvider/JsonPathAverageProvider.php">
+        <class name="App\DataProvider\JsonPathAverageProvider" namespace="App\DataProvider">
+          <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </class>
+        <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </file>
+      <file name="/var/www/qa-tracker/src/DataProvider/JsonPathCountProvider.php">
+        <class name="App\DataProvider\JsonPathCountProvider" namespace="App\DataProvider">
+          <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </class>
+        <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </file>
+      <file name="/var/www/qa-tracker/src/DataProvider/JsonPathProvider.php">
+        <class name="App\DataProvider\JsonPathProvider" namespace="App\DataProvider">
+          <metrics complexity="2" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="8" coveredelements="0"/>
+        </class>
+        <line num="18" type="method" name="fetchData" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="20" type="stmt" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="27" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <line num="31" type="stmt" count="0"/>
+        <metrics loc="32" ncloc="27" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="8" coveredelements="0"/>
+      </file>
+      <file name="/var/www/qa-tracker/src/DataProvider/JsonPathSumProvider.php">
+        <class name="App\DataProvider\JsonPathSumProvider" namespace="App\DataProvider">
+          <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </class>
+        <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </file>
+      <file name="/var/www/qa-tracker/src/DataProvider/XpathAverageProvider.php">
+        <class name="App\DataProvider\XpathAverageProvider" namespace="App\DataProvider">
+          <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </class>
+        <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </file>
+      <file name="/var/www/qa-tracker/src/DataProvider/XpathCountProvider.php">
+        <class name="App\DataProvider\XpathCountProvider" namespace="App\DataProvider">
+          <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </class>
+        <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </file>
+      <file name="/var/www/qa-tracker/src/DataProvider/XpathProvider.php">
+        <class name="App\DataProvider\XpathProvider" namespace="App\DataProvider">
+          <metrics complexity="3" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="0" elements="9" coveredelements="0"/>
+        </class>
+        <line num="13" type="method" name="fetchData" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <line num="16" type="stmt" count="0"/>
+        <line num="19" type="stmt" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="22" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="28" type="stmt" count="0"/>
+        <metrics loc="29" ncloc="26" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="0" elements="9" coveredelements="0"/>
+      </file>
+      <file name="/var/www/qa-tracker/src/DataProvider/XpathSumProvider.php">
+        <class name="App\DataProvider\XpathSumProvider" namespace="App\DataProvider">
+          <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+        </class>
+        <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </file>
+    </package>
+    <file name="/var/www/qa-tracker/src/DataProvider/DataProviderInterface.php">
+      <metrics loc="6" ncloc="6" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <package name="App\DataProvider\Reducer">
+      <file name="/var/www/qa-tracker/src/DataProvider/Reducer/AverageReducerTrait.php">
+        <class name="AverageReducerTrait" namespace="App\DataProvider\Reducer">
+          <metrics complexity="3" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="7" coveredelements="0"/>
+        </class>
+        <line num="13" type="method" name="reduceMethod" visibility="protected" complexity="3" crap="12" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <line num="16" type="stmt" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="23" type="stmt" count="0"/>
+        <metrics loc="24" ncloc="20" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="7" coveredelements="0"/>
+      </file>
+      <file name="/var/www/qa-tracker/src/DataProvider/Reducer/CountReducerTrait.php">
+        <class name="CountReducerTrait" namespace="App\DataProvider\Reducer">
+          <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+        </class>
+        <line num="13" type="method" name="reduceMethod" visibility="protected" complexity="1" crap="2" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <metrics loc="16" ncloc="12" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      </file>
+      <file name="/var/www/qa-tracker/src/DataProvider/Reducer/SumReducerTrait.php">
+        <class name="SumReducerTrait" namespace="App\DataProvider\Reducer">
+          <metrics complexity="3" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="7" coveredelements="0"/>
+        </class>
+        <line num="13" type="method" name="reduceMethod" visibility="protected" complexity="3" crap="12" count="0"/>
+        <line num="15" type="stmt" count="0"/>
+        <line num="16" type="stmt" count="0"/>
+        <line num="17" type="stmt" count="0"/>
+        <line num="18" type="stmt" count="0"/>
+        <line num="21" type="stmt" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <metrics loc="25" ncloc="21" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="7" coveredelements="0"/>
+      </file>
+    </package>
+    <package name="App\DataSerie">
+      <file name="/var/www/qa-tracker/src/DataSerie/DataSerie.php">
+        <class name="App\DataSerie\DataSerie" namespace="App\DataSerie">
+          <metrics complexity="13" methods="10" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="7" elements="37" coveredelements="8"/>
+        </class>
+        <line num="29" type="method" name="__construct" visibility="public" complexity="1" crap="1.04" count="1"/>
+        <line num="31" type="stmt" count="1"/>
+        <line num="32" type="stmt" count="1"/>
+        <line num="34" type="stmt" count="1"/>
+        <line num="35" type="stmt" count="1"/>
+        <line num="37" type="stmt" count="1"/>
+        <line num="38" type="stmt" count="1"/>
+        <line num="39" type="stmt" count="0"/>
+        <line num="41" type="stmt" count="0"/>
+        <line num="42" type="stmt" count="0"/>
+        <line num="47" type="method" name="save" visibility="public" complexity="3" crap="12" count="0"/>
+        <line num="49" type="stmt" count="0"/>
+        <line num="50" type="stmt" count="0"/>
+        <line num="51" type="stmt" count="0"/>
+        <line num="54" type="stmt" count="0"/>
+        <line num="55" type="stmt" count="0"/>
+        <line num="60" type="method" name="load" visibility="protected" complexity="2" crap="6" count="0"/>
+        <line num="62" type="stmt" count="0"/>
+        <line num="63" type="stmt" count="0"/>
+        <line num="66" type="stmt" count="0"/>
+        <line num="67" type="stmt" count="0"/>
+        <line num="72" type="method" name="getStorageFilePath" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="74" type="stmt" count="0"/>
+        <line num="80" type="method" name="getName" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="82" type="stmt" count="0"/>
+        <line num="88" type="method" name="getData" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="90" type="stmt" count="0"/>
+        <line num="96" type="method" name="addData" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="98" type="stmt" count="0"/>
+        <line num="99" type="stmt" count="0"/>
+        <line num="100" type="stmt" count="0"/>
+        <line num="105" type="method" name="getSlug" visibility="public" complexity="1" crap="1" count="1"/>
+        <line num="107" type="stmt" count="1"/>
+        <line num="113" type="method" name="getProvider" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="115" type="stmt" count="0"/>
+        <line num="121" type="method" name="getArguments" visibility="public" complexity="1" crap="2" count="0"/>
+        <line num="123" type="stmt" count="0"/>
+        <metrics loc="125" ncloc="93" classes="1" methods="10" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="7" elements="37" coveredelements="8"/>
+      </file>
+    </package>
+    <package name="App\Twig">
+      <file name="/var/www/qa-tracker/src/Twig/TwigFactory.php">
+        <class name="App\Twig\TwigFactory" namespace="App\Twig">
+          <metrics complexity="2" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="5" coveredelements="0"/>
+        </class>
+        <line num="22" type="method" name="getTwig" visibility="public" complexity="2" crap="6" count="0"/>
+        <line num="24" type="stmt" count="0"/>
+        <line num="25" type="stmt" count="0"/>
+        <line num="26" type="stmt" count="0"/>
+        <line num="29" type="stmt" count="0"/>
+        <metrics loc="30" ncloc="24" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="5" coveredelements="0"/>
+      </file>
+    </package>
+    <metrics files="21" loc="774" ncloc="644" classes="14" methods="31" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="190" coveredstatements="9" elements="221" coveredelements="12"/>
+  </project>
+</coverage>

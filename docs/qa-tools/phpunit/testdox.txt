@@ -1,0 +1,3 @@
+Data Serie (App\Tests\DataSerie\DataSerie)
+ [x] Get slug
+

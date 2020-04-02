@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd version="@package_version@" timestamp="2020-04-01T16:55:23+00:00">
+  <file name="App\DataSerie\">
+    <violation beginline="1" rule="Stable Dependencies Principle" ruleset="Stable Dependencies Principle" externalInfoUrl="http://www.phpmetrics.org/documentation/index.html" priority="3">Packages should depend in the direction of stability.
+
+This package is more stable (0.8) than 1 package(s) that it depends on.
+The packages that are more stable are
+
+* App\Command (0.933)</violation>
+  </file>
+  <file name="App\Command\TrackCommand">
+    <violation beginline="1" rule="Probably bugged" ruleset="Probably bugged" externalInfoUrl="http://www.phpmetrics.org/documentation/index.html" priority="3">This component contains in theory 0.38 bugs.
+
+* Calculation is based on number of operators, operands, cyclomatic complexity
+* See more details at https://en.wikipedia.org/wiki/Halstead_complexity_measures
+*  testsuites has dependency to this class.
+
+Maybe you should check your unit tests for this class.</violation>
+  </file>
+</pmd>

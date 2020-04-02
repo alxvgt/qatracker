@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<crap_result>
+  <project/>
+  <timestamp>2020-04-02 08:19:25</timestamp>
+  <stats>
+    <name>Method Crap Stats</name>
+    <methodCount>35</methodCount>
+    <crapMethodCount>2</crapMethodCount>
+    <crapLoad>12</crapLoad>
+    <totalCrap>240.04</totalCrap>
+    <crapMethodPercent>5.71</crapMethodPercent>
+  </stats>
+  <methods>
+    <method>
+      <package>App\Chart</package>
+      <className>App\Chart\ChartGenerator</className>
+      <methodName>generate</methodName>
+      <methodSignature>generate($values, $settings = [])</methodSignature>
+      <fullMethod>generate($values, $settings = [])</fullMethod>
+      <crap>2</crap>
+      <complexity>1</complexity>
+      <coverage>0</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\Command</package>
+      <className>App\Command\TrackCommand</className>
+      <methodName>configure</methodName>
+      <methodSignature>configure()</methodSignature>
+      <fullMethod>configure()</fullMethod>
+      <crap>2</crap>
+      <complexity>1</complexity>
+      <coverage>0</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\Command</package>
+      <className>App\Command\TrackCommand</className>
+      <methodName>interact</methodName>
+      <methodSignature>interact(InputInterface $input, OutputInterface $output)</methodSignature>
+      <fullMethod>interact(InputInterface $input, OutputInterface $output)</fullMethod>
+      <crap>12</crap>
+      <complexity>3</complexity>
+      <coverage>0</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\Command</package>
+      <className>App\Command\TrackCommand</className>
+      <methodName>execute</methodName>
+      <methodSignature>execute(InputInterface $input, OutputInterface $output)</methodSignature>
+      <fullMethod>execute(InputInterface $input, OutputInterface $output)</fullMethod>
+      <crap>42</crap>
+      <complexity>6</complexity>
+      <coverage>0</coverage>
+      <crapLoad>6</crapLoad>
+    </method>
+    <method>
+      <package>App\Command</package>
+      <className>App\Command\TrackCommand</className>
+      <methodName>initializeOutputDir</methodName>
+      <methodSignature>initializeOutputDir(string $outputFilePath): void</methodSignature>
+      <fullMethod>initializeOutputDir(string $outputFilePath): void</fullMethod>
+      <crap>12</crap>
+      <complexity>3</complexity>
+      <coverage>0</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\Command</package>
+      <className>App\Command\TrackCommand</className>
+      <methodName>trackDataSerie</methodName>
+      <methodSignature>trackDataSerie(SymfonyStyle $io, DataSerie $serie): void</methodSignature>
+      <fullMethod>trackDataSerie(SymfonyStyle $io, DataSerie $serie): void</fullMethod>
+      <crap>2</crap>
+      <complexity>1</complexity>
+      <coverage>0</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\Command</package>
+      <className>App\Command\TrackCommand</className>
+      <methodName>getBaseDir</methodName>
+      <methodSignature>getBaseDir(): string</methodSignature>
+      <fullMethod>getBaseDir(): string</fullMethod>
+      <crap>1</crap>
+      <complexity>1</complexity>
+      <coverage>100</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\Command</package>
+      <className>App\Command\TrackCommand</className>
+      <methodName>getGeneratedDir</methodName>
+      <methodSignature>getGeneratedDir(): string</methodSignature>
+      <fullMethod>getGeneratedDir(): string</fullMethod>
+      <crap>1</crap>
+      <complexity>1</complexity>
+      <coverage>100</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\Command</package>
+      <className>App\Command\TrackCommand</className>
+      <methodName>getConfigPath</methodName>
+      <methodSignature>getConfigPath(): string</methodSignature>
+      <fullMethod>getConfigPath(): string</fullMethod>
+      <crap>2</crap>
+      <complexity>1</complexity>
+      <coverage>0</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\Configuration</package>
+      <className>App\Configuration\Configuration</className>
+      <methodName>load</methodName>
+      <methodSignature>load(string $configPath)</methodSignature>
+      <fullMethod>load(string $configPath)</fullMethod>
+      <crap>20</crap>
+      <complexity>4</complexity>
+      <coverage>0</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\Configuration</package>
+      <className>App\Configuration\Configuration</className>
+      <methodName>validateSerie</methodName>
+      <methodSignature>validateSerie(array $serie): void</methodSignature>
+      <fullMethod>validateSerie(array $serie): void</fullMethod>
+      <crap>42</crap>
+      <complexity>6</complexity>
+      <coverage>0</coverage>
+      <crapLoad>6</crapLoad>
+    </method>
+    <method>
+      <package>App\DataProvider</package>
+      <className>App\DataProvider\AbstractJsonPathProvider</className>
+      <methodName>__construct</methodName>
+      <methodSignature>__construct(string $inputFilePath, string $xpathQuery)</methodSignature>
+      <fullMethod>__construct(string $inputFilePath, string $xpathQuery)</fullMethod>
+      <crap>6</crap>
+      <complexity>2</complexity>
+      <coverage>0</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\DataProvider</package>
+      <className>App\DataProvider\AbstractJsonPathProvider</className>
+      <methodName>fetchData</methodName>
+      <methodSignature>fetchData(): int</methodSignature>
+      <fullMethod>fetchData(): int</fullMethod>
+      <crap>1</crap>
+      <complexity>1</complexity>
+      <coverage>100</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\DataProvider</package>
+      <className>App\DataProvider\AbstractJsonPathReducerProvider</className>
+      <methodName>fetchData</methodName>
+      <methodSignature>fetchData(): int</methodSignature>
+      <fullMethod>fetchData(): int</fullMethod>
+      <crap>2</crap>
+      <complexity>1</complexity>
+      <coverage>0</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\DataProvider</package>
+      <className>App\DataProvider\AbstractJsonPathReducerProvider</className>
+      <methodName>reduceMethod</methodName>
+      <methodSignature>reduceMethod(array $nodes): int</methodSignature>
+      <fullMethod>reduceMethod(array $nodes): int</fullMethod>
+      <crap>1</crap>
+      <complexity>1</complexity>
+      <coverage>100</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\DataProvider</package>
+      <className>App\DataProvider\AbstractXpathProvider</className>
+      <methodName>__construct</methodName>
+      <methodSignature>__construct(string $inputFilePath, string $xpathQuery)</methodSignature>
+      <fullMethod>__construct(string $inputFilePath, string $xpathQuery)</fullMethod>
+      <crap>6</crap>
+      <complexity>2</complexity>
+      <coverage>0</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\DataProvider</package>
+      <className>App\DataProvider\AbstractXpathProvider</className>
+      <methodName>fetchData</methodName>
+      <methodSignature>fetchData(): int</methodSignature>
+      <fullMethod>fetchData(): int</fullMethod>
+      <crap>1</crap>
+      <complexity>1</complexity>
+      <coverage>100</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\DataProvider</package>
+      <className>App\DataProvider\AbstractXpathReducerProvider</className>
+      <methodName>fetchData</methodName>
+      <methodSignature>fetchData(): int</methodSignature>
+      <fullMethod>fetchData(): int</fullMethod>
+      <crap>2</crap>
+      <complexity>1</complexity>
+      <coverage>0</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\DataProvider</package>
+      <className>App\DataProvider\AbstractXpathReducerProvider</className>
+      <methodName>reduceMethod</methodName>
+      <methodSignature>reduceMethod(array $nodes): int</methodSignature>
+      <fullMethod>reduceMethod(array $nodes): int</fullMethod>
+      <crap>1</crap>
+      <complexity>1</complexity>
+      <coverage>100</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\DataProvider</package>
+      <className>App\DataProvider\JsonPathProvider</className>
+      <methodName>fetchData</methodName>
+      <methodSignature>fetchData(): int</methodSignature>
+      <fullMethod>fetchData(): int</fullMethod>
+      <crap>6</crap>
+      <complexity>2</complexity>
+      <coverage>0</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\DataProvider\Reducer</package>
+      <className>AverageReducerTrait</className>
+      <methodName>reduceMethod</methodName>
+      <methodSignature>reduceMethod(array $nodes): int</methodSignature>
+      <fullMethod>reduceMethod(array $nodes): int</fullMethod>
+      <crap>12</crap>
+      <complexity>3</complexity>
+      <coverage>0</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\DataProvider\Reducer</package>
+      <className>CountReducerTrait</className>
+      <methodName>reduceMethod</methodName>
+      <methodSignature>reduceMethod(array $nodes): int</methodSignature>
+      <fullMethod>reduceMethod(array $nodes): int</fullMethod>
+      <crap>2</crap>
+      <complexity>1</complexity>
+      <coverage>0</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\DataProvider\Reducer</package>
+      <className>SumReducerTrait</className>
+      <methodName>reduceMethod</methodName>
+      <methodSignature>reduceMethod(array $nodes): int</methodSignature>
+      <fullMethod>reduceMethod(array $nodes): int</fullMethod>
+      <crap>12</crap>
+      <complexity>3</complexity>
+      <coverage>0</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\DataProvider</package>
+      <className>App\DataProvider\XpathProvider</className>
+      <methodName>fetchData</methodName>
+      <methodSignature>fetchData(): int</methodSignature>
+      <fullMethod>fetchData(): int</fullMethod>
+      <crap>12</crap>
+      <complexity>3</complexity>
+      <coverage>0</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\DataSerie</package>
+      <className>App\DataSerie\DataSerie</className>
+      <methodName>__construct</methodName>
+      <methodSignature>__construct(array $config)</methodSignature>
+      <fullMethod>__construct(array $config)</fullMethod>
+      <crap>1.04</crap>
+      <complexity>1</complexity>
+      <coverage>66.67</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\DataSerie</package>
+      <className>App\DataSerie\DataSerie</className>
+      <methodName>save</methodName>
+      <methodSignature>save()</methodSignature>
+      <fullMethod>save()</fullMethod>
+      <crap>12</crap>
+      <complexity>3</complexity>
+      <coverage>0</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\DataSerie</package>
+      <className>App\DataSerie\DataSerie</className>
+      <methodName>load</methodName>
+      <methodSignature>load()</methodSignature>
+      <fullMethod>load()</fullMethod>
+      <crap>6</crap>
+      <complexity>2</complexity>
+      <coverage>0</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\DataSerie</package>
+      <className>App\DataSerie\DataSerie</className>
+      <methodName>getStorageFilePath</methodName>
+      <methodSignature>getStorageFilePath(): string</methodSignature>
+      <fullMethod>getStorageFilePath(): string</fullMethod>
+      <crap>2</crap>
+      <complexity>1</complexity>
+      <coverage>0</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\DataSerie</package>
+      <className>App\DataSerie\DataSerie</className>
+      <methodName>getName</methodName>
+      <methodSignature>getName() : string</methodSignature>
+      <fullMethod>getName() : string</fullMethod>
+      <crap>2</crap>
+      <complexity>1</complexity>
+      <coverage>0</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\DataSerie</package>
+      <className>App\DataSerie\DataSerie</className>
+      <methodName>getData</methodName>
+      <methodSignature>getData(): array</methodSignature>
+      <fullMethod>getData(): array</fullMethod>
+      <crap>2</crap>
+      <complexity>1</complexity>
+      <coverage>0</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\DataSerie</package>
+      <className>App\DataSerie\DataSerie</className>
+      <methodName>addData</methodName>
+      <methodSignature>addData($value): void</methodSignature>
+      <fullMethod>addData($value): void</fullMethod>
+      <crap>2</crap>
+      <complexity>1</complexity>
+      <coverage>0</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\DataSerie</package>
+      <className>App\DataSerie\DataSerie</className>
+      <methodName>getSlug</methodName>
+      <methodSignature>getSlug() : string</methodSignature>
+      <fullMethod>getSlug() : string</fullMethod>
+      <crap>1</crap>
+      <complexity>1</complexity>
+      <coverage>100</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\DataSerie</package>
+      <className>App\DataSerie\DataSerie</className>
+      <methodName>getProvider</methodName>
+      <methodSignature>getProvider()</methodSignature>
+      <fullMethod>getProvider()</fullMethod>
+      <crap>2</crap>
+      <complexity>1</complexity>
+      <coverage>0</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\DataSerie</package>
+      <className>App\DataSerie\DataSerie</className>
+      <methodName>getArguments</methodName>
+      <methodSignature>getArguments()</methodSignature>
+      <fullMethod>getArguments()</fullMethod>
+      <crap>2</crap>
+      <complexity>1</complexity>
+      <coverage>0</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+    <method>
+      <package>App\Twig</package>
+      <className>App\Twig\TwigFactory</className>
+      <methodName>getTwig</methodName>
+      <methodSignature>getTwig(): Environment</methodSignature>
+      <fullMethod>getTwig(): Environment</fullMethod>
+      <crap>6</crap>
+      <complexity>2</complexity>
+      <coverage>0</coverage>
+      <crapLoad>0</crapLoad>
+    </method>
+  </methods>
+</crap_result>

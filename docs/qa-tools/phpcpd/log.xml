@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd-cpd>
+  <duplication lines="26" tokens="47">
+    <file path="/var/www/qa-tracker/src/DataProvider/AbstractXpathReducerProvider.php" line="8"/>
+    <file path="/var/www/qa-tracker/src/DataProvider/XpathProvider.php" line="8"/>
+    <codefragment>abstract class AbstractXpathReducerProvider implements DataProviderInterface
+{
+    protected string $inputFilePath;
+    protected string $xpathQuery;
+
+    /**
+     * XpathProvider constructor.
+     * @param string $inputFilePath
+     * @param string $xpathQuery
+     */
+    public function __construct(string $inputFilePath, string $xpathQuery)
+    {
+        $this-&gt;inputFilePath = $inputFilePath;
+        $this-&gt;xpathQuery = $xpathQuery;
+    }
+
+    /**
+     * @return int
+     */
+    public function fetchData(): int
+    {
+        if (!file_exists($this-&gt;inputFilePath)) {
+            throw new \RuntimeException(sprintf('Unable to find file at %s', $this-&gt;inputFilePath));
+        }
+
+        $xml = new SimpleXMLElement(file_get_contents($this-&gt;inputFilePath));
+</codefragment>
+  </duplication>
+  <duplication lines="5" tokens="5">
+    <file path="/var/www/qa-tracker/src/DataProvider/AbstractXpathReducerProvider.php" line="4"/>
+    <file path="/var/www/qa-tracker/src/DataProvider/XpathSumProvider.php" line="4"/>
+    <codefragment>namespace App\DataProvider;
+
+use SimpleXMLElement;
+
+abstract class AbstractXpathReducerProvider implements DataProviderInterface
+</codefragment>
+  </duplication>
+  <duplication lines="3" tokens="4">
+    <file path="/var/www/qa-tracker/src/DataSerie/DataSerie.php" line="72"/>
+    <file path="/var/www/qa-tracker/src/DataSerie/DataSerie.php" line="80"/>
+    <file path="/var/www/qa-tracker/src/DataSerie/DataSerie.php" line="105"/>
+    <codefragment>    public function getStorageFilePath(): string
+    {
+        return $this-&gt;storageFilePath;
+</codefragment>
+  </duplication>
+  <duplication lines="3" tokens="4">
+    <file path="/var/www/qa-tracker/src/Command/TrackCommand.php" line="196"/>
+    <file path="/var/www/qa-tracker/src/Command/TrackCommand.php" line="204"/>
+    <file path="/var/www/qa-tracker/src/Command/TrackCommand.php" line="212"/>
+    <codefragment>    public static function getBaseDir(): string
+    {
+        return static::$baseDir;
+</codefragment>
+  </duplication>
+  <duplication lines="3" tokens="7">
+    <file path="/var/www/qa-tracker/src/Command/TrackCommand.php" line="110"/>
+    <file path="/var/www/qa-tracker/src/Command/TrackCommand.php" line="185"/>
+    <codefragment>            $io-&gt;text('done.');
+            $io-&gt;newLine();
+
+</codefragment>
+  </duplication>
+  <duplication lines="3" tokens="9">
+    <file path="/var/www/qa-tracker/src/Command/TrackCommand.php" line="60"/>
+    <file path="/var/www/qa-tracker/src/Command/TrackCommand.php" line="98"/>
+    <codefragment>    protected function interact(InputInterface $input, OutputInterface $output)
+    {
+        $io = new SymfonyStyle($input, $output);
+</codefragment>
+  </duplication>
+  <duplication lines="2" tokens="7">
+    <file path="/var/www/qa-tracker/src/Command/TrackCommand.php" line="166"/>
+    <file path="/var/www/qa-tracker/src/DataSerie/DataSerie.php" line="50"/>
+    <codefragment>        if (!is_dir($outputFileDir) &amp;&amp; !mkdir($outputFileDir, 0777, true)) {
+            throw new RuntimeException(sprintf('Directory "%s" was not created', $outputFileDir));
+</codefragment>
+  </duplication>
+  <duplication lines="2" tokens="7">
+    <file path="/var/www/qa-tracker/src/DataProvider/AbstractXpathReducerProvider.php" line="35"/>
+    <file path="/var/www/qa-tracker/src/DataProvider/XpathProvider.php" line="35"/>
+    <codefragment>        $nodes = $xml-&gt;xpath($this-&gt;xpathQuery);
+
+</codefragment>
+  </duplication>
+  <duplication lines="2" tokens="5">
+    <file path="/var/www/qa-tracker/src/Configuration/Configuration.php" line="49"/>
+    <file path="/var/www/qa-tracker/src/Configuration/Configuration.php" line="53"/>
+    <codefragment>        if (!$provider) {
+            throw new RuntimeException(sprintf('You must defined a provider class for your data serie "%s"',
+</codefragment>
+  </duplication>
+  <duplication lines="2" tokens="8">
+    <file path="/var/www/qa-tracker/src/Command/TrackCommand.php" line="117"/>
+    <file path="/var/www/qa-tracker/src/Configuration/Configuration.php" line="30"/>
+    <codefragment>            $series = $config['qatracker']['series'];
+            foreach ($series as $serie) {
+</codefragment>
+  </duplication>
+  <duplication lines="2" tokens="6">
+    <file path="/var/www/qa-tracker/src/Command/TrackCommand.php" line="110"/>
+    <file path="/var/www/qa-tracker/src/Command/TrackCommand.php" line="141"/>
+    <codefragment>            $io-&gt;text('done.');
+            $io-&gt;newLine();
+</codefragment>
+  </duplication>
+  <duplication lines="2" tokens="5">
+    <file path="/var/www/qa-tracker/src/Command/TrackCommand.php" line="80"/>
+    <file path="/var/www/qa-tracker/src/Command/TrackCommand.php" line="109"/>
+    <codefragment>        $fs-&gt;copy(Configuration::EXAMPLE_CONFIG_PATH, static::getConfigPath());
+
+</codefragment>
+  </duplication>
+</pmd-cpd>
