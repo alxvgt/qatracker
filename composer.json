@@ -3,7 +3,8 @@
     "description": "This command allows you to fetch some indicators and build simple QA charts...",
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "src/",
+            "App\\Tests\\": "tests/"
         }
     },
     "require": {
