@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle>
+<file name="src/Chart/ChartGenerator.php">
+  <error line="16" column="1" severity="error" message="Method App\Chart\ChartGenerator::generate() has parameter $settings with no value type specified in iterable type array." />
+  <error line="16" column="1" severity="error" message="Method App\Chart\ChartGenerator::generate() has parameter $values with no typehint specified." />
+  <error line="16" column="1" severity="error" message="PHPDoc tag @param has invalid value ($values): Unexpected token &quot;$values&quot;, expected type at offset 24" />
+</file>
+<file name="src/Command/TrackCommand.php">
+  <error line="39" column="1" severity="error" message="Method App\Command\TrackCommand::configure() has no return typehint specified." />
+  <error line="60" column="1" severity="error" message="Method App\Command\TrackCommand::interact() has no return typehint specified." />
+  <error line="64" column="1" severity="error" message="Cannot cast array&lt;string&gt;|bool|string|null to string." />
+  <error line="109" column="1" severity="error" message="Parameter #1 $outputFilePath of method App\Command\TrackCommand::initializeOutputDir() expects string, array&lt;string&gt;|bool|string|null given." />
+  <error line="141" column="1" severity="error" message="Parameter #1 $file of function file_put_contents expects string, array&lt;string&gt;|bool|string|null given." />
+  <error line="143" column="1" severity="error" message="Binary operation &quot;.&quot; between 'Report generated at…' and array&lt;string&gt;|bool|string|null results in an error." />
+  <error line="163" column="1" severity="error" message="PHPDoc tag @param has invalid value ($outputFilePath): Unexpected token &quot;$outputFilePath&quot;, expected type at offset 18" />
+  <error line="200" column="1" severity="error" message="Method App\Command\TrackCommand::getBaseDir() should return string but returns string|false." />
+</file>
+<file name="src/Configuration/Configuration.php">
+  <error line="41" column="1" severity="error" message="Method App\Configuration\Configuration::validateSerie() has parameter $serie with no value type specified in iterable type array." />
+  <error line="41" column="1" severity="error" message="PHPDoc tag @param has invalid value ($serie): Unexpected token &quot;$serie&quot;, expected type at offset 18" />
+</file>
+<file name="src/DataProvider/AbstractJsonPathReducerProvider.php">
+  <error line="19" column="1" severity="error" message="Parameter #1 $json of function json_decode expects string, string|false given." />
+</file>
+<file name="src/DataProvider/AbstractXpathProvider.php">
+  <error line="13" column="1" severity="error" message="Property App\DataProvider\AbstractXpathProvider::$namespaceParameters type has no value type specified in iterable type array." />
+  <error line="21" column="1" severity="error" message="Method App\DataProvider\AbstractXpathProvider::__construct() has parameter $namespaceParameters with no value type specified in iterable type array." />
+</file>
+<file name="src/DataProvider/AbstractXpathReducerProvider.php">
+  <error line="15" column="1" severity="error" message="Parameter #1 $data of class SimpleXMLElement constructor expects string, string|false given." />
+  <error line="19" column="1" severity="error" message="Parameter #1 $nodes of method App\DataProvider\ReducerProviderInterface::reduceMethod() expects array, array&lt;SimpleXMLElement&gt;|false given." />
+</file>
+<file name="src/DataProvider/JsonPathProvider.php">
+  <error line="20" column="1" severity="error" message="Parameter #1 $json of function json_decode expects string, string|false given." />
+  <error line="25" column="1" severity="error" message="Parameter #1 $array_arg of function reset expects array, Flow\JSONPath\JSONPath given." />
+</file>
+<file name="src/DataProvider/Reducer/AverageReducerTrait.php (in context of class App\DataProvider\JsonPathAverageProvider)">
+  <error line="13" column="1" severity="error" message="Method App\DataProvider\JsonPathAverageProvider::reduceMethod() has parameter $nodes with no value type specified in iterable type array." />
+</file>
+<file name="src/DataProvider/Reducer/AverageReducerTrait.php (in context of class App\DataProvider\XpathAverageProvider)">
+  <error line="13" column="1" severity="error" message="Method App\DataProvider\XpathAverageProvider::reduceMethod() has parameter $nodes with no value type specified in iterable type array." />
+</file>
+<file name="src/DataProvider/Reducer/CountReducerTrait.php (in context of class App\DataProvider\JsonPathCountProvider)">
+  <error line="13" column="1" severity="error" message="Method App\DataProvider\JsonPathCountProvider::reduceMethod() has parameter $nodes with no value type specified in iterable type array." />
+</file>
+<file name="src/DataProvider/Reducer/CountReducerTrait.php (in context of class App\DataProvider\XpathCountProvider)">
+  <error line="13" column="1" severity="error" message="Method App\DataProvider\XpathCountProvider::reduceMethod() has parameter $nodes with no value type specified in iterable type array." />
+</file>
+<file name="src/DataProvider/Reducer/SumReducerTrait.php (in context of class App\DataProvider\JsonPathSumProvider)">
+  <error line="13" column="1" severity="error" message="Method App\DataProvider\JsonPathSumProvider::reduceMethod() has parameter $nodes with no value type specified in iterable type array." />
+</file>
+<file name="src/DataProvider/Reducer/SumReducerTrait.php (in context of class App\DataProvider\XpathSumProvider)">
+  <error line="13" column="1" severity="error" message="Method App\DataProvider\XpathSumProvider::reduceMethod() has parameter $nodes with no value type specified in iterable type array." />
+</file>
+<file name="src/DataProvider/ReducerProviderInterface.php">
+  <error line="6" column="1" severity="error" message="Method App\DataProvider\ReducerProviderInterface::reduceMethod() has parameter $nodes with no value type specified in iterable type array." />
+</file>
+<file name="src/DataProvider/XpathProvider.php">
+  <error line="19" column="1" severity="error" message="Parameter #1 $data of class SimpleXMLElement constructor expects string, string|false given." />
+  <error line="23" column="1" severity="error" message="Parameter #1 $array_arg of function reset expects array, array&lt;SimpleXMLElement&gt;|false given." />
+</file>
+<file name="src/DataSerie/DataSerie.php">
+  <error line="20" column="1" severity="error" message="Property App\DataSerie\DataSerie::$data type has no value type specified in iterable type array." />
+  <error line="22" column="1" severity="error" message="Property App\DataSerie\DataSerie::$arguments type has no value type specified in iterable type array." />
+  <error line="29" column="1" severity="error" message="Method App\DataSerie\DataSerie::__construct() has parameter $config with no value type specified in iterable type array." />
+  <error line="47" column="1" severity="error" message="Method App\DataSerie\DataSerie::save() has no return typehint specified." />
+  <error line="60" column="1" severity="error" message="Method App\DataSerie\DataSerie::load() has no return typehint specified." />
+  <error line="66" column="1" severity="error" message="Parameter #1 $json of function json_decode expects string, string|false given." />
+  <error line="88" column="1" severity="error" message="Method App\DataSerie\DataSerie::getData() return type has no value type specified in iterable type array." />
+  <error line="96" column="1" severity="error" message="Method App\DataSerie\DataSerie::addData() has parameter $value with no typehint specified." />
+  <error line="96" column="1" severity="error" message="PHPDoc tag @param has invalid value ($value): Unexpected token &quot;$value&quot;, expected type at offset 18" />
+</file>
+<file name="src/Twig/TwigFactory.php">
+  <error line="24" column="1" severity="error" message="Negated boolean expression is always false." />
+</file>
+<file name="tests/DataSerie/DataSerieTest.php">
+  <error line="16" column="1" severity="error" message="Method App\Tests\DataSerie\DataSerieTest::testGetSlug() has no return typehint specified." />
+</file>
+</checkstyle>

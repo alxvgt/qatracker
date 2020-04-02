@@ -12,10 +12,6 @@ class XpathProvider extends AbstractXpathProvider
      */
     public function fetchData(): float
     {
-        if (!file_exists($this->inputFilePath)) {
-            throw new \RuntimeException(sprintf('Unable to find file at %s', $this->inputFilePath));
-        }
-
         $xml = new SimpleXMLElement(file_get_contents($this->inputFilePath));
         $xml->registerXPathNamespace($this->namespaceParameters[static::NS_PREFIX], $this->namespaceParameters[static::NS_VALUE]);
 

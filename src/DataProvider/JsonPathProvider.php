@@ -22,10 +22,10 @@ class JsonPathProvider extends AbstractJsonPathProvider
 
         $nodes = $jsonFinder->find($this->jsonPathQuery);
 
-        $result = reset($nodes);
+        $result = $nodes->first();
 
         if(!is_numeric((string)$result)){
-            throw new RuntimeException(sprintf('The result of must be a numeric value, got "%s"', $result));
+            throw new RuntimeException(sprintf('The result of query must be a numeric value, got "%s"', $result));
         }
 
         return (float)$result;

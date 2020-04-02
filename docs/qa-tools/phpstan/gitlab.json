@@ -1,0 +1,402 @@
+[
+    {
+        "description": "Method App\\Chart\\ChartGenerator::generate() has parameter $settings with no value type specified in iterable type array.",
+        "fingerprint": "fc8846a1fd8a77190da260d148e3f512e3286825448949666705f0b5ad3a4fc8",
+        "location": {
+            "path": "src/Chart/ChartGenerator.php",
+            "lines": {
+                "begin": 16
+            }
+        }
+    },
+    {
+        "description": "Method App\\Chart\\ChartGenerator::generate() has parameter $values with no typehint specified.",
+        "fingerprint": "0e55f2508e27ad77139b3ee37f541938fd915a61e03151bfd5df6eb7bbcd92fd",
+        "location": {
+            "path": "src/Chart/ChartGenerator.php",
+            "lines": {
+                "begin": 16
+            }
+        }
+    },
+    {
+        "description": "PHPDoc tag @param has invalid value ($values): Unexpected token \"$values\", expected type at offset 24",
+        "fingerprint": "8ceb8bda6e72dd3d34ff1d1f2f0004bab349b9813237b45b8151c781de5f72f6",
+        "location": {
+            "path": "src/Chart/ChartGenerator.php",
+            "lines": {
+                "begin": 16
+            }
+        }
+    },
+    {
+        "description": "Method App\\Command\\TrackCommand::configure() has no return typehint specified.",
+        "fingerprint": "72e596e9ed4a16064cbd3f6625c003f940b09b4e7fc50463030c4adaf0059be4",
+        "location": {
+            "path": "src/Command/TrackCommand.php",
+            "lines": {
+                "begin": 39
+            }
+        }
+    },
+    {
+        "description": "Method App\\Command\\TrackCommand::interact() has no return typehint specified.",
+        "fingerprint": "3d958ab984d138e6f8f109f05c5ce29fa5642f7763ade76f612c497c40342058",
+        "location": {
+            "path": "src/Command/TrackCommand.php",
+            "lines": {
+                "begin": 60
+            }
+        }
+    },
+    {
+        "description": "Cannot cast array<string>|bool|string|null to string.",
+        "fingerprint": "3d8782907d6c25cee28f8fb8450eda4029e263c45b7109e731ebe54b9cb297f6",
+        "location": {
+            "path": "src/Command/TrackCommand.php",
+            "lines": {
+                "begin": 64
+            }
+        }
+    },
+    {
+        "description": "Parameter #1 $outputFilePath of method App\\Command\\TrackCommand::initializeOutputDir() expects string, array<string>|bool|string|null given.",
+        "fingerprint": "a625076ce019cf6416faecbac7be1c03ff3b609b0a5972cb75ac9bd519949815",
+        "location": {
+            "path": "src/Command/TrackCommand.php",
+            "lines": {
+                "begin": 109
+            }
+        }
+    },
+    {
+        "description": "Parameter #1 $file of function file_put_contents expects string, array<string>|bool|string|null given.",
+        "fingerprint": "e6ee9e1e8c032f44b6828110840f740750a49b2f2df7ba91c49fe69649ef2fc1",
+        "location": {
+            "path": "src/Command/TrackCommand.php",
+            "lines": {
+                "begin": 141
+            }
+        }
+    },
+    {
+        "description": "Binary operation \".\" between 'Report generated at…' and array<string>|bool|string|null results in an error.",
+        "fingerprint": "6d333b1ce71667d0e0fe63b3c7559f0d374f0a4c3ce6f37ed66394bdae3603e3",
+        "location": {
+            "path": "src/Command/TrackCommand.php",
+            "lines": {
+                "begin": 143
+            }
+        }
+    },
+    {
+        "description": "PHPDoc tag @param has invalid value ($outputFilePath): Unexpected token \"$outputFilePath\", expected type at offset 18",
+        "fingerprint": "d8ee4661644b80dba0be7d6b72481977a61f841f9138828708d221eea0533135",
+        "location": {
+            "path": "src/Command/TrackCommand.php",
+            "lines": {
+                "begin": 163
+            }
+        }
+    },
+    {
+        "description": "Method App\\Command\\TrackCommand::getBaseDir() should return string but returns string|false.",
+        "fingerprint": "74ce912919a831ba44dd809fea723594d00529d617e18e872881940993b5be32",
+        "location": {
+            "path": "src/Command/TrackCommand.php",
+            "lines": {
+                "begin": 200
+            }
+        }
+    },
+    {
+        "description": "Method App\\Configuration\\Configuration::validateSerie() has parameter $serie with no value type specified in iterable type array.",
+        "fingerprint": "89b6dab751db9593ae28758c51446e0eefe42f668f49fd1742094d2701c2f2cc",
+        "location": {
+            "path": "src/Configuration/Configuration.php",
+            "lines": {
+                "begin": 41
+            }
+        }
+    },
+    {
+        "description": "PHPDoc tag @param has invalid value ($serie): Unexpected token \"$serie\", expected type at offset 18",
+        "fingerprint": "a38bb5eca541cd425256d3b254c2b801a2bd87c428474fd9cb31c574ca5b1782",
+        "location": {
+            "path": "src/Configuration/Configuration.php",
+            "lines": {
+                "begin": 41
+            }
+        }
+    },
+    {
+        "description": "Parameter #1 $json of function json_decode expects string, string|false given.",
+        "fingerprint": "d74fafcbb3411c47bb72dc30c451f3d276259fbe55fc4ec586bebd84e0657ebf",
+        "location": {
+            "path": "src/DataProvider/AbstractJsonPathReducerProvider.php",
+            "lines": {
+                "begin": 19
+            }
+        }
+    },
+    {
+        "description": "Property App\\DataProvider\\AbstractXpathProvider::$namespaceParameters type has no value type specified in iterable type array.",
+        "fingerprint": "7bff6258c367234d556ce9c08a523a9b2176be50ad71ae35d379dc5b35956fd8",
+        "location": {
+            "path": "src/DataProvider/AbstractXpathProvider.php",
+            "lines": {
+                "begin": 13
+            }
+        }
+    },
+    {
+        "description": "Method App\\DataProvider\\AbstractXpathProvider::__construct() has parameter $namespaceParameters with no value type specified in iterable type array.",
+        "fingerprint": "d838514a58a6dace1232e3f85fa97db93b966b73a0dd7577baa4be67e58558ea",
+        "location": {
+            "path": "src/DataProvider/AbstractXpathProvider.php",
+            "lines": {
+                "begin": 21
+            }
+        }
+    },
+    {
+        "description": "Parameter #1 $data of class SimpleXMLElement constructor expects string, string|false given.",
+        "fingerprint": "c9a0be6c82c22d92b29f8877a4e50205a95ad7d723ae2202aa37239d5e418ddb",
+        "location": {
+            "path": "src/DataProvider/AbstractXpathReducerProvider.php",
+            "lines": {
+                "begin": 15
+            }
+        }
+    },
+    {
+        "description": "Parameter #1 $nodes of method App\\DataProvider\\ReducerProviderInterface::reduceMethod() expects array, array<SimpleXMLElement>|false given.",
+        "fingerprint": "090366261cf219b4396e76e9d930863ea54badbe15e67b444e08fe269bc46baa",
+        "location": {
+            "path": "src/DataProvider/AbstractXpathReducerProvider.php",
+            "lines": {
+                "begin": 19
+            }
+        }
+    },
+    {
+        "description": "Parameter #1 $json of function json_decode expects string, string|false given.",
+        "fingerprint": "2c55d2e1cc5345db359d3aa827e8ad680e10773d2457197609213d32c5310021",
+        "location": {
+            "path": "src/DataProvider/JsonPathProvider.php",
+            "lines": {
+                "begin": 20
+            }
+        }
+    },
+    {
+        "description": "Parameter #1 $array_arg of function reset expects array, Flow\\JSONPath\\JSONPath given.",
+        "fingerprint": "23601775883ec651723c58cea74a7f349b9834428176063a77b064e2e854bf20",
+        "location": {
+            "path": "src/DataProvider/JsonPathProvider.php",
+            "lines": {
+                "begin": 25
+            }
+        }
+    },
+    {
+        "description": "Method App\\DataProvider\\JsonPathAverageProvider::reduceMethod() has parameter $nodes with no value type specified in iterable type array.",
+        "fingerprint": "9e8240853526e6d1c9c64b674cc4056b16d28e90429d12b34e7a7b10e0009fd2",
+        "location": {
+            "path": "src/DataProvider/Reducer/AverageReducerTrait.php (in context of class App\\DataProvider\\JsonPathAverageProvider)",
+            "lines": {
+                "begin": 13
+            }
+        }
+    },
+    {
+        "description": "Method App\\DataProvider\\XpathAverageProvider::reduceMethod() has parameter $nodes with no value type specified in iterable type array.",
+        "fingerprint": "d440345d2dad15f64171ffbd721404e06c6b4988bac009773e5caae9e28cb7a8",
+        "location": {
+            "path": "src/DataProvider/Reducer/AverageReducerTrait.php (in context of class App\\DataProvider\\XpathAverageProvider)",
+            "lines": {
+                "begin": 13
+            }
+        }
+    },
+    {
+        "description": "Method App\\DataProvider\\JsonPathCountProvider::reduceMethod() has parameter $nodes with no value type specified in iterable type array.",
+        "fingerprint": "4f5b8957c22d6ef514feb6233ca593ed6eb35c81aa0bb9cf1e96d8bc106d07a6",
+        "location": {
+            "path": "src/DataProvider/Reducer/CountReducerTrait.php (in context of class App\\DataProvider\\JsonPathCountProvider)",
+            "lines": {
+                "begin": 13
+            }
+        }
+    },
+    {
+        "description": "Method App\\DataProvider\\XpathCountProvider::reduceMethod() has parameter $nodes with no value type specified in iterable type array.",
+        "fingerprint": "6c318fad45780ab4ee56fdd7142ef1c9bf3ca19b23dc5db3fb9f417ecfbc1baf",
+        "location": {
+            "path": "src/DataProvider/Reducer/CountReducerTrait.php (in context of class App\\DataProvider\\XpathCountProvider)",
+            "lines": {
+                "begin": 13
+            }
+        }
+    },
+    {
+        "description": "Method App\\DataProvider\\JsonPathSumProvider::reduceMethod() has parameter $nodes with no value type specified in iterable type array.",
+        "fingerprint": "6390934c56f6c3d0c73a8336a39aa703a249de3287a9ada41e2e7345f86c0960",
+        "location": {
+            "path": "src/DataProvider/Reducer/SumReducerTrait.php (in context of class App\\DataProvider\\JsonPathSumProvider)",
+            "lines": {
+                "begin": 13
+            }
+        }
+    },
+    {
+        "description": "Method App\\DataProvider\\XpathSumProvider::reduceMethod() has parameter $nodes with no value type specified in iterable type array.",
+        "fingerprint": "61eea21bfcc4604f4246cd112525ff72d0cfc05a3cd2fbd942ff0cb6fe3cab49",
+        "location": {
+            "path": "src/DataProvider/Reducer/SumReducerTrait.php (in context of class App\\DataProvider\\XpathSumProvider)",
+            "lines": {
+                "begin": 13
+            }
+        }
+    },
+    {
+        "description": "Method App\\DataProvider\\ReducerProviderInterface::reduceMethod() has parameter $nodes with no value type specified in iterable type array.",
+        "fingerprint": "11f79a73885b1920fee8b667211e0a16d87da61251c1c0ce19c05791f4d5e112",
+        "location": {
+            "path": "src/DataProvider/ReducerProviderInterface.php",
+            "lines": {
+                "begin": 6
+            }
+        }
+    },
+    {
+        "description": "Parameter #1 $data of class SimpleXMLElement constructor expects string, string|false given.",
+        "fingerprint": "eaa5941327e76aff35a4f86e0b2d1e9cc5985f405cad0ac9b89f58941927f68d",
+        "location": {
+            "path": "src/DataProvider/XpathProvider.php",
+            "lines": {
+                "begin": 19
+            }
+        }
+    },
+    {
+        "description": "Parameter #1 $array_arg of function reset expects array, array<SimpleXMLElement>|false given.",
+        "fingerprint": "1466dc382b4f708457b8d016af4aa914c70506438da23c9101269329caf42bed",
+        "location": {
+            "path": "src/DataProvider/XpathProvider.php",
+            "lines": {
+                "begin": 23
+            }
+        }
+    },
+    {
+        "description": "Property App\\DataSerie\\DataSerie::$data type has no value type specified in iterable type array.",
+        "fingerprint": "472af9a829d9bcc835183206d9309ca3d7795bec034083100982353acda940e1",
+        "location": {
+            "path": "src/DataSerie/DataSerie.php",
+            "lines": {
+                "begin": 20
+            }
+        }
+    },
+    {
+        "description": "Property App\\DataSerie\\DataSerie::$arguments type has no value type specified in iterable type array.",
+        "fingerprint": "339e4a4f745f945bc27cddf3f2da06937bd93d5c6f6889e4afec4cc89d5a81cc",
+        "location": {
+            "path": "src/DataSerie/DataSerie.php",
+            "lines": {
+                "begin": 22
+            }
+        }
+    },
+    {
+        "description": "Method App\\DataSerie\\DataSerie::__construct() has parameter $config with no value type specified in iterable type array.",
+        "fingerprint": "7f1227032462f0604cd0e8121c67114f3480fa166b8ccf6d55540f1516daeb45",
+        "location": {
+            "path": "src/DataSerie/DataSerie.php",
+            "lines": {
+                "begin": 29
+            }
+        }
+    },
+    {
+        "description": "Method App\\DataSerie\\DataSerie::save() has no return typehint specified.",
+        "fingerprint": "acfcffb8d3c9e608289e667b421a4231fb24180575e910241a2ad8aa43c7d6b7",
+        "location": {
+            "path": "src/DataSerie/DataSerie.php",
+            "lines": {
+                "begin": 47
+            }
+        }
+    },
+    {
+        "description": "Method App\\DataSerie\\DataSerie::load() has no return typehint specified.",
+        "fingerprint": "c22dc5ec168e048e92cb072008b87ea67e04ecaa005f4472e10f909b0f8429ff",
+        "location": {
+            "path": "src/DataSerie/DataSerie.php",
+            "lines": {
+                "begin": 60
+            }
+        }
+    },
+    {
+        "description": "Parameter #1 $json of function json_decode expects string, string|false given.",
+        "fingerprint": "54fc814641ecf0106274ff77f5310723b43895bed1ef3fe1ae8b4b5ddd9634ac",
+        "location": {
+            "path": "src/DataSerie/DataSerie.php",
+            "lines": {
+                "begin": 66
+            }
+        }
+    },
+    {
+        "description": "Method App\\DataSerie\\DataSerie::getData() return type has no value type specified in iterable type array.",
+        "fingerprint": "66803c53e6c3c286c3f8a30c606e528d1aa029310ef6e93c4aa075fd8f337abd",
+        "location": {
+            "path": "src/DataSerie/DataSerie.php",
+            "lines": {
+                "begin": 88
+            }
+        }
+    },
+    {
+        "description": "Method App\\DataSerie\\DataSerie::addData() has parameter $value with no typehint specified.",
+        "fingerprint": "24b00d5fed5fcb88c89c1d82c63a22080cc946adbf1d0c065abcf2fdf9f74232",
+        "location": {
+            "path": "src/DataSerie/DataSerie.php",
+            "lines": {
+                "begin": 96
+            }
+        }
+    },
+    {
+        "description": "PHPDoc tag @param has invalid value ($value): Unexpected token \"$value\", expected type at offset 18",
+        "fingerprint": "fd48ac30b2771ecd7e1be42b31caab88209815d186e2b866afb518f3ece1adb0",
+        "location": {
+            "path": "src/DataSerie/DataSerie.php",
+            "lines": {
+                "begin": 96
+            }
+        }
+    },
+    {
+        "description": "Negated boolean expression is always false.",
+        "fingerprint": "36e3560897145190fb2099465df2248c157edc473fade10ee17cb7c28e40432d",
+        "location": {
+            "path": "src/Twig/TwigFactory.php",
+            "lines": {
+                "begin": 24
+            }
+        }
+    },
+    {
+        "description": "Method App\\Tests\\DataSerie\\DataSerieTest::testGetSlug() has no return typehint specified.",
+        "fingerprint": "76baad7ec25ce4cd92f8e1e05d121ab65af658c718283733158edae608f8f3bf",
+        "location": {
+            "path": "tests/DataSerie/DataSerieTest.php",
+            "lines": {
+                "begin": 16
+            }
+        }
+    }
+]
