@@ -36,6 +36,6 @@ $p->setDefaultStub('qatracker.php', '/qatracker.php');
 $p->compress(Phar::GZ);
 
 echo "\n";
-echo "$pharFile successfully created";
+echo "Phar archive : \"$pharFile\" successfully created";
 echo "\n";
 echo "\n";

@@ -68,8 +68,9 @@ class TrackCommand extends Command
         }
 
         $helper = $this->getHelper('question');
-        $question = new ConfirmationQuestion(sprintf('File %s does not exists. Do you want to create it from the sample file ? (Y/n)',
-            static::getConfigPath()), true);
+        $question = new ConfirmationQuestion(
+            sprintf("\nFile %s does not exists.\nDo you want to create it from the sample file ? (Y/n)",
+                static::getConfigPath()), true);
 
         if (!$helper->ask($input, $output, $question)) {
             $io->warning(sprintf('The config file has not been created'));
@@ -195,7 +196,8 @@ class TrackCommand extends Command
      */
     public static function getBaseDir(): string
     {
-        return static::$baseDir;
+        // realpath is needed in order to fecth the directory correctly from phar archive
+        return realpath(static::$baseDir);
     }
 
     /**
