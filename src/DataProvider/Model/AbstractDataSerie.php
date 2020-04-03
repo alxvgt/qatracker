@@ -42,6 +42,9 @@ abstract class AbstractDataSerie
     {
         $trackDate = TrackCommand::getTrackDate();
         $this->data[$trackDate->format(static::DATE_FORMAT)] = $value;
+        $data = $this->data;
+        ksort($data);
+        $this->data = $data;
     }
 
     /**

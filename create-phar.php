@@ -30,12 +30,15 @@ $finder
     ->exclude('docs')
     ->exclude('tests')
     ->notName('*.loc')
+    ->notName(['*.png', '*.jpg', '*.jpeg'])
     ->notName('*.sh')
     ->notName('*.phar')
     ->notName('*.phar.gz')
     ->notName('composer.*')
     ->notName('.gitignore')
-    ->notName('create-phar.php');
+    ->notName('create-phar.php')
+    ->notContains('PHPUnit\Framework\TestCase')
+    ;
 
 $p->buildFromIterator($finder->getIterator(), __DIR__);
 $p->setDefaultStub('qatracker.php', '/qatracker.php');
