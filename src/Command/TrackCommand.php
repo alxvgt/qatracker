@@ -9,6 +9,7 @@ use App\DataProvider\Model\AbstractDataSerie;
 use App\DataProvider\Model\DataPercentSerie;
 use App\DataProvider\Model\DataStandardSerie;
 use App\Twig\TwigFactory;
+use DateTime;
 use Goat1000\SVGGraph\SVGGraph;
 use JsonException;
 use RuntimeException;
@@ -28,18 +29,19 @@ class TrackCommand extends Command
 {
     public const EXIT_SUCCESS = 0;
     public const EXIT_FAILURE = 1;
+
     public const BASE_DIR = '.qatracker';
     public const GENERATED_DIR = 'generated';
     public const OUTPUT_DIR = 'report';
     public const OUTPUT_FILENAME = 'index.html';
     public const DEFAULT_TEMPLATE = 'index.html.twig';
     public const CONFIG_FILENAME = 'config.yaml';
-    const OUTPUT_DONE = ' <fg=green>done</>.';
+    protected const OUTPUT_DONE = ' <fg=green>done</>.';
 
     protected static string $baseDir = self::BASE_DIR;
+    protected static DateTime $trackDate;
 
     protected static $defaultName = 'track';
-
 
     protected function configure()
     {
@@ -48,12 +50,15 @@ class TrackCommand extends Command
         $this
             ->setDescription('Track your QA indicators')
             ->setHelp('This command allows you to fetch some indicators and build simple QA charts...')
+            ->addOption('date', null, InputOption::VALUE_REQUIRED,
+                sprintf('Use this date instead today to collect data (use format "%s")', AbstractDataSerie::DATE_FORMAT),
+                (new DateTime())->format(AbstractDataSerie::DATE_FORMAT))
             ->addOption('no-report', null, InputOption::VALUE_NONE, 'Do not execute the report rendering step')
             ->addOption('no-track', null, InputOption::VALUE_NONE, 'Do not execute the tracking step')
-            ->addOption('report-html-path', null, InputOption::VALUE_OPTIONAL,
+            ->addOption('report-html-path', null, InputOption::VALUE_REQUIRED,
                 'Define a custom path for the html report',
                 $outputDir.'/'.static::OUTPUT_FILENAME)
-            ->addOption('base-dir', null, InputOption::VALUE_OPTIONAL,
+            ->addOption('base-dir', null, InputOption::VALUE_REQUIRED,
                 'Define a custom base directory for qatracker',
                 static::getBaseDir());
     }
@@ -115,6 +120,8 @@ class TrackCommand extends Command
             $section->writeln($message);
             $outputFilePath = $input->getOption('report-html-path');
             $this->initializeOutputDir($outputFilePath);
+            $trackDate = $input->getOption('date');
+            $this->initializeTrackDate($trackDate);
             $config = Configuration::load(static::getConfigPath());
             $section->overwrite($message.static::OUTPUT_DONE);
 
@@ -275,6 +282,28 @@ class TrackCommand extends Command
         }
 
         return $providersStack;
+    }
+
+    /**
+     * @param $trackDate
+     */
+    protected function initializeTrackDate($trackDate): void
+    {
+        static::$trackDate = DateTime::createFromFormat(AbstractDataSerie::DATE_FORMAT, $trackDate);
+
+        if (!static::$trackDate) {
+            throw new \RuntimeException(
+                sprintf('Unable to create date from option with value %s',
+                    $trackDate));
+        }
+    }
+
+    /**
+     * @return DateTime|false
+     */
+    public static function getTrackDate()
+    {
+        return self::$trackDate;
     }
 
 }

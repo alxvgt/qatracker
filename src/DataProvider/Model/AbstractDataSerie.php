@@ -4,6 +4,7 @@
 namespace App\DataProvider\Model;
 
 
+use App\Command\TrackCommand;
 use JsonException;
 
 abstract class AbstractDataSerie
@@ -39,8 +40,8 @@ abstract class AbstractDataSerie
      */
     public function addData($value): void
     {
-        $today = new \DateTime();
-        $this->data[$today->format(static::DATE_FORMAT)] = $value;
+        $trackDate = TrackCommand::getTrackDate();
+        $this->data[$trackDate->format(static::DATE_FORMAT)] = $value;
     }
 
     /**
