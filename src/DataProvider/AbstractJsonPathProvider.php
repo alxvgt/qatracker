@@ -3,6 +3,7 @@
 
 namespace App\DataProvider;
 
+use App\Root\Root;
 use JsonException;
 
 abstract class AbstractJsonPathProvider implements DataProviderInterface
@@ -22,7 +23,7 @@ abstract class AbstractJsonPathProvider implements DataProviderInterface
      */
     public function __construct(string $inputFilePath, string $xpathQuery)
     {
-        $this->inputFilePath = $inputFilePath;
+        $this->inputFilePath = Root::external().'/'.$inputFilePath;
         $this->jsonPathQuery = $xpathQuery;
 
         if (!file_exists($this->inputFilePath)) {

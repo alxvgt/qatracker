@@ -3,12 +3,19 @@
 namespace App\Configuration;
 
 use App\DataProvider\Model\AbstractDataSerie;
+use App\Root\Root;
 use RuntimeException;
 use Symfony\Component\Yaml\Yaml;
 
 class Configuration
 {
-    public const EXAMPLE_CONFIG_PATH = __DIR__.'/../../.qatracker.dist/config.yaml';
+    /**
+     * @return string
+     */
+    public static function exampleConfigPath(): string
+    {
+        return Root::internal().'/../../.qatracker.dist/config.yaml';
+    }
 
     /**
      * @param string $configPath
@@ -17,7 +24,7 @@ class Configuration
     public static function load(string $configPath)
     {
         if (!file_exists($configPath)) {
-            $exampleConfig = file_get_contents(static::EXAMPLE_CONFIG_PATH);
+            $exampleConfig = file_get_contents(static::exampleConfigPath());
             throw new RuntimeException(sprintf("File %s does not exists. You should run :\n#> touch .qatracker/config.yaml\n\nNow edit this file to put your custom configuration, example : \n%s",
                 $configPath, $exampleConfig));
         }

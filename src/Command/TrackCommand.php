@@ -8,6 +8,7 @@ use App\Configuration\Configuration;
 use App\DataProvider\Model\AbstractDataSerie;
 use App\DataProvider\Model\DataPercentSerie;
 use App\DataProvider\Model\DataStandardSerie;
+use App\Root\Root;
 use App\Twig\TwigFactory;
 use DateTime;
 use Goat1000\SVGGraph\SVGGraph;
@@ -88,7 +89,7 @@ class TrackCommand extends Command
         }
 
         $fs = new Filesystem();
-        $fs->copy(Configuration::EXAMPLE_CONFIG_PATH, static::getConfigPath());
+        $fs->copy(Configuration::exampleConfigPath(), static::getConfigPath());
 
         $io->success(sprintf("The config file has been created at \"%s\".\nYou can now edit it to put your own configuration.",
             static::getConfigPath()));
@@ -127,10 +128,10 @@ class TrackCommand extends Command
 
             /** @var ConsoleSectionOutput $section */
             $section = $output->section();
-            $message = 'Loading providers...';
+            $message = 'Loading data series...';
             $section->writeln($message);
-            $providersConfig = $config['qatracker']['dataSeries'];
-            $providersStack = $this->loadProviders($providersConfig);
+            $dataSeriesConfig = $config['qatracker']['dataSeries'];
+            $dataSeriessStack = $this->loadProviders($dataSeriesConfig);
             $section->overwrite($message.static::OUTPUT_DONE);
             $io->newLine();
 
@@ -139,12 +140,13 @@ class TrackCommand extends Command
             $graphs = [];
 
             if ($withTrack) {
-                foreach ($providersStack as $provider) {
+                /** @var AbstractDataSerie $dataSerie */
+                foreach ($dataSeriessStack as $dataSerie) {
                     /** @var ConsoleSectionOutput $section */
                     $section = $output->section();
-                    $message = sprintf('Collecting new indicator for "%s"...', $provider->getId());
+                    $message = sprintf('Collecting new indicator for "%s"...', $dataSerie->getId());
                     $section->writeln($message);
-                    $provider->collect();
+                    $dataSerie->collect();
                     $section->overwrite($message.static::OUTPUT_DONE);
                 }
                 $io->newLine();
@@ -160,7 +162,7 @@ class TrackCommand extends Command
                 $charts = $config['qatracker']['charts'];
                 foreach ($charts as $chart) {
 
-                    $chart = new Chart($chart, $providersStack);
+                    $chart = new Chart($chart, $dataSeriessStack);
 
                     $graphs [] = ChartGenerator::generate(
                         $chart->getFirstProvider()->getData(),
@@ -226,8 +228,7 @@ class TrackCommand extends Command
      */
     public static function getBaseDir(): string
     {
-        // realpath is needed in order to fecth the directory correctly from phar archive
-        return realpath(static::$baseDir);
+        return Root::external().'/'.static::BASE_DIR;
     }
 
     /**

@@ -3,6 +3,7 @@
 
 namespace App\DataProvider;
 
+use App\Root\Root;
 use RuntimeException;
 use SimpleXMLElement;
 
@@ -29,7 +30,7 @@ abstract class AbstractXpathProvider implements DataProviderInterface
      */
     public function __construct(string $inputFilePath, string $xpathQuery, array $namespaceParameters = [])
     {
-        $this->inputFilePath = $inputFilePath;
+        $this->inputFilePath = Root::external().'/'.$inputFilePath;
         $this->xpathQuery = $xpathQuery;
         $this->namespaceParameters = $namespaceParameters;
 

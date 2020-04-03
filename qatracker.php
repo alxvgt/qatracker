@@ -7,9 +7,7 @@ use App\Command\TrackCommand;
 use Symfony\Component\Console\Application;
 
 $application = new Application();
-
 $command = new TrackCommand();
-
 $application->add(new TrackCommand());
 
 $application->setDefaultCommand($command->getName(), true);

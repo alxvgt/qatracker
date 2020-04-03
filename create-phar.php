@@ -23,12 +23,18 @@ $finder = new Finder();
 $finder
     ->files()
     ->in(__DIR__)
-    ->exclude(TrackCommand::getBaseDir())
-    ->exclude(TrackCommand::getBaseDir().'.dist/'.TrackCommand::GENERATED_DIR)
+    ->ignoreDotFiles(false)
+    ->exclude(TrackCommand::BASE_DIR.'.dist/'.TrackCommand::GENERATED_DIR)
+    ->exclude(TrackCommand::BASE_DIR)
     ->exclude('docker')
-    ->exclude('*.loc')
+    ->exclude('docs')
+    ->exclude('tests')
+    ->notName('*.loc')
+    ->notName('*.sh')
     ->notName('*.phar')
     ->notName('*.phar.gz')
+    ->notName('composer.*')
+    ->notName('.gitignore')
     ->notName('create-phar.php');
 
 $p->buildFromIterator($finder->getIterator(), __DIR__);
@@ -36,6 +42,35 @@ $p->setDefaultStub('qatracker.php', '/qatracker.php');
 $p->compress(Phar::GZ);
 
 echo "\n";
-echo "Phar archive : \"$pharFile\" successfully created";
+echo "\n== Archived files ==\n";
+
+$children = $p->getChildren();
+/** @var PharFileInfo $child */
+foreach ($children as $child) {
+    echo '> '.$child->getFilename()."\n";
+}
+
+echo "\n";
+echo sprintf(
+    'Phar archive : "%s" (%s) successfully created',
+    $pharFile,
+    human_filesize(filesize($pharFile))
+);
 echo "\n";
 echo "\n";
+
+
+/** ---------------------------------- */
+
+/**
+ * @param     $bytes
+ * @param int $decimals
+ * @return string
+ */
+function human_filesize($bytes, $decimals = 2)
+{
+    $sz = 'BKMGTP';
+    $factor = floor((strlen($bytes) - 1) / 3);
+
+    return sprintf("%.{$decimals}f", $bytes / (1024 ** $factor)).@$sz[$factor];
+}
