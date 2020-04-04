@@ -1,44 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <title>QA Tracker</title>
-    <link href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBjbGFzcz0ic3ZnLWlubGluZS0tZmEgZmEtY2hhcnQtbGluZSBmYS13LTE2Ij4KCiA8Zz4KICA8dGl0bGU+YmFja2dyb3VuZDwvdGl0bGU+CiAgPHJlY3QgZmlsbD0ibm9uZSIgaWQ9ImNhbnZhc19iYWNrZ3JvdW5kIiBoZWlnaHQ9IjQwMiIgd2lkdGg9IjU4MiIgeT0iLTEiIHg9Ii0xIi8+CiA8L2c+CiA8Zz4KICA8dGl0bGU+TGF5ZXIgMTwvdGl0bGU+CiAgPHBhdGggaWQ9InN2Z18xIiBkPSJtNDk2LDM4NGwtNDMyLDBsMCwtMzA0YzAsLTguODQgLTcuMTYsLTE2IC0xNiwtMTZsLTMyLDBjLTguODQsMCAtMTYsNy4xNiAtMTYsMTZsMCwzMzZjMCwxNy42NyAxNC4zMywzMiAzMiwzMmw0NjQsMGM4Ljg0LDAgMTYsLTcuMTYgMTYsLTE2bDAsLTMyYzAsLTguODQgLTcuMTYsLTE2IC0xNiwtMTZ6bS0zMiwtMjg4bC0xMTguMDYsMGMtMjEuMzgsMCAtMzIuMDksMjUuODUgLTE2Ljk3LDQwLjk3bDMyLjQsMzIuNGwtNzMuMzcsNzMuMzhsLTczLjM3LC03My4zN2MtMTIuNSwtMTIuNSAtMzIuNzYsLTEyLjUgLTQ1LjI1LDBsLTY4LjY5LDY4LjY5Yy02LjI1LDYuMjUgLTYuMjUsMTYuMzggMCwyMi42M2wyMi42MiwyMi42MmM2LjI1LDYuMjUgMTYuMzgsNi4yNSAyMi42MywwbDQ2LjA2LC00Ni4wN2w3My4zNyw3My4zN2MxMi41LDEyLjUgMzIuNzYsMTIuNSA0NS4yNSwwbDk2LC05NmwzMi40LDMyLjRjMTUuMTIsMTUuMTIgNDAuOTcsNC40MSA0MC45NywtMTYuOTdsMCwtMTE4LjA1YzAuMDEsLTguODQgLTcuMTUsLTE2IC0xNS45OSwtMTZ6IiBmaWxsPSIjODREM0RCIi8+CiA8L2c+Cjwvc3ZnPg==" rel="icon" type="image/svg+xml" />
+    <link href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBjbGFzcz0ic3ZnLWlubGluZS0tZmEgZmEtY2hhcnQtbGluZSBmYS13LTE2Ij4KCiA8Zz4KICA8dGl0bGU+YmFja2dyb3VuZDwvdGl0bGU+CiAgPHJlY3QgZmlsbD0ibm9uZSIgaWQ9ImNhbnZhc19iYWNrZ3JvdW5kIiBoZWlnaHQ9IjQwMiIgd2lkdGg9IjU4MiIgeT0iLTEiIHg9Ii0xIi8+CiA8L2c+CiA8Zz4KICA8dGl0bGU+TGF5ZXIgMTwvdGl0bGU+CiAgPHBhdGggaWQ9InN2Z18xIiBkPSJtNDk2LDM4NGwtNDMyLDBsMCwtMzA0YzAsLTguODQgLTcuMTYsLTE2IC0xNiwtMTZsLTMyLDBjLTguODQsMCAtMTYsNy4xNiAtMTYsMTZsMCwzMzZjMCwxNy42NyAxNC4zMywzMiAzMiwzMmw0NjQsMGM4Ljg0LDAgMTYsLTcuMTYgMTYsLTE2bDAsLTMyYzAsLTguODQgLTcuMTYsLTE2IC0xNiwtMTZ6bS0zMiwtMjg4bC0xMTguMDYsMGMtMjEuMzgsMCAtMzIuMDksMjUuODUgLTE2Ljk3LDQwLjk3bDMyLjQsMzIuNGwtNzMuMzcsNzMuMzhsLTczLjM3LC03My4zN2MtMTIuNSwtMTIuNSAtMzIuNzYsLTEyLjUgLTQ1LjI1LDBsLTY4LjY5LDY4LjY5Yy02LjI1LDYuMjUgLTYuMjUsMTYuMzggMCwyMi42M2wyMi42MiwyMi42MmM2LjI1LDYuMjUgMTYuMzgsNi4yNSAyMi42MywwbDQ2LjA2LC00Ni4wN2w3My4zNyw3My4zN2MxMi41LDEyLjUgMzIuNzYsMTIuNSA0NS4yNSwwbDk2LC05NmwzMi40LDMyLjRjMTUuMTIsMTUuMTIgNDAuOTcsNC40MSA0MC45NywtMTYuOTdsMCwtMTE4LjA1YzAuMDEsLTguODQgLTcuMTUsLTE2IC0xNS45OSwtMTZ6IiBmaWxsPSIjODREM0RCIi8+CiA8L2c+Cjwvc3ZnPg=="
+          rel="icon" type="image/svg+xml"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.1/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body {
-            padding: 1rem;
-            background-color: rgb(43, 43, 43);
-            color: white;
-            font-family: Arial, sans-serif;
+        .hero-body {
+            padding-top: 0.3rem;
+            padding-bottom: 0.8rem;
         }
 
-        h1 {
-            text-align: center;
+        .footer {
+            padding: 0.3rem;
         }
 
-        .chart {
-            min-width: 550px;
-            height: 300px;
-            padding: 10px;
-            flex: 1 1 auto;
+        .sticky-top {
+            position: sticky;
+            top: 0;
+            z-index: 1;
         }
 
-        .charts {
-            display: flex;
-            flex-wrap: wrap;
+        .sticky-bottom {
+            position: sticky;
+            bottom: 0;
+            z-index: 1;
         }
 
+        .min-full-height {
+            min-height: 100vh;
+        }
+
+        .extra-small {
+            height: 1.5rem;
+        }
+
+        .title.is-spaced {
+            margin-bottom: 0;
+        }
+
+        .logo {
+            height: 36px;
+        }
     </style>
 </head>
 <body>
-<h1>QA Tracker</h1>
-<div class="charts">
-    {% for graph in graphs %}
-        <div class="chart">
-            {{ graph|raw }}
+
+<section class="hero is-dark is-bold sticky-top">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title is-spaced">
+                <img class="logo"
+                     src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBjbGFzcz0ic3ZnLWlubGluZS0tZmEgZmEtY2hhcnQtbGluZSBmYS13LTE2Ij4KCiA8Zz4KICA8dGl0bGU+YmFja2dyb3VuZDwvdGl0bGU+CiAgPHJlY3QgZmlsbD0ibm9uZSIgaWQ9ImNhbnZhc19iYWNrZ3JvdW5kIiBoZWlnaHQ9IjQwMiIgd2lkdGg9IjU4MiIgeT0iLTEiIHg9Ii0xIi8+CiA8L2c+CiA8Zz4KICA8dGl0bGU+TGF5ZXIgMTwvdGl0bGU+CiAgPHBhdGggaWQ9InN2Z18xIiBkPSJtNDk2LDM4NGwtNDMyLDBsMCwtMzA0YzAsLTguODQgLTcuMTYsLTE2IC0xNiwtMTZsLTMyLDBjLTguODQsMCAtMTYsNy4xNiAtMTYsMTZsMCwzMzZjMCwxNy42NyAxNC4zMywzMiAzMiwzMmw0NjQsMGM4Ljg0LDAgMTYsLTcuMTYgMTYsLTE2bDAsLTMyYzAsLTguODQgLTcuMTYsLTE2IC0xNiwtMTZ6bS0zMiwtMjg4bC0xMTguMDYsMGMtMjEuMzgsMCAtMzIuMDksMjUuODUgLTE2Ljk3LDQwLjk3bDMyLjQsMzIuNGwtNzMuMzcsNzMuMzhsLTczLjM3LC03My4zN2MtMTIuNSwtMTIuNSAtMzIuNzYsLTEyLjUgLTQ1LjI1LDBsLTY4LjY5LDY4LjY5Yy02LjI1LDYuMjUgLTYuMjUsMTYuMzggMCwyMi42M2wyMi42MiwyMi42MmM2LjI1LDYuMjUgMTYuMzgsNi4yNSAyMi42MywwbDQ2LjA2LC00Ni4wN2w3My4zNyw3My4zN2MxMi41LDEyLjUgMzIuNzYsMTIuNSA0NS4yNSwwbDk2LC05NmwzMi40LDMyLjRjMTUuMTIsMTUuMTIgNDAuOTcsNC40MSA0MC45NywtMTYuOTdsMCwtMTE4LjA1YzAuMDEsLTguODQgLTcuMTUsLTE2IC0xNS45OSwtMTZ6IiBmaWxsPSIjODREM0RCIi8+CiA8L2c+Cjwvc3ZnPg=="/>
+                QA Tracker
+            </h1>
+            <h2 class="subtitle is-hidden-mobile">
+                Collect, store and render quality assurance indicators.
+            </h2>
         </div>
-    {% endfor %}
+    </div>
+</section>
+
+<div class="container is-fluid has-background-grey-darker min-full-height">
+    <section class="section">
+        <div class="columns is-multiline is-centered is-vcentered">
+            {% for graph in graphs %}
+                <div class="column is-one-third-widescreen is-half-desktop is-full-tablet">
+                    <div class="box">
+                        <figure class="image">
+                            {{ graph|raw }}
+                        </figure>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
 </div>
+
+<footer class="footer is-dark is-bold sticky-bottom is-hidden-mobile">
+    <div class="container is-fluid">
+        <div class="columns is-multiline is-centered is-vcentered">
+            <div class="column is-one-third-widescreen is-full-mobile has-text-left">
+                QA Tracker.
+            </div>
+            <div class="column is-one-third-widescreen is-full-mobile has-text-centered">
+                Made with ❤️ for you.
+            </div>
+            <div class="column is-one-third-widescreen is-full-mobile has-text-right">
+                <a class="button is-small extra-small" href="https://github.com/alxvgt/qatracker" target="_blank">
+                    <span class="icon is-small">
+                        <i class="fab fa-github"></i>
+                    </span>
+                    <span>
+                        Documentation on Github
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
 {{ js|raw }}
 </body>
 </html>
