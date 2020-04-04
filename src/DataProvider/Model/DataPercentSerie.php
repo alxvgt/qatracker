@@ -56,7 +56,7 @@ class DataPercentSerie extends AbstractDataSerie
 
         $value = $provider->getInstance()->fetchData();
         $total = $totalPercentProvider->getInstance()->fetchData();
-        $percent = round($value * 100 / $total, 2);
+        $percent = $value * 100 / $total;
 
         $this->addData($percent);
         $this->save();

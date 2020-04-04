@@ -42,8 +42,17 @@
             margin-bottom: 0;
         }
 
-        .logo {
+        img.logo {
             height: 36px;
+            vertical-align: sub;
+        }
+
+        .box {
+            padding: 0.5rem;
+        }
+
+        .report-generation {
+            font-size: 14px;
         }
     </style>
 </head>
@@ -53,9 +62,12 @@
     <div class="hero-body">
         <div class="container">
             <h1 class="title is-spaced">
-                <img class="logo"
-                     src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBjbGFzcz0ic3ZnLWlubGluZS0tZmEgZmEtY2hhcnQtbGluZSBmYS13LTE2Ij4KCiA8Zz4KICA8dGl0bGU+YmFja2dyb3VuZDwvdGl0bGU+CiAgPHJlY3QgZmlsbD0ibm9uZSIgaWQ9ImNhbnZhc19iYWNrZ3JvdW5kIiBoZWlnaHQ9IjQwMiIgd2lkdGg9IjU4MiIgeT0iLTEiIHg9Ii0xIi8+CiA8L2c+CiA8Zz4KICA8dGl0bGU+TGF5ZXIgMTwvdGl0bGU+CiAgPHBhdGggaWQ9InN2Z18xIiBkPSJtNDk2LDM4NGwtNDMyLDBsMCwtMzA0YzAsLTguODQgLTcuMTYsLTE2IC0xNiwtMTZsLTMyLDBjLTguODQsMCAtMTYsNy4xNiAtMTYsMTZsMCwzMzZjMCwxNy42NyAxNC4zMywzMiAzMiwzMmw0NjQsMGM4Ljg0LDAgMTYsLTcuMTYgMTYsLTE2bDAsLTMyYzAsLTguODQgLTcuMTYsLTE2IC0xNiwtMTZ6bS0zMiwtMjg4bC0xMTguMDYsMGMtMjEuMzgsMCAtMzIuMDksMjUuODUgLTE2Ljk3LDQwLjk3bDMyLjQsMzIuNGwtNzMuMzcsNzMuMzhsLTczLjM3LC03My4zN2MtMTIuNSwtMTIuNSAtMzIuNzYsLTEyLjUgLTQ1LjI1LDBsLTY4LjY5LDY4LjY5Yy02LjI1LDYuMjUgLTYuMjUsMTYuMzggMCwyMi42M2wyMi42MiwyMi42MmM2LjI1LDYuMjUgMTYuMzgsNi4yNSAyMi42MywwbDQ2LjA2LC00Ni4wN2w3My4zNyw3My4zN2MxMi41LDEyLjUgMzIuNzYsMTIuNSA0NS4yNSwwbDk2LC05NmwzMi40LDMyLjRjMTUuMTIsMTUuMTIgNDAuOTcsNC40MSA0MC45NywtMTYuOTdsMCwtMTE4LjA1YzAuMDEsLTguODQgLTcuMTUsLTE2IC0xNS45OSwtMTZ6IiBmaWxsPSIjODREM0RCIi8+CiA8L2c+Cjwvc3ZnPg=="/>
-                QA Tracker
+                <p>
+                    <img class="logo"
+                         src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBjbGFzcz0ic3ZnLWlubGluZS0tZmEgZmEtY2hhcnQtbGluZSBmYS13LTE2Ij4KCiA8Zz4KICA8dGl0bGU+YmFja2dyb3VuZDwvdGl0bGU+CiAgPHJlY3QgZmlsbD0ibm9uZSIgaWQ9ImNhbnZhc19iYWNrZ3JvdW5kIiBoZWlnaHQ9IjQwMiIgd2lkdGg9IjU4MiIgeT0iLTEiIHg9Ii0xIi8+CiA8L2c+CiA8Zz4KICA8dGl0bGU+TGF5ZXIgMTwvdGl0bGU+CiAgPHBhdGggaWQ9InN2Z18xIiBkPSJtNDk2LDM4NGwtNDMyLDBsMCwtMzA0YzAsLTguODQgLTcuMTYsLTE2IC0xNiwtMTZsLTMyLDBjLTguODQsMCAtMTYsNy4xNiAtMTYsMTZsMCwzMzZjMCwxNy42NyAxNC4zMywzMiAzMiwzMmw0NjQsMGM4Ljg0LDAgMTYsLTcuMTYgMTYsLTE2bDAsLTMyYzAsLTguODQgLTcuMTYsLTE2IC0xNiwtMTZ6bS0zMiwtMjg4bC0xMTguMDYsMGMtMjEuMzgsMCAtMzIuMDksMjUuODUgLTE2Ljk3LDQwLjk3bDMyLjQsMzIuNGwtNzMuMzcsNzMuMzhsLTczLjM3LC03My4zN2MtMTIuNSwtMTIuNSAtMzIuNzYsLTEyLjUgLTQ1LjI1LDBsLTY4LjY5LDY4LjY5Yy02LjI1LDYuMjUgLTYuMjUsMTYuMzggMCwyMi42M2wyMi42MiwyMi42MmM2LjI1LDYuMjUgMTYuMzgsNi4yNSAyMi42MywwbDQ2LjA2LC00Ni4wN2w3My4zNyw3My4zN2MxMi41LDEyLjUgMzIuNzYsMTIuNSA0NS4yNSwwbDk2LC05NmwzMi40LDMyLjRjMTUuMTIsMTUuMTIgNDAuOTcsNC40MSA0MC45NywtMTYuOTdsMCwtMTE4LjA1YzAuMDEsLTguODQgLTcuMTUsLTE2IC0xNS45OSwtMTZ6IiBmaWxsPSIjODREM0RCIi8+CiA8L2c+Cjwvc3ZnPg=="/>
+                    QA Tracker
+                    <span class="is-italic tag is-dark">{{ version }}</span>
+                </p>
             </h1>
             <h2 class="subtitle is-hidden-mobile">
                 Collect, store and render quality assurance indicators.
@@ -83,8 +95,8 @@
 <footer class="footer is-dark is-bold sticky-bottom is-hidden-mobile">
     <div class="container is-fluid">
         <div class="columns is-multiline is-centered is-vcentered">
-            <div class="column is-one-third-widescreen is-full-mobile has-text-left">
-                QA Tracker.
+            <div class="column is-one-third-widescreen is-full-mobile has-text-left has-text-grey-light report-generation">
+                Report generated on <span class="is-italic">{{ generatedAt|date('d/m/Y') }}</span>
             </div>
             <div class="column is-one-third-widescreen is-full-mobile has-text-centered">
                 Made with ❤️ for you.

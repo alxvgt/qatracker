@@ -28,6 +28,8 @@ use Twig\Error\SyntaxError;
 
 class TrackCommand extends Command
 {
+    public const VERSION = 'v0.4.0';
+
     public const EXIT_SUCCESS = 0;
     public const EXIT_FAILURE = 1;
 
@@ -186,6 +188,8 @@ class TrackCommand extends Command
                 $html = $twig->render(static::DEFAULT_TEMPLATE, [
                     'graphs' => $graphs,
                     'js'     => SVGGraph::fetchJavascript(),
+                    'version'     => static::VERSION,
+                    'generatedAt'     => new DateTime(),
                 ]);
                 file_put_contents($outputFilePath, $html);
                 $section->overwrite($message.static::OUTPUT_DONE);

@@ -41,7 +41,7 @@ abstract class AbstractDataSerie
     public function addData($value): void
     {
         $trackDate = TrackCommand::getTrackDate();
-        $this->data[$trackDate->format(static::DATE_FORMAT)] = $value;
+        $this->data[$trackDate->format(static::DATE_FORMAT)] = round($value, 2);
         $data = $this->data;
         ksort($data);
         $this->data = $data;
