@@ -7,7 +7,9 @@ use Symfony\Component\Finder\Finder;
 require __DIR__.'/vendor/autoload.php';
 
 // The php.ini setting phar.readonly must be set to 0
+
 $pharFile = 'qatracker.phar';
+$pharZip = 'qatracker.zip';
 
 // clean up
 if (file_exists($pharFile)) {
@@ -15,6 +17,9 @@ if (file_exists($pharFile)) {
 }
 if (file_exists($pharFile.'.gz')) {
     unlink($pharFile.'.gz');
+}
+if (file_exists($pharZip)) {
+    unlink($pharZip);
 }
 
 $p = new Phar($pharFile);
@@ -29,17 +34,29 @@ $finder
     ->exclude('docker')
     ->exclude('docs')
     ->exclude('tests')
-    ->notName('*.loc')
-    ->notName(['*.png', '*.jpg', '*.jpeg'])
-    ->notName('*.sh')
-    ->notName('*.phar')
-    ->notName('*.phar.gz')
+    ->notName(
+        [
+            '*.loc',
+            '*.phar.gz',
+            '*.phar',
+            '*.sh',
+            '*.zip',
+            '*.png',
+            '*.jpg',
+            '*.jpeg',
+            '*.js',
+            '*.css',
+            '*.json',
+            '*.exe',
+            '*.rst',
+            '*.html',
+        ])
     ->notName('composer.*')
     ->notName('.gitignore')
     ->notName('create-phar.php')
-    ->notContains('PHPUnit\Framework\TestCase')
-    ;
+    ->notContains('PHPUnit\Framework');
 
+createZip($finder, $pharZip);
 $p->buildFromIterator($finder->getIterator(), __DIR__);
 $p->setDefaultStub('qatracker.php', '/qatracker.php');
 $p->compress(Phar::GZ);
@@ -76,4 +93,29 @@ function human_filesize($bytes, $decimals = 2)
     $factor = floor((strlen($bytes) - 1) / 3);
 
     return sprintf("%.{$decimals}f", $bytes / (1024 ** $factor)).@$sz[$factor];
+}
+
+/**
+ * @param Finder $finder
+ * @param string $zipName
+ * @return ZipArchive
+ */
+function createZip(Finder $finder, string $zipName)
+{
+    echo "\nCreating zip...";
+    $zip = new ZipArchive();
+
+    if ($zip->open($zipName, ZipArchive::CREATE) !== true) {
+        throw new RuntimeException('Zip file could not be created/opened.');
+    }
+
+    foreach ($finder as $file) {
+        $zip->addFile($file->getRealpath(), basename($file->getRealpath()));
+    }
+
+    if (!$zip->close()) {
+        throw new RuntimeException('Zip file could not be closed.');
+    }
+
+    return $zip;
 }
