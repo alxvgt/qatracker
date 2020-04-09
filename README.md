@@ -32,7 +32,7 @@ How to run qatracker :
 php qatracker.phar
 ```
 
-### Initilization
+### First time
 1. Run your favorite QA tools and produce log files
 1. Run qatracker, if no configuration file is detected, the tool generate a sample for you.
 1. Adapt the generated sample file to your metrics logs, then run again the tool.
