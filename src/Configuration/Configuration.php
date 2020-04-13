@@ -14,7 +14,7 @@ class Configuration
      */
     public static function exampleConfigPath(): string
     {
-        return Root::internal().'/../../.qatracker.dist/config.yaml';
+        return Root::internal().'/.qatracker.dist/config.yaml';
     }
 
     /**
