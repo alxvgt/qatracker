@@ -28,7 +28,7 @@ use Twig\Error\SyntaxError;
 
 class TrackCommand extends Command
 {
-    public const VERSION = 'v0.4.0';
+    public const VERSION = 'v0.6.0';
 
     public const EXIT_SUCCESS = 0;
     public const EXIT_FAILURE = 1;
