@@ -4,12 +4,15 @@
 use Alxvng\QATracker\Command\TrackCommand;
 use Symfony\Component\Finder\Finder;
 
-require __DIR__.'/vendor/autoload.php';
+include __DIR__.'/bootstrap.php';
 
 // The php.ini setting phar.readonly must be set to 0
 
-$pharFile = 'qatracker.phar';
-$pharZip = 'qatracker.zip';
+$baseDir = __DIR__.'/../';
+$releaseDir = __DIR__.'/../release';
+
+$pharFile = $releaseDir.'/qatracker.phar';
+$pharZip = $releaseDir.'/qatracker.zip';
 
 // clean up
 if (file_exists($pharFile)) {
@@ -27,7 +30,7 @@ $p = new Phar($pharFile);
 $finder = new Finder();
 $finder
     ->files()
-    ->in(__DIR__)
+    ->in($baseDir)
     ->ignoreDotFiles(false)
     ->exclude(TrackCommand::BASE_DIR.'.dist/'.TrackCommand::GENERATED_DIR)
     ->exclude(TrackCommand::BASE_DIR)
@@ -57,8 +60,8 @@ $finder
     ->notContains('PHPUnit\Framework');
 
 createZip($finder, $pharZip);
-$p->buildFromIterator($finder->getIterator(), __DIR__);
-$p->setDefaultStub('qatracker.php', '/qatracker.php');
+$p->buildFromIterator($finder->getIterator(), $baseDir);
+$p->setDefaultStub('bin/qatracker');
 $p->compress(Phar::GZ);
 
 echo "\n";
