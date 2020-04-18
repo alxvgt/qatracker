@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\DataProvider\Model;
+namespace Alxvng\QATracker\DataProvider\Model;
 
 
-use App\Command\TrackCommand;
+use Alxvng\QATracker\Command\TrackCommand;
 use JsonException;
 
 abstract class AbstractDataSerie

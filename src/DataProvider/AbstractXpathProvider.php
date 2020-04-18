@@ -1,11 +1,12 @@
 <?php
 
 
-namespace App\DataProvider;
+namespace Alxvng\QATracker\DataProvider;
 
-use App\Root\Root;
+use Alxvng\QATracker\Root\Root;
 use RuntimeException;
 use SimpleXMLElement;
+use Symfony\Component\Filesystem\Filesystem;
 
 abstract class AbstractXpathProvider implements DataProviderInterface
 {
@@ -30,7 +31,8 @@ abstract class AbstractXpathProvider implements DataProviderInterface
      */
     public function __construct(string $inputFilePath, string $xpathQuery, array $namespaceParameters = [])
     {
-        $this->inputFilePath = Root::external().'/'.$inputFilePath;
+        $fs = new Filesystem();
+        $this->inputFilePath = $fs->isAbsolutePath($inputFilePath) ? $inputFilePath : Root::external().'/'.$inputFilePath;
         $this->xpathQuery = $xpathQuery;
         $this->namespaceParameters = $namespaceParameters;
 

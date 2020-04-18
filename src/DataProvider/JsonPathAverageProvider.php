@@ -1,9 +1,9 @@
 <?php
 
 
-namespace App\DataProvider;
+namespace Alxvng\QATracker\DataProvider;
 
-use App\DataProvider\Reducer\AverageReducerTrait;
+use Alxvng\QATracker\DataProvider\Reducer\AverageReducerTrait;
 
 class JsonPathAverageProvider extends AbstractJsonPathReducerProvider
 {

@@ -1,10 +1,11 @@
 <?php
 
 
-namespace App\DataProvider;
+namespace Alxvng\QATracker\DataProvider;
 
-use App\Root\Root;
+use Alxvng\QATracker\Root\Root;
 use JsonException;
+use Symfony\Component\Filesystem\Filesystem;
 
 abstract class AbstractJsonPathProvider implements DataProviderInterface
 {
@@ -23,7 +24,8 @@ abstract class AbstractJsonPathProvider implements DataProviderInterface
      */
     public function __construct(string $inputFilePath, string $xpathQuery)
     {
-        $this->inputFilePath = Root::external().'/'.$inputFilePath;
+        $fs = new Filesystem();
+        $this->inputFilePath = $fs->isAbsolutePath($inputFilePath) ? $inputFilePath : Root::external().'/'.$inputFilePath;
         $this->jsonPathQuery = $xpathQuery;
 
         if (!file_exists($this->inputFilePath)) {

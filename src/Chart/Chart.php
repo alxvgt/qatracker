@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Chart;
+namespace Alxvng\QATracker\Chart;
 
 
-use App\DataProvider\Model\AbstractDataSerie;
+use Alxvng\QATracker\DataProvider\Model\AbstractDataSerie;
 
 class Chart
 {
@@ -24,6 +24,10 @@ class Chart
         $this->withHistory = $config['withHistory'];
         $this->graphSettings = $config['graphSettings'];
         $this->providers = array_intersect_key($providersStack, array_flip($config['dataSeries']));
+
+        if(empty($this->providers)){
+            throw new \RuntimeException('You must define at least one valid data serie for chart.');
+        }
     }
 
     /**

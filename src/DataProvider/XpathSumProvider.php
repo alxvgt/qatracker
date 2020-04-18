@@ -1,9 +1,9 @@
 <?php
 
 
-namespace App\DataProvider;
+namespace Alxvng\QATracker\DataProvider;
 
-use App\DataProvider\Reducer\SumReducerTrait;
+use Alxvng\QATracker\DataProvider\Reducer\SumReducerTrait;
 
 class XpathSumProvider extends AbstractXpathReducerProvider
 {

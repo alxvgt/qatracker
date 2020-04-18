@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\DataProvider;
+namespace Alxvng\QATracker\DataProvider;
 
 use SimpleXMLElement;
 

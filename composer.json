@@ -1,16 +1,22 @@
 {
     "name": "alxvng/qatracker",
-    "description": "This command allows you to fetch some indicators and build simple QA charts...",
+    "description": "QATracker is a tool to collect, store and render quality assurance indicators.",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "App\\": "src/",
-            "App\\Tests\\": "tests/"
+            "Alxvng\\QATracker\\": "src/",
+            "Alxvng\\QATracker\\Tests\\": "tests/"
         },
         "files": [
             "Root.php"
         ]
     },
+    "support": {
+        "issues": "https://github.com/alxvgt/qatracker/issues"
+    },
+    "bin": [
+        "bin/qatracker"
+    ],
     "require": {
         "php": ">=7.4",
         "ext-xml": "*",
@@ -28,5 +34,8 @@
         "phpunit/phpunit": "^9.0",
         "symfony/var-dumper": "^5.0",
         "phpstan/phpstan": "^0.12.18"
+    },
+    "config": {
+        "sort-packages": true
     }
 }

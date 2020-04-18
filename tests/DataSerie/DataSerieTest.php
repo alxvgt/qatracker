@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Tests\DataSerie;
+namespace Alxvng\QATracker\Tests\DataSerie;
 
-use App\DataProvider\Model\DataStandardSerie;
+use Alxvng\QATracker\DataProvider\Model\DataStandardSerie;
 use JsonException;
 use PHPUnit\Framework\TestCase;
 use TypeError;

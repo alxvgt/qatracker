@@ -1,9 +1,9 @@
 <?php
 
 
-namespace App\DataProvider\Finder;
+namespace Alxvng\QATracker\DataProvider\Finder;
 
-use App\DataProvider\Model\AbstractDataSerie;
+use Alxvng\QATracker\DataProvider\Model\AbstractDataSerie;
 
 class ProviderFinder
 {
