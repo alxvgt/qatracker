@@ -76,19 +76,19 @@ You need to follow this structure and replace variable between brackets :
 ```
 
 Available provider classes:
-- _Alxvng\QATrackerDataProvider\XPathProvider_ : pick a unique data in a xml file 
-- _Alxvng\QATrackerDataProvider\XPathSumProvider_ : pick many data in a xml file and reduce it with a sum
-- _Alxvng\QATrackerDataProvider\XPathCountProvider_ : count nodes retrieved by the expresion in the xml file
-- _Alxvng\QATrackerDataProvider\XPathAverageProvider_ : pick many data in a xml file and compute the average
-- _Alxvng\QATrackerDataProvider\JsonPathProvider_ : pick a unique data in a json file
-- _Alxvng\QATrackerDataProvider\JsonPathSumProvider_ : pick many data in a json file and reduce it with a sum
-- _Alxvng\QATrackerDataProvider\JsonPathCountProvider_ : count nodes retrieved by the expresion in the json file
-- _Alxvng\QATrackerDataProvider\JsonPathAverageProvider_ : pick many data in a json file and compute the average
+- _Alxvng\QATracker\DataProvider\XPathProvider_ : pick a unique data in a xml file 
+- _Alxvng\QATracker\DataProvider\XPathSumProvider_ : pick many data in a xml file and reduce it with a sum
+- _Alxvng\QATracker\DataProvider\XPathCountProvider_ : count nodes retrieved by the expresion in the xml file
+- _Alxvng\QATracker\DataProvider\XPathAverageProvider_ : pick many data in a xml file and compute the average
+- _Alxvng\QATracker\DataProvider\JsonPathProvider_ : pick a unique data in a json file
+- _Alxvng\QATracker\DataProvider\JsonPathSumProvider_ : pick many data in a json file and reduce it with a sum
+- _Alxvng\QATracker\DataProvider\JsonPathCountProvider_ : count nodes retrieved by the expresion in the json file
+- _Alxvng\QATracker\DataProvider\JsonPathAverageProvider_ : pick many data in a json file and compute the average
 
 **Example:** 
 ```yaml
 total-duplicated-lines:
-    class: App\DataProvider\XpathSumProvider
+    class: Alxvng\QATracker\DataProvider\XpathSumProvider
     arguments:
         - '/tmp/qa-logs/phpcpd/log.xml'
         - '/pmd-cpd/duplication/@lines'
