@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Twig;
+namespace Alxvng\QATracker\Twig;
 
 
 use Twig\Environment;

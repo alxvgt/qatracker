@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\DataProvider\Reducer;
+namespace Alxvng\QATracker\DataProvider\Reducer;
 
 
 trait SumReducerTrait

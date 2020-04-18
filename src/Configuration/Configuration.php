@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Configuration;
+namespace Alxvng\QATracker\Configuration;
 
-use App\DataProvider\Model\AbstractDataSerie;
-use App\Root\Root;
+use Alxvng\QATracker\DataProvider\Model\AbstractDataSerie;
+use Alxvng\QATracker\Root\Root;
 use RuntimeException;
 use Symfony\Component\Yaml\Yaml;
 
@@ -14,7 +14,7 @@ class Configuration
      */
     public static function exampleConfigPath(): string
     {
-        return Root::internal().'/.qatracker.dist/config.yaml';
+        return Root::internal() . '/.qatracker.dist/config.yaml';
     }
 
     /**
@@ -29,7 +29,16 @@ class Configuration
                 $configPath, $exampleConfig));
         }
 
-        $config = Yaml::parseFile($configPath);
+        $baseDir = dirname($configPath);
+
+        $rootConfig = Yaml::parseFile($configPath);
+        $config = [];
+        foreach ($rootConfig['imports'] as $import) {
+            $config = array_merge_recursive($config, Yaml::parseFile($baseDir . '/' . $import['resource']));
+        }
+        $config = array_merge_recursive($config, $rootConfig);
+
+        $config = static::addIds($config);
 
         if (!isset($config['qatracker']['dataSeries'])) {
             throw new RuntimeException('You must define at least one provider in the config file');
@@ -118,5 +127,22 @@ class Configuration
         }
 
         return true;
+    }
+
+    /**
+     * @param array $config
+     * @return array
+     */
+    protected static function addIds(array $config): array
+    {
+        foreach ($config['qatracker']['dataSeries'] as $id => &$dataSerie) {
+            $dataSerie ['id'] = $id;
+        }
+
+        foreach ($config['qatracker']['charts'] as $id => &$chart) {
+            $chart ['id'] = $id;
+        }
+
+        return $config;
     }
 }

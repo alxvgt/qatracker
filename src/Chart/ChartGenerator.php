@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Chart;
+namespace Alxvng\QATracker\Chart;
 
-use App\DataProvider\Model\AbstractDataSerie;
+use Alxvng\QATracker\DataProvider\Model\AbstractDataSerie;
 use Goat1000\SVGGraph\LineGraph;
 use Goat1000\SVGGraph\SVGGraph;
 
@@ -60,7 +60,7 @@ class ChartGenerator
             'show_grid_subdivisions'    => true,
             'thousands'                 => ' ',
             'precision'                 => 2,
-            'exception_throw'           => true,
+            'exception_throw'           => false,
         ], $settings);
 
         $width = 550;

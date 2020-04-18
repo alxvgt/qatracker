@@ -1,9 +1,9 @@
 <?php
 
 
-namespace App\DataProvider;
+namespace Alxvng\QATracker\DataProvider;
 
-use App\DataProvider\Reducer\CountReducerTrait;
+use Alxvng\QATracker\DataProvider\Reducer\CountReducerTrait;
 
 class XpathCountProvider extends AbstractXpathReducerProvider
 {

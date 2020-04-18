@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-use App\Command\TrackCommand;
+use Alxvng\QATracker\Command\TrackCommand;
 use Symfony\Component\Finder\Finder;
 
 require __DIR__.'/vendor/autoload.php';

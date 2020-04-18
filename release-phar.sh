@@ -1,4 +1,3 @@
 #!/bin/bash
-
 composer dump-autoload --no-dev --profile
-php create-phar.php
+php bin/build-phar

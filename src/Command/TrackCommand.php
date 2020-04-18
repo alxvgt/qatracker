@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Command;
+namespace Alxvng\QATracker\Command;
 
-use App\Chart\Chart;
-use App\Chart\ChartGenerator;
-use App\Configuration\Configuration;
-use App\DataProvider\Model\AbstractDataSerie;
-use App\DataProvider\Model\DataPercentSerie;
-use App\DataProvider\Model\DataStandardSerie;
-use App\Root\Root;
-use App\Twig\TwigFactory;
+use Alxvng\QATracker\Chart\Chart;
+use Alxvng\QATracker\Chart\ChartGenerator;
+use Alxvng\QATracker\Configuration\Configuration;
+use Alxvng\QATracker\DataProvider\Model\AbstractDataSerie;
+use Alxvng\QATracker\DataProvider\Model\DataPercentSerie;
+use Alxvng\QATracker\DataProvider\Model\DataStandardSerie;
+use Alxvng\QATracker\Root\Root;
+use Alxvng\QATracker\Twig\TwigFactory;
 use DateTime;
 use Goat1000\SVGGraph\SVGGraph;
 use JsonException;

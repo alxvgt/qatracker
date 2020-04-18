@@ -4,8 +4,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "App\\": "src/",
-            "App\\Tests\\": "tests/"
+            "Alxvng\\QATracker\\": "src/",
+            "Alxvng\\QATracker\\Tests\\": "tests/"
         },
         "files": [
             "Root.php"

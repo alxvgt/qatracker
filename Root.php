@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Root;
+namespace Alxvng\QATracker\Root;
 
 class Root
 {

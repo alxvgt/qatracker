@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-use App\Command\TrackCommand;
+use Alxvng\QATracker\Command\TrackCommand;
 use Symfony\Component\Console\Application;
 
 function includeIfExists(string $file): bool

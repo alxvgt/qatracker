@@ -1,11 +1,11 @@
 <?php
 
 
-namespace App\DataProvider\Model;
+namespace Alxvng\QATracker\DataProvider\Model;
 
 
-use App\Command\TrackCommand;
-use App\DataProvider\DataProviderInterface;
+use Alxvng\QATracker\Command\TrackCommand;
+use Alxvng\QATracker\DataProvider\DataProviderInterface;
 use JsonException;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use function Symfony\Component\String\u;
