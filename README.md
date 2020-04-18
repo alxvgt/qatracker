@@ -51,6 +51,17 @@ You need to put your own configuration in order to build your own indicators and
 The configuration is based on two objects :
  - **dataSerie** : this object enables you to pick/fetch data in any file you want. Each run of qatracker run each dataSerie provider and store in a file the currated data.
  - **chart** : this object associate a dataSerie to a chart in the final report
+ 
+```yaml
+qatracker:
+    dataSeries:
+        [list of your data series]
+    charts:
+        [list of your charts]
+```
+
+**Example:**
+You can see the default config file at `.qatracker.dist/config.yaml`
 
 ### dataSeries
 
@@ -65,16 +76,16 @@ You need to follow this structure and replace variable between brackets :
 ```
 
 Available provider classes:
-- Alxvng\QATrackerDataProvider\XPathProvider : pick a unique data in a xml file 
-- Alxvng\QATrackerDataProvider\XPathSumProvider : pick many data in a xml file and reduce it with a sum
-- Alxvng\QATrackerDataProvider\XPathCountProvider : count nodes retrieved by the expresion in the xml file
-- Alxvng\QATrackerDataProvider\XPathAverageProvider : pick many data in a xml file and compute the average
-- Alxvng\QATrackerDataProvider\JsonPathProvider : pick a unique data in a json file
-- Alxvng\QATrackerDataProvider\JsonPathSumProvider : pick many data in a json file and reduce it with a sum
-- Alxvng\QATrackerDataProvider\JsonPathCountProvider : count nodes retrieved by the expresion in the json file
-- Alxvng\QATrackerDataProvider\JsonPathAverageProvider : pick many data in a json file and compute the average
+- _Alxvng\QATrackerDataProvider\XPathProvider_ : pick a unique data in a xml file 
+- _Alxvng\QATrackerDataProvider\XPathSumProvider_ : pick many data in a xml file and reduce it with a sum
+- _Alxvng\QATrackerDataProvider\XPathCountProvider_ : count nodes retrieved by the expresion in the xml file
+- _Alxvng\QATrackerDataProvider\XPathAverageProvider_ : pick many data in a xml file and compute the average
+- _Alxvng\QATrackerDataProvider\JsonPathProvider_ : pick a unique data in a json file
+- _Alxvng\QATrackerDataProvider\JsonPathSumProvider_ : pick many data in a json file and reduce it with a sum
+- _Alxvng\QATrackerDataProvider\JsonPathCountProvider_ : count nodes retrieved by the expresion in the json file
+- _Alxvng\QATrackerDataProvider\JsonPathAverageProvider_ : pick many data in a json file and compute the average
 
-Example: 
+**Example:** 
 ```yaml
 total-duplicated-lines:
     class: App\DataProvider\XpathSumProvider
@@ -105,7 +116,7 @@ You should refer to a data serie defined in the previous section.
 Graph settings :
 You can find all available graph options in the library documentation : https://goat1000.com/svggraph-options.php
 
-Example:
+**Example:**
 ```yaml
 total-duplicated-lines:
     type: Goat1000\SVGGraph\LineGraph
