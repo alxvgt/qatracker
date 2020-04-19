@@ -6,28 +6,25 @@ name: Docker
 # events but only for the master branch
 on:
     push:
-        branches:
-            - 'master'
-            - '0*'
-            - '*-ci'
-        pull_request:
-            branches:
-                - 'master'
-                - '0*'
-                - '*-ci'
+        paths:
+            - 'docker/**'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
     # This workflow contains a single job called "build"
     publish-image:
         # The type of runner that the job will run on
-        container: docker.pkg.github.com/alxvgt/qatracker/base:lastest
+        runs-on: ubuntu-latest
         # Steps represent a sequence of tasks that will be executed as part of the job
         steps:
             # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
             -   uses: actions/checkout@v2
-            -   name: Unit tests
-                run: |
-                    pwd
-                    ls -halt
-                    php -v
+            -   name: Publish to Registry
+                uses: elgohr/Publish-Docker-Github-Action@master
+                with:
+                    name: alxvgt/qatracker/base
+                    username: ${{ github.actor }}
+                    password: ${{ secrets.DOCKER_PASSWORD }}
+                    registry: docker.pkg.github.com
+                    workdir: docker
+                    tags: "latest"
