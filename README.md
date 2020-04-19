@@ -1,3 +1,5 @@
+![CI](https://github.com/alxvgt/qatracker/workflows/CI/badge.svg)
+
 # QATracker
 QATracker is a tool to collect, store and render quality assurance indicators.  
 For example, you can run on your project some static code analysis tools like phploc or phpcpd then collect som metrics
