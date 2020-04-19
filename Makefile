@@ -3,7 +3,7 @@ CMD_SUDO = sudo
 
 CMD_DOCKER 					= ${CMD_SUDO} docker
 CMD_DOCKER_COMPOSE 			= ${CMD_SUDO} docker-compose -f docker/docker-compose.yml
-CMD_EXEC = ${CMD_DOCKER_COMPOSE} exec app
+CMD_EXEC = ${CMD_DOCKER_COMPOSE} exec -T app
 
 CMD_PHP ?= ${CMD_EXEC} php
 CMD_COMPOSER ?= ${CMD_EXEC} composer
