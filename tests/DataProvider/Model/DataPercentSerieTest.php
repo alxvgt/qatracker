@@ -1,6 +1,6 @@
 <?php
 
-namespace Alxvng\QATracker\Tests\DataProvider\Model;
+    namespace Alxvng\QATracker\Tests\DataProvider\Model;
 
 use Alxvng\QATracker\DataProvider\DataProviderInterface;
 use Alxvng\QATracker\DataProvider\Model\DataPercentSerie;
