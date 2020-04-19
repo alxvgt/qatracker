@@ -20,10 +20,16 @@ help:  ## Display this help
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[32m<target>\033[0m\n"} /^[a-zA-Z_-]+:.*?##/ { printf "  \033[32m%-20s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[33m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
 ##
 
+##@ Project
+
+install: ## Install project
+install:
+	${CMD_COMPOSER} install
+
 ##@ Test
 
 test: ## Run phpunit tests
-test:
+test: install
 	${CMD_PHPUNIT} -c tests/phpunit.xml.dist
 
 ##@ Release
