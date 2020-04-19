@@ -124,7 +124,7 @@ class TrackCommand extends Command
             $outputFilePath = $input->getOption('report-html-path');
             $this->initializeOutputDir($outputFilePath);
             $trackDate = $input->getOption('date');
-            $this->initializeTrackDate($trackDate);
+            static::initializeTrackDate($trackDate);
             $config = Configuration::load(static::getConfigPath());
             $section->overwrite($message.static::OUTPUT_DONE);
 
@@ -133,7 +133,7 @@ class TrackCommand extends Command
             $message = 'Loading data series...';
             $section->writeln($message);
             $dataSeriesConfig = $config['qatracker']['dataSeries'];
-            $dataSeriessStack = $this->loadProviders($dataSeriesConfig);
+            $dataSeriesStack = $this->loadDataSeries($dataSeriesConfig);
             $section->overwrite($message.static::OUTPUT_DONE);
             $io->newLine();
 
@@ -143,12 +143,12 @@ class TrackCommand extends Command
 
             if ($withTrack) {
                 /** @var AbstractDataSerie $dataSerie */
-                foreach ($dataSeriessStack as $dataSerie) {
+                foreach ($dataSeriesStack as $dataSerie) {
                     /** @var ConsoleSectionOutput $section */
                     $section = $output->section();
                     $message = sprintf('Collecting new indicator for "%s"...', $dataSerie->getId());
                     $section->writeln($message);
-                    $dataSerie->collect();
+                    $dataSerie->collect(static::getTrackDate());
                     $section->overwrite($message.static::OUTPUT_DONE);
                 }
                 $io->newLine();
@@ -164,7 +164,7 @@ class TrackCommand extends Command
                 $charts = $config['qatracker']['charts'];
                 foreach ($charts as $chart) {
 
-                    $chart = new Chart($chart, $dataSeriessStack);
+                    $chart = new Chart($chart, $dataSeriesStack);
 
                     $graphs [] = ChartGenerator::generate(
                         $chart->getFirstProvider()->getData(),
@@ -256,9 +256,9 @@ class TrackCommand extends Command
      * @return array
      * @throws JsonException
      */
-    protected function loadProviders($providersConfig): array
+    protected function loadDataSeries($providersConfig): array
     {
-        $providersStack = [];
+        $dataSeriesStack = [];
 
         /**
          * Load standard providers on a first time
@@ -268,8 +268,8 @@ class TrackCommand extends Command
                 continue;
             }
 
-            $provider = new DataStandardSerie($provider);
-            $providersStack [$provider->getId()] = $provider;
+            $provider = new DataStandardSerie($provider, TrackCommand::getGeneratedDir());
+            $dataSeriesStack [$provider->getId()] = $provider;
             unset($providersConfig[$key]);
         }
 
@@ -281,18 +281,18 @@ class TrackCommand extends Command
                 continue;
             }
 
-            $provider = new DataPercentSerie($provider, $providersStack);
-            $providersStack [$provider->getId()] = $provider;
+            $provider = new DataPercentSerie($provider, TrackCommand::getGeneratedDir(), $dataSeriesStack);
+            $dataSeriesStack [$provider->getId()] = $provider;
             unset($providersConfig[$key]);
         }
 
-        return $providersStack;
+        return $dataSeriesStack;
     }
 
     /**
      * @param $trackDate
      */
-    protected function initializeTrackDate($trackDate): void
+    public static function initializeTrackDate($trackDate): void
     {
         static::$trackDate = DateTime::createFromFormat(AbstractDataSerie::DATE_FORMAT, $trackDate);
 
