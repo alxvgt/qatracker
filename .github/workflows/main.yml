@@ -32,3 +32,5 @@ jobs:
                     name: alxvgt/qatracker
                     username: ${{ secrets.DOCKER_USERNAME }}
                     password: ${{ secrets.DOCKER_PASSWORD }}
+                    registry: docker.pkg.github.com
+                    workdir: docker
