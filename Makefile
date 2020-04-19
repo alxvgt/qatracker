@@ -1,3 +1,17 @@
+PROJECT_NAME=qa-tracker
+CMD_SUDO = sudo
+
+CMD_DOCKER 					= ${CMD_SUDO} docker
+CMD_DOCKER_COMPOSE 			= ${CMD_SUDO} docker-compose -f docker/docker-compose.yml
+CMD_EXEC = ${CMD_DOCKER_COMPOSE} exec app
+
+CMD_PHP ?= ${CMD_EXEC} php
+CMD_COMPOSER ?= ${CMD_EXEC} composer
+CMD_CHMOD ?= ${CMD_EXEC} chmod
+CMD_PWD ?= ${CMD_EXEC} pwd
+
+CMD_PHPUNIT ?= ${CMD_EXEC} vendor/bin/phpunit
+
 
 ##@ Help
 
@@ -10,14 +24,14 @@ help:  ## Display this help
 
 test: ## Run phpunit tests
 test:
-	vendor/bin/phpunit -c tests/phpunit.xml.dist
+	${CMD_PHPUNIT} -c tests/phpunit.xml.dist
 
 ##@ Release
 
 release: ## Release a new version of app (.phar archives)
 release:
-	composer install --no-dev --profile
-	composer dump-autoload --no-dev --profile
-	php bin/build-phar
-	chmod +x release/*
+	${CMD_COMPOSER} install --no-dev --profile
+	${CMD_COMPOSER} dump-autoload --no-dev --profile
+	${CMD_PHP} bin/build-phar
+	${CMD_CHMOD} +x release/*
 

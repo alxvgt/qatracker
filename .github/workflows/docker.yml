@@ -24,7 +24,7 @@ jobs:
                 with:
                     name: alxvgt/qatracker/base
                     username: ${{ github.actor }}
-                    password: ${{ secrets.DOCKER_PASSWORD }}
+                    password: ${{ secrets.GITHUB_TOKEN }}
                     registry: docker.pkg.github.com
                     workdir: docker
                     tags: "latest"
