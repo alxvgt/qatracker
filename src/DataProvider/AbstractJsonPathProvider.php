@@ -20,13 +20,13 @@ abstract class AbstractJsonPathProvider implements DataProviderInterface
     /**
      * XpathProvider constructor.
      * @param string $inputFilePath
-     * @param string $xpathQuery
+     * @param string $jsonPathQuery
      */
-    public function __construct(string $inputFilePath, string $xpathQuery)
+    public function __construct(string $inputFilePath, string $jsonPathQuery)
     {
         $fs = new Filesystem();
         $this->inputFilePath = $fs->isAbsolutePath($inputFilePath) ? $inputFilePath : Root::external().'/'.$inputFilePath;
-        $this->jsonPathQuery = $xpathQuery;
+        $this->jsonPathQuery = $jsonPathQuery;
 
         if (!file_exists($this->inputFilePath)) {
             throw new \RuntimeException(sprintf('Unable to find file at %s', $this->inputFilePath));

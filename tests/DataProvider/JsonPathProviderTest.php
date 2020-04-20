@@ -5,13 +5,13 @@ namespace Alxvng\QATracker\DataProvider;
 
 use PHPUnit\Framework\TestCase;
 
-class XpathCountProviderTest extends TestCase
+class JsonPathProviderTest extends TestCase
 {
     public function testFetchData()
     {
-        $provider = new XpathCountProvider('tests/resource/log/phploc/log.xml', '/phploc/*[starts-with(name(), \'lloc\')]');
+        $provider = new JsonPathProvider('tests/resource/log/phpmetrics/log.json', '$.*.mi');
         $result = $provider->fetchData();
         $this->assertIsFloat($result);
-        $this->assertEquals(5, $result);
+        $this->assertEquals(102.42, $result);
     }
 }
