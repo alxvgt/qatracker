@@ -1,8 +1,9 @@
 <?php
 
 
-namespace Alxvng\QATracker\DataProvider;
+namespace Alxvng\QATracker\Tests\DataProvider;
 
+use Alxvng\QATracker\DataProvider\JsonPathAverageProvider;
 use PHPUnit\Framework\TestCase;
 
 class JsonPathAverageProviderTest extends TestCase

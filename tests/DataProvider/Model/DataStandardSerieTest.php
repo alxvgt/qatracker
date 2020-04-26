@@ -4,8 +4,8 @@ namespace Alxvng\QATracker\Tests\DataProvider\Model;
 
 use Alxvng\QATracker\DataProvider\DataProviderInterface;
 use Alxvng\QATracker\DataProvider\Model\DataStandardSerie;
+use Alxvng\QATracker\Tests\Mock;
 use DateTime;
-use Error;
 use Generator;
 use JsonException;
 use PHPUnit\Framework\TestCase;
@@ -38,15 +38,15 @@ class DataStandardSerieTest extends TestCase
      */
     public function getInstanceProvider()
     {
-        yield [static::getDataSerie(), function ($result) {
+        yield [Mock::dataSerie(), function ($result) {
             $this->assertInstanceOf(DataProviderInterface::class, $result);
         }];
 
-        yield [static::getDataSerieWithBadFilePath(), null, function (TestCase $self) {
+        yield [Mock::dataSerieWithBadFilePath(), null, function (TestCase $self) {
             $self->expectException(RuntimeException::class);
         }];
 
-        yield [static::getDataSerieWithBadXml(), null, function (TestCase $self) {
+        yield [Mock::dataSerieWithBadXml(), null, function (TestCase $self) {
             $self->expectException(RuntimeException::class);
         }];
     }
@@ -56,7 +56,7 @@ class DataStandardSerieTest extends TestCase
      */
     public function testCollect()
     {
-        $dataSerie = $this->getDataSerie();
+        $dataSerie = Mock::dataSerie();
 
         $filesizeBefore = file_exists($dataSerie->getStorageFilePath()) ? filesize($dataSerie->getStorageFilePath()) : 0;
         $dataBefore = $dataSerie->getData();
@@ -70,57 +70,4 @@ class DataStandardSerieTest extends TestCase
         $this->assertCount(count($dataBefore) + 1, $dataAfter);
     }
 
-    /**
-     * @return DataStandardSerie
-     * @throws JsonException
-     */
-    public static function getDataSerie(): DataStandardSerie
-    {
-        $config = [
-            'id' => 'lines-of-code',
-            'class' => 'Alxvng\QATracker\DataProvider\XpathProvider',
-            'arguments' => [
-                'tests/resource/log/phploc/log.xml',
-                '/phploc/loc',
-            ]
-        ];
-
-        return new DataStandardSerie($config, '/tmp');
-    }
-
-    /**
-     * @return DataStandardSerie
-     * @throws JsonException
-     */
-    public static function getDataSerieWithBadFilePath(): DataStandardSerie
-    {
-        $config = [
-            'id' => 'lines-of-code',
-            'class' => 'Alxvng\QATracker\DataProvider\XpathProvider',
-            'arguments' => [
-                'bad-path.xml',
-                '/phploc/loc',
-            ]
-        ];
-
-        return new DataStandardSerie($config, '/tmp');
-    }
-
-    /**
-     * @return DataStandardSerie
-     * @throws JsonException
-     */
-    public static function getDataSerieWithBadXml(): DataStandardSerie
-    {
-        $config = [
-            'id' => 'lines-of-code',
-            'class' => 'Alxvng\QATracker\DataProvider\XpathProvider',
-            'arguments' => [
-                'tests/resource/log/phploc/badxml.xml',
-                '/phploc/loc',
-            ]
-        ];
-
-        return new DataStandardSerie($config, '/tmp');
-    }
 }

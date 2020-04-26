@@ -1,9 +1,18 @@
 PROJECT_NAME=qa-tracker
+
 CMD_SUDO = sudo
 
-CMD_DOCKER 					= ${CMD_SUDO} docker
-CMD_DOCKER_COMPOSE 			= ${CMD_SUDO} docker-compose -f docker/docker-compose.yml
-CMD_EXEC = ${CMD_DOCKER_COMPOSE} exec -T app
+###### Docker
+
+test-docker = $(shell command -v docker || '')
+test-docker-compose = $(if $(shell command -v docker-compose || exit 0), docker-compose -f docker/docker-compose.yml, )
+test-docker-compose-exec = $(if $(shell command -v docker-compose || exit 0), ${CMD_DOCKER_COMPOSE} exec -T app, ${CMD_DOCKER_COMPOSE})
+
+CMD_DOCKER 					= ${CMD_SUDO} $(call test-docker)
+CMD_DOCKER_COMPOSE 			= ${CMD_SUDO} $(call test-docker-compose)
+CMD_EXEC = $(call test-docker-compose-exec)
+
+###### Others
 
 CMD_PHP ?= ${CMD_EXEC} php
 CMD_COMPOSER ?= ${CMD_EXEC} composer
@@ -40,4 +49,3 @@ release:
 	${CMD_COMPOSER} dump-autoload --no-dev --profile
 	${CMD_PHP} bin/build-phar
 	${CMD_CHMOD} +x release/*
-
