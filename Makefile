@@ -37,13 +37,13 @@ install: composer.json
 ##@ Test
 
 test: ## Run phpunit tests
-test: composer.lock
+test: install
 	${CMD_PHPUNIT} -c tests/phpunit.xml.dist
 
 ##@ Release
 
 release: ## Release a new version of app (.phar archives)
-release: composer.json bin/build-phar
+release:
 	${CMD_COMPOSER} install --no-dev --profile
 	${CMD_COMPOSER} dump-autoload --no-dev --profile
 	${CMD_PHP} bin/build-phar
