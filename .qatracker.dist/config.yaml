@@ -1,50 +1,50 @@
 qatracker:
     dataSeries:
-        -   id: 'lines-of-code'
+        lines-of-code:
             class: Alxvng\QATracker\DataProvider\XpathProvider
             arguments:
                 - 'docs/qa-tools/phploc/log.xml'
                 - '/phploc/loc'
-        -   id: 'non-comment-lines-of-code'
+        non-comment-lines-of-code:
             class: Alxvng\QATracker\DataProvider\XpathProvider
             arguments:
                 - 'docs/qa-tools/phploc/log.xml'
                 - '/phploc/ncloc'
-        -   id: 'average-complexity-per-class'
+        average-complexity-per-class:
             class: Alxvng\QATracker\DataProvider\XpathProvider
             arguments:
                 - 'docs/qa-tools/phploc/log.xml'
                 - '/phploc/classCcnAvg'
-        -   id: 'total-duplicated-lines'
+        total-duplicated-lines:
             class: Alxvng\QATracker\DataProvider\XpathSumProvider
             arguments:
                 - 'docs/qa-tools/phpcpd/log.xml'
                 - '/pmd-cpd/duplication/@lines'
-        -   id: 'total-duplicated-lines-percent'
+        total-duplicated-lines-percent:
             provider: 'total-duplicated-lines'
             totalPercentProvider: 'lines-of-code'
-        -   id: 'total-duplications'
+        total-duplications:
             class: Alxvng\QATracker\DataProvider\XpathCountProvider
             arguments:
                 - 'docs/qa-tools/phpcpd/log.xml'
                 - '/pmd-cpd/duplication'
-        -   id: 'average-maintenance-index'
+        average-maintenance-index:
             class: Alxvng\QATracker\DataProvider\JsonPathAverageProvider
             arguments:
                 - 'docs/qa-tools/phpmetrics/report.json'
                 - '$.*.mi'
-        -   id: 'total-code-coverage-(lines)'
+        total-code-coverage-(lines):
             class: Alxvng\QATracker\DataProvider\XpathProvider
             arguments:
                 - 'docs/qa-tools/phpunit/coverage.xml/index.xml'
                 - '/ns:phpunit/ns:project/ns:directory/ns:totals/ns:lines/@percent'
                 - {prefix: 'ns', namespace: 'https://schema.phpunit.de/coverage/1.0'}
-        -   id: 'total-crap'
+        total-crap:
             class: Alxvng\QATracker\DataProvider\XpathProvider
             arguments:
                 - 'docs/qa-tools/phpunit/coverage.crap4j'
                 - '/crap_result/stats/totalCrap'
-        -   id: 'total-phpstan-errors'
+        total-phpstan-errors:
             class: Alxvng\QATracker\DataProvider\JsonPathProvider
             arguments:
                 - 'docs/qa-tools/phpstan/log.json'
@@ -57,19 +57,22 @@ qatracker:
     # at the moment only the first serie is used to generate chart
     # multiple data series chart is not available, maybe soon ... PR accepted ;-)
     charts:
-        -   type: Goat1000\SVGGraph\LineGraph
+        line-of-code-line:
+            type: Goat1000\SVGGraph\LineGraph
             dataSeries:
                 - 'lines-of-code'
             withHistory: true
             graphSettings:
                 graph_title: 'Lines of code'
-        -   type: Goat1000\SVGGraph\BarGraph
+        line-of-code-bar:
+            type: Goat1000\SVGGraph\BarGraph
             dataSeries:
                 - 'lines-of-code'
             withHistory: true
             graphSettings:
                 graph_title: 'Lines of code'
-        -   type: Goat1000\SVGGraph\LineGraph
+        total-duplicated-lines-percent:
+            type: Goat1000\SVGGraph\LineGraph
             dataSeries:
                 - 'total-duplicated-lines-percent'
             withHistory: true

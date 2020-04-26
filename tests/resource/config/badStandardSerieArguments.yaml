@@ -1,0 +1,6 @@
+qatracker:
+    dataSeries:
+        - id: '001'
+          class: Alxvng\QATracker\DataProvider\XpathProvider
+          arguments : 'not an array'
+    charts:

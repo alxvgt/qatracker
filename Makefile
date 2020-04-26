@@ -21,7 +21,6 @@ CMD_PWD ?= ${CMD_EXEC} pwd
 
 CMD_PHPUNIT ?= ${CMD_EXEC} vendor/bin/phpunit
 
-
 ##@ Help
 
 .DEFAULT_GOAL := help
@@ -32,19 +31,19 @@ help:  ## Display this help
 ##@ Project
 
 install: ## Install project
-install:
+install: composer.json
 	${CMD_COMPOSER} install
 
 ##@ Test
 
 test: ## Run phpunit tests
-test: install
+test: composer.lock
 	${CMD_PHPUNIT} -c tests/phpunit.xml.dist
 
 ##@ Release
 
 release: ## Release a new version of app (.phar archives)
-release:
+release: composer.json bin/build-phar
 	${CMD_COMPOSER} install --no-dev --profile
 	${CMD_COMPOSER} dump-autoload --no-dev --profile
 	${CMD_PHP} bin/build-phar

@@ -32,13 +32,22 @@ class Configuration
         $baseDir = dirname($configPath);
 
         $rootConfig = Yaml::parseFile($configPath);
+
+        if (!$rootConfig) {
+            throw new RuntimeException(sprintf('No yaml can be parsed from your config file %s', $configPath));
+        }
+
         $config = [];
-        foreach ($rootConfig['imports'] as $import) {
-            $config = array_merge_recursive($config, Yaml::parseFile($baseDir . '/' . $import['resource']));
+        if (isset($rootConfig['imports'])) {
+            foreach ($rootConfig['imports'] as $import) {
+                $config = array_merge_recursive($config, Yaml::parseFile($baseDir . '/' . $import['resource']));
+            }
         }
         $config = array_merge_recursive($config, $rootConfig);
 
-        $config = static::addIds($config);
+        if (!isset($config['qatracker'])) {
+            throw new RuntimeException('You must define the root key \'qatracker\' in the config file');
+        }
 
         if (!isset($config['qatracker']['dataSeries'])) {
             throw new RuntimeException('You must define at least one provider in the config file');
@@ -49,24 +58,26 @@ class Configuration
         }
 
         $providers = $config['qatracker']['dataSeries'];
-        foreach ($providers as $provider) {
-            static::validateProvider($provider);
+        foreach ($providers as $id => $provider) {
+            static::validateProvider($id, $provider);
         }
 
         $charts = $config['qatracker']['charts'];
-        foreach ($charts as $chart) {
-            static::validateChart($chart);
+        foreach ($charts as $id => $chart) {
+            static::validateChart($id, $chart);
         }
+
+        $config = static::addIds($config);
 
         return $config;
     }
 
     /**
-     * @param $provider
+     * @param string $id
+     * @param array $provider
      */
-    protected static function validateProvider(array $provider): void
+    protected static function validateProvider(string $id, array $provider): void
     {
-        $id = $provider['id'] ?? null;
         if (!$id) {
             throw new RuntimeException('You must defined an id for your provider');
         }
@@ -80,8 +91,12 @@ class Configuration
         }
     }
 
-    protected static function validateChart(array $chart)
+    protected static function validateChart(string $id, array $chart)
     {
+        if (!$id) {
+            throw new RuntimeException('You must defined an id for your provider');
+        }
+
         // TODO implement configuration validation for this part
         return;
     }
@@ -126,6 +141,19 @@ class Configuration
             return false;
         }
 
+        $id = $provider['id'];
+
+        $percentProvider = $provider['provider'] ?? null;
+        if (!is_string($percentProvider)) {
+            throw new RuntimeException(sprintf('You must defined the \'provider\' key for your percent provider "%s"', $id));
+        }
+
+        $totalPercentProvider = $provider['totalPercentProvider'] ?? null;
+        if (!is_string($totalPercentProvider)) {
+            throw new RuntimeException(sprintf('You must defined the \'totalPercentProvider\' key for your percent provider "%s"',
+                $id));
+        }
+
         return true;
     }
 
@@ -135,13 +163,25 @@ class Configuration
      */
     protected static function addIds(array $config): array
     {
-        foreach ($config['qatracker']['dataSeries'] as $id => &$dataSerie) {
-            $dataSerie ['id'] = $id;
+        $dataSeries = [];
+        if (isset($config['qatracker']['dataSeries'])) {
+            $dataSeries = $config['qatracker']['dataSeries'];
         }
 
-        foreach ($config['qatracker']['charts'] as $id => &$chart) {
+        foreach ($dataSeries as $id => &$dataSerie) {
+            $dataSerie ['id'] = $id;
+        }
+        $config['qatracker']['dataSeries'] = $dataSeries;
+
+        $charts = [];
+        if (isset($config['qatracker']['charts'])) {
+            $charts = $config['qatracker']['charts'];
+        }
+
+        foreach ($charts as $id => &$chart) {
             $chart ['id'] = $id;
         }
+        $config['qatracker']['charts'] = $charts;
 
         return $config;
     }

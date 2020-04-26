@@ -1,0 +1,5 @@
+qatracker:
+    dataSeries:
+        provider: 1
+        totalPercentProvider: 2
+    charts:

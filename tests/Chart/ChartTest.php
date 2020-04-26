@@ -20,7 +20,7 @@ class ChartTest extends TestCase
         $config['dataSeries'] = [];
         $providersStack = [];
 
-        $chart = new Chart($config, $providersStack);
+        new Chart($config, $providersStack);
     }
 
     public function testConstruct()
