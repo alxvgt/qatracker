@@ -7,6 +7,10 @@ use Alxvng\QATracker\Tests\Mock;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class ProviderFinderTest extends TestCase
 {
     public function testFindById()

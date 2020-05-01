@@ -11,12 +11,16 @@ use JsonException;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class DataStandardSerieTest extends TestCase
 {
     /**
+     * @param callable          $assert
+     * @param callable          $expectException
      * @param DataStandardSerie $object
-     * @param callable $assert
-     * @param callable $expectException
      * @dataProvider getInstanceProvider
      */
     public function testGetInstance(DataStandardSerie $object, callable $assert = null, callable $expectException = null)
@@ -33,8 +37,9 @@ class DataStandardSerieTest extends TestCase
     }
 
     /**
-     * @return Generator
      * @throws JsonException
+     *
+     * @return Generator
      */
     public function getInstanceProvider()
     {
@@ -69,5 +74,4 @@ class DataStandardSerieTest extends TestCase
         $this->assertGreaterThan($filesizeBefore, $filesizeAfter);
         $this->assertCount(count($dataBefore) + 1, $dataAfter);
     }
-
 }

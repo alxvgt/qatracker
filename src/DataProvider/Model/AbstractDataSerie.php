@@ -1,10 +1,7 @@
 <?php
 
-
 namespace Alxvng\QATracker\DataProvider\Model;
 
-
-use Alxvng\QATracker\Command\TrackCommand;
 use DateTime;
 use JsonException;
 use RuntimeException;
@@ -19,19 +16,11 @@ abstract class AbstractDataSerie
     protected string $slug;
     protected array $data = [];
 
-    /**
-     * @param array $providerConfig
-     * @return bool
-     */
     public static function isStandard(array $providerConfig): bool
     {
         return isset($providerConfig['class'], $providerConfig['arguments']);
     }
 
-    /**
-     * @param array $providerConfig
-     * @return bool
-     */
     public static function isPercent(array $providerConfig): bool
     {
         return isset($providerConfig['provider'], $providerConfig['totalPercentProvider']);
@@ -62,13 +51,27 @@ abstract class AbstractDataSerie
         file_put_contents($this->getStorageFilePath(), json_encode($this->data, JSON_THROW_ON_ERROR, 512));
     }
 
-    /**
-     * @return string
-     */
     public function getSlug(): string
     {
         return $this->slug;
     }
+
+    public function getStorageFilePath(): string
+    {
+        return $this->storageFilePath;
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    public function getData(): array
+    {
+        return $this->data;
+    }
+
+    abstract public function collect(DateTime $trackDate): void;
 
     /**
      * @throws JsonException
@@ -81,30 +84,4 @@ abstract class AbstractDataSerie
 
         $this->data = json_decode(file_get_contents($this->getStorageFilePath()), true, 512, JSON_THROW_ON_ERROR);
     }
-
-    /**
-     * @return string
-     */
-    public function getStorageFilePath(): string
-    {
-        return $this->storageFilePath;
-    }
-
-    /**
-     * @return string
-     */
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return array
-     */
-    public function getData(): array
-    {
-        return $this->data;
-    }
-
-    abstract public function collect(DateTime $trackDate): void;
 }

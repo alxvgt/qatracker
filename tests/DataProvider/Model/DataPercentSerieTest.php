@@ -1,6 +1,6 @@
 <?php
 
-    namespace Alxvng\QATracker\Tests\DataProvider\Model;
+namespace Alxvng\QATracker\Tests\DataProvider\Model;
 
 use Alxvng\QATracker\Tests\Mock;
 use DateTime;
@@ -8,6 +8,10 @@ use JsonException;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class DataPercentSerieTest extends TestCase
 {
     /**
@@ -46,5 +50,4 @@ class DataPercentSerieTest extends TestCase
         $this->expectException(RuntimeException::class);
         Mock::dataPercentSerieWithItSelfProvider();
     }
-
 }

@@ -1,11 +1,14 @@
 <?php
 
-
 namespace Alxvng\QATracker\Tests\DataProvider;
 
 use Alxvng\QATracker\DataProvider\JsonPathAverageProvider;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class JsonPathAverageProviderTest extends TestCase
 {
     public function testFetchData()

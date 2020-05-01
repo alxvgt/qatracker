@@ -1,11 +1,14 @@
 <?php
 
-
 namespace Alxvng\QATracker\Tests\DataProvider;
 
 use Alxvng\QATracker\DataProvider\XpathProvider;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class XpathProviderTest extends TestCase
 {
     public function testFetchData()

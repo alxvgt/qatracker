@@ -7,6 +7,10 @@ use Generator;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class ConfigurationTest extends TestCase
 {
     public function testExampleConfigPath()
@@ -16,9 +20,10 @@ class ConfigurationTest extends TestCase
     }
 
     /**
+     * @dataProvider loadWithExceptionProvider
+     *
      * @param string $configPath
      * @param string $exceptionClass
-     * @dataProvider loadWithExceptionProvider
      */
     public function testLoadWithException(string $configPath, string $exceptionClass)
     {
@@ -27,8 +32,9 @@ class ConfigurationTest extends TestCase
     }
 
     /**
-     * @param string $configPath
      * @dataProvider loadWithProvider
+     *
+     * @param string $configPath
      */
     public function testLoad(string $configPath)
     {
@@ -65,5 +71,4 @@ class ConfigurationTest extends TestCase
     {
         yield ['.qatracker.dist/config.yaml'];
     }
-
 }

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Alxvng\QATracker\Twig;
-
 
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -16,9 +14,6 @@ class TwigFactory
      */
     protected static $environment;
 
-    /**
-     * @return Environment
-     */
     public static function getTwig(): Environment
     {
         if (!static::$environment) {

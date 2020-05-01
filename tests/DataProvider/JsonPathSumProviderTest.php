@@ -1,11 +1,14 @@
 <?php
 
-
 namespace Alxvng\QATracker\Tests\DataProvider;
 
 use Alxvng\QATracker\DataProvider\JsonPathSumProvider;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class JsonPathSumProviderTest extends TestCase
 {
     public function testFetchData()

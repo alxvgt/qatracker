@@ -10,12 +10,16 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Filesystem\Filesystem;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class TrackCommandTest extends TestCase
 {
     public function testExecuteNoConfigFile()
     {
         $fs = new Filesystem();
-        $fs->remove(Root::internal() . '/' . TrackCommand::BASE_DIR);
+        $fs->remove(Root::internal().'/'.TrackCommand::BASE_DIR);
 
         $commandTester = $this->getCommandTester();
 
@@ -40,9 +44,6 @@ class TrackCommandTest extends TestCase
         $this->assertEquals(1, $commandTester->getStatusCode());
     }
 
-    /**
-     * @return CommandTester
-     */
     protected function getCommandTester(): CommandTester
     {
         $application = new Application();
@@ -50,11 +51,14 @@ class TrackCommandTest extends TestCase
         $application->add($command);
 
         $commandTester = new CommandTester($command);
-        $commandTester->execute([],
+        $commandTester->execute(
+            [],
             [
                 'interactive' => true,
-                'capture_stderr_separately' => true
-            ]);
+                'capture_stderr_separately' => true,
+            ]
+        );
+
         return $commandTester;
     }
 }

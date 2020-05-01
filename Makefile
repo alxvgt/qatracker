@@ -52,11 +52,16 @@ test: install
 
 cs: ## Check code style
 cs: install
-	${CMD_PHPCSFIX} --dry-run
+	${CMD_PHPCSFIX} --dry-run --using-cache=no
 
 cs-fix: ## Fix code style
 cs-fix: install
-	${CMD_PHPCSFIX}
+	${CMD_PHPCSFIX} --using-cache=no
+	@printf "\n\033[32m--------------------------------------------------------------------------\033[0m"
+	@printf "\n\033[32mCheck after fix\033[0m"
+	@printf "\n\033[32m--------------------------------------------------------------------------\033[0m"
+	@printf "\n"
+	make cs
 
 coverage: ## Run test coverage
 coverage: install

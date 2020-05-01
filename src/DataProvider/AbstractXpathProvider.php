@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Alxvng\QATracker\DataProvider;
 
 use Alxvng\QATracker\Root\Root;
@@ -25,6 +24,7 @@ abstract class AbstractXpathProvider implements DataProviderInterface
 
     /**
      * XpathProvider constructor.
+     *
      * @param string $inputFilePath
      * @param string $xpathQuery
      * @param array  $namespaceParameters
@@ -41,23 +41,13 @@ abstract class AbstractXpathProvider implements DataProviderInterface
         }
 
         if (!in_array(mime_content_type($this->inputFilePath), static::MIME_TYPES, true)) {
-            throw new RuntimeException(
-                sprintf(
-                    'The file %s (%s) must have one the mime types : %s',
-                    $this->inputFilePath,
-                    mime_content_type($this->inputFilePath),
-                    implode(',', static::MIME_TYPES)
-                ));
+            throw new RuntimeException(sprintf('The file %s (%s) must have one the mime types : %s', $this->inputFilePath, mime_content_type($this->inputFilePath), implode(',', static::MIME_TYPES)));
         }
 
-        try{
+        try {
             $xml = new SimpleXMLElement(file_get_contents($this->inputFilePath));
-        } catch (\Exception $e){
-            throw new \RuntimeException(sprintf(
-                'The file %s seems does not contain valid xml data',
-                $this->inputFilePath
-            ));
+        } catch (\Exception $e) {
+            throw new \RuntimeException(sprintf('The file %s seems does not contain valid xml data', $this->inputFilePath));
         }
-
     }
 }

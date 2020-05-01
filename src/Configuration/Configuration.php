@@ -9,24 +9,21 @@ use Symfony\Component\Yaml\Yaml;
 
 class Configuration
 {
-    /**
-     * @return string
-     */
     public static function exampleConfigPath(): string
     {
-        return Root::internal() . '/.qatracker.dist/config.yaml';
+        return Root::internal().'/.qatracker.dist/config.yaml';
     }
 
     /**
      * @param string $configPath
+     *
      * @return mixed
      */
     public static function load(string $configPath)
     {
         if (!file_exists($configPath)) {
             $exampleConfig = file_get_contents(static::exampleConfigPath());
-            throw new RuntimeException(sprintf("File %s does not exists. You should run :\n#> touch .qatracker/config.yaml\n\nNow edit this file to put your custom configuration, example : \n%s",
-                $configPath, $exampleConfig));
+            throw new RuntimeException(sprintf("File %s does not exists. You should run :\n#> touch .qatracker/config.yaml\n\nNow edit this file to put your custom configuration, example : \n%s", $configPath, $exampleConfig));
         }
 
         $baseDir = dirname($configPath);
@@ -40,7 +37,7 @@ class Configuration
         $config = [];
         if (isset($rootConfig['imports'])) {
             foreach ($rootConfig['imports'] as $import) {
-                $config = array_merge_recursive($config, Yaml::parseFile($baseDir . '/' . $import['resource']));
+                $config = array_merge_recursive($config, Yaml::parseFile($baseDir.'/'.$import['resource']));
             }
         }
         $config = array_merge_recursive($config, $rootConfig);
@@ -72,10 +69,6 @@ class Configuration
         return $config;
     }
 
-    /**
-     * @param string $id
-     * @param array $provider
-     */
     protected static function validateProvider(string $id, array $provider): void
     {
         if (!$id) {
@@ -98,13 +91,8 @@ class Configuration
         }
 
         // TODO implement configuration validation for this part
-        return;
     }
 
-    /**
-     * @param array $provider
-     * @return bool
-     */
     protected static function validateStandardProvider(array $provider): bool
     {
         if (!AbstractDataSerie::isStandard($provider)) {
@@ -118,23 +106,17 @@ class Configuration
             throw new RuntimeException(sprintf('You must defined a class for your provider "%s"', $id));
         }
         if (!class_exists($class)) {
-            throw new RuntimeException(sprintf('You must defined a valid class for your provider, got "%s"',
-                $class));
+            throw new RuntimeException(sprintf('You must defined a valid class for your provider, got "%s"', $class));
         }
 
         $arguments = $provider['arguments'] ?? null;
         if (!$arguments || !is_array($arguments)) {
-            throw new RuntimeException(sprintf('You must defined valid arguments for your provider "%s"',
-                $id));
+            throw new RuntimeException(sprintf('You must defined valid arguments for your provider "%s"', $id));
         }
 
         return true;
     }
 
-    /**
-     * @param array $provider
-     * @return bool
-     */
     protected static function validatePercentProvider(array $provider): bool
     {
         if (!AbstractDataSerie::isPercent($provider)) {
@@ -150,17 +132,12 @@ class Configuration
 
         $totalPercentProvider = $provider['totalPercentProvider'] ?? null;
         if (!is_string($totalPercentProvider)) {
-            throw new RuntimeException(sprintf('You must defined the \'totalPercentProvider\' key for your percent provider "%s"',
-                $id));
+            throw new RuntimeException(sprintf('You must defined the \'totalPercentProvider\' key for your percent provider "%s"', $id));
         }
 
         return true;
     }
 
-    /**
-     * @param array $config
-     * @return array
-     */
     protected static function addIds(array $config): array
     {
         $dataSeries = [];
@@ -169,7 +146,7 @@ class Configuration
         }
 
         foreach ($dataSeries as $id => &$dataSerie) {
-            $dataSerie ['id'] = $id;
+            $dataSerie['id'] = $id;
         }
         $config['qatracker']['dataSeries'] = $dataSeries;
 
@@ -179,7 +156,7 @@ class Configuration
         }
 
         foreach ($charts as $id => &$chart) {
-            $chart ['id'] = $id;
+            $chart['id'] = $id;
         }
         $config['qatracker']['charts'] = $charts;
 

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Alxvng\QATracker\DataProvider;
 
 use Flow\JSONPath\JSONPath;
@@ -10,7 +9,6 @@ use JsonException;
 abstract class AbstractJsonPathReducerProvider extends AbstractJsonPathProvider implements ReducerProviderInterface
 {
     /**
-     * @return float
      * @throws JSONPathException
      * @throws JsonException
      */

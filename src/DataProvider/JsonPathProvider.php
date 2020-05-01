@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Alxvng\QATracker\DataProvider;
 
 use Flow\JSONPath\JSONPath;
@@ -11,7 +10,6 @@ use RuntimeException;
 class JsonPathProvider extends AbstractJsonPathProvider
 {
     /**
-     * @return float
      * @throws JSONPathException
      * @throws JsonException
      */
@@ -24,10 +22,10 @@ class JsonPathProvider extends AbstractJsonPathProvider
 
         $result = $nodes->first();
 
-        if(!is_numeric((string)$result)){
+        if (!is_numeric((string) $result)) {
             throw new RuntimeException(sprintf('The result of query must be a numeric value, got "%s"', $result));
         }
 
-        return (float)$result;
+        return (float) $result;
     }
 }

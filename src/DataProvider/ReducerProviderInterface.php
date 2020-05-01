@@ -1,4 +1,5 @@
 <?php
+
 namespace Alxvng\QATracker\DataProvider;
 
 interface ReducerProviderInterface

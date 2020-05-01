@@ -1,11 +1,14 @@
 <?php
 
-
 namespace Alxvng\QATracker\Tests\DataProvider;
 
 use Alxvng\QATracker\DataProvider\JsonPathCountProvider;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class JsonPathCountProviderTest extends TestCase
 {
     public function testFetchData()

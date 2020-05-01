@@ -46,6 +46,41 @@ class TrackCommand extends Command
 
     protected static $defaultName = 'track';
 
+    public static function getBaseDir(): string
+    {
+        return Root::external().'/'.static::BASE_DIR;
+    }
+
+    public static function getGeneratedDir(): string
+    {
+        return static::getBaseDir().'/'.static::GENERATED_DIR;
+    }
+
+    public static function getConfigPath(): string
+    {
+        return static::getBaseDir().'/'.static::CONFIG_FILENAME;
+    }
+
+    /**
+     * @param $trackDate
+     */
+    public static function initializeTrackDate($trackDate): void
+    {
+        static::$trackDate = DateTime::createFromFormat(AbstractDataSerie::DATE_FORMAT, $trackDate);
+
+        if (!static::$trackDate) {
+            throw new \RuntimeException(sprintf('Unable to create date from option with value %s', $trackDate));
+        }
+    }
+
+    /**
+     * @return DateTime|false
+     */
+    public static function getTrackDate()
+    {
+        return self::$trackDate;
+    }
+
     protected function configure()
     {
         $outputDir = static::getGeneratedDir().'/'.static::OUTPUT_DIR;
@@ -53,28 +88,37 @@ class TrackCommand extends Command
         $this
             ->setDescription('Track your QA indicators')
             ->setHelp('This command allows you to fetch some indicators and build simple QA charts...')
-            ->addOption('date', null, InputOption::VALUE_REQUIRED,
+            ->addOption(
+                'date',
+                null,
+                InputOption::VALUE_REQUIRED,
                 sprintf('Use this date instead today to collect data (use format "%s")', AbstractDataSerie::DATE_FORMAT),
-                (new DateTime())->format(AbstractDataSerie::DATE_FORMAT))
+                (new DateTime())->format(AbstractDataSerie::DATE_FORMAT)
+            )
             ->addOption('no-report', null, InputOption::VALUE_NONE, 'Do not execute the report rendering step')
             ->addOption('no-track', null, InputOption::VALUE_NONE, 'Do not execute the tracking step')
-            ->addOption('report-html-path', null, InputOption::VALUE_REQUIRED,
+            ->addOption(
+                'report-html-path',
+                null,
+                InputOption::VALUE_REQUIRED,
                 'Define a custom path for the html report',
-                $outputDir.'/'.static::OUTPUT_FILENAME)
-            ->addOption('base-dir', null, InputOption::VALUE_REQUIRED,
+                $outputDir.'/'.static::OUTPUT_FILENAME
+            )
+            ->addOption(
+                'base-dir',
+                null,
+                InputOption::VALUE_REQUIRED,
                 'Define a custom base directory for qatracker',
-                static::getBaseDir());
+                static::getBaseDir()
+            )
+        ;
     }
 
-    /**
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     */
     protected function interact(InputInterface $input, OutputInterface $output)
     {
         $io = new SymfonyStyle($input, $output);
 
-        static::$baseDir = (string)$input->getOption('base-dir');
+        static::$baseDir = (string) $input->getOption('base-dir');
 
         if (file_exists(static::getConfigPath())) {
             return;
@@ -82,12 +126,16 @@ class TrackCommand extends Command
 
         $helper = $this->getHelper('question');
         $question = new ConfirmationQuestion(
-            sprintf("\nFile %s does not exists.\nDo you want to create it from the sample file ? (Y/n)",
-                static::getConfigPath()), true);
+            sprintf(
+                "\nFile %s does not exists.\nDo you want to create it from the sample file ? (Y/n)",
+                static::getConfigPath()
+            ),
+            true
+        );
 
         if (!$helper->ask($input, $output, $question)) {
             $io->warning(sprintf('The config file has not been created'));
-            $this->setCode(function(){
+            $this->setCode(function () {
                 return 0;
             });
         }
@@ -95,30 +143,32 @@ class TrackCommand extends Command
         $fs = new Filesystem();
         $fs->copy(Configuration::exampleConfigPath(), static::getConfigPath());
 
-        $io->success(sprintf("The config file has been created at \"%s\".\nYou can now edit it to put your own configuration.",
-            static::getConfigPath()));
+        $io->success(sprintf(
+            "The config file has been created at \"%s\".\nYou can now edit it to put your own configuration.",
+            static::getConfigPath()
+        ));
 
-        $this->setCode(function(){
+        $this->setCode(function () {
             return 0;
         });
     }
 
-
     /**
      * @param InputInterface  $input
      * @param OutputInterface $output
-     * @return int
+     *
      * @throws JsonException
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
+     *
+     * @return int
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $io = new SymfonyStyle($input, $output);
         $twig = TwigFactory::getTwig();
         try {
-
             $io->title('Track your QA indicators');
 
             /** @var ConsoleSectionOutput $section */
@@ -159,7 +209,6 @@ class TrackCommand extends Command
             }
 
             if ($withReport) {
-
                 /** @var ConsoleSectionOutput $section */
                 $section = $output->section();
                 $message = 'Generating charts : ';
@@ -167,10 +216,9 @@ class TrackCommand extends Command
 
                 $charts = $config['qatracker']['charts'];
                 foreach ($charts as $chart) {
-
                     $chart = new Chart($chart, $dataSeriesStack);
 
-                    $graphs [] = ChartGenerator::generate(
+                    $graphs[] = ChartGenerator::generate(
                         $chart->getFirstProvider()->getData(),
                         $chart->getType(),
                         $chart->getGraphSettings()
@@ -181,9 +229,7 @@ class TrackCommand extends Command
                 $io->newLine();
             }
 
-
             if (!empty($graphs)) {
-
                 /** @var ConsoleSectionOutput $section */
                 $section = $output->section();
                 $message = sprintf('Rendering report...');
@@ -191,9 +237,9 @@ class TrackCommand extends Command
 
                 $html = $twig->render(static::DEFAULT_TEMPLATE, [
                     'graphs' => $graphs,
-                    'js'     => SVGGraph::fetchJavascript(),
-                    'version'     => static::VERSION,
-                    'generatedAt'     => new DateTime(),
+                    'js' => SVGGraph::fetchJavascript(),
+                    'version' => static::VERSION,
+                    'generatedAt' => new DateTime(),
                 ]);
                 file_put_contents($outputFilePath, $html);
                 $section->overwrite($message.static::OUTPUT_DONE);
@@ -204,19 +250,18 @@ class TrackCommand extends Command
                 [
                     sprintf(
                         "Well done ! You have track new QA indicators !\n".
-                        'Report generated at : %s', $outputFilePath
+                        'Report generated at : %s',
+                        $outputFilePath
                     ),
-                ]);
+                ]
+            );
 
             return static::EXIT_SUCCESS;
-
         } catch (\RuntimeException $e) {
-
             $io->error($e->getMessage());
 
             return static::EXIT_FAILURE;
         }
-
     }
 
     /**
@@ -232,39 +277,15 @@ class TrackCommand extends Command
     }
 
     /**
-     * @return string
-     */
-    public static function getBaseDir(): string
-    {
-        return Root::external().'/'.static::BASE_DIR;
-    }
-
-    /**
-     * @return string
-     */
-    public static function getGeneratedDir(): string
-    {
-        return static::getBaseDir().'/'.static::GENERATED_DIR;
-    }
-
-    /**
-     * @return string
-     */
-    public static function getConfigPath(): string
-    {
-        return static::getBaseDir().'/'.static::CONFIG_FILENAME;
-    }
-
-    /**
      * @param $providersConfig
-     * @return array
+     *
      * @throws JsonException
      */
     protected function loadDataSeries($providersConfig): array
     {
         $dataSeriesStack = [];
 
-        /**
+        /*
          * Load standard providers on a first time
          */
         foreach ($providersConfig as $key => $provider) {
@@ -273,11 +294,11 @@ class TrackCommand extends Command
             }
 
             $provider = new DataStandardSerie($provider, TrackCommand::getGeneratedDir());
-            $dataSeriesStack [$provider->getId()] = $provider;
+            $dataSeriesStack[$provider->getId()] = $provider;
             unset($providersConfig[$key]);
         }
 
-        /**
+        /*
          * Load other providers on a second time
          */
         foreach ($providersConfig as $key => $provider) {
@@ -286,33 +307,10 @@ class TrackCommand extends Command
             }
 
             $provider = new DataPercentSerie($provider, TrackCommand::getGeneratedDir(), $dataSeriesStack);
-            $dataSeriesStack [$provider->getId()] = $provider;
+            $dataSeriesStack[$provider->getId()] = $provider;
             unset($providersConfig[$key]);
         }
 
         return $dataSeriesStack;
     }
-
-    /**
-     * @param $trackDate
-     */
-    public static function initializeTrackDate($trackDate): void
-    {
-        static::$trackDate = DateTime::createFromFormat(AbstractDataSerie::DATE_FORMAT, $trackDate);
-
-        if (!static::$trackDate) {
-            throw new \RuntimeException(
-                sprintf('Unable to create date from option with value %s',
-                    $trackDate));
-        }
-    }
-
-    /**
-     * @return DateTime|false
-     */
-    public static function getTrackDate()
-    {
-        return self::$trackDate;
-    }
-
 }

@@ -1,10 +1,7 @@
 <?php
 
-
 namespace Alxvng\QATracker\DataProvider\Model;
 
-
-use Alxvng\QATracker\Command\TrackCommand;
 use Alxvng\QATracker\DataProvider\DataProviderInterface;
 use DateTime;
 use JsonException;
@@ -18,8 +15,10 @@ class DataStandardSerie extends AbstractDataSerie
 
     /**
      * DataProvider constructor.
-     * @param array $config
+     *
+     * @param array  $config
      * @param string $generatedDir
+     *
      * @throws JsonException
      */
     public function __construct(array $config, string $generatedDir)
@@ -38,6 +37,8 @@ class DataStandardSerie extends AbstractDataSerie
     }
 
     /**
+     * @param DateTime $trackDate
+     *
      * @throws JsonException
      */
     public function collect(DateTime $trackDate): void
@@ -48,12 +49,10 @@ class DataStandardSerie extends AbstractDataSerie
         $this->save();
     }
 
-    /**
-     * @return DataProviderInterface
-     */
-    public function getInstance() : DataProviderInterface
+    public function getInstance(): DataProviderInterface
     {
         $providerClass = $this->getClass();
+
         return new $providerClass(...$this->getArguments());
     }
 
@@ -72,7 +71,4 @@ class DataStandardSerie extends AbstractDataSerie
     {
         return $this->arguments;
     }
-
-
-
 }
