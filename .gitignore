@@ -3,3 +3,5 @@ vendor
 *.loc
 .qatracker
 .qatracker.dist/generated
+.php_cs
+.php_cs.cache

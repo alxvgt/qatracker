@@ -24,7 +24,8 @@ CMD_COMPOSER ?= ${CMD_EXEC} composer
 CMD_CHMOD ?= ${CMD_EXEC} chmod
 CMD_PWD ?= ${CMD_EXEC} pwd
 
-CMD_PHPUNIT ?= ${CMD_EXEC} vendor/bin/phpunit
+CMD_PHPUNIT ?= ${CMD_PHP} vendor/bin/phpunit -c tests/phpunit.xml.dist
+CMD_PHPCSFIX ?= ${CMD_PHP} vendor/bin/php-cs-fixer fix -v
 
 ###### START
 
@@ -45,27 +46,36 @@ install: composer.json
 
 test: ## Run phpunit tests
 test: install
-	${CMD_PHPUNIT} -c tests/phpunit.xml.dist
+	${CMD_PHPUNIT}
 
-##@ QA metrics
+##@ QA tools
+
+cs: ## Check code style
+cs: install
+	${CMD_PHPCSFIX} --dry-run
+
+cs-fix: ## Fix code style
+cs-fix: install
+	${CMD_PHPCSFIX}
 
 coverage: ## Run test coverage
 coverage: install
 	$(eval outputDir=${PATH_QA_ROOT}/${PATH_QA_PHPUNIT}/coverage-html)
 	mkdir -p ${outputDir}
-	${CMD_PHPUNIT} -c tests/phpunit.xml.dist --coverage-html=${outputDir}
+	${CMD_PHPUNIT} --coverage-html=${outputDir}
 
-run-qa: ## Run all the qa tools
-run-qa:
+qa-report: ## Run all the qa tools
+qa-report:
 	make --directory ${PATH_QA_MAKEFILE_DIR} install-all
 	make --directory ${PATH_QA_MAKEFILE_DIR} run-all
 	cp -Rf /tmp/qa-logs/* ${PATH_QA_ROOT}/.
 	make coverage
+	make cs
 
 ##@ Release
 
 release: ## Release a new version of app (.phar archives)
-release: run-qa
+release: cs-fix qa-report
 	${CMD_COMPOSER} install --no-dev --profile
 	${CMD_COMPOSER} dump-autoload --no-dev --profile
 	${CMD_PHP} bin/build-phar
