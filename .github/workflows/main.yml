@@ -1,14 +1,23 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Quality
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
 on: [push]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-    tests-cs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v2
+            -   name: Start project
+                run: |
+                    cd docker
+                    make restart
+            -   name: Unit tests
+                run: |
+                    make test
+    code-style:
         runs-on: ubuntu-latest
         steps:
             -   uses: actions/checkout@v2
@@ -19,6 +28,3 @@ jobs:
             -   name: Check code style
                 run: |
                     make cs
-            -   name: Unit test
-                run: |
-                    make test
