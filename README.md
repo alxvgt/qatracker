@@ -10,7 +10,7 @@ throught exported files. This specific collected data are stored in an other fil
 </div>
 
 ## Demo
-You can view an example of a report here : [Demo](https://alxvgt.github.io/demo/index.html)
+You can view an example of a report here : [Demo](https://alxvgt.github.io/qatracker/demo/index.html)
 
 ## Requirements
 You can view the requirements on packagist website : https://packagist.org/packages/alxvng/qatracker
@@ -138,8 +138,8 @@ imports:
     - { resource: config-phploc.yaml }
 ```  
 
-## Docs
-Some informatiosn about this tool are available here : [Docs](https://alxvgt.github.io/index.html)
+## Docs & QA
+Some informations about this tool are available here : [Docs](https://alxvgt.github.io/qatracker/)
 
 ## Contributing
 You can contribute to this project by adding issue or pull request.
