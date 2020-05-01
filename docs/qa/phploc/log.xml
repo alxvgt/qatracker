@@ -2,9 +2,9 @@
 <phploc>
   <directories>7</directories>
   <files>26</files>
-  <loc>1345</loc>
-  <lloc>290</lloc>
-  <llocClasses>296</llocClasses>
+  <loc>1349</loc>
+  <lloc>292</lloc>
+  <llocClasses>298</llocClasses>
   <llocFunctions>0</llocFunctions>
   <llocGlobal>-6</llocGlobal>
   <cloc>213</cloc>
@@ -17,9 +17,9 @@
   <concreteClasses>16</concreteClasses>
   <finalClasses>0</finalClasses>
   <nonFinalClasses>16</nonFinalClasses>
-  <functions>0</functions>
+  <functions>2</functions>
   <namedFunctions>0</namedFunctions>
-  <anonymousFunctions>0</anonymousFunctions>
+  <anonymousFunctions>2</anonymousFunctions>
   <methods>57</methods>
   <publicMethods>45</publicMethods>
   <nonPublicMethods>12</nonPublicMethods>
@@ -34,11 +34,11 @@
   <globalConstants>0</globalConstants>
   <testClasses>0</testClasses>
   <testMethods>0</testMethods>
-  <ccnByLloc>0.23793103448276</ccnByLloc>
+  <ccnByLloc>0.23630136986301</ccnByLloc>
   <llocByNof>0</llocByNof>
-  <methodCalls>134</methodCalls>
+  <methodCalls>136</methodCalls>
   <staticMethodCalls>37</staticMethodCalls>
-  <instanceMethodCalls>97</instanceMethodCalls>
+  <instanceMethodCalls>99</instanceMethodCalls>
   <attributeAccesses>77</attributeAccesses>
   <staticAttributeAccesses>7</staticAttributeAccesses>
   <instanceAttributeAccesses>70</instanceAttributeAccesses>
@@ -50,17 +50,17 @@
   <classCcnAvg>3.6538461538462</classCcnAvg>
   <classCcnMax>29</classCcnMax>
   <classLlocMin>1</classLlocMin>
-  <classLlocAvg>11.384615384615</classLlocAvg>
-  <classLlocMax>92</classLlocMax>
+  <classLlocAvg>11.461538461538</classLlocAvg>
+  <classLlocMax>94</classLlocMax>
   <methodCcnMin>1</methodCcnMin>
-  <methodCcnAvg>2.2777777777778</methodCcnAvg>
+  <methodCcnAvg>2.2641509433962</methodCcnAvg>
   <methodCcnMax>10</methodCcnMax>
   <methodLlocMin>1</methodLlocMin>
-  <methodLlocAvg>4.6111111111111</methodLlocAvg>
+  <methodLlocAvg>4.4905660377358</methodLlocAvg>
   <methodLlocMax>48</methodLlocMax>
   <averageMethodsPerClass>2.1923076923077</averageMethodsPerClass>
   <minimumMethodsPerClass>0</minimumMethodsPerClass>
   <maximumMethodsPerClass>10</maximumMethodsPerClass>
   <namespaces>8</namespaces>
-  <ncloc>1132</ncloc>
+  <ncloc>1136</ncloc>
 </phploc>

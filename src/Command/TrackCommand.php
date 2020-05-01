@@ -87,7 +87,9 @@ class TrackCommand extends Command
 
         if (!$helper->ask($input, $output, $question)) {
             $io->warning(sprintf('The config file has not been created'));
-            exit(static::EXIT_SUCCESS);
+            $this->setCode(function(){
+                return 0;
+            });
         }
 
         $fs = new Filesystem();
@@ -96,7 +98,9 @@ class TrackCommand extends Command
         $io->success(sprintf("The config file has been created at \"%s\".\nYou can now edit it to put your own configuration.",
             static::getConfigPath()));
 
-        exit(static::EXIT_SUCCESS);
+        $this->setCode(function(){
+            return 0;
+        });
     }
 
 
