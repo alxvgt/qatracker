@@ -1,0 +1,5 @@
+qatracker:
+    dataSeries:
+        - id: '001'
+          class: 'App\NotExistsClass'
+    charts:

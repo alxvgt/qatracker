@@ -20,6 +20,6 @@ trait AverageReducerTrait
 
             $sum += (float)$node;
         }
-        return $sum / count($nodes);
+        return round($sum / count($nodes), 2);
     }
 }

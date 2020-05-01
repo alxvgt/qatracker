@@ -14,7 +14,7 @@ class ChartGenerator
      * @param array  $settings
      * @return mixed
      */
-    public static function generate($values, $type = LineGraph::class, $settings = [])
+    public static function generate($values, $type = LineGraph::class, array $settings = [])
     {
         $dark = 'rgb(54,54,54)';
         $darkRed = 'rgb(127,0,0)';

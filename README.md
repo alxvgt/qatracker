@@ -1,6 +1,8 @@
+![CI](https://github.com/alxvgt/qatracker/workflows/CI/badge.svg)
+
 # QATracker
 QATracker is a tool to collect, store and render quality assurance indicators.  
-For example, you can run on your project some static code analysis tools like phploc or phpcpd then collect som metrics
+For example, you can run on your project some static code analysis tools like phploc or phpcpd then collect some metrics
 throught exported files. This specific collected data are stored in an other file that you can push to your repository if you want.
 
 <div align="center">
@@ -8,7 +10,7 @@ throught exported files. This specific collected data are stored in an other fil
 </div>
 
 ## Demo
-You can view an example of a report here : [Demo](https://alxvgt.github.io/qatracker/)
+You can view an example of a report here : [Demo](https://alxvgt.github.io/demo/index.html)
 
 ## Requirements
 You can view the requirements on packagist website : https://packagist.org/packages/alxvng/qatracker
@@ -135,6 +137,9 @@ The imported files are processed first then the content of `config.yaml`
 imports:
     - { resource: config-phploc.yaml }
 ```  
+
+## Docs
+Some informatiosn about this tool are available here : [Docs](https://alxvgt.github.io/index.html)
 
 ## Contributing
 You can contribute to this project by adding issue or pull request.

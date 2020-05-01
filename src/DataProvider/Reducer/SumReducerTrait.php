@@ -21,6 +21,6 @@ trait SumReducerTrait
             $sum += (float)$node;
         }
 
-        return $sum;
+        return round($sum, 2);
     }
 }

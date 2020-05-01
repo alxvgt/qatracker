@@ -5,7 +5,9 @@ namespace Alxvng\QATracker\DataProvider\Model;
 
 
 use Alxvng\QATracker\Command\TrackCommand;
+use DateTime;
 use JsonException;
+use RuntimeException;
 
 abstract class AbstractDataSerie
 {
@@ -37,10 +39,10 @@ abstract class AbstractDataSerie
 
     /**
      * @param $value
+     * @param DateTime $trackDate
      */
-    public function addData($value): void
+    public function addData($value, DateTime $trackDate): void
     {
-        $trackDate = TrackCommand::getTrackDate();
         $this->data[$trackDate->format(static::DATE_FORMAT)] = round($value, 2);
         $data = $this->data;
         ksort($data);
@@ -54,7 +56,7 @@ abstract class AbstractDataSerie
     {
         $dir = dirname($this->getStorageFilePath());
         if (!is_dir($dir) && !mkdir($dir, 0777, true)) {
-            throw new \RuntimeException(sprintf('Directory "%s" was not created', $dir));
+            throw new RuntimeException(sprintf('Directory "%s" was not created', $dir));
         }
 
         file_put_contents($this->getStorageFilePath(), json_encode($this->data, JSON_THROW_ON_ERROR, 512));
@@ -104,5 +106,5 @@ abstract class AbstractDataSerie
         return $this->data;
     }
 
-    abstract public function collect(): void;
+    abstract public function collect(DateTime $trackDate): void;
 }
