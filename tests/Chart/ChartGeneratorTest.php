@@ -5,10 +5,6 @@ namespace Alxvng\QATracker\Tests\Chart;
 use Alxvng\QATracker\Chart\ChartGenerator;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @internal
- * @coversNothing
- */
 class ChartGeneratorTest extends TestCase
 {
     public function testGenerate()

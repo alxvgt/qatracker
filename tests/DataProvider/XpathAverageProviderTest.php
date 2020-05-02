@@ -5,10 +5,6 @@ namespace Alxvng\QATracker\Tests\DataProvider;
 use Alxvng\QATracker\DataProvider\XpathAverageProvider;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @internal
- * @coversNothing
- */
 class XpathAverageProviderTest extends TestCase
 {
     public function testFetchData()

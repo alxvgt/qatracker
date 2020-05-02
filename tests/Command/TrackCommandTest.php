@@ -9,10 +9,6 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Filesystem\Filesystem;
 
-/**
- * @internal
- * @coversNothing
- */
 class TrackCommandTest extends TestCase
 {
     public function testExecuteNoConfigFile()

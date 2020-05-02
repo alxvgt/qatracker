@@ -2,9 +2,9 @@ PROJECT_NAME=qa-tracker
 
 ###### Paths
 
-PATH_QA_ROOT = docs/qa
-PATH_QA_PHPUNIT = phpunit
-PATH_QA_MAKEFILE_DIR = qa
+PATH_QA_ROOT=$(shell pwd)/docs/qa
+PATH_QA_PHPUNIT=phpunit
+PATH_QA_MAKEFILE_DIR=qa
 
 ###### Commands : Docker
 
@@ -71,9 +71,9 @@ coverage: install
 
 qa-report: ## Run all the qa tools
 qa-report:
-	make --directory ${PATH_QA_MAKEFILE_DIR} install-all
-	make --directory ${PATH_QA_MAKEFILE_DIR} run-all
-	cp -Rf /tmp/qa-logs/* ${PATH_QA_ROOT}/.
+	$(eval outputDir=)
+	LOG_DIR=${PATH_QA_ROOT} make -e --directory ${PATH_QA_MAKEFILE_DIR} install-all
+	LOG_DIR=${PATH_QA_ROOT} make -e --directory ${PATH_QA_MAKEFILE_DIR} run-all
 	make coverage
 	make cs
 

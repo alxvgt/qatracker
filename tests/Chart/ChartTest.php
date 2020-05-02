@@ -8,10 +8,6 @@ use JsonException;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
-/**
- * @internal
- * @coversNothing
- */
 class ChartTest extends TestCase
 {
     public function testConstructException()

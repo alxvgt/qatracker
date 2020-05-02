@@ -7,10 +7,6 @@ use Generator;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
-/**
- * @internal
- * @coversNothing
- */
 class ConfigurationTest extends TestCase
 {
     public function testExampleConfigPath()

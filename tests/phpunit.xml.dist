@@ -1,10 +1,13 @@
-<phpunit
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/6.3/phpunit.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.1/phpunit.xsd"
+         bootstrap="../bin/bootstrap.php"
+         cacheResult="false"
+         backupGlobals="false">
 
     <testsuites>
-        <testsuite name="Main testsuite">
-            <directory>.</directory>
+        <testsuite name="default">
+            <directory suffix="Test.php">.</directory>
         </testsuite>
     </testsuites>
 
