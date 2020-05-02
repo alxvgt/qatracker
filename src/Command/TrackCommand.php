@@ -48,7 +48,7 @@ class TrackCommand extends Command
 
     public static function getBaseDir(): string
     {
-        return Root::external().'/'.static::BASE_DIR;
+        return Root::external().'/'.static::$baseDir;
     }
 
     public static function getGeneratedDir(): string
@@ -136,7 +136,7 @@ class TrackCommand extends Command
         if (!$helper->ask($input, $output, $question)) {
             $io->warning(sprintf('The config file has not been created'));
             $this->setCode(function () {
-                return 0;
+                return static::EXIT_SUCCESS;
             });
         }
 
@@ -149,7 +149,7 @@ class TrackCommand extends Command
         ));
 
         $this->setCode(function () {
-            return 0;
+            return static::EXIT_SUCCESS;
         });
     }
 

@@ -22,10 +22,12 @@ If necessary, remove the previous installation :
 rm qatracker.phar;
 ```
 
-Install the phar :
+Install the phar (master):
 ```bash
-wget https://github.com/alxvgt/qa-tracker/raw/master/qatracker.phar
+wget https://github.com/alxvgt/qa-tracker/raw/master/release/qatracker.phar
 ```
+
+If you prefer more stable version, checkout the last stable release at https://github.com/alxvgt/qatracker/releases
 
 ## Usage
 
