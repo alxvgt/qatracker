@@ -2,14 +2,14 @@
 <phploc>
   <directories>7</directories>
   <files>26</files>
-  <loc>1349</loc>
-  <lloc>292</lloc>
-  <llocClasses>298</llocClasses>
+  <loc>1242</loc>
+  <lloc>291</lloc>
+  <llocClasses>297</llocClasses>
   <llocFunctions>0</llocFunctions>
   <llocGlobal>-6</llocGlobal>
-  <cloc>213</cloc>
-  <ccn>69</ccn>
-  <ccnMethods>69</ccnMethods>
+  <cloc>129</cloc>
+  <ccn>70</ccn>
+  <ccnMethods>70</ccnMethods>
   <interfaces>2</interfaces>
   <traits>3</traits>
   <classes>21</classes>
@@ -34,33 +34,33 @@
   <globalConstants>0</globalConstants>
   <testClasses>0</testClasses>
   <testMethods>0</testMethods>
-  <ccnByLloc>0.23630136986301</ccnByLloc>
+  <ccnByLloc>0.24054982817869</ccnByLloc>
   <llocByNof>0</llocByNof>
   <methodCalls>136</methodCalls>
   <staticMethodCalls>37</staticMethodCalls>
   <instanceMethodCalls>99</instanceMethodCalls>
-  <attributeAccesses>77</attributeAccesses>
-  <staticAttributeAccesses>7</staticAttributeAccesses>
+  <attributeAccesses>78</attributeAccesses>
+  <staticAttributeAccesses>8</staticAttributeAccesses>
   <instanceAttributeAccesses>70</instanceAttributeAccesses>
   <globalAccesses>0</globalAccesses>
   <globalVariableAccesses>0</globalVariableAccesses>
   <superGlobalVariableAccesses>0</superGlobalVariableAccesses>
   <globalConstantAccesses>0</globalConstantAccesses>
   <classCcnMin>1</classCcnMin>
-  <classCcnAvg>3.6538461538462</classCcnAvg>
+  <classCcnAvg>3.6923076923077</classCcnAvg>
   <classCcnMax>29</classCcnMax>
   <classLlocMin>1</classLlocMin>
-  <classLlocAvg>11.461538461538</classLlocAvg>
+  <classLlocAvg>11.423076923077</classLlocAvg>
   <classLlocMax>94</classLlocMax>
   <methodCcnMin>1</methodCcnMin>
   <methodCcnAvg>2.2641509433962</methodCcnAvg>
   <methodCcnMax>10</methodCcnMax>
   <methodLlocMin>1</methodLlocMin>
-  <methodLlocAvg>4.4905660377358</methodLlocAvg>
+  <methodLlocAvg>4.4716981132075</methodLlocAvg>
   <methodLlocMax>48</methodLlocMax>
   <averageMethodsPerClass>2.1923076923077</averageMethodsPerClass>
   <minimumMethodsPerClass>0</minimumMethodsPerClass>
   <maximumMethodsPerClass>10</maximumMethodsPerClass>
   <namespaces>8</namespaces>
-  <ncloc>1136</ncloc>
+  <ncloc>1113</ncloc>
 </phploc>

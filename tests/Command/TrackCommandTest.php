@@ -4,7 +4,6 @@ namespace Alxvng\QATracker\Tests\Command;
 
 use Alxvng\QATracker\Command\TrackCommand;
 use Alxvng\QATracker\Configuration\Configuration;
-use Alxvng\QATracker\Root\Root;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -19,7 +18,7 @@ class TrackCommandTest extends TestCase
     public function testExecuteNoConfigFile()
     {
         $fs = new Filesystem();
-        $fs->remove(Root::internal().'/'.TrackCommand::BASE_DIR);
+        $fs->remove(TrackCommand::getBaseDir());
 
         $commandTester = $this->getCommandTester();
 

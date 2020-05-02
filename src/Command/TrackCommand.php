@@ -41,14 +41,14 @@ class TrackCommand extends Command
     public const CONFIG_FILENAME = 'config.yaml';
     protected const OUTPUT_DONE = ' <fg=green>done</>.';
 
-    protected static string $baseDir = self::BASE_DIR;
+    protected static ?string $baseDir = null;
     protected static DateTime $trackDate;
 
     protected static $defaultName = 'track';
 
     public static function getBaseDir(): string
     {
-        return Root::external().'/'.static::$baseDir;
+        return static::$baseDir ?? Root::external().'/'.static::BASE_DIR;
     }
 
     public static function getGeneratedDir(): string
@@ -157,10 +157,10 @@ class TrackCommand extends Command
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
-     * @throws JsonException
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
+     * @throws JsonException
      *
      * @return int
      */

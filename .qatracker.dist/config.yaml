@@ -3,22 +3,22 @@ qatracker:
         lines-of-code:
             class: Alxvng\QATracker\DataProvider\XpathProvider
             arguments:
-                - 'docs/qa-tools/phploc/log.xml'
+                - 'docs/qa/phploc/log.xml'
                 - '/phploc/loc'
         non-comment-lines-of-code:
             class: Alxvng\QATracker\DataProvider\XpathProvider
             arguments:
-                - 'docs/qa-tools/phploc/log.xml'
+                - 'docs/qa/phploc/log.xml'
                 - '/phploc/ncloc'
         average-complexity-per-class:
             class: Alxvng\QATracker\DataProvider\XpathProvider
             arguments:
-                - 'docs/qa-tools/phploc/log.xml'
+                - 'docs/qa/phploc/log.xml'
                 - '/phploc/classCcnAvg'
         total-duplicated-lines:
             class: Alxvng\QATracker\DataProvider\XpathSumProvider
             arguments:
-                - 'docs/qa-tools/phpcpd/log.xml'
+                - 'docs/qa/phpcpd/log.xml'
                 - '/pmd-cpd/duplication/@lines'
         total-duplicated-lines-percent:
             provider: 'total-duplicated-lines'
@@ -26,28 +26,28 @@ qatracker:
         total-duplications:
             class: Alxvng\QATracker\DataProvider\XpathCountProvider
             arguments:
-                - 'docs/qa-tools/phpcpd/log.xml'
+                - 'docs/qa/phpcpd/log.xml'
                 - '/pmd-cpd/duplication'
         average-maintenance-index:
             class: Alxvng\QATracker\DataProvider\JsonPathAverageProvider
             arguments:
-                - 'docs/qa-tools/phpmetrics/report.json'
+                - 'docs/qa/phpmetrics/report.json'
                 - '$.*.mi'
         total-code-coverage-(lines):
             class: Alxvng\QATracker\DataProvider\XpathProvider
             arguments:
-                - 'docs/qa-tools/phpunit/coverage.xml/index.xml'
+                - 'docs/qa/phpunit/coverage.xml/index.xml'
                 - '/ns:phpunit/ns:project/ns:directory/ns:totals/ns:lines/@percent'
                 - {prefix: 'ns', namespace: 'https://schema.phpunit.de/coverage/1.0'}
         total-crap:
             class: Alxvng\QATracker\DataProvider\XpathProvider
             arguments:
-                - 'docs/qa-tools/phpunit/coverage.crap4j'
+                - 'docs/qa/phpunit/coverage.crap4j'
                 - '/crap_result/stats/totalCrap'
         total-phpstan-errors:
             class: Alxvng\QATracker\DataProvider\JsonPathProvider
             arguments:
-                - 'docs/qa-tools/phpstan/log.json'
+                - 'docs/qa/phpstan/log.json'
                 - '$.totals.file_errors'
 
     # documentation :
