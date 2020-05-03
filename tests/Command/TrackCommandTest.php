@@ -14,7 +14,7 @@ class TrackCommandTest extends TestCase
     public function testExecuteNoConfigFile()
     {
         $fs = new Filesystem();
-        $fs->remove(TrackCommand::getBaseDir());
+        $fs->remove(TrackCommand::getConfigDir());
 
         $commandTester = $this->getCommandTester();
 
@@ -22,7 +22,7 @@ class TrackCommandTest extends TestCase
         $this->assertStringContainsString('.qatracker/config.yaml', $commandTester->getDisplay());
         $this->assertStringContainsString('.qatracker/config.yaml does not exists.', $commandTester->getErrorOutput());
         $this->assertStringContainsString('create it from the sample file ? (Y/n)', $commandTester->getErrorOutput());
-        $this->assertEquals(0, $commandTester->getStatusCode());
+        $this->assertEquals(1, $commandTester->getStatusCode());
     }
 
     public function testExecuteWithConfigFile()

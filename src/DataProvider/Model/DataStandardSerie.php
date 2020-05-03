@@ -12,16 +12,18 @@ class DataStandardSerie extends AbstractDataSerie
 {
     protected string $class;
     protected array $arguments;
+    private string $baseDir;
 
     /**
      * DataProvider constructor.
      *
      * @param array  $config
+     * @param string $baseDir
      * @param string $generatedDir
      *
      * @throws JsonException
      */
-    public function __construct(array $config, string $generatedDir)
+    public function __construct(array $config, string $baseDir, string $generatedDir)
     {
         $slugger = new AsciiSlugger();
         $this->slug = u($slugger->slug($config['id']))->lower();
@@ -34,6 +36,7 @@ class DataStandardSerie extends AbstractDataSerie
         $this->arguments = $config['arguments'];
 
         $this->load();
+        $this->baseDir = $baseDir;
     }
 
     /**
@@ -53,7 +56,7 @@ class DataStandardSerie extends AbstractDataSerie
     {
         $providerClass = $this->getClass();
 
-        return new $providerClass(...$this->getArguments());
+        return new $providerClass($this->baseDir, ...$this->getArguments());
     }
 
     /**

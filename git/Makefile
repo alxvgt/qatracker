@@ -1,13 +1,15 @@
+SHELL := /bin/bash
+
 REPOSITORY_URL=https://github.com/alxvgt/qatracker.git
 GIT_REFS=\
-v0.1.0 \
-v0.2.0
+["20200403120000"]=v0.1.0 \
+["20200503120000"]=v0.2.0
 
 WORKING_DIR=/tmp/temp-git
 
 QA_MAKEFILE_DIR=$(shell pwd)/../qa
 QA_LOG_DIR=/tmp/qa/logs
-QATRACKER_DIR=$(shell pwd)/../.qatracker
+QATRACKER_CONFIG_DIR=$(shell pwd)/../.qatracker
 
 ###### START
 
@@ -20,11 +22,12 @@ help:  ## Display this help
 
 ##@ Git
 
-exec: ## Execute oprations
+exec: ## Execute operations
 exec:
-	printf "\n\033[32m Cleaning working directories... \033[0m\n"
+	printf "\n\033[32m Cleaning working directories, files, etc. \033[0m\n"
 	rm -rf ${WORKING_DIR}
 	rm -rf ${QA_LOG_DIR}
+	make -e --directory ${QA_MAKEFILE_DIR} clean-qatracker
 
 	printf "\n\033[32m Installing tools... \033[0m\n"
 	make -e --directory ${QA_MAKEFILE_DIR} install-all
@@ -33,7 +36,9 @@ exec:
 	git clone --depth=1 ${REPOSITORY_URL} ${WORKING_DIR}
 	cd ${WORKING_DIR}
 
-	for ref in ${GIT_REFS} ; do \
+	declare -A REFS=( ${GIT_REFS} ) ; \
+	for date in $${!REFS[@]} ; do \
+	  	ref=$${REFS[$${date}]} ; \
 		printf "\n\033[32m Processing $${ref}... \033[0m" ; \
 		cd ${WORKING_DIR} ; \
 		\
@@ -46,6 +51,6 @@ exec:
   		printf "\n\033[32m --> running code analysis... \033[0m\n" ; \
   		LOG_DIR=${QA_LOG_DIR} make -e --directory ${QA_MAKEFILE_DIR} run-all ; \
 		\
-  		printf "\n\033[32m --> running qatracker... \033[0m\n" ; \
-  		QATRACKER_DIR=${QATRACKER_DIR} make -e --directory ${QA_MAKEFILE_DIR} run-qatracker ; \
+  		printf "\n\033[32m --> running qatracker ($${date} > $${ref})... \033[0m\n" ; \
+  		QATRACKER_CONFIG_DIR=${QATRACKER_CONFIG_DIR} QATRACKER_BASE_DIR=${QA_LOG_DIR} QATRACKER_DATE=$${date} make -e --directory ${QA_MAKEFILE_DIR} run-qatracker ; \
 	done

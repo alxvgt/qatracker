@@ -24,7 +24,7 @@ class Mock
             ],
         ];
 
-        return new DataStandardSerie($config, '/tmp');
+        return new DataStandardSerie($config, getcwd(), '/tmp/gen');
     }
 
     /**
@@ -43,7 +43,7 @@ class Mock
             ],
         ];
 
-        return new DataStandardSerie($config, '/tmp');
+        return new DataStandardSerie($config, getcwd(), '/tmp/gen');
     }
 
     /**
@@ -62,7 +62,7 @@ class Mock
             ],
         ];
 
-        return new DataStandardSerie($config, '/tmp');
+        return new DataStandardSerie($config, getcwd(), '/tmp/gen');
     }
 
     /**

@@ -1,53 +1,56 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<pmd version="@project.version@" timestamp="2020-05-03T10:35:52+00:00">
+<pmd version="@project.version@" timestamp="2020-05-03T17:04:29+00:00">
   <file name="/var/www/qa-tracker/src/Command/TrackCommand.php">
-    <violation beginline="45" endline="316" rule="CouplingBetweenObjects" ruleset="Design Rules" package="Alxvng\QATracker\Command" externalInfoUrl="https://phpmd.org/rules/design.html#couplingbetweenobjects" class="TrackCommand" priority="2">
+    <violation beginline="47" endline="356" rule="CouplingBetweenObjects" ruleset="Design Rules" package="Alxvng\QATracker\Command" externalInfoUrl="https://phpmd.org/rules/design.html#couplingbetweenobjects" class="TrackCommand" priority="2">
       The class TrackCommand has a coupling between objects value of 21. Consider to reduce the number of dependencies under 13.
     </violation>
-    <violation beginline="51" endline="51" rule="StaticAccess" ruleset="Clean Code Rules" externalInfoUrl="https://phpmd.org/rules/cleancode.html#staticaccess" priority="1">
+    <violation beginline="53" endline="53" rule="StaticAccess" ruleset="Clean Code Rules" externalInfoUrl="https://phpmd.org/rules/cleancode.html#staticaccess" priority="1">
       Avoid using static access to class '\Alxvng\QATracker\Root\Root' in method 'getBaseDir'.
     </violation>
-    <violation beginline="69" endline="69" rule="StaticAccess" ruleset="Clean Code Rules" externalInfoUrl="https://phpmd.org/rules/cleancode.html#staticaccess" priority="1">
+    <violation beginline="81" endline="81" rule="StaticAccess" ruleset="Clean Code Rules" externalInfoUrl="https://phpmd.org/rules/cleancode.html#staticaccess" priority="1">
       Avoid using static access to class '\DateTime' in method 'initializeTrackDate'.
     </violation>
-    <violation beginline="72" endline="72" rule="MissingImport" ruleset="Clean Code Rules" externalInfoUrl="http://phpmd.org/rules/cleancode.html#MissingImport" priority="1">
-      Missing class import via use statement (line '72', column '23').
+    <violation beginline="84" endline="84" rule="MissingImport" ruleset="Clean Code Rules" externalInfoUrl="http://phpmd.org/rules/cleancode.html#MissingImport" priority="1">
+      Missing class import via use statement (line '84', column '23').
     </violation>
-    <violation beginline="119" endline="119" rule="ShortVariable" ruleset="Naming Rules" externalInfoUrl="https://phpmd.org/rules/naming.html#shortvariable" priority="3">
-      Avoid variables with short names like $io. Configured minimum length is 3.
+    <violation beginline="110" endline="110" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="https://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$outputDir'.
     </violation>
     <violation beginline="143" endline="143" rule="ShortVariable" ruleset="Naming Rules" externalInfoUrl="https://phpmd.org/rules/naming.html#shortvariable" priority="3">
-      Avoid variables with short names like $fs. Configured minimum length is 3.
-    </violation>
-    <violation beginline="144" endline="144" rule="StaticAccess" ruleset="Clean Code Rules" externalInfoUrl="https://phpmd.org/rules/cleancode.html#staticaccess" priority="1">
-      Avoid using static access to class '\Alxvng\QATracker\Configuration\Configuration' in method 'interact'.
-    </violation>
-    <violation beginline="169" endline="169" rule="ShortVariable" ruleset="Naming Rules" externalInfoUrl="https://phpmd.org/rules/naming.html#shortvariable" priority="3">
       Avoid variables with short names like $io. Configured minimum length is 3.
     </violation>
-    <violation beginline="170" endline="170" rule="StaticAccess" ruleset="Clean Code Rules" externalInfoUrl="https://phpmd.org/rules/cleancode.html#staticaccess" priority="1">
+    <violation beginline="165" endline="173" rule="ElseExpression" ruleset="Clean Code Rules" externalInfoUrl="https://phpmd.org/rules/cleancode.html#elseexpression" priority="1">
+      The method interact uses an else expression. Else clauses are basically not necessary and you can simplify the code by not using them.
+    </violation>
+    <violation beginline="166" endline="166" rule="ShortVariable" ruleset="Naming Rules" externalInfoUrl="https://phpmd.org/rules/naming.html#shortvariable" priority="3">
+      Avoid variables with short names like $fs. Configured minimum length is 3.
+    </violation>
+    <violation beginline="167" endline="167" rule="StaticAccess" ruleset="Clean Code Rules" externalInfoUrl="https://phpmd.org/rules/cleancode.html#staticaccess" priority="1">
+      Avoid using static access to class '\Alxvng\QATracker\Configuration\Configuration' in method 'interact'.
+    </violation>
+    <violation beginline="191" endline="296" rule="ExcessiveMethodLength" ruleset="Code Size Rules" package="Alxvng\QATracker\Command" externalInfoUrl="https://phpmd.org/rules/codesize.html#excessivemethodlength" class="TrackCommand" method="execute" priority="3">
+      The method execute() has 106 lines of code. Current threshold is set to 100. Avoid really long methods.
+    </violation>
+    <violation beginline="193" endline="193" rule="ShortVariable" ruleset="Naming Rules" externalInfoUrl="https://phpmd.org/rules/naming.html#shortvariable" priority="3">
+      Avoid variables with short names like $io. Configured minimum length is 3.
+    </violation>
+    <violation beginline="194" endline="194" rule="StaticAccess" ruleset="Clean Code Rules" externalInfoUrl="https://phpmd.org/rules/cleancode.html#staticaccess" priority="1">
       Avoid using static access to class '\Alxvng\QATracker\Twig\TwigFactory' in method 'execute'.
     </violation>
-    <violation beginline="182" endline="182" rule="StaticAccess" ruleset="Clean Code Rules" externalInfoUrl="https://phpmd.org/rules/cleancode.html#staticaccess" priority="1">
+    <violation beginline="213" endline="213" rule="StaticAccess" ruleset="Clean Code Rules" externalInfoUrl="https://phpmd.org/rules/cleancode.html#staticaccess" priority="1">
       Avoid using static access to class '\Alxvng\QATracker\Configuration\Configuration' in method 'execute'.
     </violation>
-    <violation beginline="221" endline="225" rule="StaticAccess" ruleset="Clean Code Rules" externalInfoUrl="https://phpmd.org/rules/cleancode.html#staticaccess" priority="1">
+    <violation beginline="252" endline="256" rule="StaticAccess" ruleset="Clean Code Rules" externalInfoUrl="https://phpmd.org/rules/cleancode.html#staticaccess" priority="1">
       Avoid using static access to class '\Alxvng\QATracker\Chart\ChartGenerator' in method 'execute'.
     </violation>
-    <violation beginline="240" endline="240" rule="StaticAccess" ruleset="Clean Code Rules" externalInfoUrl="https://phpmd.org/rules/cleancode.html#staticaccess" priority="1">
+    <violation beginline="271" endline="271" rule="StaticAccess" ruleset="Clean Code Rules" externalInfoUrl="https://phpmd.org/rules/cleancode.html#staticaccess" priority="1">
       Avoid using static access to class '\Goat1000\SVGGraph\SVGGraph' in method 'execute'.
     </violation>
-    <violation beginline="292" endline="292" rule="StaticAccess" ruleset="Clean Code Rules" externalInfoUrl="https://phpmd.org/rules/cleancode.html#staticaccess" priority="1">
+    <violation beginline="313" endline="313" rule="StaticAccess" ruleset="Clean Code Rules" externalInfoUrl="https://phpmd.org/rules/cleancode.html#staticaccess" priority="1">
       Avoid using static access to class '\Alxvng\QATracker\DataProvider\Model\AbstractDataSerie' in method 'loadDataSeries'.
     </violation>
-    <violation beginline="296" endline="296" rule="StaticAccess" ruleset="Clean Code Rules" externalInfoUrl="https://phpmd.org/rules/cleancode.html#staticaccess" priority="1">
-      Avoid using static access to class 'Alxvng\QATracker\Command\TrackCommand' in method 'loadDataSeries'.
-    </violation>
-    <violation beginline="305" endline="305" rule="StaticAccess" ruleset="Clean Code Rules" externalInfoUrl="https://phpmd.org/rules/cleancode.html#staticaccess" priority="1">
+    <violation beginline="326" endline="326" rule="StaticAccess" ruleset="Clean Code Rules" externalInfoUrl="https://phpmd.org/rules/cleancode.html#staticaccess" priority="1">
       Avoid using static access to class '\Alxvng\QATracker\DataProvider\Model\AbstractDataSerie' in method 'loadDataSeries'.
-    </violation>
-    <violation beginline="309" endline="309" rule="StaticAccess" ruleset="Clean Code Rules" externalInfoUrl="https://phpmd.org/rules/cleancode.html#staticaccess" priority="1">
-      Avoid using static access to class 'Alxvng\QATracker\Command\TrackCommand' in method 'loadDataSeries'.
     </violation>
   </file>
   <file name="/var/www/qa-tracker/src/Configuration/Configuration.php">
@@ -104,9 +107,6 @@
     <violation beginline="27" endline="27" rule="ShortVariable" ruleset="Naming Rules" externalInfoUrl="https://phpmd.org/rules/naming.html#shortvariable" priority="3">
       Avoid variables with short names like $fs. Configured minimum length is 3.
     </violation>
-    <violation beginline="28" endline="28" rule="StaticAccess" ruleset="Clean Code Rules" externalInfoUrl="https://phpmd.org/rules/cleancode.html#staticaccess" priority="1">
-      Avoid using static access to class '\Alxvng\QATracker\Root\Root' in method '__construct'.
-    </violation>
     <violation beginline="32" endline="32" rule="MissingImport" ruleset="Clean Code Rules" externalInfoUrl="http://phpmd.org/rules/cleancode.html#MissingImport" priority="1">
       Missing class import via use statement (line '32', column '23').
     </violation>
@@ -120,9 +120,6 @@
   <file name="/var/www/qa-tracker/src/DataProvider/AbstractXpathProvider.php">
     <violation beginline="34" endline="34" rule="ShortVariable" ruleset="Naming Rules" externalInfoUrl="https://phpmd.org/rules/naming.html#shortvariable" priority="3">
       Avoid variables with short names like $fs. Configured minimum length is 3.
-    </violation>
-    <violation beginline="35" endline="35" rule="StaticAccess" ruleset="Clean Code Rules" externalInfoUrl="https://phpmd.org/rules/cleancode.html#staticaccess" priority="1">
-      Avoid using static access to class '\Alxvng\QATracker\Root\Root' in method '__construct'.
     </violation>
     <violation beginline="48" endline="48" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="https://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
       Avoid unused local variables such as '$xml'.

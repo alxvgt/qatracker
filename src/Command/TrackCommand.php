@@ -35,30 +35,42 @@ class TrackCommand extends Command
 
     public const BASE_DIR = '.qatracker';
     public const GENERATED_DIR = 'generated';
-    public const OUTPUT_DIR = 'report';
-    public const OUTPUT_FILENAME = 'index.html';
+    public const REPORT_DIR = 'report';
+    public const REPORT_FILENAME = 'index.html';
     public const DEFAULT_TEMPLATE = 'index.html.twig';
     public const CONFIG_FILENAME = 'config.yaml';
+
     protected const OUTPUT_DONE = ' <fg=green>done</>.';
 
     protected static ?string $baseDir = null;
+    protected static ?string $configDir = null;
     protected static DateTime $trackDate;
 
     protected static $defaultName = 'track';
 
     public static function getBaseDir(): string
     {
-        return static::$baseDir ?? Root::external().'/'.static::BASE_DIR;
+        return static::$baseDir ?? Root::external();
     }
 
     public static function getGeneratedDir(): string
     {
-        return static::getBaseDir().'/'.static::GENERATED_DIR;
+        $dir = static::getConfigDir().'/'.static::GENERATED_DIR;
+        if (!is_dir($dir) && !mkdir($dir, 0777, true)) {
+            throw new RuntimeException(sprintf('Directory "%s" was not created', $dir));
+        }
+
+        return $dir;
+    }
+
+    public static function getConfigDir(): string
+    {
+        return static::$configDir ?? static::getBaseDir().'/'.static::BASE_DIR;
     }
 
     public static function getConfigPath(): string
     {
-        return static::getBaseDir().'/'.static::CONFIG_FILENAME;
+        return static::getConfigDir().'/'.static::CONFIG_FILENAME;
     }
 
     /**
@@ -78,12 +90,24 @@ class TrackCommand extends Command
      */
     public static function getTrackDate()
     {
-        return self::$trackDate;
+        return static::$trackDate;
+    }
+
+    protected static function getReportPath()
+    {
+        $path = static::getGeneratedDir().'/'.static::REPORT_DIR.'/'.static::REPORT_FILENAME;
+
+        $dir = dirname($path);
+        if (!is_dir($dir) && !mkdir($dir, 0777, true)) {
+            throw new RuntimeException(sprintf('Directory "%s" was not created', $dir));
+        }
+
+        return $path;
     }
 
     protected function configure()
     {
-        $outputDir = static::getGeneratedDir().'/'.static::OUTPUT_DIR;
+        $outputDir = static::getGeneratedDir().'/'.static::REPORT_DIR;
 
         $this
             ->setDescription('Track your QA indicators')
@@ -98,18 +122,18 @@ class TrackCommand extends Command
             ->addOption('no-report', null, InputOption::VALUE_NONE, 'Do not execute the report rendering step')
             ->addOption('no-track', null, InputOption::VALUE_NONE, 'Do not execute the tracking step')
             ->addOption(
-                'report-html-path',
-                null,
-                InputOption::VALUE_REQUIRED,
-                'Define a custom path for the html report',
-                $outputDir.'/'.static::OUTPUT_FILENAME
-            )
-            ->addOption(
                 'base-dir',
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Define a custom base directory for qatracker',
                 static::getBaseDir()
+            )
+            ->addOption(
+                'config-dir',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Define a custom config directory for qatracker',
+                static::getConfigDir()
             )
         ;
     }
@@ -118,7 +142,10 @@ class TrackCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        static::$baseDir = (string) $input->getOption('base-dir');
+        $baseDir = (string) $input->getOption('base-dir') ?: static::getConfigDir();
+        $configDir = (string) $input->getOption('config-dir') ?: static::getConfigDir();
+        static::$baseDir = $this->getAbsoluteDirPath($baseDir);
+        static::$configDir = $this->getAbsoluteDirPath($configDir);
 
         if (file_exists(static::getConfigPath())) {
             return;
@@ -135,21 +162,18 @@ class TrackCommand extends Command
 
         if (!$helper->ask($input, $output, $question)) {
             $io->warning(sprintf('The config file has not been created'));
-            $this->setCode(function () {
-                return static::EXIT_SUCCESS;
-            });
+        } else {
+            $fs = new Filesystem();
+            $fs->copy(Configuration::exampleConfigPath(), static::getConfigPath());
+
+            $io->success(sprintf(
+                "The config file has been created at \"%s\".\nYou can now edit it to put your own configuration.",
+                static::getConfigPath()
+            ));
         }
 
-        $fs = new Filesystem();
-        $fs->copy(Configuration::exampleConfigPath(), static::getConfigPath());
-
-        $io->success(sprintf(
-            "The config file has been created at \"%s\".\nYou can now edit it to put your own configuration.",
-            static::getConfigPath()
-        ));
-
         $this->setCode(function () {
-            return static::EXIT_SUCCESS;
+            return static::EXIT_FAILURE;
         });
     }
 
@@ -157,10 +181,10 @@ class TrackCommand extends Command
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
-     * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
      * @throws JsonException
+     * @throws LoaderError
      *
      * @return int
      */
@@ -171,12 +195,19 @@ class TrackCommand extends Command
         try {
             $io->title('Track your QA indicators');
 
+            $io->write('Configuration');
+            $io->listing(
+                [
+                    'Files read from : '.static::getBaseDir(),
+                    'Config read from : '.static::getConfigPath(),
+                    'Generated files write in : '.static::getGeneratedDir(),
+                ]
+            );
+
             /** @var ConsoleSectionOutput $section */
             $section = $output->section();
             $message = 'Initializing...';
             $section->writeln($message);
-            $outputFilePath = $input->getOption('report-html-path');
-            $this->initializeOutputDir($outputFilePath);
             $trackDate = $input->getOption('date');
             static::initializeTrackDate($trackDate);
             $config = Configuration::load(static::getConfigPath());
@@ -241,7 +272,7 @@ class TrackCommand extends Command
                     'version' => static::VERSION,
                     'generatedAt' => new DateTime(),
                 ]);
-                file_put_contents($outputFilePath, $html);
+                file_put_contents(static::getReportPath(), $html);
                 $section->overwrite($message.static::OUTPUT_DONE);
                 $io->newLine();
             }
@@ -251,7 +282,7 @@ class TrackCommand extends Command
                     sprintf(
                         "Well done ! You have track new QA indicators !\n".
                         'Report generated at : %s',
-                        $outputFilePath
+                        static::getReportPath()
                     ),
                 ]
             );
@@ -265,21 +296,11 @@ class TrackCommand extends Command
     }
 
     /**
-     * @param $outputFilePath
-     */
-    protected function initializeOutputDir(string $outputFilePath): void
-    {
-        $outputFileDir = dirname($outputFilePath);
-
-        if (!is_dir($outputFileDir) && !mkdir($outputFileDir, 0777, true)) {
-            throw new RuntimeException(sprintf('Directory " % s" was not created', $outputFileDir));
-        }
-    }
-
-    /**
      * @param $providersConfig
      *
      * @throws JsonException
+     *
+     * @return array
      */
     protected function loadDataSeries($providersConfig): array
     {
@@ -293,7 +314,7 @@ class TrackCommand extends Command
                 continue;
             }
 
-            $provider = new DataStandardSerie($provider, TrackCommand::getGeneratedDir());
+            $provider = new DataStandardSerie($provider, static::getBaseDir(), static::getGeneratedDir());
             $dataSeriesStack[$provider->getId()] = $provider;
             unset($providersConfig[$key]);
         }
@@ -306,11 +327,30 @@ class TrackCommand extends Command
                 continue;
             }
 
-            $provider = new DataPercentSerie($provider, TrackCommand::getGeneratedDir(), $dataSeriesStack);
+            $provider = new DataPercentSerie($provider, static::getGeneratedDir(), $dataSeriesStack);
             $dataSeriesStack[$provider->getId()] = $provider;
             unset($providersConfig[$key]);
         }
 
         return $dataSeriesStack;
+    }
+
+    /**
+     * @param string $dirPath
+     *
+     * @return string
+     */
+    protected function getAbsoluteDirPath(string $dirPath): string
+    {
+        $parent = dirname($dirPath);
+        if (!is_dir($parent)) {
+            throw new RuntimeException(sprintf('Unable to read directory "%s"', $parent));
+        }
+
+        if (!is_dir($dirPath) && !mkdir($dirPath, 0777, true)) {
+            throw new RuntimeException(sprintf('Directory "%s" was not created', $dirPath));
+        }
+
+        return realpath($dirPath);
     }
 }

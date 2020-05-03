@@ -2,7 +2,6 @@
 
 namespace Alxvng\QATracker\DataProvider;
 
-use Alxvng\QATracker\Root\Root;
 use RuntimeException;
 use SimpleXMLElement;
 use Symfony\Component\Filesystem\Filesystem;
@@ -25,14 +24,15 @@ abstract class AbstractXpathProvider implements DataProviderInterface
     /**
      * XpathProvider constructor.
      *
+     * @param string $baseDir
      * @param string $inputFilePath
      * @param string $xpathQuery
      * @param array  $namespaceParameters
      */
-    public function __construct(string $inputFilePath, string $xpathQuery, array $namespaceParameters = [])
+    public function __construct(string $baseDir, string $inputFilePath, string $xpathQuery, array $namespaceParameters = [])
     {
         $fs = new Filesystem();
-        $this->inputFilePath = $fs->isAbsolutePath($inputFilePath) ? $inputFilePath : Root::external().'/'.$inputFilePath;
+        $this->inputFilePath = $fs->isAbsolutePath($inputFilePath) ? $inputFilePath : $baseDir.'/'.$inputFilePath;
         $this->xpathQuery = $xpathQuery;
         $this->namespaceParameters = $namespaceParameters;
 

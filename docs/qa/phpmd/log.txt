@@ -1,19 +1,20 @@
-/var/www/qa-tracker/src/Command/TrackCommand.php:45	The class TrackCommand has a coupling between objects value of 21. Consider to reduce the number of dependencies under 13.
-/var/www/qa-tracker/src/Command/TrackCommand.php:51	Avoid using static access to class '\Alxvng\QATracker\Root\Root' in method 'getBaseDir'.
-/var/www/qa-tracker/src/Command/TrackCommand.php:69	Avoid using static access to class '\DateTime' in method 'initializeTrackDate'.
-/var/www/qa-tracker/src/Command/TrackCommand.php:72	Missing class import via use statement (line '72', column '23').
-/var/www/qa-tracker/src/Command/TrackCommand.php:119	Avoid variables with short names like $io. Configured minimum length is 3.
-/var/www/qa-tracker/src/Command/TrackCommand.php:143	Avoid variables with short names like $fs. Configured minimum length is 3.
-/var/www/qa-tracker/src/Command/TrackCommand.php:144	Avoid using static access to class '\Alxvng\QATracker\Configuration\Configuration' in method 'interact'.
-/var/www/qa-tracker/src/Command/TrackCommand.php:169	Avoid variables with short names like $io. Configured minimum length is 3.
-/var/www/qa-tracker/src/Command/TrackCommand.php:170	Avoid using static access to class '\Alxvng\QATracker\Twig\TwigFactory' in method 'execute'.
-/var/www/qa-tracker/src/Command/TrackCommand.php:182	Avoid using static access to class '\Alxvng\QATracker\Configuration\Configuration' in method 'execute'.
-/var/www/qa-tracker/src/Command/TrackCommand.php:221	Avoid using static access to class '\Alxvng\QATracker\Chart\ChartGenerator' in method 'execute'.
-/var/www/qa-tracker/src/Command/TrackCommand.php:240	Avoid using static access to class '\Goat1000\SVGGraph\SVGGraph' in method 'execute'.
-/var/www/qa-tracker/src/Command/TrackCommand.php:292	Avoid using static access to class '\Alxvng\QATracker\DataProvider\Model\AbstractDataSerie' in method 'loadDataSeries'.
-/var/www/qa-tracker/src/Command/TrackCommand.php:296	Avoid using static access to class 'Alxvng\QATracker\Command\TrackCommand' in method 'loadDataSeries'.
-/var/www/qa-tracker/src/Command/TrackCommand.php:305	Avoid using static access to class '\Alxvng\QATracker\DataProvider\Model\AbstractDataSerie' in method 'loadDataSeries'.
-/var/www/qa-tracker/src/Command/TrackCommand.php:309	Avoid using static access to class 'Alxvng\QATracker\Command\TrackCommand' in method 'loadDataSeries'.
+/var/www/qa-tracker/src/Command/TrackCommand.php:47	The class TrackCommand has a coupling between objects value of 21. Consider to reduce the number of dependencies under 13.
+/var/www/qa-tracker/src/Command/TrackCommand.php:53	Avoid using static access to class '\Alxvng\QATracker\Root\Root' in method 'getBaseDir'.
+/var/www/qa-tracker/src/Command/TrackCommand.php:81	Avoid using static access to class '\DateTime' in method 'initializeTrackDate'.
+/var/www/qa-tracker/src/Command/TrackCommand.php:84	Missing class import via use statement (line '84', column '23').
+/var/www/qa-tracker/src/Command/TrackCommand.php:110	Avoid unused local variables such as '$outputDir'.
+/var/www/qa-tracker/src/Command/TrackCommand.php:143	Avoid variables with short names like $io. Configured minimum length is 3.
+/var/www/qa-tracker/src/Command/TrackCommand.php:165	The method interact uses an else expression. Else clauses are basically not necessary and you can simplify the code by not using them.
+/var/www/qa-tracker/src/Command/TrackCommand.php:166	Avoid variables with short names like $fs. Configured minimum length is 3.
+/var/www/qa-tracker/src/Command/TrackCommand.php:167	Avoid using static access to class '\Alxvng\QATracker\Configuration\Configuration' in method 'interact'.
+/var/www/qa-tracker/src/Command/TrackCommand.php:191	The method execute() has 106 lines of code. Current threshold is set to 100. Avoid really long methods.
+/var/www/qa-tracker/src/Command/TrackCommand.php:193	Avoid variables with short names like $io. Configured minimum length is 3.
+/var/www/qa-tracker/src/Command/TrackCommand.php:194	Avoid using static access to class '\Alxvng\QATracker\Twig\TwigFactory' in method 'execute'.
+/var/www/qa-tracker/src/Command/TrackCommand.php:213	Avoid using static access to class '\Alxvng\QATracker\Configuration\Configuration' in method 'execute'.
+/var/www/qa-tracker/src/Command/TrackCommand.php:252	Avoid using static access to class '\Alxvng\QATracker\Chart\ChartGenerator' in method 'execute'.
+/var/www/qa-tracker/src/Command/TrackCommand.php:271	Avoid using static access to class '\Goat1000\SVGGraph\SVGGraph' in method 'execute'.
+/var/www/qa-tracker/src/Command/TrackCommand.php:313	Avoid using static access to class '\Alxvng\QATracker\DataProvider\Model\AbstractDataSerie' in method 'loadDataSeries'.
+/var/www/qa-tracker/src/Command/TrackCommand.php:326	Avoid using static access to class '\Alxvng\QATracker\DataProvider\Model\AbstractDataSerie' in method 'loadDataSeries'.
 /var/www/qa-tracker/src/Configuration/Configuration.php:14	Avoid using static access to class '\Alxvng\QATracker\Root\Root' in method 'exampleConfigPath'.
 /var/www/qa-tracker/src/Configuration/Configuration.php:22	The method load() has a Cyclomatic Complexity of 10. The configured cyclomatic complexity threshold is 10.
 /var/www/qa-tracker/src/Configuration/Configuration.php:22	The method load() has an NPath complexity of 384. The configured NPath complexity threshold is 200.
@@ -31,12 +32,10 @@
 /var/www/qa-tracker/src/Configuration/Configuration.php:158	Avoid using undefined variables such as '$chart' which will lead to PHP notices.
 /var/www/qa-tracker/src/Configuration/Configuration.php:159	Avoid using undefined variables such as '$chart' which will lead to PHP notices.
 /var/www/qa-tracker/src/DataProvider/AbstractJsonPathProvider.php:27	Avoid variables with short names like $fs. Configured minimum length is 3.
-/var/www/qa-tracker/src/DataProvider/AbstractJsonPathProvider.php:28	Avoid using static access to class '\Alxvng\QATracker\Root\Root' in method '__construct'.
 /var/www/qa-tracker/src/DataProvider/AbstractJsonPathProvider.php:32	Missing class import via use statement (line '32', column '23').
 /var/www/qa-tracker/src/DataProvider/AbstractJsonPathProvider.php:36	Missing class import via use statement (line '36', column '23').
 /var/www/qa-tracker/src/DataProvider/AbstractJsonPathProvider.php:42	Missing class import via use statement (line '42', column '23').
 /var/www/qa-tracker/src/DataProvider/AbstractXpathProvider.php:34	Avoid variables with short names like $fs. Configured minimum length is 3.
-/var/www/qa-tracker/src/DataProvider/AbstractXpathProvider.php:35	Avoid using static access to class '\Alxvng\QATracker\Root\Root' in method '__construct'.
 /var/www/qa-tracker/src/DataProvider/AbstractXpathProvider.php:48	Avoid unused local variables such as '$xml'.
 /var/www/qa-tracker/src/DataProvider/AbstractXpathProvider.php:50	Missing class import via use statement (line '50', column '23').
 /var/www/qa-tracker/src/DataProvider/Finder/ProviderFinder.php:9	Avoid variables with short names like $id. Configured minimum length is 3.

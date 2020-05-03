@@ -1,22 +1,23 @@
 
 FILE: /var/www/qa-tracker/src/Command/TrackCommand.php
 ------------------------------------------------------
- 45  | [31mVIOLATION[0m | The class TrackCommand has a coupling between objects value of 21. Consider to reduce the number of dependencies under 13.
- 51  | [31mVIOLATION[0m | Avoid using static access to class '\Alxvng\QATracker\Root\Root' in method 'getBaseDir'.
- 69  | [31mVIOLATION[0m | Avoid using static access to class '\DateTime' in method 'initializeTrackDate'.
- 72  | [31mVIOLATION[0m | Missing class import via use statement (line '72', column '23').
- 119 | [31mVIOLATION[0m | Avoid variables with short names like $io. Configured minimum length is 3.
- 143 | [31mVIOLATION[0m | Avoid variables with short names like $fs. Configured minimum length is 3.
- 144 | [31mVIOLATION[0m | Avoid using static access to class '\Alxvng\QATracker\Configuration\Configuration' in method 'interact'.
- 169 | [31mVIOLATION[0m | Avoid variables with short names like $io. Configured minimum length is 3.
- 170 | [31mVIOLATION[0m | Avoid using static access to class '\Alxvng\QATracker\Twig\TwigFactory' in method 'execute'.
- 182 | [31mVIOLATION[0m | Avoid using static access to class '\Alxvng\QATracker\Configuration\Configuration' in method 'execute'.
- 221 | [31mVIOLATION[0m | Avoid using static access to class '\Alxvng\QATracker\Chart\ChartGenerator' in method 'execute'.
- 240 | [31mVIOLATION[0m | Avoid using static access to class '\Goat1000\SVGGraph\SVGGraph' in method 'execute'.
- 292 | [31mVIOLATION[0m | Avoid using static access to class '\Alxvng\QATracker\DataProvider\Model\AbstractDataSerie' in method 'loadDataSeries'.
- 296 | [31mVIOLATION[0m | Avoid using static access to class 'Alxvng\QATracker\Command\TrackCommand' in method 'loadDataSeries'.
- 305 | [31mVIOLATION[0m | Avoid using static access to class '\Alxvng\QATracker\DataProvider\Model\AbstractDataSerie' in method 'loadDataSeries'.
- 309 | [31mVIOLATION[0m | Avoid using static access to class 'Alxvng\QATracker\Command\TrackCommand' in method 'loadDataSeries'.
+ 47  | [31mVIOLATION[0m | The class TrackCommand has a coupling between objects value of 21. Consider to reduce the number of dependencies under 13.
+ 53  | [31mVIOLATION[0m | Avoid using static access to class '\Alxvng\QATracker\Root\Root' in method 'getBaseDir'.
+ 81  | [31mVIOLATION[0m | Avoid using static access to class '\DateTime' in method 'initializeTrackDate'.
+ 84  | [31mVIOLATION[0m | Missing class import via use statement (line '84', column '23').
+ 110 | [31mVIOLATION[0m | Avoid unused local variables such as '$outputDir'.
+ 143 | [31mVIOLATION[0m | Avoid variables with short names like $io. Configured minimum length is 3.
+ 165 | [31mVIOLATION[0m | The method interact uses an else expression. Else clauses are basically not necessary and you can simplify the code by not using them.
+ 166 | [31mVIOLATION[0m | Avoid variables with short names like $fs. Configured minimum length is 3.
+ 167 | [31mVIOLATION[0m | Avoid using static access to class '\Alxvng\QATracker\Configuration\Configuration' in method 'interact'.
+ 191 | [31mVIOLATION[0m | The method execute() has 106 lines of code. Current threshold is set to 100. Avoid really long methods.
+ 193 | [31mVIOLATION[0m | Avoid variables with short names like $io. Configured minimum length is 3.
+ 194 | [31mVIOLATION[0m | Avoid using static access to class '\Alxvng\QATracker\Twig\TwigFactory' in method 'execute'.
+ 213 | [31mVIOLATION[0m | Avoid using static access to class '\Alxvng\QATracker\Configuration\Configuration' in method 'execute'.
+ 252 | [31mVIOLATION[0m | Avoid using static access to class '\Alxvng\QATracker\Chart\ChartGenerator' in method 'execute'.
+ 271 | [31mVIOLATION[0m | Avoid using static access to class '\Goat1000\SVGGraph\SVGGraph' in method 'execute'.
+ 313 | [31mVIOLATION[0m | Avoid using static access to class '\Alxvng\QATracker\DataProvider\Model\AbstractDataSerie' in method 'loadDataSeries'.
+ 326 | [31mVIOLATION[0m | Avoid using static access to class '\Alxvng\QATracker\DataProvider\Model\AbstractDataSerie' in method 'loadDataSeries'.
 
 FILE: /var/www/qa-tracker/src/Configuration/Configuration.php
 -------------------------------------------------------------
@@ -40,7 +41,6 @@ FILE: /var/www/qa-tracker/src/Configuration/Configuration.php
 FILE: /var/www/qa-tracker/src/DataProvider/AbstractJsonPathProvider.php
 -----------------------------------------------------------------------
  27  | [31mVIOLATION[0m | Avoid variables with short names like $fs. Configured minimum length is 3.
- 28  | [31mVIOLATION[0m | Avoid using static access to class '\Alxvng\QATracker\Root\Root' in method '__construct'.
  32  | [31mVIOLATION[0m | Missing class import via use statement (line '32', column '23').
  36  | [31mVIOLATION[0m | Missing class import via use statement (line '36', column '23').
  42  | [31mVIOLATION[0m | Missing class import via use statement (line '42', column '23').
@@ -48,7 +48,6 @@ FILE: /var/www/qa-tracker/src/DataProvider/AbstractJsonPathProvider.php
 FILE: /var/www/qa-tracker/src/DataProvider/AbstractXpathProvider.php
 --------------------------------------------------------------------
  34  | [31mVIOLATION[0m | Avoid variables with short names like $fs. Configured minimum length is 3.
- 35  | [31mVIOLATION[0m | Avoid using static access to class '\Alxvng\QATracker\Root\Root' in method '__construct'.
  48  | [31mVIOLATION[0m | Avoid unused local variables such as '$xml'.
  50  | [31mVIOLATION[0m | Missing class import via use statement (line '50', column '23').
 
@@ -155,4 +154,4 @@ FILE: /var/www/qa-tracker/tests/Mock.php
  119 | [31mVIOLATION[0m | Avoid using static access to class 'Alxvng\QATracker\Tests\Mock' in method 'dataPercentSerie'.
  139 | [31mVIOLATION[0m | Avoid using static access to class 'Alxvng\QATracker\Tests\Mock' in method 'dataPercentSerieWithItSelfProvider'.
 
-Found 102 violations and 0 errors in 2653ms
+Found 101 violations and 0 errors in 2112ms

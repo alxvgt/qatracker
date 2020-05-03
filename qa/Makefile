@@ -22,12 +22,16 @@ help:  ## Display this help
 install-all: ## Install all php code tools
 install-all: ${INSTALL_DIR}/phpcpd.phar ${INSTALL_DIR}/phploc.phar ${INSTALL_DIR}/phpmd.phar ${INSTALL_DIR}/phpmetrics.phar ${INSTALL_DIR}/qatracker.phar
 
-clean:
+clean-qatracker: ## Remove qatracker bin
+clean-qatracker:
+	rm -f ${INSTALL_DIR}/qatracker.phar
+
+clean: ## Remove all installed tools and clear the log directory
+clean: clean-qatracker
 	rm -f ${INSTALL_DIR}/phploc.phar
 	rm -f ${INSTALL_DIR}/phpcpd.phar
 	rm -f ${INSTALL_DIR}/phpmd.phar
 	rm -f ${INSTALL_DIR}/phpmetrics.phar
-	rm -f ${INSTALL_DIR}/qatracker.phar
 	rm -rf ${LOG_DIR}
 
 
@@ -141,5 +145,5 @@ run-phpmetrics:
 run-qatracker: ## Run qatracker tool
 run-qatracker:
 	$(eval phar_name=qatracker)
-	php ${INSTALL_DIR}/$(phar_name).phar --base-dir=${QATRACKER_DIR}
+	php ${INSTALL_DIR}/$(phar_name).phar --base-dir=${QATRACKER_BASE_DIR} --config-dir=${QATRACKER_CONFIG_DIR} --date=${QATRACKER_DATE}
 	@printf "\033[92m > Complete: $(phar_name) report generated under \"${QATRACKER_DIR}\"\n\033[0m"

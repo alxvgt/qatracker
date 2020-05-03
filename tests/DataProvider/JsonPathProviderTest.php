@@ -9,7 +9,7 @@ class JsonPathProviderTest extends TestCase
 {
     public function testFetchData()
     {
-        $provider = new JsonPathProvider('tests/resource/log/phpmetrics/log.json', '$.*.mi');
+        $provider = new JsonPathProvider(getcwd(), 'tests/resource/log/phpmetrics/log.json', '$.*.mi');
         $result = $provider->fetchData();
         $this->assertIsFloat($result);
         $this->assertEquals(102.42, $result);
