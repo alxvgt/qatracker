@@ -1,9 +1,13 @@
 SHELL := /bin/bash
 
 REPOSITORY_URL=https://github.com/alxvgt/qatracker.git
-GIT_REFS=\
-["20200403120000"]=v0.1.0 \
-["20200503120000"]=v0.2.0
+GIT_REFS= \
+["20200402120000"]=v0.1.0 \
+["20200403100000"]=v0.2.0 \
+["20200403190000"]=v0.3.0 \
+["20200404190000"]=v0.4.0 \
+["20200418180000"]=v0.5.0 \
+["20200503120000"]=master
 
 WORKING_DIR=/tmp/temp-git
 
@@ -22,11 +26,12 @@ help:  ## Display this help
 
 ##@ Git
 
-exec: ## Execute operations
-exec:
+qa-history: ## Execute operations
+qa-history:
 	printf "\n\033[32m Cleaning working directories, files, etc. \033[0m\n"
 	rm -rf ${WORKING_DIR}
 	rm -rf ${QA_LOG_DIR}
+	rm -rf ${QATRACKER_CONFIG_DIR}/generated
 	make -e --directory ${QA_MAKEFILE_DIR} clean-qatracker
 
 	printf "\n\033[32m Installing tools... \033[0m\n"
@@ -49,7 +54,7 @@ exec:
   		git checkout $${ref} ; \
   		\
   		printf "\n\033[32m --> running code analysis... \033[0m\n" ; \
-  		LOG_DIR=${QA_LOG_DIR} make -e --directory ${QA_MAKEFILE_DIR} run-all ; \
+  		PROJECT_DIR=${WORKING_DIR} LOG_DIR=${QA_LOG_DIR} make -e --directory ${QA_MAKEFILE_DIR} run-all ; \
 		\
   		printf "\n\033[32m --> running qatracker ($${date} > $${ref})... \033[0m\n" ; \
   		QATRACKER_CONFIG_DIR=${QATRACKER_CONFIG_DIR} QATRACKER_BASE_DIR=${QA_LOG_DIR} QATRACKER_DATE=$${date} make -e --directory ${QA_MAKEFILE_DIR} run-qatracker ; \

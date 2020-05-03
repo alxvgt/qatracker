@@ -69,81 +69,81 @@ run-phploc: ## Run phploc tool
 run-phploc:
 	$(eval phar_name=phploc)
 	$(eval tool_log_dir=${LOG_DIR}/${phar_name})
-	@mkdir -p $(tool_log_dir)
+	mkdir -p $(tool_log_dir)
 
 	$(eval tool_log_file_xml=${tool_log_dir}/log.xml)
-	@rm -rf $(tool_log_file_xml)
+	rm -rf $(tool_log_file_xml)
 	$(eval tool_log_file_csv=${tool_log_dir}/log.csv)
-	@rm -rf $(tool_log_file_csv)
+	rm -rf $(tool_log_file_csv)
 	$(eval tool_log_file_json=${tool_log_dir}/log.json)
-	@rm -rf $(tool_log_file_json)
+	rm -rf $(tool_log_file_json)
 
-	php ${INSTALL_DIR}/$(phar_name).phar --quiet --log-xml=$(tool_log_file_xml) --log-csv=$(tool_log_file_csv) --log-json=$(tool_log_file_json) ${PROJECT_DIR}/src ${PROJECT_DIR}/tests
-	@printf "\033[92m > Complete: $(phar_name) log generated at \"$(tool_log_file_xml)\"\n\033[0m"
+	php ${INSTALL_DIR}/$(phar_name).phar --quiet --log-xml=$(tool_log_file_xml) --log-csv=$(tool_log_file_csv) --log-json=$(tool_log_file_json) ${PROJECT_DIR}/src ${PROJECT_DIR}/tests  || echo 'OK'
+	printf "\033[92m > Complete: $(phar_name) log generated at \"$(tool_log_file_xml)\"\n\033[0m"
 
 run-phpcpd: ## Run phpcpd tool
 run-phpcpd:
 	$(eval phar_name=phpcpd)
 	$(eval tool_log_dir=${LOG_DIR}/${phar_name})
-	@mkdir -p $(tool_log_dir)
+	mkdir -p $(tool_log_dir)
 
 	$(eval tool_log_file=${tool_log_dir}/log.xml)
-	@rm -rf $(tool_log_file)
+	rm -rf $(tool_log_file)
 
-	php ${INSTALL_DIR}/$(phar_name).phar --quiet --log-pmd=$(tool_log_file) ${PROJECT_DIR}/src ${PROJECT_DIR}/tests
-	@printf "\033[92m > Complete: $(phar_name) log generated at \"$(tool_log_file)\"\n\033[0m"
+	php ${INSTALL_DIR}/$(phar_name).phar --min-tokens=20 --quiet --log-pmd=$(tool_log_file) ${PROJECT_DIR}/src ${PROJECT_DIR}/tests || echo 'OK'
+	printf "\033[92m > Complete: $(phar_name) log generated at \"$(tool_log_file)\"\n\033[0m"
 
 run-phpmd: ## Run phpmd tool
 run-phpmd:
 	$(eval phar_name=phpmd)
 	$(eval tool_log_dir=${LOG_DIR}/${phar_name})
-	@mkdir -p $(tool_log_dir)
+	mkdir -p $(tool_log_dir)
 
 	$(eval tool_log_file=${tool_log_dir}/index.html)
-	@rm -rf $(tool_log_file)
+	rm -rf $(tool_log_file)
 	php ${INSTALL_DIR}/$(phar_name).phar ${PROJECT_DIR}/src,${PROJECT_DIR}/tests html cleancode,codesize,controversial,design,naming,unusedcode --reportfile $(tool_log_file) || printf ''
-	@printf "\033[92m > Complete: $(phar_name) log generated at \"$(tool_log_file)\"\n\033[0m"
+	printf "\033[92m > Complete: $(phar_name) log generated at \"$(tool_log_file)\"\n\033[0m"
 
 	$(eval tool_log_file=${tool_log_dir}/log-ansi.txt)
-	@rm -rf $(tool_log_file)
+	rm -rf $(tool_log_file)
 	php ${INSTALL_DIR}/$(phar_name).phar ${PROJECT_DIR}/src,${PROJECT_DIR}/tests ansi cleancode,codesize,controversial,design,naming,unusedcode --reportfile $(tool_log_file) || printf ''
-	@printf "\033[92m > Complete: $(phar_name) log generated at \"$(tool_log_file)\"\n\033[0m"
+	printf "\033[92m > Complete: $(phar_name) log generated at \"$(tool_log_file)\"\n\033[0m"
 
 	$(eval tool_log_file=${tool_log_dir}/log.json)
-	@rm -rf $(tool_log_file)
+	rm -rf $(tool_log_file)
 	php ${INSTALL_DIR}/$(phar_name).phar ${PROJECT_DIR}/src,${PROJECT_DIR}/tests json cleancode,codesize,controversial,design,naming,unusedcode --reportfile $(tool_log_file) || printf ''
-	@printf "\033[92m > Complete: $(phar_name) log generated at \"$(tool_log_file)\"\n\033[0m"
+	printf "\033[92m > Complete: $(phar_name) log generated at \"$(tool_log_file)\"\n\033[0m"
 
 	$(eval tool_log_file=${tool_log_dir}/log.txt)
-	@rm -rf $(tool_log_file)
+	rm -rf $(tool_log_file)
 	php ${INSTALL_DIR}/$(phar_name).phar ${PROJECT_DIR}/src,${PROJECT_DIR}/tests text cleancode,codesize,controversial,design,naming,unusedcode --reportfile $(tool_log_file) || printf ''
-	@printf "\033[92m > Complete: $(phar_name) log generated at \"$(tool_log_file)\"\n\033[0m"
+	printf "\033[92m > Complete: $(phar_name) log generated at \"$(tool_log_file)\"\n\033[0m"
 
 	$(eval tool_log_file=${tool_log_dir}/log.xml)
-	@rm -rf $(tool_log_file)
+	rm -rf $(tool_log_file)
 	php ${INSTALL_DIR}/$(phar_name).phar ${PROJECT_DIR}/src,${PROJECT_DIR}/tests xml cleancode,codesize,controversial,design,naming,unusedcode --reportfile $(tool_log_file) || printf ''
-	@printf "\033[92m > Complete: $(phar_name) log generated at \"$(tool_log_file)\"\n\033[0m"
+	printf "\033[92m > Complete: $(phar_name) log generated at \"$(tool_log_file)\"\n\033[0m"
 
 run-phpmetrics: ## Run phpmetrics tool
 run-phpmetrics:
 	$(eval phar_name=phpmetrics)
 	$(eval tool_log_dir=${LOG_DIR}/${phar_name})
-	@mkdir -p $(tool_log_dir)
+	mkdir -p $(tool_log_dir)
 
 	$(eval tool_log_dir_html=${tool_log_dir}/html)
-	@rm -rf $(tool_log_dir_html)
+	rm -rf $(tool_log_dir_html)
 	$(eval tool_log_file_json=${tool_log_dir}/log.json)
-	@rm -rf $(tool_log_file_json)
+	rm -rf $(tool_log_file_json)
 	$(eval tool_log_file_csv=${tool_log_dir}/log.csv)
-	@rm -rf $(tool_log_file_csv)
+	rm -rf $(tool_log_file_csv)
 	$(eval tool_log_file_xml=${tool_log_dir}/log.xml)
-	@rm -rf $(tool_log_file_xml)
+	rm -rf $(tool_log_file_xml)
 
 	php ${INSTALL_DIR}/$(phar_name).phar ${PROJECT_DIR}/src,${PROJECT_DIR}/tests,${PROJECT_DIR}/composer.json,${PROJECT_DIR}/composer.lock --quiet --report-json=$(tool_log_file_json) --report-csv=$(tool_log_file_csv) --report-violations=$(tool_log_file_xml) --report-html=$(tool_log_dir_html) --junit=${PATH_QA_PHPUNIT}/junit.xml --git
-	@printf "\033[92m > Complete: $(phar_name) log generated at \"$(tool_log_dir_html)\"\n\033[0m"
+	printf "\033[92m > Complete: $(phar_name) log generated at \"$(tool_log_dir_html)\"\n\033[0m"
 
 run-qatracker: ## Run qatracker tool
 run-qatracker:
 	$(eval phar_name=qatracker)
 	php ${INSTALL_DIR}/$(phar_name).phar --base-dir=${QATRACKER_BASE_DIR} --config-dir=${QATRACKER_CONFIG_DIR} --date=${QATRACKER_DATE}
-	@printf "\033[92m > Complete: $(phar_name) report generated under \"${QATRACKER_DIR}\"\n\033[0m"
+	printf "\033[92m > Complete: $(phar_name) report generated under \"${QATRACKER_DIR}\"\n\033[0m"

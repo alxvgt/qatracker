@@ -7,8 +7,8 @@ Chart (Alxvng\QATracker\Tests\Chart\Chart)
  [x] Get first provider
 
 Track Command (Alxvng\QATracker\Tests\Command\TrackCommand)
- [x] Execute no config file
- [x] Execute with config file
+ [ ] Execute no config file
+ [ ] Execute with config file
 
 Configuration (Alxvng\QATracker\Tests\Configuration\Configuration)
  [x] Example config path

@@ -1,2 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd-cpd/>
+<pmd-cpd>
+  <duplication lines="12" tokens="29">
+    <file path="/var/www/qa-tracker/src/DataProvider/Reducer/AverageReducerTrait.php" line="7"/>
+    <file path="/var/www/qa-tracker/src/DataProvider/Reducer/SumReducerTrait.php" line="7"/>
+    <codefragment>    public function reduceMethod(array $nodes): float
+    {
+        $sum = 0;
+        foreach ($nodes as $node) {
+            if (!is_numeric((string) $node)) {
+                throw new \RuntimeException(sprintf('The result of must be a numeric value, got "%s"', $node));
+            }
+
+            $sum += (float) $node;
+        }
+
+        return round($sum / count($nodes), 2);
+</codefragment>
+  </duplication>
+  <duplication lines="10" tokens="45">
+    <file path="/var/www/qa-tracker/tests/DataProvider/Model/DataPercentSerieTest.php" line="20"/>
+    <file path="/var/www/qa-tracker/tests/DataProvider/Model/DataStandardSerieTest.php" line="62"/>
+    <codefragment>        $filesizeBefore = file_exists($dataSerie-&gt;getStorageFilePath()) ? filesize($dataSerie-&gt;getStorageFilePath()) : 0;
+        $dataBefore = $dataSerie-&gt;getData();
+
+        $dataSerie-&gt;collect(new DateTime());
+
+        $dataAfter = $dataSerie-&gt;getData();
+        $filesizeAfter = file_exists($dataSerie-&gt;getStorageFilePath()) ? filesize($dataSerie-&gt;getStorageFilePath()) : 0;
+
+        $this-&gt;assertGreaterThan($filesizeBefore, $filesizeAfter);
+        $this-&gt;assertCount(count($dataBefore) + 1, $dataAfter);
+</codefragment>
+  </duplication>
+  <duplication lines="10" tokens="22">
+    <file path="/var/www/qa-tracker/tests/Chart/ChartTest.php" line="28"/>
+    <file path="/var/www/qa-tracker/tests/Chart/ChartTest.php" line="52"/>
+    <codefragment>        $config['type'] = 'test';
+        $config['withHistory'] = 'test';
+        $config['graphSettings'] = [];
+        $config['dataSeries'] = [
+            'test1' =&gt; '01',
+            'test2' =&gt; '02',
+            'test3' =&gt; '03',
+        ];
+        $providersStack = [
+            '01' =&gt; 'test1',
+</codefragment>
+  </duplication>
+  <duplication lines="9" tokens="20">
+    <file path="/var/www/qa-tracker/tests/Mock.php" line="110"/>
+    <file path="/var/www/qa-tracker/tests/Mock.php" line="131"/>
+    <codefragment>            'provider' =&gt; 'lines-of-code',
+            'totalPercentProvider' =&gt; 'lines-of-code',
+        ];
+
+        return new DataPercentSerie(
+            $config,
+            '/tmp',
+            [
+                Mock::dataSerie()-&gt;getId() =&gt; Mock::dataSerie(),
+</codefragment>
+  </duplication>
+  <duplication lines="9" tokens="41">
+    <file path="/var/www/qa-tracker/src/DataProvider/AbstractJsonPathProvider.php" line="31"/>
+    <file path="/var/www/qa-tracker/src/DataProvider/AbstractXpathProvider.php" line="39"/>
+    <codefragment>        if (!file_exists($this-&gt;inputFilePath)) {
+            throw new \RuntimeException(sprintf('Unable to find file at %s', $this-&gt;inputFilePath));
+        }
+
+        if (!in_array(mime_content_type($this-&gt;inputFilePath), static::MIME_TYPES, true)) {
+            throw new \RuntimeException(sprintf('The file %s (%s) must have one the mime types : %s', $this-&gt;inputFilePath, mime_content_type($this-&gt;inputFilePath), implode(',', static::MIME_TYPES)));
+        }
+
+        try {
+</codefragment>
+  </duplication>
+  <duplication lines="8" tokens="36">
+    <file path="/var/www/qa-tracker/src/DataProvider/Model/DataPercentSerie.php" line="27"/>
+    <file path="/var/www/qa-tracker/src/DataProvider/Model/DataStandardSerie.php" line="28"/>
+    <codefragment>        $slugger = new AsciiSlugger();
+        $this-&gt;slug = u($slugger-&gt;slug($config['id']))-&gt;lower();
+
+        $storageDir = $generatedDir.'/'.static::PROVIDERS_DIR;
+        $this-&gt;storageFilePath = $storageDir.'/'.$this-&gt;getSlug().'.json';
+
+        $this-&gt;id = $config['id'];
+
+</codefragment>
+  </duplication>
+  <duplication lines="6" tokens="24">
+    <file path="/var/www/qa-tracker/src/DataProvider/AbstractJsonPathReducerProvider.php" line="15"/>
+    <file path="/var/www/qa-tracker/src/DataProvider/JsonPathProvider.php" line="16"/>
+    <codefragment>    public function fetchData(): float
+    {
+        $data = json_decode(file_get_contents($this-&gt;inputFilePath), true, 512, JSON_THROW_ON_ERROR);
+        $jsonFinder = new JSONPath($data);
+
+        $nodes = $jsonFinder-&gt;find($this-&gt;jsonPathQuery);
+</codefragment>
+  </duplication>
+</pmd-cpd>

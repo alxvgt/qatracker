@@ -1,206 +1,210 @@
 
-##teamcity[testCount count='32' flowId='1019']
+##teamcity[testCount count='32' flowId='5195']
 
-##teamcity[testSuiteStarted name='default' flowId='1019']
+##teamcity[testSuiteStarted name='default' flowId='5195']
 
-##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\Chart\ChartGeneratorTest' locationHint='php_qn:///var/www/qa-tracker/tests/Chart/ChartGeneratorTest.php::\Alxvng\QATracker\Tests\Chart\ChartGeneratorTest' flowId='1019']
+##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\Chart\ChartGeneratorTest' locationHint='php_qn:///var/www/qa-tracker/tests/Chart/ChartGeneratorTest.php::\Alxvng\QATracker\Tests\Chart\ChartGeneratorTest' flowId='5195']
 
-##teamcity[testStarted name='testGenerate' locationHint='php_qn:///var/www/qa-tracker/tests/Chart/ChartGeneratorTest.php::\Alxvng\QATracker\Tests\Chart\ChartGeneratorTest::testGenerate' flowId='1019']
+##teamcity[testStarted name='testGenerate' locationHint='php_qn:///var/www/qa-tracker/tests/Chart/ChartGeneratorTest.php::\Alxvng\QATracker\Tests\Chart\ChartGeneratorTest::testGenerate' flowId='5195']
 
-##teamcity[testFinished name='testGenerate' duration='13' flowId='1019']
+##teamcity[testFinished name='testGenerate' duration='13' flowId='5195']
 
-##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\Chart\ChartGeneratorTest' flowId='1019']
+##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\Chart\ChartGeneratorTest' flowId='5195']
 
-##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\Chart\ChartTest' locationHint='php_qn:///var/www/qa-tracker/tests/Chart/ChartTest.php::\Alxvng\QATracker\Tests\Chart\ChartTest' flowId='1019']
+##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\Chart\ChartTest' locationHint='php_qn:///var/www/qa-tracker/tests/Chart/ChartTest.php::\Alxvng\QATracker\Tests\Chart\ChartTest' flowId='5195']
 
-##teamcity[testStarted name='testConstructException' locationHint='php_qn:///var/www/qa-tracker/tests/Chart/ChartTest.php::\Alxvng\QATracker\Tests\Chart\ChartTest::testConstructException' flowId='1019']
+##teamcity[testStarted name='testConstructException' locationHint='php_qn:///var/www/qa-tracker/tests/Chart/ChartTest.php::\Alxvng\QATracker\Tests\Chart\ChartTest::testConstructException' flowId='5195']
 
-##teamcity[testFinished name='testConstructException' duration='1' flowId='1019']
+##teamcity[testFinished name='testConstructException' duration='1' flowId='5195']
 
-##teamcity[testStarted name='testConstruct' locationHint='php_qn:///var/www/qa-tracker/tests/Chart/ChartTest.php::\Alxvng\QATracker\Tests\Chart\ChartTest::testConstruct' flowId='1019']
+##teamcity[testStarted name='testConstruct' locationHint='php_qn:///var/www/qa-tracker/tests/Chart/ChartTest.php::\Alxvng\QATracker\Tests\Chart\ChartTest::testConstruct' flowId='5195']
 
-##teamcity[testFinished name='testConstruct' duration='1' flowId='1019']
+##teamcity[testFinished name='testConstruct' duration='2' flowId='5195']
 
-##teamcity[testStarted name='testGetFirstProvider' locationHint='php_qn:///var/www/qa-tracker/tests/Chart/ChartTest.php::\Alxvng\QATracker\Tests\Chart\ChartTest::testGetFirstProvider' flowId='1019']
+##teamcity[testStarted name='testGetFirstProvider' locationHint='php_qn:///var/www/qa-tracker/tests/Chart/ChartTest.php::\Alxvng\QATracker\Tests\Chart\ChartTest::testGetFirstProvider' flowId='5195']
 
-##teamcity[testFinished name='testGetFirstProvider' duration='3' flowId='1019']
+##teamcity[testFinished name='testGetFirstProvider' duration='3' flowId='5195']
 
-##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\Chart\ChartTest' flowId='1019']
+##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\Chart\ChartTest' flowId='5195']
 
-##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\Command\TrackCommandTest' locationHint='php_qn:///var/www/qa-tracker/tests/Command/TrackCommandTest.php::\Alxvng\QATracker\Tests\Command\TrackCommandTest' flowId='1019']
+##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\Command\TrackCommandTest' locationHint='php_qn:///var/www/qa-tracker/tests/Command/TrackCommandTest.php::\Alxvng\QATracker\Tests\Command\TrackCommandTest' flowId='5195']
 
-##teamcity[testStarted name='testExecuteNoConfigFile' locationHint='php_qn:///var/www/qa-tracker/tests/Command/TrackCommandTest.php::\Alxvng\QATracker\Tests\Command\TrackCommandTest::testExecuteNoConfigFile' flowId='1019']
+##teamcity[testStarted name='testExecuteNoConfigFile' locationHint='php_qn:///var/www/qa-tracker/tests/Command/TrackCommandTest.php::\Alxvng\QATracker\Tests\Command\TrackCommandTest::testExecuteNoConfigFile' flowId='5195']
 
-##teamcity[testFinished name='testExecuteNoConfigFile' duration='33' flowId='1019']
+##teamcity[testFailed name='testExecuteNoConfigFile' message='This test did not perform any assertions|n|n/var/www/qa-tracker/tests/Command/TrackCommandTest.php:17' details=' ' duration='1' flowId='5195']
 
-##teamcity[testStarted name='testExecuteWithConfigFile' locationHint='php_qn:///var/www/qa-tracker/tests/Command/TrackCommandTest.php::\Alxvng\QATracker\Tests\Command\TrackCommandTest::testExecuteWithConfigFile' flowId='1019']
+##teamcity[testFinished name='testExecuteNoConfigFile' duration='1' flowId='5195']
 
-##teamcity[testFinished name='testExecuteWithConfigFile' duration='114' flowId='1019']
+##teamcity[testStarted name='testExecuteWithConfigFile' locationHint='php_qn:///var/www/qa-tracker/tests/Command/TrackCommandTest.php::\Alxvng\QATracker\Tests\Command\TrackCommandTest::testExecuteWithConfigFile' flowId='5195']
 
-##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\Command\TrackCommandTest' flowId='1019']
+##teamcity[testFailed name='testExecuteWithConfigFile' message='This test did not perform any assertions|n|n/var/www/qa-tracker/tests/Command/TrackCommandTest.php:29' details=' ' duration='1' flowId='5195']
 
-##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\Configuration\ConfigurationTest' locationHint='php_qn:///var/www/qa-tracker/tests/Configuration/ConfigurationTest.php::\Alxvng\QATracker\Tests\Configuration\ConfigurationTest' flowId='1019']
+##teamcity[testFinished name='testExecuteWithConfigFile' duration='1' flowId='5195']
 
-##teamcity[testStarted name='testExampleConfigPath' locationHint='php_qn:///var/www/qa-tracker/tests/Configuration/ConfigurationTest.php::\Alxvng\QATracker\Tests\Configuration\ConfigurationTest::testExampleConfigPath' flowId='1019']
+##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\Command\TrackCommandTest' flowId='5195']
 
-##teamcity[testFinished name='testExampleConfigPath' duration='1' flowId='1019']
+##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\Configuration\ConfigurationTest' locationHint='php_qn:///var/www/qa-tracker/tests/Configuration/ConfigurationTest.php::\Alxvng\QATracker\Tests\Configuration\ConfigurationTest' flowId='5195']
 
-##teamcity[testSuiteStarted name='testLoadWithException' locationHint='php_qn:///var/www/qa-tracker/tests/Configuration/ConfigurationTest.php::\Alxvng\QATracker\Tests\Configuration\ConfigurationTest::testLoadWithException' flowId='1019']
+##teamcity[testStarted name='testExampleConfigPath' locationHint='php_qn:///var/www/qa-tracker/tests/Configuration/ConfigurationTest.php::\Alxvng\QATracker\Tests\Configuration\ConfigurationTest::testExampleConfigPath' flowId='5195']
 
-##teamcity[testStarted name='testLoadWithException with data set #0' locationHint='php_qn:///var/www/qa-tracker/tests/Configuration/ConfigurationTest.php::\Alxvng\QATracker\Tests\Configuration\ConfigurationTest::testLoadWithException with data set #0' flowId='1019']
+##teamcity[testFinished name='testExampleConfigPath' duration='1' flowId='5195']
 
-##teamcity[testFinished name='testLoadWithException with data set #0' duration='1' flowId='1019']
+##teamcity[testSuiteStarted name='testLoadWithException' locationHint='php_qn:///var/www/qa-tracker/tests/Configuration/ConfigurationTest.php::\Alxvng\QATracker\Tests\Configuration\ConfigurationTest::testLoadWithException' flowId='5195']
 
-##teamcity[testStarted name='testLoadWithException with data set #1' locationHint='php_qn:///var/www/qa-tracker/tests/Configuration/ConfigurationTest.php::\Alxvng\QATracker\Tests\Configuration\ConfigurationTest::testLoadWithException with data set #1' flowId='1019']
+##teamcity[testStarted name='testLoadWithException with data set #0' locationHint='php_qn:///var/www/qa-tracker/tests/Configuration/ConfigurationTest.php::\Alxvng\QATracker\Tests\Configuration\ConfigurationTest::testLoadWithException with data set #0' flowId='5195']
 
-##teamcity[testFinished name='testLoadWithException with data set #1' duration='1' flowId='1019']
+##teamcity[testFinished name='testLoadWithException with data set #0' duration='2' flowId='5195']
 
-##teamcity[testStarted name='testLoadWithException with data set #2' locationHint='php_qn:///var/www/qa-tracker/tests/Configuration/ConfigurationTest.php::\Alxvng\QATracker\Tests\Configuration\ConfigurationTest::testLoadWithException with data set #2' flowId='1019']
+##teamcity[testStarted name='testLoadWithException with data set #1' locationHint='php_qn:///var/www/qa-tracker/tests/Configuration/ConfigurationTest.php::\Alxvng\QATracker\Tests\Configuration\ConfigurationTest::testLoadWithException with data set #1' flowId='5195']
 
-##teamcity[testFinished name='testLoadWithException with data set #2' duration='2' flowId='1019']
+##teamcity[testFinished name='testLoadWithException with data set #1' duration='4' flowId='5195']
 
-##teamcity[testStarted name='testLoadWithException with data set #3' locationHint='php_qn:///var/www/qa-tracker/tests/Configuration/ConfigurationTest.php::\Alxvng\QATracker\Tests\Configuration\ConfigurationTest::testLoadWithException with data set #3' flowId='1019']
+##teamcity[testStarted name='testLoadWithException with data set #2' locationHint='php_qn:///var/www/qa-tracker/tests/Configuration/ConfigurationTest.php::\Alxvng\QATracker\Tests\Configuration\ConfigurationTest::testLoadWithException with data set #2' flowId='5195']
 
-##teamcity[testFinished name='testLoadWithException with data set #3' duration='3' flowId='1019']
+##teamcity[testFinished name='testLoadWithException with data set #2' duration='3' flowId='5195']
 
-##teamcity[testStarted name='testLoadWithException with data set #4' locationHint='php_qn:///var/www/qa-tracker/tests/Configuration/ConfigurationTest.php::\Alxvng\QATracker\Tests\Configuration\ConfigurationTest::testLoadWithException with data set #4' flowId='1019']
+##teamcity[testStarted name='testLoadWithException with data set #3' locationHint='php_qn:///var/www/qa-tracker/tests/Configuration/ConfigurationTest.php::\Alxvng\QATracker\Tests\Configuration\ConfigurationTest::testLoadWithException with data set #3' flowId='5195']
 
-##teamcity[testFinished name='testLoadWithException with data set #4' duration='3' flowId='1019']
+##teamcity[testFinished name='testLoadWithException with data set #3' duration='3' flowId='5195']
 
-##teamcity[testStarted name='testLoadWithException with data set #5' locationHint='php_qn:///var/www/qa-tracker/tests/Configuration/ConfigurationTest.php::\Alxvng\QATracker\Tests\Configuration\ConfigurationTest::testLoadWithException with data set #5' flowId='1019']
+##teamcity[testStarted name='testLoadWithException with data set #4' locationHint='php_qn:///var/www/qa-tracker/tests/Configuration/ConfigurationTest.php::\Alxvng\QATracker\Tests\Configuration\ConfigurationTest::testLoadWithException with data set #4' flowId='5195']
 
-##teamcity[testFinished name='testLoadWithException with data set #5' duration='6' flowId='1019']
+##teamcity[testFinished name='testLoadWithException with data set #4' duration='3' flowId='5195']
 
-##teamcity[testStarted name='testLoadWithException with data set #6' locationHint='php_qn:///var/www/qa-tracker/tests/Configuration/ConfigurationTest.php::\Alxvng\QATracker\Tests\Configuration\ConfigurationTest::testLoadWithException with data set #6' flowId='1019']
+##teamcity[testStarted name='testLoadWithException with data set #5' locationHint='php_qn:///var/www/qa-tracker/tests/Configuration/ConfigurationTest.php::\Alxvng\QATracker\Tests\Configuration\ConfigurationTest::testLoadWithException with data set #5' flowId='5195']
 
-##teamcity[testFinished name='testLoadWithException with data set #6' duration='7' flowId='1019']
+##teamcity[testFinished name='testLoadWithException with data set #5' duration='7' flowId='5195']
 
-##teamcity[testSuiteFinished name='testLoadWithException' flowId='1019']
+##teamcity[testStarted name='testLoadWithException with data set #6' locationHint='php_qn:///var/www/qa-tracker/tests/Configuration/ConfigurationTest.php::\Alxvng\QATracker\Tests\Configuration\ConfigurationTest::testLoadWithException with data set #6' flowId='5195']
 
-##teamcity[testSuiteStarted name='testLoad' locationHint='php_qn:///var/www/qa-tracker/tests/Configuration/ConfigurationTest.php::\Alxvng\QATracker\Tests\Configuration\ConfigurationTest::testLoad' flowId='1019']
+##teamcity[testFinished name='testLoadWithException with data set #6' duration='7' flowId='5195']
 
-##teamcity[testStarted name='testLoad with data set #0' locationHint='php_qn:///var/www/qa-tracker/tests/Configuration/ConfigurationTest.php::\Alxvng\QATracker\Tests\Configuration\ConfigurationTest::testLoad with data set #0' flowId='1019']
+##teamcity[testSuiteFinished name='testLoadWithException' flowId='5195']
 
-##teamcity[testFinished name='testLoad with data set #0' duration='69' flowId='1019']
+##teamcity[testSuiteStarted name='testLoad' locationHint='php_qn:///var/www/qa-tracker/tests/Configuration/ConfigurationTest.php::\Alxvng\QATracker\Tests\Configuration\ConfigurationTest::testLoad' flowId='5195']
 
-##teamcity[testSuiteFinished name='testLoad' flowId='1019']
+##teamcity[testStarted name='testLoad with data set #0' locationHint='php_qn:///var/www/qa-tracker/tests/Configuration/ConfigurationTest.php::\Alxvng\QATracker\Tests\Configuration\ConfigurationTest::testLoad with data set #0' flowId='5195']
 
-##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\Configuration\ConfigurationTest' flowId='1019']
+##teamcity[testFinished name='testLoad with data set #0' duration='72' flowId='5195']
 
-##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\DataProvider\Finder\ProviderFinderTest' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/Finder/ProviderFinderTest.php::\Alxvng\QATracker\Tests\DataProvider\Finder\ProviderFinderTest' flowId='1019']
+##teamcity[testSuiteFinished name='testLoad' flowId='5195']
 
-##teamcity[testStarted name='testFindById' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/Finder/ProviderFinderTest.php::\Alxvng\QATracker\Tests\DataProvider\Finder\ProviderFinderTest::testFindById' flowId='1019']
+##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\Configuration\ConfigurationTest' flowId='5195']
 
-##teamcity[testFinished name='testFindById' duration='3' flowId='1019']
+##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\DataProvider\Finder\ProviderFinderTest' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/Finder/ProviderFinderTest.php::\Alxvng\QATracker\Tests\DataProvider\Finder\ProviderFinderTest' flowId='5195']
 
-##teamcity[testStarted name='testFindByIdException' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/Finder/ProviderFinderTest.php::\Alxvng\QATracker\Tests\DataProvider\Finder\ProviderFinderTest::testFindByIdException' flowId='1019']
+##teamcity[testStarted name='testFindById' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/Finder/ProviderFinderTest.php::\Alxvng\QATracker\Tests\DataProvider\Finder\ProviderFinderTest::testFindById' flowId='5195']
 
-##teamcity[testFinished name='testFindByIdException' duration='3' flowId='1019']
+##teamcity[testFinished name='testFindById' duration='3' flowId='5195']
 
-##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\DataProvider\Finder\ProviderFinderTest' flowId='1019']
+##teamcity[testStarted name='testFindByIdException' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/Finder/ProviderFinderTest.php::\Alxvng\QATracker\Tests\DataProvider\Finder\ProviderFinderTest::testFindByIdException' flowId='5195']
 
-##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\DataProvider\JsonPathAverageProviderTest' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/JsonPathAverageProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\JsonPathAverageProviderTest' flowId='1019']
+##teamcity[testFinished name='testFindByIdException' duration='3' flowId='5195']
 
-##teamcity[testStarted name='testFetchData' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/JsonPathAverageProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\JsonPathAverageProviderTest::testFetchData' flowId='1019']
+##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\DataProvider\Finder\ProviderFinderTest' flowId='5195']
 
-##teamcity[testFinished name='testFetchData' duration='12' flowId='1019']
+##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\DataProvider\JsonPathAverageProviderTest' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/JsonPathAverageProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\JsonPathAverageProviderTest' flowId='5195']
 
-##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\DataProvider\JsonPathAverageProviderTest' flowId='1019']
+##teamcity[testStarted name='testFetchData' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/JsonPathAverageProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\JsonPathAverageProviderTest::testFetchData' flowId='5195']
 
-##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\DataProvider\JsonPathCountProviderTest' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/JsonPathCountProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\JsonPathCountProviderTest' flowId='1019']
+##teamcity[testFinished name='testFetchData' duration='13' flowId='5195']
 
-##teamcity[testStarted name='testFetchData' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/JsonPathCountProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\JsonPathCountProviderTest::testFetchData' flowId='1019']
+##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\DataProvider\JsonPathAverageProviderTest' flowId='5195']
 
-##teamcity[testFinished name='testFetchData' duration='9' flowId='1019']
+##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\DataProvider\JsonPathCountProviderTest' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/JsonPathCountProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\JsonPathCountProviderTest' flowId='5195']
 
-##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\DataProvider\JsonPathCountProviderTest' flowId='1019']
+##teamcity[testStarted name='testFetchData' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/JsonPathCountProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\JsonPathCountProviderTest::testFetchData' flowId='5195']
 
-##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\DataProvider\JsonPathProviderTest' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/JsonPathProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\JsonPathProviderTest' flowId='1019']
+##teamcity[testFinished name='testFetchData' duration='10' flowId='5195']
 
-##teamcity[testStarted name='testFetchData' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/JsonPathProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\JsonPathProviderTest::testFetchData' flowId='1019']
+##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\DataProvider\JsonPathCountProviderTest' flowId='5195']
 
-##teamcity[testFinished name='testFetchData' duration='8' flowId='1019']
+##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\DataProvider\JsonPathProviderTest' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/JsonPathProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\JsonPathProviderTest' flowId='5195']
 
-##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\DataProvider\JsonPathProviderTest' flowId='1019']
+##teamcity[testStarted name='testFetchData' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/JsonPathProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\JsonPathProviderTest::testFetchData' flowId='5195']
 
-##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\DataProvider\JsonPathSumProviderTest' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/JsonPathSumProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\JsonPathSumProviderTest' flowId='1019']
+##teamcity[testFinished name='testFetchData' duration='8' flowId='5195']
 
-##teamcity[testStarted name='testFetchData' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/JsonPathSumProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\JsonPathSumProviderTest::testFetchData' flowId='1019']
+##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\DataProvider\JsonPathProviderTest' flowId='5195']
 
-##teamcity[testFinished name='testFetchData' duration='9' flowId='1019']
+##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\DataProvider\JsonPathSumProviderTest' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/JsonPathSumProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\JsonPathSumProviderTest' flowId='5195']
 
-##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\DataProvider\JsonPathSumProviderTest' flowId='1019']
+##teamcity[testStarted name='testFetchData' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/JsonPathSumProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\JsonPathSumProviderTest::testFetchData' flowId='5195']
 
-##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\DataProvider\Model\DataPercentSerieTest' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/Model/DataPercentSerieTest.php::\Alxvng\QATracker\Tests\DataProvider\Model\DataPercentSerieTest' flowId='1019']
+##teamcity[testFinished name='testFetchData' duration='11' flowId='5195']
 
-##teamcity[testStarted name='testCollect' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/Model/DataPercentSerieTest.php::\Alxvng\QATracker\Tests\DataProvider\Model\DataPercentSerieTest::testCollect' flowId='1019']
+##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\DataProvider\JsonPathSumProviderTest' flowId='5195']
 
-##teamcity[testFinished name='testCollect' duration='10' flowId='1019']
+##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\DataProvider\Model\DataPercentSerieTest' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/Model/DataPercentSerieTest.php::\Alxvng\QATracker\Tests\DataProvider\Model\DataPercentSerieTest' flowId='5195']
 
-##teamcity[testStarted name='testConstructorPercentException' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/Model/DataPercentSerieTest.php::\Alxvng\QATracker\Tests\DataProvider\Model\DataPercentSerieTest::testConstructorPercentException' flowId='1019']
+##teamcity[testStarted name='testCollect' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/Model/DataPercentSerieTest.php::\Alxvng\QATracker\Tests\DataProvider\Model\DataPercentSerieTest::testCollect' flowId='5195']
 
-##teamcity[testFinished name='testConstructorPercentException' duration='5' flowId='1019']
+##teamcity[testFinished name='testCollect' duration='10' flowId='5195']
 
-##teamcity[testStarted name='testConstructorItselfException' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/Model/DataPercentSerieTest.php::\Alxvng\QATracker\Tests\DataProvider\Model\DataPercentSerieTest::testConstructorItselfException' flowId='1019']
+##teamcity[testStarted name='testConstructorPercentException' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/Model/DataPercentSerieTest.php::\Alxvng\QATracker\Tests\DataProvider\Model\DataPercentSerieTest::testConstructorPercentException' flowId='5195']
 
-##teamcity[testFinished name='testConstructorItselfException' duration='4' flowId='1019']
+##teamcity[testFinished name='testConstructorPercentException' duration='6' flowId='5195']
 
-##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\DataProvider\Model\DataPercentSerieTest' flowId='1019']
+##teamcity[testStarted name='testConstructorItselfException' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/Model/DataPercentSerieTest.php::\Alxvng\QATracker\Tests\DataProvider\Model\DataPercentSerieTest::testConstructorItselfException' flowId='5195']
 
-##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerieTest' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/Model/DataStandardSerieTest.php::\Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerieTest' flowId='1019']
+##teamcity[testFinished name='testConstructorItselfException' duration='5' flowId='5195']
 
-##teamcity[testSuiteStarted name='testGetInstance' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/Model/DataStandardSerieTest.php::\Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerieTest::testGetInstance' flowId='1019']
+##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\DataProvider\Model\DataPercentSerieTest' flowId='5195']
 
-##teamcity[testStarted name='testGetInstance with data set #0' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/Model/DataStandardSerieTest.php::\Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerieTest::testGetInstance with data set #0' flowId='1019']
+##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerieTest' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/Model/DataStandardSerieTest.php::\Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerieTest' flowId='5195']
 
-##teamcity[testFinished name='testGetInstance with data set #0' duration='3' flowId='1019']
+##teamcity[testSuiteStarted name='testGetInstance' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/Model/DataStandardSerieTest.php::\Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerieTest::testGetInstance' flowId='5195']
 
-##teamcity[testStarted name='testGetInstance with data set #1' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/Model/DataStandardSerieTest.php::\Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerieTest::testGetInstance with data set #1' flowId='1019']
+##teamcity[testStarted name='testGetInstance with data set #0' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/Model/DataStandardSerieTest.php::\Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerieTest::testGetInstance with data set #0' flowId='5195']
 
-##teamcity[testFinished name='testGetInstance with data set #1' duration='1' flowId='1019']
+##teamcity[testFinished name='testGetInstance with data set #0' duration='2' flowId='5195']
 
-##teamcity[testStarted name='testGetInstance with data set #2' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/Model/DataStandardSerieTest.php::\Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerieTest::testGetInstance with data set #2' flowId='1019']
+##teamcity[testStarted name='testGetInstance with data set #1' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/Model/DataStandardSerieTest.php::\Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerieTest::testGetInstance with data set #1' flowId='5195']
 
-##teamcity[testFinished name='testGetInstance with data set #2' duration='2' flowId='1019']
+##teamcity[testFinished name='testGetInstance with data set #1' duration='1' flowId='5195']
 
-##teamcity[testSuiteFinished name='testGetInstance' flowId='1019']
+##teamcity[testStarted name='testGetInstance with data set #2' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/Model/DataStandardSerieTest.php::\Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerieTest::testGetInstance with data set #2' flowId='5195']
 
-##teamcity[testStarted name='testCollect' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/Model/DataStandardSerieTest.php::\Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerieTest::testCollect' flowId='1019']
+##teamcity[testFinished name='testGetInstance with data set #2' duration='3' flowId='5195']
 
-##teamcity[testFinished name='testCollect' duration='4' flowId='1019']
+##teamcity[testSuiteFinished name='testGetInstance' flowId='5195']
 
-##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerieTest' flowId='1019']
+##teamcity[testStarted name='testCollect' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/Model/DataStandardSerieTest.php::\Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerieTest::testCollect' flowId='5195']
 
-##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\DataProvider\XpathAverageProviderTest' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/XpathAverageProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\XpathAverageProviderTest' flowId='1019']
+##teamcity[testFinished name='testCollect' duration='4' flowId='5195']
 
-##teamcity[testStarted name='testFetchData' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/XpathAverageProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\XpathAverageProviderTest::testFetchData' flowId='1019']
+##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerieTest' flowId='5195']
 
-##teamcity[testFinished name='testFetchData' duration='2' flowId='1019']
+##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\DataProvider\XpathAverageProviderTest' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/XpathAverageProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\XpathAverageProviderTest' flowId='5195']
 
-##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\DataProvider\XpathAverageProviderTest' flowId='1019']
+##teamcity[testStarted name='testFetchData' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/XpathAverageProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\XpathAverageProviderTest::testFetchData' flowId='5195']
 
-##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\DataProvider\XpathCountProviderTest' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/XpathCountProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\XpathCountProviderTest' flowId='1019']
+##teamcity[testFinished name='testFetchData' duration='3' flowId='5195']
 
-##teamcity[testStarted name='testFetchData' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/XpathCountProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\XpathCountProviderTest::testFetchData' flowId='1019']
+##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\DataProvider\XpathAverageProviderTest' flowId='5195']
 
-##teamcity[testFinished name='testFetchData' duration='2' flowId='1019']
+##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\DataProvider\XpathCountProviderTest' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/XpathCountProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\XpathCountProviderTest' flowId='5195']
 
-##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\DataProvider\XpathCountProviderTest' flowId='1019']
+##teamcity[testStarted name='testFetchData' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/XpathCountProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\XpathCountProviderTest::testFetchData' flowId='5195']
 
-##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\DataProvider\XpathProviderTest' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/XpathProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\XpathProviderTest' flowId='1019']
+##teamcity[testFinished name='testFetchData' duration='3' flowId='5195']
 
-##teamcity[testStarted name='testFetchData' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/XpathProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\XpathProviderTest::testFetchData' flowId='1019']
+##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\DataProvider\XpathCountProviderTest' flowId='5195']
 
-##teamcity[testFinished name='testFetchData' duration='2' flowId='1019']
+##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\DataProvider\XpathProviderTest' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/XpathProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\XpathProviderTest' flowId='5195']
 
-##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\DataProvider\XpathProviderTest' flowId='1019']
+##teamcity[testStarted name='testFetchData' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/XpathProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\XpathProviderTest::testFetchData' flowId='5195']
 
-##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\DataProvider\XpathSumProviderTest' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/XpathSumProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\XpathSumProviderTest' flowId='1019']
+##teamcity[testFinished name='testFetchData' duration='3' flowId='5195']
 
-##teamcity[testStarted name='testFetchData' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/XpathSumProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\XpathSumProviderTest::testFetchData' flowId='1019']
+##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\DataProvider\XpathProviderTest' flowId='5195']
 
-##teamcity[testFinished name='testFetchData' duration='3' flowId='1019']
+##teamcity[testSuiteStarted name='Alxvng\QATracker\Tests\DataProvider\XpathSumProviderTest' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/XpathSumProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\XpathSumProviderTest' flowId='5195']
 
-##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\DataProvider\XpathSumProviderTest' flowId='1019']
+##teamcity[testStarted name='testFetchData' locationHint='php_qn:///var/www/qa-tracker/tests/DataProvider/XpathSumProviderTest.php::\Alxvng\QATracker\Tests\DataProvider\XpathSumProviderTest::testFetchData' flowId='5195']
 
-##teamcity[testSuiteFinished name='default' flowId='1019']
+##teamcity[testFinished name='testFetchData' duration='3' flowId='5195']
+
+##teamcity[testSuiteFinished name='Alxvng\QATracker\Tests\DataProvider\XpathSumProviderTest' flowId='5195']
+
+##teamcity[testSuiteFinished name='default' flowId='5195']

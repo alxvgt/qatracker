@@ -1,99 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tests>
-  <test className="Alxvng\QATracker\Tests\Chart\ChartGeneratorTest" methodName="testGenerate" prettifiedClassName="Chart Generator (Alxvng\QATracker\Tests\Chart\ChartGenerator)" prettifiedMethodName="Generate" status="0" time="0.012787223997293" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\Chart\ChartGeneratorTest" methodName="testGenerate" prettifiedClassName="Chart Generator (Alxvng\QATracker\Tests\Chart\ChartGenerator)" prettifiedMethodName="Generate" status="0" time="0.012998466991121" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\Chart\ChartTest" methodName="testConstructException" prettifiedClassName="Chart (Alxvng\QATracker\Tests\Chart\Chart)" prettifiedMethodName="Construct exception" status="0" time="0.0013050470151938" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\Chart\ChartTest" methodName="testConstructException" prettifiedClassName="Chart (Alxvng\QATracker\Tests\Chart\Chart)" prettifiedMethodName="Construct exception" status="0" time="0.0013453639985528" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\Chart\ChartTest" methodName="testConstruct" prettifiedClassName="Chart (Alxvng\QATracker\Tests\Chart\Chart)" prettifiedMethodName="Construct" status="0" time="0.0013645130093209" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\Chart\ChartTest" methodName="testConstruct" prettifiedClassName="Chart (Alxvng\QATracker\Tests\Chart\Chart)" prettifiedMethodName="Construct" status="0" time="0.0016338549903594" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\Chart\ChartTest" methodName="testGetFirstProvider" prettifiedClassName="Chart (Alxvng\QATracker\Tests\Chart\Chart)" prettifiedMethodName="Get first provider" status="0" time="0.0034802000154741" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\Chart\ChartTest" methodName="testGetFirstProvider" prettifiedClassName="Chart (Alxvng\QATracker\Tests\Chart\Chart)" prettifiedMethodName="Get first provider" status="0" time="0.0031231379834935" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\Command\TrackCommandTest" methodName="testExecuteNoConfigFile" prettifiedClassName="Track Command (Alxvng\QATracker\Tests\Command\TrackCommand)" prettifiedMethodName="Execute no config file" status="0" time="0.033162439998705" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\Command\TrackCommandTest" methodName="testExecuteNoConfigFile" prettifiedClassName="Track Command (Alxvng\QATracker\Tests\Command\TrackCommand)" prettifiedMethodName="Execute no config file" status="5" time="0.00086972600547597" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\Command\TrackCommandTest" methodName="testExecuteWithConfigFile" prettifiedClassName="Track Command (Alxvng\QATracker\Tests\Command\TrackCommand)" prettifiedMethodName="Execute with config file" status="0" time="0.11426779499743" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\Command\TrackCommandTest" methodName="testExecuteWithConfigFile" prettifiedClassName="Track Command (Alxvng\QATracker\Tests\Command\TrackCommand)" prettifiedMethodName="Execute with config file" status="5" time="0.0009144030045718" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\Configuration\ConfigurationTest" methodName="testExampleConfigPath" prettifiedClassName="Configuration (Alxvng\QATracker\Tests\Configuration\Configuration)" prettifiedMethodName="Example config path" status="0" time="0.0011725589865819" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\Configuration\ConfigurationTest" methodName="testExampleConfigPath" prettifiedClassName="Configuration (Alxvng\QATracker\Tests\Configuration\Configuration)" prettifiedMethodName="Example config path" status="0" time="0.0013022659986746" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\Configuration\ConfigurationTest" methodName="testLoadWithException with data set #0" prettifiedClassName="Configuration (Alxvng\QATracker\Tests\Configuration\Configuration)" prettifiedMethodName="Load with exception with data set #0" status="0" time="0.0013098400086164" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\Configuration\ConfigurationTest" methodName="testLoadWithException with data set #0" prettifiedClassName="Configuration (Alxvng\QATracker\Tests\Configuration\Configuration)" prettifiedMethodName="Load with exception with data set #0" status="0" time="0.0015574799908791" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\Configuration\ConfigurationTest" methodName="testLoadWithException with data set #1" prettifiedClassName="Configuration (Alxvng\QATracker\Tests\Configuration\Configuration)" prettifiedMethodName="Load with exception with data set #1" status="0" time="0.0012897550186608" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\Configuration\ConfigurationTest" methodName="testLoadWithException with data set #1" prettifiedClassName="Configuration (Alxvng\QATracker\Tests\Configuration\Configuration)" prettifiedMethodName="Load with exception with data set #1" status="0" time="0.0043011140078306" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\Configuration\ConfigurationTest" methodName="testLoadWithException with data set #2" prettifiedClassName="Configuration (Alxvng\QATracker\Tests\Configuration\Configuration)" prettifiedMethodName="Load with exception with data set #2" status="0" time="0.0017128150211647" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\Configuration\ConfigurationTest" methodName="testLoadWithException with data set #2" prettifiedClassName="Configuration (Alxvng\QATracker\Tests\Configuration\Configuration)" prettifiedMethodName="Load with exception with data set #2" status="0" time="0.0033206799998879" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\Configuration\ConfigurationTest" methodName="testLoadWithException with data set #3" prettifiedClassName="Configuration (Alxvng\QATracker\Tests\Configuration\Configuration)" prettifiedMethodName="Load with exception with data set #3" status="0" time="0.0031366240000352" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\Configuration\ConfigurationTest" methodName="testLoadWithException with data set #3" prettifiedClassName="Configuration (Alxvng\QATracker\Tests\Configuration\Configuration)" prettifiedMethodName="Load with exception with data set #3" status="0" time="0.0029380639898591" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\Configuration\ConfigurationTest" methodName="testLoadWithException with data set #4" prettifiedClassName="Configuration (Alxvng\QATracker\Tests\Configuration\Configuration)" prettifiedMethodName="Load with exception with data set #4" status="0" time="0.0032962499826681" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\Configuration\ConfigurationTest" methodName="testLoadWithException with data set #4" prettifiedClassName="Configuration (Alxvng\QATracker\Tests\Configuration\Configuration)" prettifiedMethodName="Load with exception with data set #4" status="0" time="0.0033040159905795" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\Configuration\ConfigurationTest" methodName="testLoadWithException with data set #5" prettifiedClassName="Configuration (Alxvng\QATracker\Tests\Configuration\Configuration)" prettifiedMethodName="Load with exception with data set #5" status="0" time="0.006079775019316" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\Configuration\ConfigurationTest" methodName="testLoadWithException with data set #5" prettifiedClassName="Configuration (Alxvng\QATracker\Tests\Configuration\Configuration)" prettifiedMethodName="Load with exception with data set #5" status="0" time="0.0067481139849406" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\Configuration\ConfigurationTest" methodName="testLoadWithException with data set #6" prettifiedClassName="Configuration (Alxvng\QATracker\Tests\Configuration\Configuration)" prettifiedMethodName="Load with exception with data set #6" status="0" time="0.0068395719863474" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\Configuration\ConfigurationTest" methodName="testLoadWithException with data set #6" prettifiedClassName="Configuration (Alxvng\QATracker\Tests\Configuration\Configuration)" prettifiedMethodName="Load with exception with data set #6" status="0" time="0.0069071589969099" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\Configuration\ConfigurationTest" methodName="testLoad with data set #0" prettifiedClassName="Configuration (Alxvng\QATracker\Tests\Configuration\Configuration)" prettifiedMethodName="Load with data set #0" status="0" time="0.069443240994588" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\Configuration\ConfigurationTest" methodName="testLoad with data set #0" prettifiedClassName="Configuration (Alxvng\QATracker\Tests\Configuration\Configuration)" prettifiedMethodName="Load with data set #0" status="0" time="0.072189202008303" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\DataProvider\Finder\ProviderFinderTest" methodName="testFindById" prettifiedClassName="Provider Finder (Alxvng\QATracker\Tests\DataProvider\Finder\ProviderFinder)" prettifiedMethodName="Find by id" status="0" time="0.0028289949987084" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\DataProvider\Finder\ProviderFinderTest" methodName="testFindById" prettifiedClassName="Provider Finder (Alxvng\QATracker\Tests\DataProvider\Finder\ProviderFinder)" prettifiedMethodName="Find by id" status="0" time="0.0033844049903564" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\DataProvider\Finder\ProviderFinderTest" methodName="testFindByIdException" prettifiedClassName="Provider Finder (Alxvng\QATracker\Tests\DataProvider\Finder\ProviderFinder)" prettifiedMethodName="Find by id exception" status="0" time="0.0027628169918898" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\DataProvider\Finder\ProviderFinderTest" methodName="testFindByIdException" prettifiedClassName="Provider Finder (Alxvng\QATracker\Tests\DataProvider\Finder\ProviderFinder)" prettifiedMethodName="Find by id exception" status="0" time="0.0031694990175311" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\DataProvider\JsonPathAverageProviderTest" methodName="testFetchData" prettifiedClassName="Json Path Average Provider (Alxvng\QATracker\Tests\DataProvider\JsonPathAverageProvider)" prettifiedMethodName="Fetch data" status="0" time="0.011637568997685" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\DataProvider\JsonPathAverageProviderTest" methodName="testFetchData" prettifiedClassName="Json Path Average Provider (Alxvng\QATracker\Tests\DataProvider\JsonPathAverageProvider)" prettifiedMethodName="Fetch data" status="0" time="0.013309862988535" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\DataProvider\JsonPathCountProviderTest" methodName="testFetchData" prettifiedClassName="Json Path Count Provider (Alxvng\QATracker\Tests\DataProvider\JsonPathCountProvider)" prettifiedMethodName="Fetch data" status="0" time="0.0086828779894859" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\DataProvider\JsonPathCountProviderTest" methodName="testFetchData" prettifiedClassName="Json Path Count Provider (Alxvng\QATracker\Tests\DataProvider\JsonPathCountProvider)" prettifiedMethodName="Fetch data" status="0" time="0.010463497979799" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\DataProvider\JsonPathProviderTest" methodName="testFetchData" prettifiedClassName="Json Path Provider (Alxvng\QATracker\Tests\DataProvider\JsonPathProvider)" prettifiedMethodName="Fetch data" status="0" time="0.0077774160017725" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\DataProvider\JsonPathProviderTest" methodName="testFetchData" prettifiedClassName="Json Path Provider (Alxvng\QATracker\Tests\DataProvider\JsonPathProvider)" prettifiedMethodName="Fetch data" status="0" time="0.008471877023112" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\DataProvider\JsonPathSumProviderTest" methodName="testFetchData" prettifiedClassName="Json Path Sum Provider (Alxvng\QATracker\Tests\DataProvider\JsonPathSumProvider)" prettifiedMethodName="Fetch data" status="0" time="0.0090367429947946" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\DataProvider\JsonPathSumProviderTest" methodName="testFetchData" prettifiedClassName="Json Path Sum Provider (Alxvng\QATracker\Tests\DataProvider\JsonPathSumProvider)" prettifiedMethodName="Fetch data" status="0" time="0.010512070992263" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\DataProvider\Model\DataPercentSerieTest" methodName="testCollect" prettifiedClassName="Data Percent Serie (Alxvng\QATracker\Tests\DataProvider\Model\DataPercentSerie)" prettifiedMethodName="Collect" status="0" time="0.0095466969942208" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\DataProvider\Model\DataPercentSerieTest" methodName="testCollect" prettifiedClassName="Data Percent Serie (Alxvng\QATracker\Tests\DataProvider\Model\DataPercentSerie)" prettifiedMethodName="Collect" status="0" time="0.0098484480113257" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\DataProvider\Model\DataPercentSerieTest" methodName="testConstructorPercentException" prettifiedClassName="Data Percent Serie (Alxvng\QATracker\Tests\DataProvider\Model\DataPercentSerie)" prettifiedMethodName="Constructor percent exception" status="0" time="0.0054388930147979" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\DataProvider\Model\DataPercentSerieTest" methodName="testConstructorPercentException" prettifiedClassName="Data Percent Serie (Alxvng\QATracker\Tests\DataProvider\Model\DataPercentSerie)" prettifiedMethodName="Constructor percent exception" status="0" time="0.0055579110048711" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\DataProvider\Model\DataPercentSerieTest" methodName="testConstructorItselfException" prettifiedClassName="Data Percent Serie (Alxvng\QATracker\Tests\DataProvider\Model\DataPercentSerie)" prettifiedMethodName="Constructor itself exception" status="0" time="0.0036554389807861" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\DataProvider\Model\DataPercentSerieTest" methodName="testConstructorItselfException" prettifiedClassName="Data Percent Serie (Alxvng\QATracker\Tests\DataProvider\Model\DataPercentSerie)" prettifiedMethodName="Constructor itself exception" status="0" time="0.0046015919942874" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerieTest" methodName="testGetInstance with data set #0" prettifiedClassName="Data Standard Serie (Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerie)" prettifiedMethodName="Get instance with data set #0" status="0" time="0.0026112849882338" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerieTest" methodName="testGetInstance with data set #0" prettifiedClassName="Data Standard Serie (Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerie)" prettifiedMethodName="Get instance with data set #0" status="0" time="0.0022864670027047" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerieTest" methodName="testGetInstance with data set #1" prettifiedClassName="Data Standard Serie (Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerie)" prettifiedMethodName="Get instance with data set #1" status="0" time="0.0011946650047321" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerieTest" methodName="testGetInstance with data set #1" prettifiedClassName="Data Standard Serie (Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerie)" prettifiedMethodName="Get instance with data set #1" status="0" time="0.0013078850170132" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerieTest" methodName="testGetInstance with data set #2" prettifiedClassName="Data Standard Serie (Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerie)" prettifiedMethodName="Get instance with data set #2" status="0" time="0.002347269008169" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerieTest" methodName="testGetInstance with data set #2" prettifiedClassName="Data Standard Serie (Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerie)" prettifiedMethodName="Get instance with data set #2" status="0" time="0.0026664559845813" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerieTest" methodName="testCollect" prettifiedClassName="Data Standard Serie (Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerie)" prettifiedMethodName="Collect" status="0" time="0.0039423640118912" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerieTest" methodName="testCollect" prettifiedClassName="Data Standard Serie (Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerie)" prettifiedMethodName="Collect" status="0" time="0.0037305139994714" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\DataProvider\XpathAverageProviderTest" methodName="testFetchData" prettifiedClassName="Xpath Average Provider (Alxvng\QATracker\Tests\DataProvider\XpathAverageProvider)" prettifiedMethodName="Fetch data" status="0" time="0.0021727029816248" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\DataProvider\XpathAverageProviderTest" methodName="testFetchData" prettifiedClassName="Xpath Average Provider (Alxvng\QATracker\Tests\DataProvider\XpathAverageProvider)" prettifiedMethodName="Fetch data" status="0" time="0.0028069590043742" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\DataProvider\XpathCountProviderTest" methodName="testFetchData" prettifiedClassName="Xpath Count Provider (Alxvng\QATracker\Tests\DataProvider\XpathCountProvider)" prettifiedMethodName="Fetch data" status="0" time="0.0024566930078436" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\DataProvider\XpathCountProviderTest" methodName="testFetchData" prettifiedClassName="Xpath Count Provider (Alxvng\QATracker\Tests\DataProvider\XpathCountProvider)" prettifiedMethodName="Fetch data" status="0" time="0.0026525879802648" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\DataProvider\XpathProviderTest" methodName="testFetchData" prettifiedClassName="Xpath Provider (Alxvng\QATracker\Tests\DataProvider\XpathProvider)" prettifiedMethodName="Fetch data" status="0" time="0.0024986969947349" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\DataProvider\XpathProviderTest" methodName="testFetchData" prettifiedClassName="Xpath Provider (Alxvng\QATracker\Tests\DataProvider\XpathProvider)" prettifiedMethodName="Fetch data" status="0" time="0.0025477260060143" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="Alxvng\QATracker\Tests\DataProvider\XpathSumProviderTest" methodName="testFetchData" prettifiedClassName="Xpath Sum Provider (Alxvng\QATracker\Tests\DataProvider\XpathSumProvider)" prettifiedMethodName="Fetch data" status="0" time="0.0026066029968206" size="-1" groups="default">
+  <test className="Alxvng\QATracker\Tests\DataProvider\XpathSumProviderTest" methodName="testFetchData" prettifiedClassName="Xpath Sum Provider (Alxvng\QATracker\Tests\DataProvider\XpathSumProvider)" prettifiedMethodName="Fetch data" status="0" time="0.002940608013887" size="-1" groups="default">
     <group name="default"/>
   </test>
 </tests>

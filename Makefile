@@ -2,9 +2,12 @@ PROJECT_NAME=qa-tracker
 
 ###### Paths
 
-PATH_QA_ROOT=$(shell pwd)/docs/qa
+QATRACKER_CONFIG_DIR=$(shell pwd)/.qatracker
+PATH_DOCS_ROOT=$(shell pwd)/docs
+PATH_QA_ROOT=${PATH_DOCS_ROOT}/qa
 PATH_QA_PHPUNIT=${PATH_QA_ROOT}/phpunit
 PATH_QA_MAKEFILE_DIR=qa
+PATH_GIT_MAKEFILE_DIR=git
 
 ###### Commands : Docker
 
@@ -57,10 +60,10 @@ cs: install
 cs-fix: ## Fix code style
 cs-fix: install
 	${CMD_PHPCSFIX} --using-cache=no
-	@printf "\n\033[32m--------------------------------------------------------------------------\033[0m"
-	@printf "\n\033[32mCheck after fix\033[0m"
-	@printf "\n\033[32m--------------------------------------------------------------------------\033[0m"
-	@printf "\n"
+	printf "\n\033[32m--------------------------------------------------------------------------\033[0m"
+	printf "\n\033[32mCheck after fix\033[0m"
+	printf "\n\033[32m--------------------------------------------------------------------------\033[0m"
+	printf "\n"
 	make cs
 
 coverage: ## Run test coverage
@@ -71,15 +74,17 @@ coverage: install
 
 qa-report: ## Run all the qa tools
 qa-report:
-	make cs
-	make coverage
-	LOG_DIR=${PATH_QA_ROOT} make -e --directory ${PATH_QA_MAKEFILE_DIR} install-all
-	LOG_DIR=${PATH_QA_ROOT} make -e --directory ${PATH_QA_MAKEFILE_DIR} run-all
+	make -e cs
+	make -e coverage
+	QATRACKER_CONFIG_DIR=${QATRACKER_CONFIG_DIR} make -e --directory ${PATH_GIT_MAKEFILE_DIR} qa-history
+#	LOG_DIR=${PATH_QA_ROOT} make -e --directory ${PATH_QA_MAKEFILE_DIR} install-all
+#	LOG_DIR=${PATH_QA_ROOT} make -e --directory ${PATH_QA_MAKEFILE_DIR} run-all
 
 ##@ Release
 
-release: ## Release a new version of app (.phar archives)
+release: ## Release a new version of app (.phar archives), quality reports
 release: cs-fix qa-report
+	cp ${QATRACKER_CONFIG_DIR}/generated/report/index.html ${PATH_DOCS_ROOT}/demo/index.html
 	${CMD_COMPOSER} install --no-dev --profile
 	${CMD_COMPOSER} dump-autoload --no-dev --profile
 	${CMD_PHP} bin/build-phar
