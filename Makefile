@@ -3,7 +3,7 @@ PROJECT_NAME=qa-tracker
 ###### Paths
 
 PATH_QA_ROOT=$(shell pwd)/docs/qa
-PATH_QA_PHPUNIT=phpunit
+PATH_QA_PHPUNIT=${PATH_QA_ROOT}/phpunit
 PATH_QA_MAKEFILE_DIR=qa
 
 ###### Commands : Docker
@@ -24,7 +24,7 @@ CMD_COMPOSER ?= ${CMD_EXEC} composer
 CMD_CHMOD ?= ${CMD_EXEC} chmod
 CMD_PWD ?= ${CMD_EXEC} pwd
 
-CMD_PHPUNIT ?= ${CMD_PHP} vendor/bin/phpunit -c tests/phpunit.xml.dist
+CMD_PHPUNIT ?= ${CMD_PHP} vendor/bin/phpunit -c tests/phpunit.xml.dist --log-junit ${PATH_QA_PHPUNIT}/junit.xml --log-teamcity ${PATH_QA_PHPUNIT}/teamcity.log --testdox-html ${PATH_QA_PHPUNIT}/testdox.html --testdox-text ${PATH_QA_PHPUNIT}/testdox.txt --testdox-xml ${PATH_QA_PHPUNIT}/testdox.xml
 CMD_PHPCSFIX ?= ${CMD_PHP} vendor/bin/php-cs-fixer fix -v
 
 ###### START
@@ -65,17 +65,16 @@ cs-fix: install
 
 coverage: ## Run test coverage
 coverage: install
-	$(eval outputDir=${PATH_QA_ROOT}/${PATH_QA_PHPUNIT}/coverage-html)
+	$(eval outputDir=${PATH_QA_PHPUNIT}/html)
 	mkdir -p ${outputDir}
 	${CMD_PHPUNIT} --coverage-html=${outputDir}
 
 qa-report: ## Run all the qa tools
 qa-report:
-	$(eval outputDir=)
+	make cs
+	make coverage
 	LOG_DIR=${PATH_QA_ROOT} make -e --directory ${PATH_QA_MAKEFILE_DIR} install-all
 	LOG_DIR=${PATH_QA_ROOT} make -e --directory ${PATH_QA_MAKEFILE_DIR} run-all
-	make coverage
-	make cs
 
 ##@ Release
 

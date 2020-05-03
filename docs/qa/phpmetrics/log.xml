@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd version="@package_version@" timestamp="2020-05-03T10:36:01+00:00">
+  <file name="Alxvng\QATracker\Command\TrackCommand">
+    <violation beginline="1" rule="Probably bugged" ruleset="Probably bugged" externalInfoUrl="http://www.phpmetrics.org/documentation/index.html" priority="3">This component contains in theory 0.6 bugs.
+
+* Calculation is based on number of operators, operands, cyclomatic complexity
+* See more details at https://en.wikipedia.org/wiki/Halstead_complexity_measures
+* 3 testsuites has dependency to this class.
+
+Maybe you should check your unit tests for this class.</violation>
+    <violation beginline="1" rule="Too dependent" ruleset="Too dependent" externalInfoUrl="http://www.phpmetrics.org/documentation/index.html" priority="4">This class looks use really high number of components.
+
+* Efferent coupling is 20, so this class uses 20 different external components.
+
+Maybe you should check why this class has lot of dependencies.</violation>
+  </file>
+  <file name="Alxvng\QATracker\DataProvider\Reducer\">
+    <violation beginline="1" rule="Stable Abstractions Principle" ruleset="Stable Abstractions Principle" externalInfoUrl="http://www.phpmetrics.org/documentation/index.html" priority="3">Packages should be either abstract and stable or concrete and instable.
+
+This package is instable and abstract.</violation>
+  </file>
+  <file name="Alxvng\QATracker\DataProvider\Model\">
+    <violation beginline="1" rule="Stable Dependencies Principle" ruleset="Stable Dependencies Principle" externalInfoUrl="http://www.phpmetrics.org/documentation/index.html" priority="3">Packages should depend in the direction of stability.
+
+This package is more stable (0.545) than 2 package(s) that it depends on.
+The packages that are more stable are
+
+* Alxvng\QATracker\DataProvider\Finder (0.667)
+* Alxvng\QATracker\DataProvider (0.833)</violation>
+  </file>
+  <file name="Alxvng\QATracker\Configuration\Configuration">
+    <violation beginline="1" rule="Probably bugged" ruleset="Probably bugged" externalInfoUrl="http://www.phpmetrics.org/documentation/index.html" priority="3">This component contains in theory 0.39 bugs.
+
+* Calculation is based on number of operators, operands, cyclomatic complexity
+* See more details at https://en.wikipedia.org/wiki/Halstead_complexity_measures
+* 9 testsuites has dependency to this class.
+
+Maybe you should check your unit tests for this class.</violation>
+  </file>
+</pmd>

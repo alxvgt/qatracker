@@ -1,0 +1,62 @@
+Chart Generator (Alxvng\QATracker\Tests\Chart\ChartGenerator)
+ [x] Generate
+
+Chart (Alxvng\QATracker\Tests\Chart\Chart)
+ [x] Construct exception
+ [x] Construct
+ [x] Get first provider
+
+Track Command (Alxvng\QATracker\Tests\Command\TrackCommand)
+ [x] Execute no config file
+ [x] Execute with config file
+
+Configuration (Alxvng\QATracker\Tests\Configuration\Configuration)
+ [x] Example config path
+ [x] Load with exception with data set #0
+ [x] Load with exception with data set #1
+ [x] Load with exception with data set #2
+ [x] Load with exception with data set #3
+ [x] Load with exception with data set #4
+ [x] Load with exception with data set #5
+ [x] Load with exception with data set #6
+ [x] Load with data set #0
+
+Provider Finder (Alxvng\QATracker\Tests\DataProvider\Finder\ProviderFinder)
+ [x] Find by id
+ [x] Find by id exception
+
+Json Path Average Provider (Alxvng\QATracker\Tests\DataProvider\JsonPathAverageProvider)
+ [x] Fetch data
+
+Json Path Count Provider (Alxvng\QATracker\Tests\DataProvider\JsonPathCountProvider)
+ [x] Fetch data
+
+Json Path Provider (Alxvng\QATracker\Tests\DataProvider\JsonPathProvider)
+ [x] Fetch data
+
+Json Path Sum Provider (Alxvng\QATracker\Tests\DataProvider\JsonPathSumProvider)
+ [x] Fetch data
+
+Data Percent Serie (Alxvng\QATracker\Tests\DataProvider\Model\DataPercentSerie)
+ [x] Collect
+ [x] Constructor percent exception
+ [x] Constructor itself exception
+
+Data Standard Serie (Alxvng\QATracker\Tests\DataProvider\Model\DataStandardSerie)
+ [x] Get instance with data set #0
+ [x] Get instance with data set #1
+ [x] Get instance with data set #2
+ [x] Collect
+
+Xpath Average Provider (Alxvng\QATracker\Tests\DataProvider\XpathAverageProvider)
+ [x] Fetch data
+
+Xpath Count Provider (Alxvng\QATracker\Tests\DataProvider\XpathCountProvider)
+ [x] Fetch data
+
+Xpath Provider (Alxvng\QATracker\Tests\DataProvider\XpathProvider)
+ [x] Fetch data
+
+Xpath Sum Provider (Alxvng\QATracker\Tests\DataProvider\XpathSumProvider)
+ [x] Fetch data
+

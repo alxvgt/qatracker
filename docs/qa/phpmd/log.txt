@@ -1,0 +1,102 @@
+/var/www/qa-tracker/src/Command/TrackCommand.php:45	The class TrackCommand has a coupling between objects value of 21. Consider to reduce the number of dependencies under 13.
+/var/www/qa-tracker/src/Command/TrackCommand.php:51	Avoid using static access to class '\Alxvng\QATracker\Root\Root' in method 'getBaseDir'.
+/var/www/qa-tracker/src/Command/TrackCommand.php:69	Avoid using static access to class '\DateTime' in method 'initializeTrackDate'.
+/var/www/qa-tracker/src/Command/TrackCommand.php:72	Missing class import via use statement (line '72', column '23').
+/var/www/qa-tracker/src/Command/TrackCommand.php:119	Avoid variables with short names like $io. Configured minimum length is 3.
+/var/www/qa-tracker/src/Command/TrackCommand.php:143	Avoid variables with short names like $fs. Configured minimum length is 3.
+/var/www/qa-tracker/src/Command/TrackCommand.php:144	Avoid using static access to class '\Alxvng\QATracker\Configuration\Configuration' in method 'interact'.
+/var/www/qa-tracker/src/Command/TrackCommand.php:169	Avoid variables with short names like $io. Configured minimum length is 3.
+/var/www/qa-tracker/src/Command/TrackCommand.php:170	Avoid using static access to class '\Alxvng\QATracker\Twig\TwigFactory' in method 'execute'.
+/var/www/qa-tracker/src/Command/TrackCommand.php:182	Avoid using static access to class '\Alxvng\QATracker\Configuration\Configuration' in method 'execute'.
+/var/www/qa-tracker/src/Command/TrackCommand.php:221	Avoid using static access to class '\Alxvng\QATracker\Chart\ChartGenerator' in method 'execute'.
+/var/www/qa-tracker/src/Command/TrackCommand.php:240	Avoid using static access to class '\Goat1000\SVGGraph\SVGGraph' in method 'execute'.
+/var/www/qa-tracker/src/Command/TrackCommand.php:292	Avoid using static access to class '\Alxvng\QATracker\DataProvider\Model\AbstractDataSerie' in method 'loadDataSeries'.
+/var/www/qa-tracker/src/Command/TrackCommand.php:296	Avoid using static access to class 'Alxvng\QATracker\Command\TrackCommand' in method 'loadDataSeries'.
+/var/www/qa-tracker/src/Command/TrackCommand.php:305	Avoid using static access to class '\Alxvng\QATracker\DataProvider\Model\AbstractDataSerie' in method 'loadDataSeries'.
+/var/www/qa-tracker/src/Command/TrackCommand.php:309	Avoid using static access to class 'Alxvng\QATracker\Command\TrackCommand' in method 'loadDataSeries'.
+/var/www/qa-tracker/src/Configuration/Configuration.php:14	Avoid using static access to class '\Alxvng\QATracker\Root\Root' in method 'exampleConfigPath'.
+/var/www/qa-tracker/src/Configuration/Configuration.php:22	The method load() has a Cyclomatic Complexity of 10. The configured cyclomatic complexity threshold is 10.
+/var/www/qa-tracker/src/Configuration/Configuration.php:22	The method load() has an NPath complexity of 384. The configured NPath complexity threshold is 200.
+/var/www/qa-tracker/src/Configuration/Configuration.php:31	Avoid using static access to class '\Symfony\Component\Yaml\Yaml' in method 'load'.
+/var/www/qa-tracker/src/Configuration/Configuration.php:40	Avoid using static access to class '\Symfony\Component\Yaml\Yaml' in method 'load'.
+/var/www/qa-tracker/src/Configuration/Configuration.php:72	Avoid variables with short names like $id. Configured minimum length is 3.
+/var/www/qa-tracker/src/Configuration/Configuration.php:87	Avoid variables with short names like $id. Configured minimum length is 3.
+/var/www/qa-tracker/src/Configuration/Configuration.php:87	Avoid unused parameters such as '$chart'.
+/var/www/qa-tracker/src/Configuration/Configuration.php:98	Avoid using static access to class '\Alxvng\QATracker\DataProvider\Model\AbstractDataSerie' in method 'validateStandardProvider'.
+/var/www/qa-tracker/src/Configuration/Configuration.php:102	Avoid variables with short names like $id. Configured minimum length is 3.
+/var/www/qa-tracker/src/Configuration/Configuration.php:122	Avoid using static access to class '\Alxvng\QATracker\DataProvider\Model\AbstractDataSerie' in method 'validatePercentProvider'.
+/var/www/qa-tracker/src/Configuration/Configuration.php:126	Avoid variables with short names like $id. Configured minimum length is 3.
+/var/www/qa-tracker/src/Configuration/Configuration.php:148	Avoid using undefined variables such as '$dataSerie' which will lead to PHP notices.
+/var/www/qa-tracker/src/Configuration/Configuration.php:149	Avoid using undefined variables such as '$dataSerie' which will lead to PHP notices.
+/var/www/qa-tracker/src/Configuration/Configuration.php:158	Avoid using undefined variables such as '$chart' which will lead to PHP notices.
+/var/www/qa-tracker/src/Configuration/Configuration.php:159	Avoid using undefined variables such as '$chart' which will lead to PHP notices.
+/var/www/qa-tracker/src/DataProvider/AbstractJsonPathProvider.php:27	Avoid variables with short names like $fs. Configured minimum length is 3.
+/var/www/qa-tracker/src/DataProvider/AbstractJsonPathProvider.php:28	Avoid using static access to class '\Alxvng\QATracker\Root\Root' in method '__construct'.
+/var/www/qa-tracker/src/DataProvider/AbstractJsonPathProvider.php:32	Missing class import via use statement (line '32', column '23').
+/var/www/qa-tracker/src/DataProvider/AbstractJsonPathProvider.php:36	Missing class import via use statement (line '36', column '23').
+/var/www/qa-tracker/src/DataProvider/AbstractJsonPathProvider.php:42	Missing class import via use statement (line '42', column '23').
+/var/www/qa-tracker/src/DataProvider/AbstractXpathProvider.php:34	Avoid variables with short names like $fs. Configured minimum length is 3.
+/var/www/qa-tracker/src/DataProvider/AbstractXpathProvider.php:35	Avoid using static access to class '\Alxvng\QATracker\Root\Root' in method '__construct'.
+/var/www/qa-tracker/src/DataProvider/AbstractXpathProvider.php:48	Avoid unused local variables such as '$xml'.
+/var/www/qa-tracker/src/DataProvider/AbstractXpathProvider.php:50	Missing class import via use statement (line '50', column '23').
+/var/www/qa-tracker/src/DataProvider/Finder/ProviderFinder.php:9	Avoid variables with short names like $id. Configured minimum length is 3.
+/var/www/qa-tracker/src/DataProvider/Finder/ProviderFinder.php:12	Missing class import via use statement (line '12', column '23').
+/var/www/qa-tracker/src/DataProvider/Model/AbstractDataSerie.php:15	Avoid variables with short names like $id. Configured minimum length is 3.
+/var/www/qa-tracker/src/DataProvider/Model/DataPercentSerie.php:14	Avoid excessively long variable names like $totalPercentDataSerie. Keep variable name length under 20.
+/var/www/qa-tracker/src/DataProvider/Model/DataPercentSerie.php:35	Avoid using static access to class '\Alxvng\QATracker\DataProvider\Finder\ProviderFinder' in method '__construct'.
+/var/www/qa-tracker/src/DataProvider/Model/DataPercentSerie.php:36	Avoid using static access to class '\Alxvng\QATracker\DataProvider\Finder\ProviderFinder' in method '__construct'.
+/var/www/qa-tracker/src/DataProvider/Model/DataPercentSerie.php:74	Missing class import via use statement (line '74', column '23').
+/var/www/qa-tracker/src/DataProvider/Model/DataPercentSerie.php:78	Missing class import via use statement (line '78', column '23').
+/var/www/qa-tracker/src/DataProvider/Model/DataPercentSerie.php:82	Missing class import via use statement (line '82', column '23').
+/var/www/qa-tracker/src/DataProvider/Model/DataPercentSerie.php:86	Missing class import via use statement (line '86', column '23').
+/var/www/qa-tracker/src/DataProvider/Reducer/AverageReducerTrait.php:12	Missing class import via use statement (line '12', column '27').
+/var/www/qa-tracker/src/DataProvider/Reducer/SumReducerTrait.php:12	Missing class import via use statement (line '12', column '27').
+/var/www/qa-tracker/src/DataProvider/XpathProvider.php:26	Missing class import via use statement (line '26', column '23').
+/var/www/qa-tracker/tests/Chart/ChartGeneratorTest.php:13	Avoid using static access to class '\Alxvng\QATracker\Chart\ChartGenerator' in method 'testGenerate'.
+/var/www/qa-tracker/tests/Chart/ChartTest.php:17	Avoid using undefined variables such as '$config' which will lead to PHP notices.
+/var/www/qa-tracker/tests/Chart/ChartTest.php:18	Avoid using undefined variables such as '$config' which will lead to PHP notices.
+/var/www/qa-tracker/tests/Chart/ChartTest.php:19	Avoid using undefined variables such as '$config' which will lead to PHP notices.
+/var/www/qa-tracker/tests/Chart/ChartTest.php:20	Avoid using undefined variables such as '$config' which will lead to PHP notices.
+/var/www/qa-tracker/tests/Chart/ChartTest.php:23	Avoid using undefined variables such as '$config' which will lead to PHP notices.
+/var/www/qa-tracker/tests/Chart/ChartTest.php:28	Avoid using undefined variables such as '$config' which will lead to PHP notices.
+/var/www/qa-tracker/tests/Chart/ChartTest.php:29	Avoid using undefined variables such as '$config' which will lead to PHP notices.
+/var/www/qa-tracker/tests/Chart/ChartTest.php:30	Avoid using undefined variables such as '$config' which will lead to PHP notices.
+/var/www/qa-tracker/tests/Chart/ChartTest.php:31	Avoid using undefined variables such as '$config' which will lead to PHP notices.
+/var/www/qa-tracker/tests/Chart/ChartTest.php:42	Avoid using undefined variables such as '$config' which will lead to PHP notices.
+/var/www/qa-tracker/tests/Chart/ChartTest.php:52	Avoid using undefined variables such as '$config' which will lead to PHP notices.
+/var/www/qa-tracker/tests/Chart/ChartTest.php:53	Avoid using undefined variables such as '$config' which will lead to PHP notices.
+/var/www/qa-tracker/tests/Chart/ChartTest.php:54	Avoid using undefined variables such as '$config' which will lead to PHP notices.
+/var/www/qa-tracker/tests/Chart/ChartTest.php:55	Avoid using undefined variables such as '$config' which will lead to PHP notices.
+/var/www/qa-tracker/tests/Chart/ChartTest.php:61	Avoid using static access to class '\Alxvng\QATracker\Tests\Mock' in method 'testGetFirstProvider'.
+/var/www/qa-tracker/tests/Chart/ChartTest.php:62	Avoid using static access to class '\Alxvng\QATracker\Tests\Mock' in method 'testGetFirstProvider'.
+/var/www/qa-tracker/tests/Chart/ChartTest.php:66	Avoid using undefined variables such as '$config' which will lead to PHP notices.
+/var/www/qa-tracker/tests/Command/TrackCommandTest.php:16	Avoid variables with short names like $fs. Configured minimum length is 3.
+/var/www/qa-tracker/tests/Command/TrackCommandTest.php:17	Avoid using static access to class '\Alxvng\QATracker\Command\TrackCommand' in method 'testExecuteNoConfigFile'.
+/var/www/qa-tracker/tests/Command/TrackCommandTest.php:30	Avoid variables with short names like $fs. Configured minimum length is 3.
+/var/www/qa-tracker/tests/Command/TrackCommandTest.php:32	Avoid using static access to class '\Alxvng\QATracker\Configuration\Configuration' in method 'testExecuteWithConfigFile'.
+/var/www/qa-tracker/tests/Command/TrackCommandTest.php:33	Avoid using static access to class '\Alxvng\QATracker\Command\TrackCommand' in method 'testExecuteWithConfigFile'.
+/var/www/qa-tracker/tests/Configuration/ConfigurationTest.php:14	Avoid using static access to class '\Alxvng\QATracker\Configuration\Configuration' in method 'testExampleConfigPath'.
+/var/www/qa-tracker/tests/Configuration/ConfigurationTest.php:15	Avoid using static access to class '\Alxvng\QATracker\Configuration\Configuration' in method 'testExampleConfigPath'.
+/var/www/qa-tracker/tests/Configuration/ConfigurationTest.php:27	Avoid using static access to class '\Alxvng\QATracker\Configuration\Configuration' in method 'testLoadWithException'.
+/var/www/qa-tracker/tests/Configuration/ConfigurationTest.php:37	Avoid using static access to class '\Alxvng\QATracker\Configuration\Configuration' in method 'testLoad'.
+/var/www/qa-tracker/tests/DataProvider/Finder/ProviderFinderTest.php:14	Avoid using static access to class '\Alxvng\QATracker\Tests\Mock' in method 'testFindById'.
+/var/www/qa-tracker/tests/DataProvider/Finder/ProviderFinderTest.php:15	Avoid using static access to class '\Alxvng\QATracker\Tests\Mock' in method 'testFindById'.
+/var/www/qa-tracker/tests/DataProvider/Finder/ProviderFinderTest.php:21	Avoid using static access to class '\Alxvng\QATracker\DataProvider\Finder\ProviderFinder' in method 'testFindById'.
+/var/www/qa-tracker/tests/DataProvider/Finder/ProviderFinderTest.php:29	Avoid using static access to class '\Alxvng\QATracker\Tests\Mock' in method 'testFindByIdException'.
+/var/www/qa-tracker/tests/DataProvider/Finder/ProviderFinderTest.php:30	Avoid using static access to class '\Alxvng\QATracker\Tests\Mock' in method 'testFindByIdException'.
+/var/www/qa-tracker/tests/DataProvider/Finder/ProviderFinderTest.php:36	Avoid using static access to class '\Alxvng\QATracker\DataProvider\Finder\ProviderFinder' in method 'testFindByIdException'.
+/var/www/qa-tracker/tests/DataProvider/Model/DataPercentSerieTest.php:18	Avoid using static access to class '\Alxvng\QATracker\Tests\Mock' in method 'testCollect'.
+/var/www/qa-tracker/tests/DataProvider/Model/DataPercentSerieTest.php:38	Avoid using static access to class '\Alxvng\QATracker\Tests\Mock' in method 'testConstructorPercentException'.
+/var/www/qa-tracker/tests/DataProvider/Model/DataPercentSerieTest.php:47	Avoid using static access to class '\Alxvng\QATracker\Tests\Mock' in method 'testConstructorItselfException'.
+/var/www/qa-tracker/tests/DataProvider/Model/DataStandardSerieTest.php:42	Avoid using static access to class '\Alxvng\QATracker\Tests\Mock' in method 'getInstanceProvider'.
+/var/www/qa-tracker/tests/DataProvider/Model/DataStandardSerieTest.php:46	Avoid using static access to class '\Alxvng\QATracker\Tests\Mock' in method 'getInstanceProvider'.
+/var/www/qa-tracker/tests/DataProvider/Model/DataStandardSerieTest.php:50	Avoid using static access to class '\Alxvng\QATracker\Tests\Mock' in method 'getInstanceProvider'.
+/var/www/qa-tracker/tests/DataProvider/Model/DataStandardSerieTest.php:60	Avoid using static access to class '\Alxvng\QATracker\Tests\Mock' in method 'testCollect'.
+/var/www/qa-tracker/tests/Mock.php:16	Avoid variables with short names like $id. Configured minimum length is 3.
+/var/www/qa-tracker/tests/Mock.php:35	Avoid variables with short names like $id. Configured minimum length is 3.
+/var/www/qa-tracker/tests/Mock.php:54	Avoid variables with short names like $id. Configured minimum length is 3.
+/var/www/qa-tracker/tests/Mock.php:83	Avoid using static access to class 'Alxvng\QATracker\Tests\Mock' in method 'dataPercentSerieWithPercentProvider'.
+/var/www/qa-tracker/tests/Mock.php:97	Avoid using static access to class 'Alxvng\QATracker\Tests\Mock' in method 'dataPercentSerieWithPercentProvider'.
+/var/www/qa-tracker/tests/Mock.php:118	Avoid using static access to class 'Alxvng\QATracker\Tests\Mock' in method 'dataPercentSerie'.
+/var/www/qa-tracker/tests/Mock.php:119	Avoid using static access to class 'Alxvng\QATracker\Tests\Mock' in method 'dataPercentSerie'.
+/var/www/qa-tracker/tests/Mock.php:139	Avoid using static access to class 'Alxvng\QATracker\Tests\Mock' in method 'dataPercentSerieWithItSelfProvider'.
