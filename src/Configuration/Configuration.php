@@ -11,7 +11,7 @@ class Configuration
 {
     public static function exampleConfigPath(): string
     {
-        return Root::internal().'/.qatracker.dist/config.yaml';
+        return Root::internal() . '/.qatracker.dist/config.yaml';
     }
 
     /**
@@ -37,7 +37,7 @@ class Configuration
         $config = [];
         if (isset($rootConfig['imports'])) {
             foreach ($rootConfig['imports'] as $import) {
-                $config = array_merge_recursive($config, Yaml::parseFile($baseDir.'/'.$import['resource']));
+                $config = array_merge_recursive($config, Yaml::parseFile($baseDir . '/' . $import['resource']));
             }
         }
         $config = array_merge_recursive($config, $rootConfig);
@@ -76,8 +76,8 @@ class Configuration
         }
 
         $isValid = false;
-        $isValid = $isValid ?: $isValid || static::validateStandardProvider($provider);
-        $isValid = $isValid ?: $isValid || static::validatePercentProvider($provider);
+        $isValid = $isValid ?: $isValid || static::validateStandardProvider($id, $provider);
+        $isValid = $isValid ?: $isValid || static::validatePercentProvider($id, $provider);
 
         if (!$isValid) {
             throw new RuntimeException('Your providers configuration is not valid');
@@ -93,13 +93,11 @@ class Configuration
         // TODO implement configuration validation for this part
     }
 
-    protected static function validateStandardProvider(array $provider): bool
+    protected static function validateStandardProvider(string $id, array $provider): bool
     {
         if (!AbstractDataSerie::isStandard($provider)) {
             return false;
         }
-
-        $id = $provider['id'];
 
         $class = $provider['class'] ?? null;
         if (!$class) {
@@ -117,13 +115,11 @@ class Configuration
         return true;
     }
 
-    protected static function validatePercentProvider(array $provider): bool
+    protected static function validatePercentProvider(string $id, array $provider): bool
     {
         if (!AbstractDataSerie::isPercent($provider)) {
             return false;
         }
-
-        $id = $provider['id'];
 
         $percentProvider = $provider['provider'] ?? null;
         if (!is_string($percentProvider)) {

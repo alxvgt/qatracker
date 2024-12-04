@@ -14,6 +14,7 @@ use DateTime;
 use Goat1000\SVGGraph\SVGGraph;
 use JsonException;
 use RuntimeException;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -26,6 +27,7 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
+#[AsCommand(name: 'track')]
 class TrackCommand extends Command
 {
     public const VERSION = 'v0.6.0';
@@ -188,7 +190,7 @@ class TrackCommand extends Command
      *
      * @return int
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
         $twig = TwigFactory::getTwig();

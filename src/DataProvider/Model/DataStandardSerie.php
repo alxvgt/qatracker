@@ -5,7 +5,6 @@ namespace Alxvng\QATracker\DataProvider\Model;
 use Alxvng\QATracker\DataProvider\DataProviderInterface;
 use DateTime;
 use JsonException;
-use Symfony\Component\String\Slugger\AsciiSlugger;
 use function Symfony\Component\String\u;
 
 class DataStandardSerie extends AbstractDataSerie
@@ -25,8 +24,7 @@ class DataStandardSerie extends AbstractDataSerie
      */
     public function __construct(array $config, string $baseDir, string $generatedDir)
     {
-        $slugger = new AsciiSlugger();
-        $this->slug = u($slugger->slug($config['id']))->lower();
+        $this->slug = u($config['id'])->kebab()->lower();
 
         $storageDir = $generatedDir.'/'.static::PROVIDERS_DIR;
         $this->storageFilePath = $storageDir.'/'.$this->getSlug().'.json';

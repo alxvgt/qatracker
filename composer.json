@@ -18,7 +18,7 @@
         "bin/qatracker"
     ],
     "require": {
-        "php": ">=7.4",
+        "php": ">=8.0",
         "ext-xml": "*",
         "ext-json": "*",
         "ext-simplexml": "*",
@@ -33,7 +33,7 @@
         "flow/jsonpath": "^0.5.0"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.16",
+        "friendsofphp/php-cs-fixer": "^3.0",
         "phpunit/phpunit": "^9.0",
         "symfony/var-dumper": "^7.0"
     },
