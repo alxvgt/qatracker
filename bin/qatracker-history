@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+
+use Alxvng\QATracker\Command\HistoryCommand;
+use Symfony\Component\Console\Application;
+
+include __DIR__.'/bootstrap.php';
+
+$application = new Application();
+$command = new HistoryCommand();
+$application->add(new HistoryCommand());
+
+$application->setDefaultCommand($command->getName(), true);
+$application->run();

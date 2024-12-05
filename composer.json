@@ -23,6 +23,7 @@
         "ext-json": "*",
         "ext-simplexml": "*",
         "ext-xml": "*",
+        "czproject/git-php": "^4.3",
         "flow/jsonpath": "^0.5.0",
         "goat1000/svggraph": "^3.5",
         "symfony/console": "^7.0",
