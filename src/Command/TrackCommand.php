@@ -35,12 +35,10 @@ class TrackCommand extends Command
     public const EXIT_SUCCESS = 0;
     public const EXIT_FAILURE = 1;
 
-    public const BASE_DIR = '.qatracker';
     public const GENERATED_DIR = 'generated';
     public const REPORT_DIR = 'report';
     public const REPORT_FILENAME = 'index.html';
     public const DEFAULT_TEMPLATE = 'index.html.twig';
-    public const CONFIG_FILENAME = 'config.yaml';
 
     protected const OUTPUT_DONE = ' <fg=green>done</>.';
 
@@ -48,16 +46,10 @@ class TrackCommand extends Command
     protected static ?string $configDir = null;
     protected static DateTime $trackDate;
 
-    protected static $defaultName = 'track';
-
-    public static function getBaseDir(): string
-    {
-        return static::$baseDir ?? Root::external();
-    }
 
     public static function getGeneratedDir(): string
     {
-        $dir = static::getConfigDir().'/'.static::GENERATED_DIR;
+        $dir = Root::getConfigDir() . '/' . static::GENERATED_DIR;
         if (!is_dir($dir) && !mkdir($dir, 0777, true)) {
             throw new RuntimeException(sprintf('Directory "%s" was not created', $dir));
         }
@@ -65,15 +57,6 @@ class TrackCommand extends Command
         return $dir;
     }
 
-    public static function getConfigDir(): string
-    {
-        return static::$configDir ?? static::getBaseDir().'/'.static::BASE_DIR;
-    }
-
-    public static function getConfigPath(): string
-    {
-        return static::getConfigDir().'/'.static::CONFIG_FILENAME;
-    }
 
     /**
      * @param $trackDate
@@ -97,7 +80,7 @@ class TrackCommand extends Command
 
     protected static function getReportPath()
     {
-        $path = static::getGeneratedDir().'/'.static::REPORT_DIR.'/'.static::REPORT_FILENAME;
+        $path = static::getGeneratedDir() . '/' . static::REPORT_DIR . '/' . static::REPORT_FILENAME;
 
         $dir = dirname($path);
         if (!is_dir($dir) && !mkdir($dir, 0777, true)) {
@@ -109,8 +92,6 @@ class TrackCommand extends Command
 
     protected function configure()
     {
-        $outputDir = static::getGeneratedDir().'/'.static::REPORT_DIR;
-
         $this
             ->setDescription('Track your QA indicators')
             ->setHelp('This command allows you to fetch some indicators and build simple QA charts...')
@@ -136,20 +117,19 @@ class TrackCommand extends Command
                 InputOption::VALUE_REQUIRED,
                 'Define a custom config directory for qatracker',
                 static::getConfigDir()
-            )
-        ;
+            );
     }
 
     protected function interact(InputInterface $input, OutputInterface $output)
     {
         $io = new SymfonyStyle($input, $output);
 
-        $baseDir = (string) $input->getOption('base-dir') ?: static::getConfigDir();
-        $configDir = (string) $input->getOption('config-dir') ?: static::getConfigDir();
+        $baseDir = (string)$input->getOption('base-dir') ?: static::getConfigDir();
+        $configDir = (string)$input->getOption('config-dir') ?: static::getConfigDir();
         static::$baseDir = $this->getAbsoluteDirPath($baseDir);
         static::$configDir = $this->getAbsoluteDirPath($configDir);
 
-        if (file_exists(static::getConfigPath())) {
+        if (file_exists(Root::getConfigPath())) {
             return;
         }
 
@@ -157,7 +137,7 @@ class TrackCommand extends Command
         $question = new ConfirmationQuestion(
             sprintf(
                 "\nFile %s does not exists.\nDo you want to create it from the sample file ? (Y/n)",
-                static::getConfigPath()
+                Root::getConfigPath()
             ),
             true
         );
@@ -166,11 +146,11 @@ class TrackCommand extends Command
             $io->warning(sprintf('The config file has not been created'));
         } else {
             $fs = new Filesystem();
-            $fs->copy(Configuration::exampleConfigPath(), static::getConfigPath());
+            $fs->copy(Configuration::exampleConfigPath(), Root::getConfigPath());
 
             $io->success(sprintf(
                 "The config file has been created at \"%s\".\nYou can now edit it to put your own configuration.",
-                static::getConfigPath()
+                Root::getConfigPath()
             ));
         }
 
@@ -180,15 +160,15 @@ class TrackCommand extends Command
     }
 
     /**
-     * @param InputInterface  $input
+     * @param InputInterface $input
      * @param OutputInterface $output
      *
-     * @throws RuntimeError
+     * @return int
      * @throws SyntaxError
      * @throws JsonException
      * @throws LoaderError
      *
-     * @return int
+     * @throws RuntimeError
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
@@ -200,9 +180,9 @@ class TrackCommand extends Command
             $io->write('Configuration');
             $io->listing(
                 [
-                    'Files read from : '.static::getBaseDir(),
-                    'Config read from : '.static::getConfigPath(),
-                    'Generated files write in : '.static::getGeneratedDir(),
+                    'Files read from : ' . Root::external(),
+                    'Config read from : ' . Root::getConfigPath(),
+                    'Generated files write in : ' . static::getGeneratedDir(),
                 ]
             );
 
@@ -212,8 +192,8 @@ class TrackCommand extends Command
             $section->writeln($message);
             $trackDate = $input->getOption('date');
             static::initializeTrackDate($trackDate);
-            $config = Configuration::load(static::getConfigPath());
-            $section->overwrite($message.static::OUTPUT_DONE);
+            $config = Configuration::load(Root::getConfigPath());
+            $section->overwrite($message . static::OUTPUT_DONE);
 
             /** @var ConsoleSectionOutput $section */
             $section = $output->section();
@@ -221,7 +201,7 @@ class TrackCommand extends Command
             $section->writeln($message);
             $dataSeriesConfig = $config['qatracker']['dataSeries'];
             $dataSeriesStack = $this->loadDataSeries($dataSeriesConfig);
-            $section->overwrite($message.static::OUTPUT_DONE);
+            $section->overwrite($message . static::OUTPUT_DONE);
             $io->newLine();
 
             $withTrack = !$input->getOption('no-track');
@@ -229,16 +209,23 @@ class TrackCommand extends Command
             $graphs = [];
 
             if ($withTrack) {
-                /** @var AbstractDataSerie $dataSerie */
-                foreach ($dataSeriesStack as $dataSerie) {
-                    /** @var ConsoleSectionOutput $section */
-                    $section = $output->section();
-                    $message = sprintf('Collecting new indicator for "%s"...', $dataSerie->getId());
-                    $section->writeln($message);
-                    $dataSerie->collect(static::getTrackDate());
-                    $section->overwrite($message.static::OUTPUT_DONE);
+                try {
+                    /** @var AbstractDataSerie $dataSerie */
+                    foreach ($dataSeriesStack as $dataSerie) {
+                        /** @var ConsoleSectionOutput $section */
+                        $section = $output->section();
+                        $message = sprintf('Collecting new indicator for "%s"...', $dataSerie->getId());
+                        $section->writeln($message);
+                        $dataSerie->collect(static::getTrackDate());
+                        $section->overwrite($message . static::OUTPUT_DONE);
+                    }
+                    $io->newLine();
+                } catch (\Throwable $t) {
+                    $io->newLine();
+                    $io->error([$t->getMessage(), 'Have you installed the tools ? See: bin/install-tools']);
+                    return Command::FAILURE;
                 }
-                $io->newLine();
+
             }
 
             if ($withReport) {
@@ -275,14 +262,14 @@ class TrackCommand extends Command
                     'generatedAt' => new DateTime(),
                 ]);
                 file_put_contents(static::getReportPath(), $html);
-                $section->overwrite($message.static::OUTPUT_DONE);
+                $section->overwrite($message . static::OUTPUT_DONE);
                 $io->newLine();
             }
 
             $io->success(
                 [
                     sprintf(
-                        "Well done ! You have track new QA indicators !\n".
+                        "Well done ! You have track new QA indicators !\n" .
                         'Report generated at : %s',
                         static::getReportPath()
                     ),
@@ -300,9 +287,9 @@ class TrackCommand extends Command
     /**
      * @param $providersConfig
      *
+     * @return array
      * @throws JsonException
      *
-     * @return array
      */
     protected function loadDataSeries($providersConfig): array
     {

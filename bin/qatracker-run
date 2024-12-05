@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php
+
+use Alxvng\QATracker\Command\InstallCommand;
+use Alxvng\QATracker\Command\RunCommand;
+use Symfony\Component\Console\Application;
+
+include __DIR__.'/bootstrap.php';
+
+$application = new Application();
+$command = new RunCommand();
+$application->add(new RunCommand());
+
+$application->setDefaultCommand($command->getName(), true);
+$application->run();

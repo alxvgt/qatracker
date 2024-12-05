@@ -19,18 +19,19 @@
     ],
     "require": {
         "php": ">=8.0",
-        "ext-xml": "*",
+        "ext-fileinfo": "*",
         "ext-json": "*",
         "ext-simplexml": "*",
-        "ext-fileinfo": "*",
-        "symfony/console": "^7.0",
+        "ext-xml": "*",
+        "flow/jsonpath": "^0.5.0",
         "goat1000/svggraph": "^3.5",
-        "twig/twig": "^3.0",
-        "symfony/string": "^7.0",
-        "symfony/yaml": "^7.0",
+        "symfony/console": "^7.0",
         "symfony/filesystem": "^7.0",
         "symfony/finder": "^7.0",
-        "flow/jsonpath": "^0.5.0"
+        "symfony/process": "^7.2",
+        "symfony/string": "^7.0",
+        "symfony/yaml": "^7.0",
+        "twig/twig": "^3.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.0",

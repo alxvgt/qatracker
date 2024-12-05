@@ -26,40 +26,6 @@ clean-qatracker: ## Remove qatracker bin
 clean-qatracker:
 	rm -f ${INSTALL_DIR}/qatracker.phar
 
-clean: ## Remove all installed tools and clear the log directory
-clean: clean-qatracker
-	rm -f ${INSTALL_DIR}/phploc.phar
-	rm -f ${INSTALL_DIR}/phpcpd.phar
-	rm -f ${INSTALL_DIR}/phpmd.phar
-	rm -f ${INSTALL_DIR}/phpmetrics.phar
-	rm -rf ${LOG_DIR}
-
-
-${INSTALL_DIR}/phploc.phar:
-	wget --show-progress -q -P ${INSTALL_DIR} https://phar.phpunit.de/phploc.phar
-	chmod +x ${INSTALL_DIR}/phploc.phar
-	printf "\033[92m > Complete: tool installed at \"${INSTALL_DIR}/phploc.phar\"\n\033[0m"
-
-${INSTALL_DIR}/phpcpd.phar:
-	wget --show-progress -q -P ${INSTALL_DIR} https://phar.phpunit.de/phpcpd.phar
-	chmod +x ${INSTALL_DIR}/phpcpd.phar
-	printf "\033[92m > Complete: tool installed at \"${INSTALL_DIR}/phpcpd.phar\"\n\033[0m"
-
-${INSTALL_DIR}/phpmd.phar:
-	wget --show-progress -q -P ${INSTALL_DIR} https://phpmd.org/static/latest/phpmd.phar
-	chmod +x ${INSTALL_DIR}/phpmd.phar
-	printf "\033[92m > Complete: tool installed at \"${INSTALL_DIR}/phpmd.phar\"\n\033[0m"
-
-${INSTALL_DIR}/phpmetrics.phar:
-	wget --show-progress -q -P ${INSTALL_DIR} https://github.com/phpmetrics/PhpMetrics/raw/master/releases/phpmetrics.phar
-	chmod +x ${INSTALL_DIR}/phpmetrics.phar
-	printf "\033[92m > Complete: tool installed at \"${INSTALL_DIR}/phpmetrics.phar\"\n\033[0m"
-
-${INSTALL_DIR}/qatracker.phar:
-	wget --show-progress -q -P ${INSTALL_DIR} https://github.com/alxvgt/qa-tracker/raw/master/release/qatracker.phar
-	chmod +x ${INSTALL_DIR}/qatracker.phar
-	printf "\033[92m > Complete: tool installed at \"${INSTALL_DIR}/qatracker.phar\"\n\033[0m"
-
 ##@ Run
 
 run-all: ## Run all php code tools

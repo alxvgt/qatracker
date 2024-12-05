@@ -14,13 +14,10 @@ class Configuration
         return Root::internal() . '/.qatracker.dist/config.yaml';
     }
 
-    /**
-     * @param string $configPath
-     *
-     * @return mixed
-     */
-    public static function load(string $configPath)
+    public static function load(?string $configPath = null): array
     {
+        $configPath = $configPath ?? Root::getConfigPath();
+
         if (!file_exists($configPath)) {
             $exampleConfig = file_get_contents(static::exampleConfigPath());
             throw new RuntimeException(sprintf("File %s does not exists. You should run :\n#> touch .qatracker/config.yaml\n\nNow edit this file to put your custom configuration, example : \n%s", $configPath, $exampleConfig));
