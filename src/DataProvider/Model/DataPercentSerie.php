@@ -42,8 +42,12 @@ class DataPercentSerie extends AbstractDataSerie
      *
      * @throws JsonException
      */
-    public function collect(DateTime $trackDate): void
+    public function collect(DateTime $trackDate, bool $reset): void
     {
+        if($reset){
+            $this->reset();
+        }
+
         $dataSerie = $this->getDataSerie();
 
         $totalPercentProvider = $this->getTotalPercentDataSerie();

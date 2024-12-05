@@ -39,7 +39,6 @@ class RunCommand extends Command
         $configuration = Configuration::load();
 
         foreach ($configuration['qatracker']['tools'] as $toolName => $commandLine) {
-
             $process = new Process(\explode(' ', $commandLine));
             $process->setTimeout(0);
             $process->run();

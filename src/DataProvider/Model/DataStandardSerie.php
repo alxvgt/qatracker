@@ -16,7 +16,7 @@ class DataStandardSerie extends AbstractDataSerie
     /**
      * DataProvider constructor.
      *
-     * @param array  $config
+     * @param array $config
      * @param string $baseDir
      * @param string $generatedDir
      *
@@ -26,8 +26,8 @@ class DataStandardSerie extends AbstractDataSerie
     {
         $this->slug = u($config['id'])->kebab()->lower();
 
-        $storageDir = $generatedDir.'/'.static::PROVIDERS_DIR;
-        $this->storageFilePath = $storageDir.'/'.$this->getSlug().'.json';
+        $storageDir = $generatedDir . '/' . static::PROVIDERS_DIR;
+        $this->storageFilePath = $storageDir . '/' . $this->getSlug() . '.json';
 
         $this->id = $config['id'];
         $this->class = $config['class'];
@@ -38,12 +38,14 @@ class DataStandardSerie extends AbstractDataSerie
     }
 
     /**
-     * @param DateTime $trackDate
-     *
      * @throws JsonException
      */
-    public function collect(DateTime $trackDate): void
+    public function collect(DateTime $trackDate, bool $reset): void
     {
+        if ($reset) {
+            $this->reset();
+        }
+
         $provider = $this->getInstance();
         $value = $provider->fetchData();
         $this->addData($value, $trackDate);

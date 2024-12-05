@@ -5,6 +5,7 @@ namespace Alxvng\QATracker\DataProvider\Model;
 use DateTime;
 use JsonException;
 use RuntimeException;
+use const JSON_THROW_ON_ERROR;
 
 abstract class AbstractDataSerie
 {
@@ -44,11 +45,22 @@ abstract class AbstractDataSerie
     public function save()
     {
         $dir = dirname($this->getStorageFilePath());
-        if (!is_dir($dir) && !mkdir($dir, 0777, true)) {
+        if (!is_dir($dir) && !mkdir($dir, 0777, true) && !is_dir($dir)) {
             throw new RuntimeException(sprintf('Directory "%s" was not created', $dir));
         }
 
         file_put_contents($this->getStorageFilePath(), json_encode($this->data, JSON_THROW_ON_ERROR, 512));
+    }
+
+    public function reset()
+    {
+        $dir = dirname($this->getStorageFilePath());
+        if (!is_dir($dir) && !mkdir($dir, 0777, true) && !is_dir($dir)) {
+            throw new RuntimeException(sprintf('Directory "%s" was not created', $dir));
+        }
+
+        file_put_contents($this->getStorageFilePath(), '');
+        $this->data = [];
     }
 
     public function getSlug(): string
@@ -71,7 +83,7 @@ abstract class AbstractDataSerie
         return $this->data;
     }
 
-    abstract public function collect(DateTime $trackDate): void;
+    abstract public function collect(DateTime $trackDate, bool $reset): void;
 
     /**
      * @throws JsonException
