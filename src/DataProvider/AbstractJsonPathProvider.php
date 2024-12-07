@@ -2,6 +2,7 @@
 
 namespace Alxvng\QATracker\DataProvider;
 
+use Alxvng\QATracker\DataProvider\Exception\FileNotFoundException;
 use JsonException;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -21,6 +22,7 @@ abstract class AbstractJsonPathProvider implements DataProviderInterface
      * @param string $baseDir
      * @param string $inputFilePath
      * @param string $jsonPathQuery
+     * @throws FileNotFoundException
      */
     public function __construct(string $baseDir, string $inputFilePath, string $jsonPathQuery)
     {
@@ -29,7 +31,7 @@ abstract class AbstractJsonPathProvider implements DataProviderInterface
         $this->jsonPathQuery = $jsonPathQuery;
 
         if (!file_exists($this->inputFilePath)) {
-            throw new \RuntimeException(sprintf('Unable to find file at %s', $this->inputFilePath));
+            throw new FileNotFoundException(sprintf('Unable to find file at %s', $this->inputFilePath));
         }
 
         if (!in_array(mime_content_type($this->inputFilePath), static::MIME_TYPES, true)) {

@@ -5,6 +5,7 @@ namespace Alxvng\QATracker\Command;
 use Alxvng\QATracker\Chart\Chart;
 use Alxvng\QATracker\Chart\ChartGenerator;
 use Alxvng\QATracker\Configuration\Configuration;
+use Alxvng\QATracker\DataProvider\Exception\FileNotFoundException;
 use Alxvng\QATracker\DataProvider\Model\AbstractDataSerie;
 use Alxvng\QATracker\DataProvider\Model\DataPercentSerie;
 use Alxvng\QATracker\DataProvider\Model\DataStandardSerie;
@@ -194,6 +195,7 @@ class TrackCommand extends Command
             $resetDataSeries = $input->getOption('reset-data-series');
             $graphs = [];
 
+            $warnings = [];
             if ($withTrack) {
                 try {
                     /** @var AbstractDataSerie $dataSerie */
@@ -202,7 +204,13 @@ class TrackCommand extends Command
                         $section = $output->section();
                         $message = sprintf('Collecting new indicator for "%s"...', $dataSerie->getId());
                         $section->writeln($message);
-                        $dataSerie->collect(static::getTrackDate(), $resetDataSeries);
+
+                        try {
+                            $dataSerie->collect(static::getTrackDate(), $resetDataSeries);
+                        } catch (FileNotFoundException $e) {
+                            $warnings [] = $e->getMessage();
+                            continue;
+                        }
                         $section->overwrite($message . static::OUTPUT_DONE);
                     }
                     $io->newLine();
@@ -212,6 +220,9 @@ class TrackCommand extends Command
                     return Command::FAILURE;
                 }
 
+                if ($warnings !== []) {
+                    $io->warning($warnings);
+                }
             }
 
             if ($withReport) {

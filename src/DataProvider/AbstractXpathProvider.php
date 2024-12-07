@@ -2,6 +2,7 @@
 
 namespace Alxvng\QATracker\DataProvider;
 
+use Alxvng\QATracker\DataProvider\Exception\FileNotFoundException;
 use RuntimeException;
 use SimpleXMLElement;
 use Symfony\Component\Filesystem\Filesystem;
@@ -27,7 +28,8 @@ abstract class AbstractXpathProvider implements DataProviderInterface
      * @param string $baseDir
      * @param string $inputFilePath
      * @param string $xpathQuery
-     * @param array  $namespaceParameters
+     * @param array $namespaceParameters
+     * @throws FileNotFoundException
      */
     public function __construct(string $baseDir, string $inputFilePath, string $xpathQuery, array $namespaceParameters = [])
     {
@@ -37,7 +39,7 @@ abstract class AbstractXpathProvider implements DataProviderInterface
         $this->namespaceParameters = $namespaceParameters;
 
         if (!file_exists($this->inputFilePath)) {
-            throw new RuntimeException(sprintf('Unable to find file at %s', $this->inputFilePath));
+            throw new FileNotFoundException(sprintf('Unable to find file at %s', $this->inputFilePath));
         }
 
         if (!in_array(mime_content_type($this->inputFilePath), static::MIME_TYPES, true)) {

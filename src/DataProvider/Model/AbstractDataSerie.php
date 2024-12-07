@@ -94,6 +94,7 @@ abstract class AbstractDataSerie
             return;
         }
 
-        $this->data = json_decode(file_get_contents($this->getStorageFilePath()), true, 512, JSON_THROW_ON_ERROR);
+        $data = json_decode(file_get_contents($this->getStorageFilePath()), true);
+        $this->data = \is_array($data) ? $data : [];
     }
 }
