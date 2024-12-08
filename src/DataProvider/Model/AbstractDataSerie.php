@@ -3,6 +3,7 @@
 namespace Alxvng\QATracker\DataProvider\Model;
 
 use DateTime;
+use DateTimeImmutable;
 use JsonException;
 use RuntimeException;
 use const JSON_THROW_ON_ERROR;
@@ -29,9 +30,8 @@ abstract class AbstractDataSerie
 
     /**
      * @param $value
-     * @param DateTime $trackDate
      */
-    public function addData($value, DateTime $trackDate): void
+    public function addData($value, DateTimeImmutable $trackDate): void
     {
         $this->data[$trackDate->format(static::DATE_FORMAT)] = round($value, 2);
         $data = $this->data;
@@ -83,7 +83,7 @@ abstract class AbstractDataSerie
         return $this->data;
     }
 
-    abstract public function collect(DateTime $trackDate, bool $reset): void;
+    abstract public function collect(DateTimeImmutable $trackDate, bool $reset): void;
 
     /**
      * @throws JsonException

@@ -4,6 +4,7 @@ namespace Alxvng\QATracker\DataProvider\Model;
 
 use Alxvng\QATracker\DataProvider\DataProviderInterface;
 use DateTime;
+use DateTimeImmutable;
 use JsonException;
 use function Symfony\Component\String\u;
 
@@ -40,7 +41,7 @@ class DataStandardSerie extends AbstractDataSerie
     /**
      * @throws JsonException
      */
-    public function collect(DateTime $trackDate, bool $reset): void
+    public function collect(DateTimeImmutable $trackDate, bool $reset): void
     {
         if ($reset) {
             $this->reset();

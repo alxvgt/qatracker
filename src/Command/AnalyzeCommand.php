@@ -22,24 +22,31 @@ use Symfony\Component\Console\Output\ConsoleSectionOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
-#[AsCommand(name: 'run')]
-class RunCommand extends Command
+#[AsCommand(name: 'analyze')]
+class AnalyzeCommand extends BaseCommand
 {
+    protected function configure(): void
+    {
+        $this
+            ->setDescription('Run QA tools');
+    }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        parent::execute($input, $output);
+
         $io = new SymfonyStyle($input, $output);
+        $io->title('Analyze QA on your project');
 
-        $configuration = Configuration::load();
-
-        foreach ($configuration['qatracker']['tools'] as $toolName => $commandLine) {
-            $io->writeln('Processing ' . $commandLine);
+        foreach (Configuration::analyze() as $toolName => $commandLine) {
+            $io->writeln('Processing ' . $this->interpret($commandLine));
             $process = Process::fromShellCommandline($commandLine);
             $process->setTimeout(0);
             $process->run();

@@ -29,13 +29,22 @@ use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
 #[AsCommand(name: 'install')]
-class InstallCommand extends Command
+class InstallCommand extends BaseCommand
 {
-    public const INSTALL_DIR = '/tmp';
-
-    public function installPhar(SymfonyStyle $io, array $tools): void
+    protected function configure(): void
     {
-        foreach ($tools as $toolName => $tool) {
+        $this
+            ->setDescription('Install default QA tools');
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output): int
+    {
+        parent::execute($input, $output);
+
+        $io = new SymfonyStyle($input, $output);
+        $io->title('Install QA tools');
+
+        foreach (Configuration::install() as $tool) {
 
             $isActionApproved = $io->ask(
                 '🤔 Do you want to install ' . $tool['binName'] . ' ? [y|n]',
@@ -44,40 +53,14 @@ class InstallCommand extends Command
             );
 
             if ($isActionApproved) {
-                $process = new Process(['wget', '--show-progress', '-q', '-P', self::INSTALL_DIR, $tool['downloadLink']]);
+                $process = new Process(['wget', '--show-progress', '-q', '-P', Configuration::tmpDir(), $tool['downloadLink']]);
                 $process->run();
-                $installedPath = self::INSTALL_DIR . '/' . $tool['binName'];
+                $installedPath = Configuration::tmpDir() . '/' . $tool['binName'];
                 $process = new Process(['chmod', '+x', $installedPath]);
                 $process->run();
                 $io->success($installedPath . ' installed.');
             }
         }
-    }
-
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
-        $io = new SymfonyStyle($input, $output);
-
-        $tools = [
-            'phploc' => [
-                'downloadLink' => 'https://phar.phpunit.de/phploc.phar',
-                'binName' => 'phploc.phar',
-            ],
-            'phpcpd' => [
-                'downloadLink' => 'https://phar.phpunit.de/phpcpd.phar',
-                'binName' => 'phpcpd.phar',
-            ],
-            'phpmd' => [
-                'downloadLink' => 'https://phpmd.org/static/latest/phpmd.phar',
-                'binName' => 'phpmd.phar',
-            ],
-            'phpmetrics' => [
-                'downloadLink' => 'https://github.com/phpmetrics/PhpMetrics/raw/master/releases/phpmetrics.phar',
-                'binName' => 'phpmetrics.phar',
-            ],
-        ];
-
-        $this->installPhar($io, $tools);
 
         return Command::SUCCESS;
     }

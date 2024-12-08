@@ -5,6 +5,7 @@ namespace Alxvng\QATracker\Configuration;
 use Alxvng\QATracker\DataProvider\Model\AbstractDataSerie;
 use Alxvng\QATracker\Root\Root;
 use RuntimeException;
+use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\Yaml\Yaml;
 
 class Configuration
@@ -81,7 +82,7 @@ class Configuration
         }
     }
 
-    protected static function validateChart(string $id, array $chart)
+    protected static function validateChart(string $id, array $chart): void
     {
         if (!$id) {
             throw new RuntimeException('You must defined an id for your provider');
@@ -154,5 +155,49 @@ class Configuration
         $config['qatracker']['charts'] = $charts;
 
         return $config;
+    }
+
+    public static function tmpDir(): string
+    {
+        return self::load()['qatracker']['tmpDir'] ?? '/tmp';
+    }
+
+    public static function install(): array
+    {
+        return self::load()['qatracker']['tools'] ?? [];
+    }
+
+    public static function analyze(): array
+    {
+        return self::load()['qatracker']['analyze'] ?? [];
+    }
+
+    public static function getGeneratedDir(): string
+    {
+        return Root::getConfigDir() . '/generated';
+    }
+
+    public static function getReportDir(): string
+    {
+        return self::getGeneratedDir() . '/report';
+    }
+
+    public static function getReportFilename(): string
+    {
+        return self::getReportDir() . '/index.html';
+    }
+
+    public static function getDataSeries():array
+    {
+        return self::load()['qatracker']['dataSeries'];
+    }
+    public static function getCharts():array
+    {
+        return self::load()['qatracker']['charts'];
+    }
+
+    public static function version(): string
+    {
+        return '0.6.0';
     }
 }

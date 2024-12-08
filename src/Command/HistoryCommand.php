@@ -40,43 +40,12 @@ use Twig\Error\SyntaxError;
 use function explode;
 
 #[AsCommand(name: 'history')]
-class HistoryCommand extends Command
+class HistoryCommand extends BaseCommand
 {
-    public const WORK_DIR = Root::BASE_DIR . '/tmp';
-
-    public function trackMetrics(DateTimeImmutable $date, $reset = false): void
-    {
-        $commandLine = 'vendor/alxvng/qatracker/bin/qatracker-track -vvv --date ' . $date->format('YmdHis') . ($reset ? ' --reset-data-series' : '');
-        $process = Process::fromShellCommandline($commandLine);
-        $process->mustRun();
-    }
-
-    public function runTools(): void
-    {
-        $commandLine = "vendor/alxvng/qatracker/bin/qatracker-run -vvv";
-        $process = Process::fromShellCommandline(
-            $commandLine,
-            env: [
-                'PROJECT_PATHS_PHPLOC' => sprintf("%s/src %s/tests ", self::WORK_DIR, self::WORK_DIR),
-                'PROJECT_PATHS_PHPCPD' => sprintf("%s/src %s/tests ", self::WORK_DIR, self::WORK_DIR),
-                'PROJECT_PATHS_PHPMD' => sprintf("%s/src,%s/tests", self::WORK_DIR, self::WORK_DIR),
-                'PROJECT_DIR_PHPUNIT' => self::WORK_DIR,
-            ]
-        );
-        $process->mustRun();
-    }
-
-    public function checkoutByDate(DateTimeImmutable $date, GitRepository $repo): void
-    {
-        $commitByDate = $date->format('Y-m-d H:i:s');
-        $commitRefByDateCommand = 'git rev-list -n 1 --first-parent --before="' . $commitByDate . '" main';
-        $commitRefByDate = trim(Process::fromShellCommandline($commitRefByDateCommand, self::WORK_DIR)->mustRun()->getOutput());
-        $repo->checkout($commitRefByDate);
-    }
-
     protected function configure(): void
     {
         $this
+            ->setDescription('Run QATracker on your git history')
             ->addArgument(
                 name: 'from',
                 mode: InputArgument::REQUIRED,
@@ -101,9 +70,9 @@ class HistoryCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $fs = new Filesystem();
         $finder = new Finder();
-        $fs->remove(self::WORK_DIR);
-        $fs->mkdir(self::WORK_DIR);
-        $workDir = $finder->in(self::WORK_DIR);
+        $fs->remove(Configuration::tmpDir());
+        $fs->mkdir(Configuration::tmpDir());
+        $workDir = $finder->in(Configuration::tmpDir());
 
         $git = new Git();
         $repo = $git->open(Root::external());
@@ -111,9 +80,9 @@ class HistoryCommand extends Command
         $remoteUrl = reset($remoteUrl);
 
         if ($workDir->hasResults()) {
-            $repo = $git->open(self::WORK_DIR);
+            $repo = $git->open(Configuration::tmpDir());
         } else {
-            $repo = $git->cloneRepository($remoteUrl, self::WORK_DIR);
+            $repo = $git->cloneRepository($remoteUrl, Configuration::tmpDir());
         }
 
         $now = $input->getArgument('to') ? new DateTimeImmutable($input->getArgument('to')) : new DateTimeImmutable();
@@ -136,6 +105,33 @@ class HistoryCommand extends Command
         }
 
         return Command::SUCCESS;
+    }
+
+    public function trackMetrics(DateTimeImmutable $date, $reset = false): void
+    {
+        $commandLine = 'vendor/alxvng/qatracker/bin/qatracker track -vvv --date ' . $date->format('YmdHis') . ($reset ? ' --reset-data-series' : '');
+        $process = Process::fromShellCommandline($commandLine);
+        $process->mustRun();
+    }
+
+    public function runTools(): void
+    {
+        $commandLine = "vendor/alxvng/qatracker/bin/qatracker run -vvv";
+        $process = Process::fromShellCommandline(
+            $commandLine,
+            env: [
+                'WORK_DIR' => Configuration::tmpDir(),
+            ]
+        );
+        $process->mustRun();
+    }
+
+    public function checkoutByDate(DateTimeImmutable $date, GitRepository $repo): void
+    {
+        $commitByDate = $date->format('Y-m-d H:i:s');
+        $commitRefByDateCommand = 'git rev-list -n 1 --first-parent --before="' . $commitByDate . '" main';
+        $commitRefByDate = trim(Process::fromShellCommandline($commitRefByDateCommand, Configuration::tmpDir())->mustRun()->getOutput());
+        $repo->checkout($commitRefByDate);
     }
 
 }

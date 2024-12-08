@@ -2,6 +2,8 @@
 
 namespace Alxvng\QATracker\Root;
 
+use Alxvng\QATracker\Configuration\Configuration;
+
 class Root
 {
     public const BASE_DIR = '.qatracker';
@@ -32,4 +34,5 @@ class Root
     {
         return self::getConfigDir() . '/' . static::CONFIG_FILENAME;
     }
+
 }

@@ -13,7 +13,6 @@ use Alxvng\QATracker\DataProvider\Model\DataStandardSerie;
 use Alxvng\QATracker\Root\Root;
 use Alxvng\QATracker\Twig\TwigFactory;
 use DateTime;
-use DateTimeImmutable;
 use Goat1000\SVGGraph\SVGGraph;
 use JsonException;
 use RuntimeException;
@@ -30,8 +29,8 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
-#[AsCommand(name: 'track')]
-class TrackCommand extends BaseCommand
+#[AsCommand(name: 'report')]
+class ReportCommand extends BaseCommand
 {
     private DataSerieLoader $dataSerieLoader;
 
@@ -44,20 +43,7 @@ class TrackCommand extends BaseCommand
     protected function configure(): void
     {
         $this
-            ->setDescription('Track your QA indicators')
-            ->addOption(
-                'date',
-                null,
-                InputOption::VALUE_REQUIRED,
-                sprintf('Use this date instead today to collect data (use format "%s")', AbstractDataSerie::DATE_FORMAT),
-                (new DateTime())->format(AbstractDataSerie::DATE_FORMAT)
-            )
-            ->addOption(
-                'reset-data-series',
-                null,
-                InputOption::VALUE_NONE,
-                'Remove all data series before collecting',
-            );
+            ->setDescription('Generate report from your QA indicators');
     }
 
     /**
@@ -74,45 +60,61 @@ class TrackCommand extends BaseCommand
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+        $twig = TwigFactory::getTwig();
         try {
-            $io->title('Track your QA indicators');
-
-            $trackDate = new DateTimeImmutable($input->getOption('date'));
-            $resetDataSeries = $input->getOption('reset-data-series');
+            $io->title('Generate report from your QA indicators');
             $dataSeriesStack = $this->dataSerieLoader->load();
 
-            try {
-                /** @var AbstractDataSerie $dataSerie */
-                foreach ($dataSeriesStack as $dataSerie) {
+            /** @var ConsoleSectionOutput $section */
+            $section = $output->section();
+            $message = 'Generating charts : ';
+            $section->writeln($message);
 
-                    /** @var ConsoleSectionOutput $section */
-                    $section = $output->section();
-                    $message = sprintf('Collecting new indicator for "%s"...', $dataSerie->getId());
-                    $section->writeln($message);
+            $graphs = [];
+            foreach (Configuration::getCharts() as $chart) {
+                $chart = new Chart($chart, $dataSeriesStack);
 
-                    try {
-                        $dataSerie->collect($trackDate, $resetDataSeries);
-                    } catch (FileNotFoundException $t) {
-                        $section->overwrite($message . static::OUTPUT_SKIP . self::yellow(' (' . $t->getMessage() . ')'));
-                        continue;
-                    }
+                $graphs[] = ChartGenerator::generate(
+                    $chart->getFirstProvider()->getData(),
+                    $chart->getType(),
+                    $chart->getGraphSettings()
+                );
+                $message .= '.';
+                $section->overwrite($message);
+            }
+            $io->newLine();
 
-                    $section->overwrite($message . static::OUTPUT_DONE);
-                }
+            if ($graphs !== []) {
+                /** @var ConsoleSectionOutput $section */
+                $section = $output->section();
+                $message = sprintf('Rendering report...');
+                $section->writeln($message);
+
+                $html = $twig->render('index.html.twig', [
+                    'graphs' => $graphs,
+                    'js' => SVGGraph::fetchJavascript(),
+                    'version' => Configuration::version(),
+                    'generatedAt' => new DateTime(),
+                ]);
+                file_put_contents(Configuration::getReportFilename(), $html);
+                $section->overwrite($message . static::OUTPUT_DONE);
                 $io->newLine();
-            } catch (FileNotFoundException $t) {
-                $io->warning([$t->getMessage(), 'Skip']);
-            } catch (\Throwable $t) {
-                $io->newLine();
-                $io->error([$t->getMessage(), 'Have you installed the tools ? See help.']);
-                return Command::FAILURE;
             }
 
-            $io->success("Well done ! You have track new QA indicators !");
+            $io->success(
+                [
+                    sprintf(
+                        "Well done !\n" .
+                        'Report generated at : %s',
+                        Configuration::getReportFilename()
+                    ),
+                ]
+            );
 
             return Command::SUCCESS;
         } catch (\RuntimeException $e) {
             $io->error($e->getMessage());
+
             return Command::FAILURE;
         }
     }
