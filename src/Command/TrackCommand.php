@@ -12,6 +12,7 @@ use Alxvng\QATracker\DataProvider\Model\DataSerieLoader;
 use Alxvng\QATracker\DataProvider\Model\DataStandardSerie;
 use Alxvng\QATracker\Root\Root;
 use Alxvng\QATracker\Twig\TwigFactory;
+use DateMalformedStringException;
 use DateTime;
 use DateTimeImmutable;
 use Goat1000\SVGGraph\SVGGraph;
@@ -65,11 +66,7 @@ class TrackCommand extends BaseCommand
      * @param OutputInterface $output
      *
      * @return int
-     * @throws SyntaxError
-     * @throws JsonException
-     * @throws LoaderError
-     *
-     * @throws RuntimeError
+     * @throws DateMalformedStringException
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
@@ -93,11 +90,11 @@ class TrackCommand extends BaseCommand
                     try {
                         $dataSerie->collect($trackDate, $resetDataSeries);
                     } catch (FileNotFoundException $t) {
-                        $section->overwrite($message . static::OUTPUT_SKIP . self::yellow(' (' . $t->getMessage() . ')'));
+                        $section->overwrite($message . ' ' . static::OUTPUT_SKIP . self::yellow(' (' . $t->getMessage() . ')'));
                         continue;
                     }
 
-                    $section->overwrite($message . static::OUTPUT_DONE);
+                    $section->overwrite($message . ' ' . static::OUTPUT_DONE);
                 }
                 $io->newLine();
             } catch (FileNotFoundException $t) {

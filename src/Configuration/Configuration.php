@@ -159,7 +159,7 @@ class Configuration
 
     public static function tmpDir(): string
     {
-        return self::load()['qatracker']['tmpDir'] ?? '/tmp';
+        return self::load()['qatracker']['tmpDir'] ?? '/tmp/qatracker';
     }
 
     public static function install(): array

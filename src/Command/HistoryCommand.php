@@ -20,6 +20,7 @@ use JsonException;
 use RuntimeException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\Input;
@@ -27,7 +28,11 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\BufferedOutput;
+use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\ConsoleSectionOutput;
+use Symfony\Component\Console\Output\NullOutput;
+use Symfony\Component\Console\Output\Output;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -64,66 +69,93 @@ class HistoryCommand extends BaseCommand
     }
 
 
+    /**
+     * @param ConsoleOutput $output
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         // eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_ed25519_docker
         $io = new SymfonyStyle($input, $output);
+        $io->title('Track QA on project history');
+
         $fs = new Filesystem();
         $finder = new Finder();
         $fs->remove(Configuration::tmpDir());
         $fs->mkdir(Configuration::tmpDir());
         $workDir = $finder->in(Configuration::tmpDir());
 
+        $analyzeCommand = $this->getApplication()->get('analyze');
+        $trackCommand = $this->getApplication()->get('track');
+        $reportCommand = $this->getApplication()->get('report');
+
         $git = new Git();
         $repo = $git->open(Root::external());
         $remoteUrl = $repo->execute(explode(' ', 'config --get remote.origin.url'));
         $remoteUrl = reset($remoteUrl);
 
+        /** @var ConsoleSectionOutput $section */
+        $section = $output->section();
+        $section->write('Cloning repository in ' . Configuration::tmpDir() . '...');
         if ($workDir->hasResults()) {
             $repo = $git->open(Configuration::tmpDir());
         } else {
             $repo = $git->cloneRepository($remoteUrl, Configuration::tmpDir());
         }
+        $section->writeln(self::OUTPUT_DONE);
 
         $now = $input->getArgument('to') ? new DateTimeImmutable($input->getArgument('to')) : new DateTimeImmutable();
         $date = new DateTimeImmutable($input->getArgument('from'));
         $reset = true;
-        while ($date <= $now) {
-            $io->writeln('Processing ' . $date->format('Y-m-d H:i:s'));
 
-            $io->writeln('Checking out');
+        while ($date <= $now) {
+            /** @var ConsoleSectionOutput $dateSection */
+            $dateSection = $output->section();
+
+            $dateSection->overwrite($date->format('Y-m-d H:i:s') . ': ' . self::yellow('checking out...'));
             $this->checkoutByDate($date, $repo);
 
-            $io->writeln('Running tools');
-            $this->runTools();
+            $dateSection->overwrite($date->format('Y-m-d H:i:s') . ': ' . self::yellow('analyzing with tools...'));
+            $result = $analyzeCommand->run(new ArrayInput([]), new NullOutput());
+            if ($result !== Command::SUCCESS) {
+                $dateSection->overwrite($date->format('Y-m-d H:i:s') . ': ' . self::yellow('analyzing with tools, skiped...'));
+                $date = $date->add(new DateInterval('P7D'));
+                continue;
+            }
 
-            $io->writeln('Tracking metrics');
-            $this->trackMetrics($date, $reset);
+            $dateSection->overwrite($date->format('Y-m-d H:i:s') . ': ' . self::yellow('tracking metrics...'));
+            $subOutput = clone $output;
+            $subOutput->setVerbosity(Output::VERBOSITY_SILENT);
+            $result = $trackCommand->run(new ArrayInput(
+                ['--date' => $date->format('YmdHis')]
+                + ($reset ? ['--reset-data-series' => true] : [])
+            ), $subOutput);
+            if ($result !== Command::SUCCESS) {
+                $dateSection->overwrite($date->format('Y-m-d H:i:s') . ': ' . self::yellow('tracking metrics, skiped...'));
+                $date = $date->add(new DateInterval('P7D'));
+                continue;
+            }
+
+            $dateSection->overwrite($date->format('Y-m-d H:i:s') . ': ' . self::OUTPUT_DONE);
 
             $date = $date->add(new DateInterval('P7D'));
             $reset = false;
         }
 
+        $dateSection->overwrite('Generating report: ' . self::yellow('processing...'));
+        $subOutput = clone $output;
+        $subOutput->setVerbosity(Output::VERBOSITY_SILENT);
+        $result = $reportCommand->run(new ArrayInput([]), $subOutput);
+        if ($result !== Command::SUCCESS) {
+            $io->newLine();
+            $io->error("Unalbe to generate report :-(");
+            return Command::FAILURE;
+        }
+        $dateSection->overwrite('Generating report: ' . self::OUTPUT_DONE);
+
+        $io->newLine();
+        $io->success("Well done ! QA history on your project is now available !");
+
         return Command::SUCCESS;
-    }
-
-    public function trackMetrics(DateTimeImmutable $date, $reset = false): void
-    {
-        $commandLine = 'vendor/alxvng/qatracker/bin/qatracker track -vvv --date ' . $date->format('YmdHis') . ($reset ? ' --reset-data-series' : '');
-        $process = Process::fromShellCommandline($commandLine);
-        $process->mustRun();
-    }
-
-    public function runTools(): void
-    {
-        $commandLine = "vendor/alxvng/qatracker/bin/qatracker run -vvv";
-        $process = Process::fromShellCommandline(
-            $commandLine,
-            env: [
-                'WORK_DIR' => Configuration::tmpDir(),
-            ]
-        );
-        $process->mustRun();
     }
 
     public function checkoutByDate(DateTimeImmutable $date, GitRepository $repo): void

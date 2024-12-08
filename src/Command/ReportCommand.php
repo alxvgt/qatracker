@@ -97,7 +97,7 @@ class ReportCommand extends BaseCommand
                     'generatedAt' => new DateTime(),
                 ]);
                 file_put_contents(Configuration::getReportFilename(), $html);
-                $section->overwrite($message . static::OUTPUT_DONE);
+                $section->overwrite($message . ' ' . static::OUTPUT_DONE);
                 $io->newLine();
             }
 
