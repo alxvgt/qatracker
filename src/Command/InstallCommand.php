@@ -8,6 +8,7 @@ use Alxvng\QATracker\Configuration\Configuration;
 use Alxvng\QATracker\DataProvider\Model\AbstractDataSerie;
 use Alxvng\QATracker\DataProvider\Model\DataPercentSerie;
 use Alxvng\QATracker\DataProvider\Model\DataStandardSerie;
+use Alxvng\QATracker\Helper\Helper;
 use Alxvng\QATracker\Root\Root;
 use Alxvng\QATracker\Twig\TwigFactory;
 use DateTime;
@@ -42,23 +43,26 @@ class InstallCommand extends BaseCommand
         parent::execute($input, $output);
 
         $io = new SymfonyStyle($input, $output);
+        $fs = new Filesystem();
+
         $io->title('Install QA tools');
 
-        foreach (Configuration::install() as $tool) {
+        foreach (Configuration::install() as $toolName => $tool) {
 
             $isActionApproved = $io->ask(
-                '🤔 Do you want to install ' . $tool['binName'] . ' ? [y|n]',
+                '🤔 Do you want to install ' . $toolName . ' ? [y|n]',
                 'y',
                 fn($response) => 'y' === $response,
             );
 
             if ($isActionApproved) {
-                $process = new Process(['wget', '--show-progress', '-q', '-P', Configuration::tmpDir(), $tool['downloadLink']]);
+                $process = Process::fromShellCommandline((new Helper())->interpretString($tool['installCommand']));
                 $process->run();
-                $installedPath = Configuration::tmpDir() . '/' . $tool['binName'];
-                $process = new Process(['chmod', '+x', $installedPath]);
-                $process->run();
-                $io->success($installedPath . ' installed.');
+                $logDir = $tool['logDir'] ?? null;
+                if ($logDir) {
+                    $fs->mkdir((new Helper())->interpretString($tool['logDir']));
+                }
+                $io->success($toolName . ' installed.');
             }
         }
 

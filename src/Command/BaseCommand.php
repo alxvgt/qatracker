@@ -20,16 +20,10 @@ abstract class BaseCommand extends Command
         $dotenv->populate([
             'QT_CONFIG_DIR' => Root::getConfigDir(),
             'QT_TMP_DIR' => Configuration::tmpDir(),
+            'QT_PROJECT_DIR' => Configuration::projectTmpDir(),
         ]);
 
         return Command::SUCCESS;
-    }
-
-    protected function interpret(string $input): string
-    {
-        return preg_replace_callback('/\$(\{([^}]+)\}|([a-zA-Z_][a-zA-Z0-9_.]*))/', static function ($matches) {
-            return $_SERVER[$matches[1]] ?: '';
-        }, $input);
     }
 
     protected static function yellow(string $string): string

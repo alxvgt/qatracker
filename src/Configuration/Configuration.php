@@ -3,6 +3,7 @@
 namespace Alxvng\QATracker\Configuration;
 
 use Alxvng\QATracker\DataProvider\Model\AbstractDataSerie;
+use Alxvng\QATracker\Helper\Helper;
 use Alxvng\QATracker\Root\Root;
 use RuntimeException;
 use Symfony\Component\Dotenv\Dotenv;
@@ -161,10 +162,14 @@ class Configuration
     {
         return self::load()['qatracker']['tmpDir'] ?? '/tmp/qatracker';
     }
+    public static function projectTmpDir(): string
+    {
+        return self::tmpDir().'/project';
+    }
 
     public static function install(): array
     {
-        return self::load()['qatracker']['tools'] ?? [];
+        return self::load()['qatracker']['install'] ?? [];
     }
 
     public static function analyze(): array
@@ -189,7 +194,9 @@ class Configuration
 
     public static function getDataSeries():array
     {
-        return self::load()['qatracker']['dataSeries'];
+        $config = self::load()['qatracker']['dataSeries'];
+        $config = (new Helper())->interpretArray($config);
+        return (new Helper())->interpretArray($config);
     }
     public static function getCharts():array
     {

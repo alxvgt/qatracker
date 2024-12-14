@@ -20,6 +20,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\ConsoleSectionOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
@@ -48,7 +49,7 @@ class ReportCommand extends BaseCommand
 
     /**
      * @param InputInterface $input
-     * @param OutputInterface $output
+     * @param ConsoleSectionOutput $output
      *
      * @return int
      * @throws SyntaxError
@@ -63,6 +64,10 @@ class ReportCommand extends BaseCommand
         $twig = TwigFactory::getTwig();
         try {
             $io->title('Generate report from your QA indicators');
+
+            $fs = new Filesystem();
+            $fs->mkdir(\dirname(Configuration::getReportFilename()));
+
             $dataSeriesStack = $this->dataSerieLoader->load();
 
             /** @var ConsoleSectionOutput $section */
@@ -80,7 +85,7 @@ class ReportCommand extends BaseCommand
                     $chart->getGraphSettings()
                 );
                 $message .= '.';
-                $section->overwrite($message);
+                $output->writeln($message);
             }
             $io->newLine();
 

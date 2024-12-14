@@ -62,9 +62,9 @@ class HistoryCommand extends BaseCommand
                 description: 'To date',
             )
             ->addOption(
-                name: 'each-month',
-                shortcut: null,
-                mode: InputOption::VALUE_NONE,
+                name: 'step',
+                mode: InputOption::VALUE_REQUIRED,
+                default: 7
             );
     }
 
@@ -80,9 +80,10 @@ class HistoryCommand extends BaseCommand
 
         $fs = new Filesystem();
         $finder = new Finder();
-        $fs->remove(Configuration::tmpDir());
-        $fs->mkdir(Configuration::tmpDir());
-        $workDir = $finder->in(Configuration::tmpDir());
+        $projectTmpDirPath = Configuration::projectTmpDir();
+        $fs->remove($projectTmpDirPath);
+        $fs->mkdir($projectTmpDirPath);
+        $projectDirFinder = $finder->in($projectTmpDirPath);
 
         $analyzeCommand = $this->getApplication()->get('analyze');
         $trackCommand = $this->getApplication()->get('track');
@@ -95,15 +96,17 @@ class HistoryCommand extends BaseCommand
 
         /** @var ConsoleSectionOutput $section */
         $section = $output->section();
-        $section->write('Cloning repository in ' . Configuration::tmpDir() . '...');
-        if ($workDir->hasResults()) {
-            $repo = $git->open(Configuration::tmpDir());
+        $section->write('Cloning repository in ' . $projectTmpDirPath . '...');
+        if ($projectDirFinder->hasResults()) {
+            $repo = $git->open($projectTmpDirPath);
         } else {
-            $repo = $git->cloneRepository($remoteUrl, Configuration::tmpDir());
+            $repo = $git->cloneRepository($remoteUrl, $projectTmpDirPath);
         }
         $section->writeln(self::OUTPUT_DONE);
+        $io->newLine();
 
         $now = $input->getArgument('to') ? new DateTimeImmutable($input->getArgument('to')) : new DateTimeImmutable();
+        $step = $input->getOption('step');
         $date = new DateTimeImmutable($input->getArgument('from'));
         $reset = true;
 
@@ -112,7 +115,7 @@ class HistoryCommand extends BaseCommand
             $dateSection = $output->section();
 
             $dateSection->overwrite($date->format('Y-m-d H:i:s') . ': ' . self::yellow('checking out...'));
-            $this->checkoutByDate($date, $repo);
+            $this->checkoutByDate($date, $repo, $projectTmpDirPath);
 
             $dateSection->overwrite($date->format('Y-m-d H:i:s') . ': ' . self::yellow('analyzing with tools...'));
             $result = $analyzeCommand->run(new ArrayInput([]), new NullOutput());
@@ -131,7 +134,7 @@ class HistoryCommand extends BaseCommand
             ), $subOutput);
             if ($result !== Command::SUCCESS) {
                 $dateSection->overwrite($date->format('Y-m-d H:i:s') . ': ' . self::yellow('tracking metrics, skiped...'));
-                $date = $date->add(new DateInterval('P7D'));
+                $date = $date->add(new DateInterval("P{$step}D"));
                 continue;
             }
 
@@ -141,16 +144,22 @@ class HistoryCommand extends BaseCommand
             $reset = false;
         }
 
-        $dateSection->overwrite('Generating report: ' . self::yellow('processing...'));
+        $io->newLine();
+
+        /** @var ConsoleSectionOutput $section */
+        $section = $output->section();
+        $section->write('Generating report: ' . self::yellow('processing...'));
+
         $subOutput = clone $output;
         $subOutput->setVerbosity(Output::VERBOSITY_SILENT);
         $result = $reportCommand->run(new ArrayInput([]), $subOutput);
         if ($result !== Command::SUCCESS) {
             $io->newLine();
-            $io->error("Unalbe to generate report :-(");
+            $io->error("Unable to generate report :-(");
             return Command::FAILURE;
         }
-        $dateSection->overwrite('Generating report: ' . self::OUTPUT_DONE);
+
+        $section->overwrite('Generating report: ' . self::OUTPUT_DONE);
 
         $io->newLine();
         $io->success("Well done ! QA history on your project is now available !");
@@ -158,11 +167,11 @@ class HistoryCommand extends BaseCommand
         return Command::SUCCESS;
     }
 
-    public function checkoutByDate(DateTimeImmutable $date, GitRepository $repo): void
+    public function checkoutByDate(DateTimeImmutable $date, GitRepository $repo, string $workdirPath): void
     {
         $commitByDate = $date->format('Y-m-d H:i:s');
         $commitRefByDateCommand = 'git rev-list -n 1 --first-parent --before="' . $commitByDate . '" main';
-        $commitRefByDate = trim(Process::fromShellCommandline($commitRefByDateCommand, Configuration::tmpDir())->mustRun()->getOutput());
+        $commitRefByDate = trim(Process::fromShellCommandline($commitRefByDateCommand, $workdirPath)->mustRun()->getOutput());
         $repo->checkout($commitRefByDate);
     }
 

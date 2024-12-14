@@ -8,11 +8,13 @@ use Alxvng\QATracker\Configuration\Configuration;
 use Alxvng\QATracker\DataProvider\Model\AbstractDataSerie;
 use Alxvng\QATracker\DataProvider\Model\DataPercentSerie;
 use Alxvng\QATracker\DataProvider\Model\DataStandardSerie;
+use Alxvng\QATracker\Helper\Helper;
 use Alxvng\QATracker\Root\Root;
 use Alxvng\QATracker\Twig\TwigFactory;
 use DateTime;
 use Goat1000\SVGGraph\SVGGraph;
 use JsonException;
+use PHPUnit\TextUI\Help;
 use RuntimeException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -46,10 +48,10 @@ class AnalyzeCommand extends BaseCommand
         $io->title('Analyze QA on your project');
 
         foreach (Configuration::analyze() as $toolName => $commandLine) {
-            $io->writeln('Processing ' . $this->interpret($commandLine));
+            $io->writeln('Processing ' . (new Helper())->interpretString($commandLine));
             $process = Process::fromShellCommandline($commandLine);
             $process->setTimeout(0);
-            $process->run();
+            $process->mustRun();
             $io->success($toolName . ' executed.');
         }
 
