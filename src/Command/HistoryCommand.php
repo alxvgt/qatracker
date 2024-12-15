@@ -74,7 +74,8 @@ class HistoryCommand extends BaseCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        // eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_ed25519_docker
+        parent::execute($input, $output);
+
         $io = new SymfonyStyle($input, $output);
         $io->title('Track QA on project history');
 

@@ -60,6 +60,8 @@ class ReportCommand extends BaseCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        parent::execute($input, $output);
+
         $io = new SymfonyStyle($input, $output);
         $twig = TwigFactory::getTwig();
         try {

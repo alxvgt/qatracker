@@ -70,6 +70,8 @@ class TrackCommand extends BaseCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        parent::execute($input, $output);
+
         $io = new SymfonyStyle($input, $output);
         try {
             $io->title('Track your QA indicators');
