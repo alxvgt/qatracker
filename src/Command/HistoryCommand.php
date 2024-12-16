@@ -2,46 +2,28 @@
 
 namespace Alxvng\QATracker\Command;
 
-use Alxvng\QATracker\Chart\Chart;
-use Alxvng\QATracker\Chart\ChartGenerator;
 use Alxvng\QATracker\Configuration\Configuration;
-use Alxvng\QATracker\DataProvider\Model\AbstractDataSerie;
-use Alxvng\QATracker\DataProvider\Model\DataPercentSerie;
-use Alxvng\QATracker\DataProvider\Model\DataStandardSerie;
 use Alxvng\QATracker\Root\Root;
-use Alxvng\QATracker\Twig\TwigFactory;
 use CzProject\GitPhp\Git;
 use CzProject\GitPhp\GitRepository;
 use DateInterval;
-use DateTime;
 use DateTimeImmutable;
-use Goat1000\SVGGraph\SVGGraph;
-use JsonException;
-use RuntimeException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Helper\Table;
-use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Input\Input;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\ConsoleSectionOutput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\Output;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\Process;
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
+use Throwable;
 use function explode;
 
 #[AsCommand(name: 'history')]
@@ -51,12 +33,12 @@ class HistoryCommand extends BaseCommand
     {
         $this
             ->setDescription('Run QATracker on your git history')
-            ->addArgument(
+            ->addOption(
                 name: 'from',
                 mode: InputArgument::REQUIRED,
                 description: 'From date',
             )
-            ->addArgument(
+            ->addOption(
                 name: 'to',
                 mode: InputArgument::OPTIONAL,
                 description: 'To date',
@@ -106,12 +88,12 @@ class HistoryCommand extends BaseCommand
         $section->writeln(self::OUTPUT_DONE);
         $io->newLine();
 
-        $now = $input->getArgument('to') ? new DateTimeImmutable($input->getArgument('to')) : new DateTimeImmutable();
+        $end = $input->getOption('to') ? new DateTimeImmutable($input->getOption('to')) : new DateTimeImmutable();
         $step = $input->getOption('step');
-        $date = new DateTimeImmutable($input->getArgument('from'));
+        $date = $input->getOption('from') ? new DateTimeImmutable($input->getOption('from')) : $this->getFirstCommitDate($repo, $projectTmpDirPath);
         $reset = true;
 
-        while ($date <= $now) {
+        while ($date <= $end) {
             /** @var ConsoleSectionOutput $dateSection */
             $dateSection = $output->section();
 
@@ -119,29 +101,37 @@ class HistoryCommand extends BaseCommand
             $this->checkoutByDate($date, $repo, $projectTmpDirPath);
 
             $dateSection->overwrite($date->format('Y-m-d H:i:s') . ': ' . self::yellow('analyzing with tools...'));
-            $result = $analyzeCommand->run(new ArrayInput([]), new NullOutput());
+            $t = null;
+            try {
+                $result = $analyzeCommand->run(new ArrayInput([]), new NullOutput());
+            } catch (Throwable $t) {
+                $result = Command::FAILURE;
+            }
             if ($result !== Command::SUCCESS) {
-                $dateSection->overwrite($date->format('Y-m-d H:i:s') . ': ' . self::yellow('analyzing with tools, skiped...'));
-                $date = $date->add(new DateInterval('P7D'));
+                $dateSection->overwrite($date->format('Y-m-d H:i:s') . ': ' . self::yellow('analyzing with tools, skiped... [' . $t?->getMessage() . ']'));
+                $date = $this->getNextDate($date, $step);
                 continue;
             }
 
             $dateSection->overwrite($date->format('Y-m-d H:i:s') . ': ' . self::yellow('tracking metrics...'));
-            $subOutput = clone $output;
-            $subOutput->setVerbosity(Output::VERBOSITY_SILENT);
-            $result = $trackCommand->run(new ArrayInput(
-                ['--date' => $date->format('YmdHis')]
-                + ($reset ? ['--reset-data-series' => true] : [])
-            ), $subOutput);
+            $t = null;
+            try {
+                $result = $trackCommand->run(new ArrayInput(
+                    ['--date' => $date->format('YmdHis')]
+                    + ($reset ? ['--reset-data-series' => true] : [])
+                ), new NullOutput());
+            } catch (Throwable $t) {
+                $result = Command::FAILURE;
+            }
             if ($result !== Command::SUCCESS) {
-                $dateSection->overwrite($date->format('Y-m-d H:i:s') . ': ' . self::yellow('tracking metrics, skiped...'));
-                $date = $date->add(new DateInterval("P{$step}D"));
+                $dateSection->overwrite($date->format('Y-m-d H:i:s') . ': ' . self::yellow('analyzing with tools, skiped... [' . $t?->getMessage() . ']'));
+                $date = $this->getNextDate($date, $step);
                 continue;
             }
 
             $dateSection->overwrite($date->format('Y-m-d H:i:s') . ': ' . self::OUTPUT_DONE);
 
-            $date = $date->add(new DateInterval('P7D'));
+            $date = $this->getNextDate($date, $step);
             $reset = false;
         }
 
@@ -176,4 +166,14 @@ class HistoryCommand extends BaseCommand
         $repo->checkout($commitRefByDate);
     }
 
+    public function getFirstCommitDate(GitRepository $repo, string $workdirPath): DateTimeImmutable
+    {
+        $commitRef = trim(Process::fromShellCommandline('git rev-list main | tail -n 4 | head -n 1', $workdirPath)->mustRun()->getOutput());
+        return $repo->getCommit($commitRef)->getDate();
+    }
+
+    private function getNextDate(mixed $date, mixed $step): mixed
+    {
+        return $date->add(new DateInterval("P{$step}D"));
+    }
 }

@@ -82,7 +82,8 @@ class ReportCommand extends BaseCommand
                 $chart = new Chart($chart, $dataSeriesStack);
 
                 $graphs[] = ChartGenerator::generate(
-                    $chart->getFirstProvider()->getData(),
+                    $chart->getChartValues(),
+                    $chart->getChartStructure(),
                     $chart->getType(),
                     $chart->getGraphSettings()
                 );
