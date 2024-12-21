@@ -36,6 +36,7 @@
         "twig/twig": "^3.0"
     },
     "require-dev": {
+        "ext-zip": "*",
         "friendsofphp/php-cs-fixer": "^3.0",
         "phpunit/phpunit": "^9.0",
         "symfony/var-dumper": "^7.0"
