@@ -108,7 +108,7 @@ class HistoryCommand extends BaseCommand
                 $result = Command::FAILURE;
             }
             if ($result !== Command::SUCCESS) {
-                $dateSection->overwrite($date->format('Y-m-d H:i:s') . ': ' . self::yellow('analyzing with tools, skiped... [' . $t?->getMessage() . ']'));
+                $dateSection->overwrite($date->format('Y-m-d H:i:s') . ': ' . self::yellow('analyzing with tools, skipped... [' . $t?->getMessage() . ']'));
                 $date = $this->getNextDate($date, $step);
                 continue;
             }
@@ -124,7 +124,7 @@ class HistoryCommand extends BaseCommand
                 $result = Command::FAILURE;
             }
             if ($result !== Command::SUCCESS) {
-                $dateSection->overwrite($date->format('Y-m-d H:i:s') . ': ' . self::yellow('analyzing with tools, skiped... [' . $t?->getMessage() . ']'));
+                $dateSection->overwrite($date->format('Y-m-d H:i:s') . ': ' . self::yellow('tracking metrics, skipped... [' . $t?->getMessage() . ']'));
                 $date = $this->getNextDate($date, $step);
                 continue;
             }

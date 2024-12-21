@@ -18,7 +18,6 @@ class ChartGenerator
     public static function generate($values, $structure, $type = LineGraph::class, array $settings = [])
     {
         $dark = 'rgb(54,54,54)';
-        $darkRed = 'rgb(127,0,0)';
         $font = 'BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif';
 
         $settings = array_merge(
@@ -44,6 +43,7 @@ class ChartGenerator
                 'axis_text_space' => 10,
                 'label_font' => $font,
                 'label_font_size' => 15,
+                'legend_position' => 'bottom right 4 -10',
                 'data_label_fade_in_speed' => 40,
                 'data_label_fade_out_speed' => 5,
                 'data_label_click' => 'hide',
@@ -52,6 +52,7 @@ class ChartGenerator
 //                'marker_colour' => $darkRed,
 //                'marker_stroke_colour' => $darkRed,
                 'line_stroke_width' => 2,
+                'line_curve' => 0.4,
                 'datetime_keys' => true,
                 'datetime_key_format' => AbstractDataSerie::DATE_FORMAT,
                 'datetime_text_format' => 'j M',

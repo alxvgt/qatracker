@@ -84,19 +84,17 @@ class TrackCommand extends BaseCommand
                 /** @var AbstractDataSerie $dataSerie */
                 foreach ($dataSeriesStack as $dataSerie) {
 
-                    /** @var ConsoleSectionOutput $section */
-                    $section = $output->section();
                     $message = sprintf('Collecting new indicator for "%s"...', $dataSerie->getId());
-                    $section->writeln($message);
+                    $io->writeln($message);
 
                     try {
                         $dataSerie->collect($trackDate, $resetDataSeries);
                     } catch (FileNotFoundException $t) {
-                        $section->overwrite($message . ' ' . static::OUTPUT_SKIP . self::yellow(' (' . $t->getMessage() . ')'));
+                        $io->writeln($message . ' ' . static::OUTPUT_SKIP . self::yellow(' (' . $t->getMessage() . ')'));
                         continue;
                     }
 
-                    $section->overwrite($message . ' ' . static::OUTPUT_DONE);
+                    $io->writeln($message . ' ' . static::OUTPUT_DONE);
                 }
                 $io->newLine();
             } catch (FileNotFoundException $t) {
