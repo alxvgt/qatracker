@@ -16,15 +16,10 @@ You can view an example of a report here : [Demo](https://alxvgt.github.io/qatra
 You can view the requirements on packagist website : https://packagist.org/packages/alxvng/qatracker
 
 ## Installation
-If necessary, remove the previous installation :
+Install/Replacer the phar (master):
 
 ```bash
-rm qatracker.phar;
-```
-
-Install the phar (master):
-```bash
-wget https://github.com/alxvgt/qa-tracker/raw/master/release/qatracker.phar && wget --directory-prefix=.qatracker https://github.com/alxvgt/qa-tracker/raw/master/.qatracker.dist/config.yaml
+rm qatracker.phar && wget https://github.com/alxvgt/qa-tracker/raw/master/release/qatracker.phar && wget --directory-prefix=.qatracker https://github.com/alxvgt/qa-tracker/raw/master/.qatracker.dist/config.yaml
 ```
 
 If you prefer more stable version, checkout the last stable release at https://github.com/alxvgt/qatracker/releases
