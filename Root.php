@@ -2,8 +2,12 @@
 
 namespace Alxvng\QATracker\Root;
 
+use Alxvng\QATracker\Configuration\Configuration;
+
 class Root
 {
+    public const BASE_DIR = '.qatracker';
+    public const CONFIG_FILENAME = 'config.yaml';
     /**
      * @return string
      */
@@ -19,4 +23,16 @@ class Root
     {
         return getcwd();
     }
+
+
+    public static function getConfigDir(): string
+    {
+        return self::external() . '/' . static::BASE_DIR;
+    }
+
+    public static function getConfigPath(): string
+    {
+        return self::getConfigDir() . '/' . static::CONFIG_FILENAME;
+    }
+
 }

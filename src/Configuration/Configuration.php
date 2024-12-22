@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Alxvng\QATracker\Configuration;
 
 use Alxvng\QATracker\DataProvider\Model\AbstractDataSerie;
+use Alxvng\QATracker\Helper\Helper;
 use Alxvng\QATracker\Root\Root;
 use RuntimeException;
 use Symfony\Component\Yaml\Yaml;
@@ -14,15 +17,13 @@ class Configuration
         return Root::internal().'/.qatracker.dist/config.yaml';
     }
 
-    /**
-     * @param string $configPath
-     *
-     * @return mixed
-     */
-    public static function load(string $configPath)
+    public static function load(?string $configPath = null): array
     {
+        $configPath ??= Root::getConfigPath();
+
         if (!file_exists($configPath)) {
             $exampleConfig = file_get_contents(static::exampleConfigPath());
+
             throw new RuntimeException(sprintf("File %s does not exists. You should run :\n#> touch .qatracker/config.yaml\n\nNow edit this file to put your custom configuration, example : \n%s", $configPath, $exampleConfig));
         }
 
@@ -69,6 +70,59 @@ class Configuration
         return $config;
     }
 
+    public static function workDir(): string
+    {
+        return self::load()['qatracker']['workDir'] ?? '/tmp/qatracker';
+    }
+
+    public static function projectWorkDir(): string
+    {
+        return self::workDir().'/project';
+    }
+
+    public static function install(): array
+    {
+        return self::load()['qatracker']['install'] ?? [];
+    }
+
+    public static function analyze(): array
+    {
+        return self::load()['qatracker']['analyze'] ?? [];
+    }
+
+    public static function getGeneratedDir(): string
+    {
+        return Root::getConfigDir().'/generated';
+    }
+
+    public static function getReportDir(): string
+    {
+        return self::getGeneratedDir().'/report';
+    }
+
+    public static function getReportFilename(): string
+    {
+        return self::getReportDir().'/index.html';
+    }
+
+    public static function getDataSeries(): array
+    {
+        $config = self::load()['qatracker']['dataSeries'];
+        $config = (new Helper())->interpretArray($config);
+
+        return (new Helper())->interpretArray($config);
+    }
+
+    public static function getCharts(): array
+    {
+        return self::load()['qatracker']['charts'];
+    }
+
+    public static function version(): string
+    {
+        return '0.6.0';
+    }
+
     protected static function validateProvider(string $id, array $provider): void
     {
         if (!$id) {
@@ -76,15 +130,15 @@ class Configuration
         }
 
         $isValid = false;
-        $isValid = $isValid ?: $isValid || static::validateStandardProvider($provider);
-        $isValid = $isValid ?: $isValid || static::validatePercentProvider($provider);
+        $isValid = $isValid ?: $isValid || static::validateStandardProvider($id, $provider);
+        $isValid = $isValid ?: $isValid || static::validatePercentProvider($id, $provider);
 
         if (!$isValid) {
             throw new RuntimeException('Your providers configuration is not valid');
         }
     }
 
-    protected static function validateChart(string $id, array $chart)
+    protected static function validateChart(string $id, array $chart): void
     {
         if (!$id) {
             throw new RuntimeException('You must defined an id for your provider');
@@ -93,13 +147,11 @@ class Configuration
         // TODO implement configuration validation for this part
     }
 
-    protected static function validateStandardProvider(array $provider): bool
+    protected static function validateStandardProvider(string $id, array $provider): bool
     {
         if (!AbstractDataSerie::isStandard($provider)) {
             return false;
         }
-
-        $id = $provider['id'];
 
         $class = $provider['class'] ?? null;
         if (!$class) {
@@ -117,13 +169,11 @@ class Configuration
         return true;
     }
 
-    protected static function validatePercentProvider(array $provider): bool
+    protected static function validatePercentProvider(string $id, array $provider): bool
     {
         if (!AbstractDataSerie::isPercent($provider)) {
             return false;
         }
-
-        $id = $provider['id'];
 
         $percentProvider = $provider['provider'] ?? null;
         if (!is_string($percentProvider)) {

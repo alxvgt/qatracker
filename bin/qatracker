@@ -1,14 +1,19 @@
 #!/usr/bin/env php
 <?php
 
+use Alxvng\QATracker\Command\HistoryCommand;
+use Alxvng\QATracker\Command\InstallCommand;
+use Alxvng\QATracker\Command\AnalyzeCommand;
+use Alxvng\QATracker\Command\ReportCommand;
 use Alxvng\QATracker\Command\TrackCommand;
 use Symfony\Component\Console\Application;
 
 include __DIR__.'/bootstrap.php';
 
 $application = new Application();
-$command = new TrackCommand();
+$application->add(new InstallCommand());
+$application->add(new AnalyzeCommand());
 $application->add(new TrackCommand());
-
-$application->setDefaultCommand($command->getName(), true);
+$application->add(new ReportCommand());
+$application->add(new HistoryCommand());
 $application->run();

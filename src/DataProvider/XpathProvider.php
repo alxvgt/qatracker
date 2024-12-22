@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Alxvng\QATracker\DataProvider;
 
+use RuntimeException;
 use SimpleXMLElement;
 
 class XpathProvider extends AbstractXpathProvider
@@ -10,12 +13,12 @@ class XpathProvider extends AbstractXpathProvider
     {
         $xml = new SimpleXMLElement(file_get_contents($this->inputFilePath));
 
-        if (!empty($this->namespaceParameters) &&
-            isset($this->namespaceParameters[static::NS_PREFIX], $this->namespaceParameters[static::NS_VALUE])
+        if (!empty($this->namespaceParameters)
+            && isset($this->namespaceParameters[static::NS_PREFIX], $this->namespaceParameters[static::NS_VALUE])
         ) {
             $xml->registerXPathNamespace(
                 $this->namespaceParameters[static::NS_PREFIX],
-                $this->namespaceParameters[static::NS_VALUE]
+                $this->namespaceParameters[static::NS_VALUE],
             );
         }
 
@@ -23,7 +26,7 @@ class XpathProvider extends AbstractXpathProvider
         $result = reset($result);
 
         if (!is_numeric((string) $result)) {
-            throw new \RuntimeException(sprintf('The result of must be a numeric value, got "%s"', $result));
+            throw new RuntimeException(sprintf('The result of must be a numeric value, got "%s"', $result));
         }
 
         return (float) $result;

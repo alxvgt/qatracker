@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Alxvng\QATracker\DataProvider\Model;
 
 use Alxvng\QATracker\DataProvider\DataProviderInterface;
-use DateTime;
+use DateTimeImmutable;
 use JsonException;
-use Symfony\Component\String\Slugger\AsciiSlugger;
+
 use function Symfony\Component\String\u;
 
 class DataStandardSerie extends AbstractDataSerie
@@ -17,16 +19,11 @@ class DataStandardSerie extends AbstractDataSerie
     /**
      * DataProvider constructor.
      *
-     * @param array  $config
-     * @param string $baseDir
-     * @param string $generatedDir
-     *
      * @throws JsonException
      */
     public function __construct(array $config, string $baseDir, string $generatedDir)
     {
-        $slugger = new AsciiSlugger();
-        $this->slug = u($slugger->slug($config['id']))->lower();
+        $this->slug = (string) u($config['id'])->kebab()->lower();
 
         $storageDir = $generatedDir.'/'.static::PROVIDERS_DIR;
         $this->storageFilePath = $storageDir.'/'.$this->getSlug().'.json';
@@ -40,12 +37,14 @@ class DataStandardSerie extends AbstractDataSerie
     }
 
     /**
-     * @param DateTime $trackDate
-     *
      * @throws JsonException
      */
-    public function collect(DateTime $trackDate): void
+    public function collect(DateTimeImmutable $trackDate, bool $reset): void
     {
+        if ($reset) {
+            $this->reset();
+        }
+
         $provider = $this->getInstance();
         $value = $provider->fetchData();
         $this->addData($value, $trackDate);

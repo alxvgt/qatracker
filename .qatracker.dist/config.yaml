@@ -1,84 +1,322 @@
 qatracker:
+    # workDir: '/tmp/qatracker' # default value
+    install:
+        # your user should be able to access to your git repository
+        sshKey:
+            installCommand: 'eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_ed25519_docker'
+        phploc:
+            installCommand: 'wget --show-progress -q -P $QT_TMP_DIR  https://phar.phpunit.de/phploc.phar && chmod +x $QT_TMP_DIR/phploc.phar'
+            logDir: '$QT_CONFIG_DIR/phploc'
+        phpcpd:
+            installCommand: 'wget --show-progress -q -P $QT_TMP_DIR  https://phar.phpunit.de/phpcpd.phar && chmod +x $QT_TMP_DIR/phpcpd.phar'
+            logDir: '$QT_CONFIG_DIR/phpcpd'
+        phpmd:
+            installCommand: 'wget --show-progress -q -P $QT_TMP_DIR  https://phpmd.org/static/latest/phpmd.phar && chmod +x $QT_TMP_DIR/phpmd.phar'
+            logDir: '$QT_CONFIG_DIR/phpmd'
+        phpmetrics:
+            installCommand: 'wget --show-progress -q -P $QT_TMP_DIR https://github.com/phpmetrics/PhpMetrics/raw/master/releases/phpmetrics.phar && chmod +x $QT_TMP_DIR/phpmetrics.phar'
+            logDir: '$QT_CONFIG_DIR/phpmetrics'
+    analyze:
+        #        phpcpd: '$QT_TMP_DIR/phpcpd.phar --min-lines=10 --log-pmd=$QT_CONFIG_DIR/phpcpd/log.xml $QT_PROJECT_DIR/src || echo "OK"'
+        phpmd: '$QT_TMP_DIR/phpmd.phar $QT_PROJECT_DIR/src json codesize,design,unusedcode --ignore-violations-on-exit --exclude=*ContractTestCase.php,*AbstractWebTestCase.php --reportfile $QT_CONFIG_DIR/phpmd/phpmd.json'
+        phpmetrics: '$QT_TMP_DIR/phpmetrics.phar $QT_PROJECT_DIR/src --report-json=$QT_CONFIG_DIR/phpmetrics/log.json --report-summary-json=$QT_CONFIG_DIR/phpmetrics/summary.json --report-csv=$QT_CONFIG_DIR/phpmetrics/log.csv --report-violations=$QT_CONFIG_DIR/phpmetrics/log.xml --report-html=$QT_CONFIG_DIR/phpmetrics/html'
+    #        phpunit: 'gosu root phpenmod -s cli xdebug && gosu root phpenmod -s fpm xdebug && composer install --working-dir=$QT_PROJECT_DIR && XDEBUG_MODE=coverage $QT_PROJECT_DIR/vendor/bin/simple-phpunit --coverage-xml=$QT_CONFIG_DIR/phpunit --coverage-crap4j=$QT_CONFIG_DIR/phpunit/coverage.crap4j --coverage-html=$QT_CONFIG_DIR/phpunit/html --testsuite unit'
+
     dataSeries:
-        lines-of-code:
-            class: Alxvng\QATracker\DataProvider\XpathProvider
+        sum-logical-line-of-code:
+            class: Alxvng\QATracker\DataProvider\JsonPathSumProvider
             arguments:
-                - 'docs/qa/phploc/log.xml'
-                - '/phploc/loc'
-        non-comment-lines-of-code:
-            class: Alxvng\QATracker\DataProvider\XpathProvider
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.lloc'
+        sum-line-of-code:
+            class: Alxvng\QATracker\DataProvider\JsonPathSumProvider
             arguments:
-                - 'docs/qa/phploc/log.xml'
-                - '/phploc/ncloc'
-        average-complexity-per-class:
-            class: Alxvng\QATracker\DataProvider\XpathProvider
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.loc'
+        count-class:
+            class: Alxvng\QATracker\DataProvider\JsonPathCountProvider
             arguments:
-                - 'docs/qa/phploc/log.xml'
-                - '/phploc/classCcnAvg'
-        total-duplicated-lines:
-            class: Alxvng\QATracker\DataProvider\XpathSumProvider
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.name'
+        count-code-size-violations:
+            class: Alxvng\QATracker\DataProvider\JsonPathCountProvider
             arguments:
-                - 'docs/qa/phpcpd/log.xml'
-                - '/pmd-cpd/duplication/@lines'
-        total-duplicated-lines-percent:
-            provider: 'total-duplicated-lines'
-            totalPercentProvider: 'lines-of-code'
-        total-duplications:
-            class: Alxvng\QATracker\DataProvider\XpathCountProvider
+                - '$QT_CONFIG_DIR/phpmd/phpmd.json'
+                - '$.files[*].violations[?(@.ruleSet=="Code Size Rules")].rule'
+        count-unused-code-violations:
+            class: Alxvng\QATracker\DataProvider\JsonPathCountProvider
             arguments:
-                - 'docs/qa/phpcpd/log.xml'
-                - '/pmd-cpd/duplication'
+                - '$QT_CONFIG_DIR/phpmd/phpmd.json'
+                - '$.files[*].violations[?(@.ruleSet=="Unused Code Rules")].rule'
+        count-coupling-violations:
+            class: Alxvng\QATracker\DataProvider\JsonPathCountProvider
+            arguments:
+                - '$QT_CONFIG_DIR/phpmd/phpmd.json'
+                - '$.files[*].violations[?(@.rule=="CouplingBetweenObjects")].rule'
         average-maintenance-index:
             class: Alxvng\QATracker\DataProvider\JsonPathAverageProvider
             arguments:
-                - 'docs/qa/phpmetrics/report.json'
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
                 - '$.*.mi'
-        total-code-coverage-(lines):
-            class: Alxvng\QATracker\DataProvider\XpathProvider
+        p50-maintenance-index:
+            class: Alxvng\QATracker\DataProvider\JsonPathPercentileProvider
             arguments:
-                - 'docs/qa/phpunit/coverage.xml/index.xml'
-                - '/ns:phpunit/ns:project/ns:directory/ns:totals/ns:lines/@percent'
-                - {prefix: 'ns', namespace: 'https://schema.phpunit.de/coverage/1.0'}
-        total-crap:
-            class: Alxvng\QATracker\DataProvider\XpathProvider
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.mi'
+                - 50
+        p80-maintenance-index:
+            class: Alxvng\QATracker\DataProvider\JsonPathPercentileProvider
             arguments:
-                - 'docs/qa/phpunit/coverage.crap4j'
-                - '/crap_result/stats/totalCrap'
-        total-phpstan-errors:
-            class: Alxvng\QATracker\DataProvider\JsonPathProvider
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.mi'
+                - 80
+        top15-maintenance-index:
+            class: Alxvng\QATracker\DataProvider\JsonPathAverageTopProvider
             arguments:
-                - 'docs/qa/phpstan/log.json'
-                - '$.totals.file_errors'
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.mi'
+                - 15
+        average-difficulty:
+            class: Alxvng\QATracker\DataProvider\JsonPathAverageProvider
+            arguments:
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.difficulty'
+        p50-difficulty:
+            class: Alxvng\QATracker\DataProvider\JsonPathPercentileProvider
+            arguments:
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.difficulty'
+                - 50
+        p80-difficulty:
+            class: Alxvng\QATracker\DataProvider\JsonPathPercentileProvider
+            arguments:
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.difficulty'
+                - 80
+        average-effort:
+            class: Alxvng\QATracker\DataProvider\JsonPathAverageProvider
+            arguments:
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.effort'
+        p50-effort:
+            class: Alxvng\QATracker\DataProvider\JsonPathPercentileProvider
+            arguments:
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.effort'
+                - 50
+        p80-effort:
+            class: Alxvng\QATracker\DataProvider\JsonPathPercentileProvider
+            arguments:
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.effort'
+                - 80
+        top15-effort:
+            class: Alxvng\QATracker\DataProvider\JsonPathAverageTopProvider
+            arguments:
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.effort'
+                - 15
+        average-time:
+            class: Alxvng\QATracker\DataProvider\JsonPathAverageProvider
+            arguments:
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.time'
+        p50-time:
+            class: Alxvng\QATracker\DataProvider\JsonPathPercentileProvider
+            arguments:
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.time'
+                - 50
+        p80-time:
+            class: Alxvng\QATracker\DataProvider\JsonPathPercentileProvider
+            arguments:
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.time'
+                - 80
+        top15-time:
+            class: Alxvng\QATracker\DataProvider\JsonPathAverageTopProvider
+            arguments:
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.time'
+                - 15
+        average-relativeSystemComplexity:
+            class: Alxvng\QATracker\DataProvider\JsonPathAverageProvider
+            arguments:
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.relativeSystemComplexity'
+        p50-relativeSystemComplexity:
+            class: Alxvng\QATracker\DataProvider\JsonPathPercentileProvider
+            arguments:
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.relativeSystemComplexity'
+                - 50
+        p80-relativeSystemComplexity:
+            class: Alxvng\QATracker\DataProvider\JsonPathPercentileProvider
+            arguments:
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.relativeSystemComplexity'
+                - 80
+        top15-relativeSystemComplexity:
+            class: Alxvng\QATracker\DataProvider\JsonPathAverageTopProvider
+            arguments:
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.relativeSystemComplexity'
+                - 15
+        average-cyclomatic-complexity:
+            class: Alxvng\QATracker\DataProvider\JsonPathAverageProvider
+            arguments:
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.wmc'
+        p50-cyclomatic-complexity:
+            class: Alxvng\QATracker\DataProvider\JsonPathPercentileProvider
+            arguments:
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.wmc'
+                - 50
+        p80-cyclomatic-complexity:
+            class: Alxvng\QATracker\DataProvider\JsonPathPercentileProvider
+            arguments:
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.wmc'
+                - 80
+        top15-cyclomatic-complexity:
+            class: Alxvng\QATracker\DataProvider\JsonPathAverageTopProvider
+            arguments:
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.wmc'
+                - 15
+        average-instability:
+            class: Alxvng\QATracker\DataProvider\JsonPathAverageProvider
+            arguments:
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.instability'
+        p50-instability:
+            class: Alxvng\QATracker\DataProvider\JsonPathPercentileProvider
+            arguments:
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.instability'
+                - 50
+        p80-instability:
+            class: Alxvng\QATracker\DataProvider\JsonPathPercentileProvider
+            arguments:
+                - '$QT_CONFIG_DIR/phpmetrics/log.json'
+                - '$.*.instability'
+                - 80
 
     # documentation :
     # graphSettings : documentation is available at https://goat1000.com/svggraph-options.php
-
-    # note :
-    # at the moment only the first serie is used to generate chart
-    # multiple data series chart is not available, maybe soon ... PR accepted ;-)
     charts:
-        line-of-code-line:
-            type: Goat1000\SVGGraph\LineGraph
+        lines-of-code:
+            type: Goat1000\SVGGraph\MultiLineGraph
             dataSeries:
-                - 'lines-of-code'
-            withHistory: true
+                - 'sum-logical-line-of-code'
+                - 'sum-line-of-code'
+                - 'count-class'
             graphSettings:
-                graph_title: 'Lines of code'
-        line-of-code-bar:
-            type: Goat1000\SVGGraph\BarGraph
+                graph_title: 'Volume of code'
+                legend_entries: [ 'sum-logical-line-of-code','sum-line-of-code', 'count-class' ]
+                dataset_axis: [0,1,2]
+        mess-violations:
+            type: Goat1000\SVGGraph\MultiLineGraph
             dataSeries:
-                - 'lines-of-code'
-            withHistory: true
+                - 'count-code-size-violations'
+                - 'count-unused-code-violations'
+                - 'count-coupling-violations'
             graphSettings:
-                graph_title: 'Lines of code'
-        total-duplicated-lines-percent:
-            type: Goat1000\SVGGraph\LineGraph
+                graph_title: 'Number of violations'
+                legend_entries: [ 'code-size-violations','unused-code-violations', 'coupling-violations' ]
+
+        maintenance-index:
+            type: Goat1000\SVGGraph\MultiLineGraph
             dataSeries:
-                - 'total-duplicated-lines-percent'
-            withHistory: true
+                - 'average-maintenance-index'
+                - 'p50-maintenance-index'
+                - 'p80-maintenance-index'
+                - 'top15-maintenance-index'
             graphSettings:
-                graph_title: 'Duplication pourcentage'
-                units_y: '%'
-#        -   name: 'Maintainability'
-#            dataSeries: {'total-crap', 'average-maintenance-index', 'total-phpstan-errors'}
-#            withHistory: false
+                graph_title: 'Maintenance Index (ease to support and change)'
+                legend_entries: [ 'average-maintenance-index','p50-maintenance-index','p80-maintenance-index','top15-maintenance-index' ]
+
+        difficulty:
+            type: Goat1000\SVGGraph\MultiLineGraph
+            dataSeries:
+                - 'average-difficulty'
+                - 'p50-difficulty'
+                - 'p80-difficulty'
+            graphSettings:
+                graph_title: 'Difficulty of the class'
+                legend_entries: [ 'average-difficulty','p50-difficulty', 'p80-difficulty' ]
+                guideline:
+                    - { 0: '20', 1: "Bad", colour: 'red' }
+                    - { 0: '12', 1: "Medium", colour: 'orange' }
+                    - { 0: '5', 1: "Good", colour: 'green' }
+
+        effort:
+            type: Goat1000\SVGGraph\MultiLineGraph
+            dataSeries:
+                - 'average-effort'
+                - 'p50-effort'
+                - 'p80-effort'
+                - 'top15-effort'
+            graphSettings:
+                graph_title: 'Effort to implement the class'
+                legend_entries: [ 'average-effort','p50-effort','p80-effort', 'top15-effort' ]
+                guideline:
+                    - { 0: '40000', 1: "Bad", colour: 'red' }
+                    - { 0: '30000', 1: "Medium", colour: 'orange' }
+                    - { 0: '4000', 1: "Good", colour: 'green' }
+
+        time:
+            type: Goat1000\SVGGraph\MultiLineGraph
+            dataSeries:
+                - 'average-time'
+                - 'p50-time'
+                - 'p80-time'
+                - 'top15-time'
+            graphSettings:
+                graph_title: 'Time to write the class (seconds)'
+                legend_entries: [ 'average-time','p50-time','p80-time', 'top15-time' ]
+                guideline:
+                    - { 0: '2500', 1: "Bad", colour: 'red' }
+                    - { 0: '1660', 1: "Medium", colour: 'orange' }
+                    - { 0: '220', 1: "Good", colour: 'green' }
+
+        relative-system-complexity:
+            type: Goat1000\SVGGraph\MultiLineGraph
+            dataSeries:
+                - 'average-relativeSystemComplexity'
+                - 'p50-relativeSystemComplexity'
+                - 'p80-relativeSystemComplexity'
+                - 'top15-relativeSystemComplexity'
+            graphSettings:
+                graph_title: 'Relative System Complexity'
+                legend_entries: [ 'average-relativeSystemComplexity','p50-relativeSystemComplexity','p80-relativeSystemComplexity', 'top15-relativeSystemComplexity' ]
+
+        cyclomatic-complexity:
+            type: Goat1000\SVGGraph\MultiLineGraph
+            dataSeries:
+                - 'average-cyclomatic-complexity'
+                - 'p50-cyclomatic-complexity'
+                - 'p80-cyclomatic-complexity'
+                - 'top15-cyclomatic-complexity'
+            graphSettings:
+                graph_title: 'Class Cyclomatic complexity (including methods)'
+                legend_entries: [ 'average-cyclomatic-complexity','p50-cyclomatic-complexity','p80-cyclomatic-complexity', 'top15-cyclomatic-complexity' ]
+                guideline:
+                    - {0: '6', 1: "Good", colour: 'green'}
+                    - {0: '10', 1: "Medium", colour: 'orange'}
+                    - {0: '16', 1: "Bad", colour: 'red'}
+        instability:
+            type: Goat1000\SVGGraph\MultiLineGraph
+            dataSeries:
+                - 'average-instability'
+                - 'p50-instability'
+                - 'p80-instability'
+            graphSettings:
+                graph_title: 'Instability / Resilience to change'
+                legend_entries: [ 'average-instability','p50-instability','p80-instability' ]
+                guideline:
+                    - { 0: '0.4', 1: "Good", colour: 'green' }
+                    - { 0: '0.7', 1: "Medium", colour: 'orange' }
+                    - { 0: '1', 1: "Bad", colour: 'red' }
+

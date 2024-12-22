@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Alxvng\QATracker\Tests\DataProvider\Model;
 
 use Alxvng\QATracker\Tests\Mock;
-use DateTime;
+use DateTimeImmutable;
 use JsonException;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
@@ -13,14 +15,14 @@ class DataPercentSerieTest extends TestCase
     /**
      * @throws JsonException
      */
-    public function testCollect()
+    public function testCollect(): void
     {
         $dataSerie = Mock::dataPercentSerie();
 
         $filesizeBefore = file_exists($dataSerie->getStorageFilePath()) ? filesize($dataSerie->getStorageFilePath()) : 0;
         $dataBefore = $dataSerie->getData();
 
-        $dataSerie->collect(new DateTime());
+        $dataSerie->collect(new DateTimeImmutable(), false);
 
         $dataAfter = $dataSerie->getData();
         $filesizeAfter = file_exists($dataSerie->getStorageFilePath()) ? filesize($dataSerie->getStorageFilePath()) : 0;
@@ -32,7 +34,7 @@ class DataPercentSerieTest extends TestCase
     /**
      * @throws JsonException
      */
-    public function testConstructorPercentException()
+    public function testConstructorPercentException(): void
     {
         $this->expectException(RuntimeException::class);
         Mock::dataPercentSerieWithPercentProvider();
@@ -41,7 +43,7 @@ class DataPercentSerieTest extends TestCase
     /**
      * @throws JsonException
      */
-    public function testConstructorItselfException()
+    public function testConstructorItselfException(): void
     {
         $this->expectException(RuntimeException::class);
         Mock::dataPercentSerieWithItSelfProvider();

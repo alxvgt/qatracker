@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Alxvng\QATracker\DataProvider\Model;
 
 use Alxvng\QATracker\DataProvider\Finder\ProviderFinder;
-use DateTime;
+use DateTimeImmutable;
 use JsonException;
-use Symfony\Component\String\Slugger\AsciiSlugger;
+use RuntimeException;
+
 use function Symfony\Component\String\u;
 
 class DataPercentSerie extends AbstractDataSerie
@@ -16,16 +19,11 @@ class DataPercentSerie extends AbstractDataSerie
     /**
      * DataProvider constructor.
      *
-     * @param array  $config
-     * @param string $generatedDir
-     * @param array  $dataSeriesStack
-     *
      * @throws JsonException
      */
     public function __construct(array $config, string $generatedDir, array $dataSeriesStack)
     {
-        $slugger = new AsciiSlugger();
-        $this->slug = u($slugger->slug($config['id']))->lower();
+        $this->slug = (string) u($config['id'])->kebab()->lower();
 
         $storageDir = $generatedDir.'/'.static::PROVIDERS_DIR;
         $this->storageFilePath = $storageDir.'/'.$this->getSlug().'.json';
@@ -40,12 +38,14 @@ class DataPercentSerie extends AbstractDataSerie
     }
 
     /**
-     * @param DateTime $trackDate
-     *
      * @throws JsonException
      */
-    public function collect(DateTime $trackDate): void
+    public function collect(DateTimeImmutable $trackDate, bool $reset): void
     {
+        if ($reset) {
+            $this->reset();
+        }
+
         $dataSerie = $this->getDataSerie();
 
         $totalPercentProvider = $this->getTotalPercentDataSerie();
@@ -71,19 +71,19 @@ class DataPercentSerie extends AbstractDataSerie
     protected function validate(): void
     {
         if (!$this->dataSerie instanceof DataStandardSerie) {
-            throw new \RuntimeException(sprintf('Unable to collect data. %s expect data serie, got %s', DataStandardSerie::class, get_class($this->dataSerie)));
+            throw new RuntimeException(sprintf('Unable to collect data. %s expect data serie, got %s', DataStandardSerie::class, get_class($this->dataSerie)));
         }
 
         if ($this->dataSerie->getId() === $this->getId()) {
-            throw new \RuntimeException('You can\'t refer the data serie itself.');
+            throw new RuntimeException('You can\'t refer the data serie itself.');
         }
 
         if (!$this->totalPercentDataSerie instanceof DataStandardSerie) {
-            throw new \RuntimeException(sprintf('Unable to collect data. %s expect data serie, got %s', DataStandardSerie::class, get_class($this->totalPercentDataSerie)));
+            throw new RuntimeException(sprintf('Unable to collect data. %s expect data serie, got %s', DataStandardSerie::class, get_class($this->totalPercentDataSerie)));
         }
 
         if ($this->totalPercentDataSerie->getId() === $this->getId()) {
-            throw new \RuntimeException('You can\'t refer the data serie itself.');
+            throw new RuntimeException('You can\'t refer the data serie itself.');
         }
     }
 }

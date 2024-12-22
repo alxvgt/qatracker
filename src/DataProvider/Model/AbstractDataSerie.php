@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Alxvng\QATracker\DataProvider\Model;
 
-use DateTime;
+use DateTimeImmutable;
 use JsonException;
 use RuntimeException;
+
+use const JSON_THROW_ON_ERROR;
+
+use function is_array;
 
 abstract class AbstractDataSerie
 {
@@ -26,11 +32,7 @@ abstract class AbstractDataSerie
         return isset($providerConfig['provider'], $providerConfig['totalPercentProvider']);
     }
 
-    /**
-     * @param $value
-     * @param DateTime $trackDate
-     */
-    public function addData($value, DateTime $trackDate): void
+    public function addData($value, DateTimeImmutable $trackDate): void
     {
         $this->data[$trackDate->format(static::DATE_FORMAT)] = round($value, 2);
         $data = $this->data;
@@ -41,14 +43,25 @@ abstract class AbstractDataSerie
     /**
      * @throws JsonException
      */
-    public function save()
+    public function save(): void
     {
         $dir = dirname($this->getStorageFilePath());
-        if (!is_dir($dir) && !mkdir($dir, 0777, true)) {
+        if (!is_dir($dir) && !mkdir($dir, 0777, true) && !is_dir($dir)) {
             throw new RuntimeException(sprintf('Directory "%s" was not created', $dir));
         }
 
         file_put_contents($this->getStorageFilePath(), json_encode($this->data, JSON_THROW_ON_ERROR, 512));
+    }
+
+    public function reset(): void
+    {
+        $dir = dirname($this->getStorageFilePath());
+        if (!is_dir($dir) && !mkdir($dir, 0777, true) && !is_dir($dir)) {
+            throw new RuntimeException(sprintf('Directory "%s" was not created', $dir));
+        }
+
+        file_put_contents($this->getStorageFilePath(), '');
+        $this->data = [];
     }
 
     public function getSlug(): string
@@ -71,17 +84,18 @@ abstract class AbstractDataSerie
         return $this->data;
     }
 
-    abstract public function collect(DateTime $trackDate): void;
+    abstract public function collect(DateTimeImmutable $trackDate, bool $reset): void;
 
     /**
      * @throws JsonException
      */
-    protected function load()
+    protected function load(): void
     {
         if (!file_exists($this->getStorageFilePath())) {
             return;
         }
 
-        $this->data = json_decode(file_get_contents($this->getStorageFilePath()), true, 512, JSON_THROW_ON_ERROR);
+        $data = json_decode(file_get_contents($this->getStorageFilePath()), true);
+        $this->data = is_array($data) ? $data : [];
     }
 }
