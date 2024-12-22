@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Alxvng\QATracker\Tests\Chart;
 
 use Alxvng\QATracker\Chart\Chart;
@@ -10,7 +12,7 @@ use RuntimeException;
 
 class ChartTest extends TestCase
 {
-    public function testConstructException()
+    public function testConstructException(): void
     {
         $this->expectException(RuntimeException::class);
 
@@ -23,7 +25,7 @@ class ChartTest extends TestCase
         new Chart($config, $providersStack);
     }
 
-    public function testConstruct()
+    public function testConstruct(): void
     {
         $config['type'] = 'test';
         $config['withHistory'] = 'test';
@@ -47,7 +49,7 @@ class ChartTest extends TestCase
     /**
      * @throws JsonException
      */
-    public function testGetFirstProvider()
+    public function testGetFirstProvider(): void
     {
         $config['type'] = 'test';
         $config['withHistory'] = 'test';

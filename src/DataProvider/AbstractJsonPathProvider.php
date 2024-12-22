@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Alxvng\QATracker\DataProvider;
 
 use Alxvng\QATracker\DataProvider\Exception\FileNotFoundException;
 use JsonException;
+use RuntimeException;
 use Symfony\Component\Filesystem\Filesystem;
 
 abstract class AbstractJsonPathProvider implements DataProviderInterface
@@ -19,9 +22,6 @@ abstract class AbstractJsonPathProvider implements DataProviderInterface
     /**
      * XpathProvider constructor.
      *
-     * @param string $baseDir
-     * @param string $inputFilePath
-     * @param string $jsonPathQuery
      * @throws FileNotFoundException
      */
     public function __construct(string $baseDir, string $inputFilePath, string $jsonPathQuery)
@@ -35,13 +35,13 @@ abstract class AbstractJsonPathProvider implements DataProviderInterface
         }
 
         if (!in_array(mime_content_type($this->inputFilePath), static::MIME_TYPES, true)) {
-            throw new \RuntimeException(sprintf('The file %s (%s) must have one the mime types : %s', $this->inputFilePath, mime_content_type($this->inputFilePath), implode(',', static::MIME_TYPES)));
+            throw new RuntimeException(sprintf('The file %s (%s) must have one the mime types : %s', $this->inputFilePath, mime_content_type($this->inputFilePath), implode(',', static::MIME_TYPES)));
         }
 
         try {
             json_decode(file_get_contents($this->inputFilePath), true, 512, JSON_THROW_ON_ERROR);
         } catch (JsonException $e) {
-            throw new \RuntimeException(sprintf('The file %s seems does not contain valid json data', $this->inputFilePath));
+            throw new RuntimeException(sprintf('The file %s seems does not contain valid json data', $this->inputFilePath));
         }
     }
 }

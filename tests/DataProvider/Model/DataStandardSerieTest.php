@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Alxvng\QATracker\Tests\DataProvider\Model;
 
 use Alxvng\QATracker\DataProvider\DataProviderInterface;
+use Alxvng\QATracker\DataProvider\Exception\FileNotFoundException;
 use Alxvng\QATracker\DataProvider\Model\DataStandardSerie;
 use Alxvng\QATracker\Tests\Mock;
-use DateTime;
+use DateTimeImmutable;
 use Generator;
 use JsonException;
 use PHPUnit\Framework\TestCase;
@@ -14,12 +17,9 @@ use RuntimeException;
 class DataStandardSerieTest extends TestCase
 {
     /**
-     * @param callable          $assert
-     * @param callable          $expectException
-     * @param DataStandardSerie $object
      * @dataProvider getInstanceProvider
      */
-    public function testGetInstance(DataStandardSerie $object, callable $assert = null, callable $expectException = null)
+    public function testGetInstance(DataStandardSerie $object, ?callable $assert = null, ?callable $expectException = null): void
     {
         if ($expectException) {
             $expectException($this);
@@ -33,21 +33,21 @@ class DataStandardSerieTest extends TestCase
     }
 
     /**
-     * @throws JsonException
-     *
      * @return Generator
+     *
+     * @throws JsonException
      */
     public function getInstanceProvider()
     {
-        yield [Mock::dataSerie(), function ($result) {
+        yield [Mock::dataSerie(), function ($result): void {
             $this->assertInstanceOf(DataProviderInterface::class, $result);
         }];
 
-        yield [Mock::dataSerieWithBadFilePath(), null, function (TestCase $self) {
-            $self->expectException(RuntimeException::class);
+        yield [Mock::dataSerieWithBadFilePath(), null, function (TestCase $self): void {
+            $self->expectException(FileNotFoundException::class);
         }];
 
-        yield [Mock::dataSerieWithBadXml(), null, function (TestCase $self) {
+        yield [Mock::dataSerieWithBadXml(), null, function (TestCase $self): void {
             $self->expectException(RuntimeException::class);
         }];
     }
@@ -55,14 +55,14 @@ class DataStandardSerieTest extends TestCase
     /**
      * @throws JsonException
      */
-    public function testCollect()
+    public function testCollect(): void
     {
         $dataSerie = Mock::dataSerie();
 
         $filesizeBefore = file_exists($dataSerie->getStorageFilePath()) ? filesize($dataSerie->getStorageFilePath()) : 0;
         $dataBefore = $dataSerie->getData();
 
-        $dataSerie->collect(new DateTime());
+        $dataSerie->collect(new DateTimeImmutable(), false);
 
         $dataAfter = $dataSerie->getData();
         $filesizeAfter = file_exists($dataSerie->getStorageFilePath()) ? filesize($dataSerie->getStorageFilePath()) : 0;

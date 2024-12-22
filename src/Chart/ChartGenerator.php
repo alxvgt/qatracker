@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Alxvng\QATracker\Chart;
 
 use Alxvng\QATracker\DataProvider\Model\AbstractDataSerie;
@@ -9,11 +11,7 @@ use Goat1000\SVGGraph\SVGGraph;
 class ChartGenerator
 {
     /**
-     * @param        $values
      * @param string $type
-     * @param array $settings
-     *
-     * @return mixed
      */
     public static function generate($values, $structure, $type = LineGraph::class, array $settings = [])
     {
@@ -49,8 +47,8 @@ class ChartGenerator
                 'data_label_click' => 'hide',
                 'data_label_shadow_opacity' => 0,
                 'data_label_padding' => 1,
-//                'marker_colour' => $darkRed,
-//                'marker_stroke_colour' => $darkRed,
+                //                'marker_colour' => $darkRed,
+                //                'marker_stroke_colour' => $darkRed,
                 'line_stroke_width' => 2,
                 'line_curve' => 0.4,
                 'datetime_keys' => true,
@@ -62,7 +60,7 @@ class ChartGenerator
                 'precision' => 2,
                 'exception_throw' => false,
             ],
-            $settings
+            $settings,
         );
 
         $width = 550;

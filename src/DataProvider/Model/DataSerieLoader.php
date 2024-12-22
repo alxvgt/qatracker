@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Alxvng\QATracker\DataProvider\Model;
 
 use Alxvng\QATracker\Configuration\Configuration;
@@ -39,6 +41,5 @@ class DataSerieLoader
         }
 
         return $dataSeriesStack;
-
     }
 }

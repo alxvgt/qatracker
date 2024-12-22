@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Alxvng\QATracker\Tests\DataProvider\Finder;
 
 use Alxvng\QATracker\DataProvider\Finder\ProviderFinder;
@@ -9,7 +11,7 @@ use RuntimeException;
 
 class ProviderFinderTest extends TestCase
 {
-    public function testFindById()
+    public function testFindById(): void
     {
         $serie = Mock::dataSerie();
         $serie2 = Mock::dataSerieWithBadFilePath();
@@ -22,7 +24,7 @@ class ProviderFinderTest extends TestCase
         $this->assertSame($serie, $result);
     }
 
-    public function testFindByIdException()
+    public function testFindByIdException(): void
     {
         $this->expectException(RuntimeException::class);
 

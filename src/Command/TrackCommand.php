@@ -1,35 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Alxvng\QATracker\Command;
 
-use Alxvng\QATracker\Chart\Chart;
-use Alxvng\QATracker\Chart\ChartGenerator;
-use Alxvng\QATracker\Configuration\Configuration;
 use Alxvng\QATracker\DataProvider\Exception\FileNotFoundException;
 use Alxvng\QATracker\DataProvider\Model\AbstractDataSerie;
-use Alxvng\QATracker\DataProvider\Model\DataPercentSerie;
 use Alxvng\QATracker\DataProvider\Model\DataSerieLoader;
-use Alxvng\QATracker\DataProvider\Model\DataStandardSerie;
-use Alxvng\QATracker\Root\Root;
-use Alxvng\QATracker\Twig\TwigFactory;
 use DateMalformedStringException;
 use DateTime;
 use DateTimeImmutable;
-use Goat1000\SVGGraph\SVGGraph;
-use JsonException;
 use RuntimeException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\ConsoleSectionOutput;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Filesystem\Filesystem;
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
+use Throwable;
 
 #[AsCommand(name: 'track')]
 class TrackCommand extends BaseCommand
@@ -51,7 +39,7 @@ class TrackCommand extends BaseCommand
                 null,
                 InputOption::VALUE_REQUIRED,
                 sprintf('Use this date instead today to collect data (use format "%s")', AbstractDataSerie::DATE_FORMAT),
-                (new DateTime())->format(AbstractDataSerie::DATE_FORMAT)
+                (new DateTime())->format(AbstractDataSerie::DATE_FORMAT),
             )
             ->addOption(
                 'reset-data-series',
@@ -62,10 +50,6 @@ class TrackCommand extends BaseCommand
     }
 
     /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     *
-     * @return int
      * @throws DateMalformedStringException
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -73,6 +57,7 @@ class TrackCommand extends BaseCommand
         parent::execute($input, $output);
 
         $io = new SymfonyStyle($input, $output);
+
         try {
             $io->title('Track your QA indicators');
 
@@ -83,35 +68,36 @@ class TrackCommand extends BaseCommand
             try {
                 /** @var AbstractDataSerie $dataSerie */
                 foreach ($dataSeriesStack as $dataSerie) {
-
                     $message = sprintf('Collecting new indicator for "%s"...', $dataSerie->getId());
                     $io->writeln($message);
 
                     try {
                         $dataSerie->collect($trackDate, $resetDataSeries);
                     } catch (FileNotFoundException $t) {
-                        $io->writeln($message . ' ' . static::OUTPUT_SKIP . self::yellow(' (' . $t->getMessage() . ')'));
+                        $io->writeln($message.' '.static::OUTPUT_SKIP.self::yellow(' ('.$t->getMessage().')'));
+
                         continue;
                     }
 
-                    $io->writeln($message . ' ' . static::OUTPUT_DONE);
+                    $io->writeln($message.' '.static::OUTPUT_DONE);
                 }
                 $io->newLine();
             } catch (FileNotFoundException $t) {
                 $io->warning([$t->getMessage(), 'Skip']);
-            } catch (\Throwable $t) {
+            } catch (Throwable $t) {
                 $io->newLine();
                 $io->error([$t->getMessage(), 'Have you installed the tools ? See help.']);
+
                 return Command::FAILURE;
             }
 
-            $io->success("Well done ! You have track new QA indicators !");
+            $io->success('Well done ! You have track new QA indicators !');
 
             return Command::SUCCESS;
-        } catch (\RuntimeException $e) {
+        } catch (RuntimeException $e) {
             $io->error($e->getMessage());
+
             return Command::FAILURE;
         }
     }
-
 }

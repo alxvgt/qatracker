@@ -1,12 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Alxvng\QATracker\DataProvider\Model;
 
-use DateTime;
 use DateTimeImmutable;
 use JsonException;
 use RuntimeException;
+
 use const JSON_THROW_ON_ERROR;
+
+use function is_array;
 
 abstract class AbstractDataSerie
 {
@@ -28,9 +32,6 @@ abstract class AbstractDataSerie
         return isset($providerConfig['provider'], $providerConfig['totalPercentProvider']);
     }
 
-    /**
-     * @param $value
-     */
     public function addData($value, DateTimeImmutable $trackDate): void
     {
         $this->data[$trackDate->format(static::DATE_FORMAT)] = round($value, 2);
@@ -42,7 +43,7 @@ abstract class AbstractDataSerie
     /**
      * @throws JsonException
      */
-    public function save()
+    public function save(): void
     {
         $dir = dirname($this->getStorageFilePath());
         if (!is_dir($dir) && !mkdir($dir, 0777, true) && !is_dir($dir)) {
@@ -52,7 +53,7 @@ abstract class AbstractDataSerie
         file_put_contents($this->getStorageFilePath(), json_encode($this->data, JSON_THROW_ON_ERROR, 512));
     }
 
-    public function reset()
+    public function reset(): void
     {
         $dir = dirname($this->getStorageFilePath());
         if (!is_dir($dir) && !mkdir($dir, 0777, true) && !is_dir($dir)) {
@@ -88,13 +89,13 @@ abstract class AbstractDataSerie
     /**
      * @throws JsonException
      */
-    protected function load()
+    protected function load(): void
     {
         if (!file_exists($this->getStorageFilePath())) {
             return;
         }
 
         $data = json_decode(file_get_contents($this->getStorageFilePath()), true);
-        $this->data = \is_array($data) ? $data : [];
+        $this->data = is_array($data) ? $data : [];
     }
 }

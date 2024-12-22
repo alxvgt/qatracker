@@ -1,16 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Alxvng\QATracker\Command;
 
 use Alxvng\QATracker\Chart\Chart;
 use Alxvng\QATracker\Chart\ChartGenerator;
 use Alxvng\QATracker\Configuration\Configuration;
-use Alxvng\QATracker\DataProvider\Exception\FileNotFoundException;
-use Alxvng\QATracker\DataProvider\Model\AbstractDataSerie;
-use Alxvng\QATracker\DataProvider\Model\DataPercentSerie;
 use Alxvng\QATracker\DataProvider\Model\DataSerieLoader;
-use Alxvng\QATracker\DataProvider\Model\DataStandardSerie;
-use Alxvng\QATracker\Root\Root;
 use Alxvng\QATracker\Twig\TwigFactory;
 use DateTime;
 use Goat1000\SVGGraph\SVGGraph;
@@ -19,16 +16,15 @@ use RuntimeException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\ConsoleSectionOutput;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Filesystem;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
+
+use function dirname;
 
 #[AsCommand(name: 'report')]
 class ReportCommand extends BaseCommand
@@ -48,14 +44,11 @@ class ReportCommand extends BaseCommand
     }
 
     /**
-     * @param InputInterface $input
      * @param ConsoleSectionOutput $output
      *
-     * @return int
      * @throws SyntaxError
      * @throws JsonException
      * @throws LoaderError
-     *
      * @throws RuntimeError
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -64,11 +57,12 @@ class ReportCommand extends BaseCommand
 
         $io = new SymfonyStyle($input, $output);
         $twig = TwigFactory::getTwig();
+
         try {
             $io->title('Generate report from your QA indicators');
 
             $fs = new Filesystem();
-            $fs->mkdir(\dirname(Configuration::getReportFilename()));
+            $fs->mkdir(dirname(Configuration::getReportFilename()));
 
             $dataSeriesStack = $this->dataSerieLoader->load();
 
@@ -85,17 +79,17 @@ class ReportCommand extends BaseCommand
                     $chart->getChartValues(),
                     $chart->getChartStructure(),
                     $chart->getType(),
-                    $chart->getGraphSettings()
+                    $chart->getGraphSettings(),
                 );
                 $message .= '.';
                 $output->writeln($message);
             }
             $io->newLine();
 
-            if ($graphs !== []) {
+            if ([] !== $graphs) {
                 /** @var ConsoleSectionOutput $section */
                 $section = $output->section();
-                $message = sprintf('Rendering report...');
+                $message = 'Rendering report...';
                 $section->writeln($message);
 
                 $html = $twig->render('index.html.twig', [
@@ -105,26 +99,25 @@ class ReportCommand extends BaseCommand
                     'generatedAt' => new DateTime(),
                 ]);
                 file_put_contents(Configuration::getReportFilename(), $html);
-                $section->overwrite($message . ' ' . static::OUTPUT_DONE);
+                $section->overwrite($message.' '.static::OUTPUT_DONE);
                 $io->newLine();
             }
 
             $io->success(
                 [
                     sprintf(
-                        "Well done !\n" .
+                        "Well done !\n".
                         'Report generated at : %s',
-                        Configuration::getReportFilename()
+                        Configuration::getReportFilename(),
                     ),
-                ]
+                ],
             );
 
             return Command::SUCCESS;
-        } catch (\RuntimeException $e) {
+        } catch (RuntimeException $e) {
             $io->error($e->getMessage());
 
             return Command::FAILURE;
         }
     }
-
 }

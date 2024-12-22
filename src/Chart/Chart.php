@@ -1,10 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Alxvng\QATracker\Chart;
 
 use Alxvng\QATracker\DataProvider\Model\AbstractDataSerie;
 use Alxvng\QATracker\DataProvider\Model\DataStandardSerie;
 use RuntimeException;
+
+use function array_keys;
+use function array_values;
 
 class Chart
 {
@@ -14,9 +19,6 @@ class Chart
 
     /**
      * Chart constructor.
-     *
-     * @param array $config
-     * @param array $providersStack
      */
     public function __construct(array $config, array $providersStack)
     {
@@ -37,7 +39,7 @@ class Chart
     public function getChartValues(): array
     {
         $values = [];
-        $serieNames = \array_keys($this->providers);
+        $serieNames = array_keys($this->providers);
         /**
          * @var srting $serieName
          * @var DataStandardSerie $serie
@@ -45,21 +47,22 @@ class Chart
         foreach ($this->providers as $serieName => $serie) {
             foreach ($serie->getData() as $date => $metric) {
                 $values[$date][0] = $date;
-                $values[$date][array_search($serieName, $serieNames)+1] = $metric;
+                $values[$date][array_search($serieName, $serieNames) + 1] = $metric;
             }
         }
 
-        return \array_values($values);
+        return array_values($values);
     }
 
     public function getChartStructure(): array
     {
         $firstMeasure = $this->getChartValues();
         $firstMeasure = \reset($firstMeasure);
+
         return [
             'structure' => [
                 'key' => 0,
-                'value' => range(1, (count($firstMeasure) - 1)),
+                'value' => range(1, count($firstMeasure) - 1),
             ],
         ];
     }

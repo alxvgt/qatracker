@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Alxvng\QATracker\Tests;
 
 use Alxvng\QATracker\DataProvider\Model\DataPercentSerie;
@@ -9,8 +11,6 @@ use JsonException;
 class Mock
 {
     /**
-     * @param ?string $id
-     *
      * @throws JsonException
      */
     public static function dataSerieWithBadXml(?string $id = null): DataStandardSerie
@@ -28,8 +28,6 @@ class Mock
     }
 
     /**
-     * @param ?string $id
-     *
      * @throws JsonException
      */
     public static function dataSerie(?string $id = null): DataStandardSerie
@@ -47,8 +45,6 @@ class Mock
     }
 
     /**
-     * @param ?string $id
-     *
      * @throws JsonException
      */
     public static function dataSerieWithBadFilePath(?string $id = null): DataStandardSerie
@@ -80,8 +76,8 @@ class Mock
             $config,
             '/tmp',
             [
-                Mock::dataSerie()->getId() => Mock::dataSerie(),
-            ]
+                self::dataSerie()->getId() => self::dataSerie(),
+            ],
         );
 
         $config = [
@@ -94,9 +90,9 @@ class Mock
             $config,
             '/tmp',
             [
-                Mock::dataSerie()->getId() => Mock::dataSerie(),
+                self::dataSerie()->getId() => self::dataSerie(),
                 $percent->getId() => $percent,
-            ]
+            ],
         );
     }
 
@@ -115,9 +111,9 @@ class Mock
             $config,
             '/tmp',
             [
-                Mock::dataSerie()->getId() => Mock::dataSerie(),
-                Mock::dataSerie()->getId() => Mock::dataSerie(),
-            ]
+                self::dataSerie()->getId() => self::dataSerie(),
+                self::dataSerie()->getId() => self::dataSerie(),
+            ],
         );
     }
 
@@ -136,8 +132,8 @@ class Mock
             $config,
             '/tmp',
             [
-                Mock::dataSerie()->getId() => Mock::dataSerie(),
-            ]
+                self::dataSerie()->getId() => self::dataSerie(),
+            ],
         );
     }
 }

@@ -16,10 +16,14 @@ You can view an example of a report here : [Demo](https://alxvgt.github.io/qatra
 You can view the requirements on packagist website : https://packagist.org/packages/alxvng/qatracker
 
 ## Installation
-Install/Replacer the phar (master):
+1. Install or replace the phar:
+```bash
+rm -f qatracker.phar && wget https://github.com/alxvgt/qa-tracker/raw/master/release/qatracker.phar
+```
+2. (option) Install the default configuration file :
 
 ```bash
-rm qatracker.phar && wget https://github.com/alxvgt/qa-tracker/raw/master/release/qatracker.phar && wget --directory-prefix=.qatracker https://github.com/alxvgt/qa-tracker/raw/master/.qatracker.dist/config.yaml
+wget --directory-prefix=.qatracker https://github.com/alxvgt/qa-tracker/raw/master/.qatracker.dist/config.yaml
 ```
 
 If you prefer more stable version, checkout the last stable release at https://github.com/alxvgt/qatracker/releases
@@ -34,9 +38,9 @@ php qatracker.phar
 ### Getting started
 For a first usage se recommend you those steps :
 1. Install QA tools : `php qatracker.phar install -n`
-2. Adapt the configuration to your project (paths, etc.) : `nano .qatracker/config.yaml`
+2. (option) Create or adapt the configuration to your project (paths, etc.) : `nano .qatracker/config.yaml`
 1. Analyze, track then report your project : `php qatracker.phar history --step=XXX`
-   - XXX is the number of days between each anlysis based on your git history. It should be high (180+) if your project is old, low (7+) if your project is new.
+   - XXX is the number of days between each analysis based on your git history. It should be high (180+) if your project is old, low (7+) if your project is new.
 
 ## Configuration `config.yaml`
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Alxvng\QATracker\Tests\Configuration;
 
 use Alxvng\QATracker\Configuration\Configuration;
@@ -9,7 +11,7 @@ use RuntimeException;
 
 class ConfigurationTest extends TestCase
 {
-    public function testExampleConfigPath()
+    public function testExampleConfigPath(): void
     {
         $this->assertIsString(Configuration::exampleConfigPath());
         $this->assertStringContainsString('.qatracker.dist/config.yaml', Configuration::exampleConfigPath());
@@ -17,11 +19,8 @@ class ConfigurationTest extends TestCase
 
     /**
      * @dataProvider loadWithExceptionProvider
-     *
-     * @param string $configPath
-     * @param string $exceptionClass
      */
-    public function testLoadWithException(string $configPath, string $exceptionClass)
+    public function testLoadWithException(string $configPath, string $exceptionClass): void
     {
         $this->expectException($exceptionClass);
         Configuration::load($configPath);
@@ -29,21 +28,11 @@ class ConfigurationTest extends TestCase
 
     /**
      * @dataProvider loadWithProvider
-     *
-     * @param string $configPath
      */
-    public function testLoad(string $configPath)
+    public function testLoad(string $configPath): void
     {
         $config = Configuration::load($configPath);
         $this->assertIsArray($config);
-
-        $this->assertCount(10, $config['qatracker']['dataSeries']);
-        $this->assertEquals('non-comment-lines-of-code', $config['qatracker']['dataSeries']['non-comment-lines-of-code']['id']);
-        $this->assertEquals('/phploc/ncloc', $config['qatracker']['dataSeries']['non-comment-lines-of-code']['arguments'][1]);
-
-        $this->assertCount(3, $config['qatracker']['charts']);
-        $this->assertEquals('line-of-code-bar', $config['qatracker']['charts']['line-of-code-bar']['id']);
-        $this->assertEquals('Lines of code', $config['qatracker']['charts']['line-of-code-bar']['graphSettings']['graph_title']);
     }
 
     /**

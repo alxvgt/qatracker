@@ -1,9 +1,6 @@
 #!/usr/bin/env php
 <?php
 
-use Alxvng\QATracker\Command\TrackCommand;
-use Alxvng\QATracker\Configuration\Configuration;
-use Alxvng\QATracker\Root\Root;
 use Symfony\Component\Finder\Finder;
 
 include __DIR__ . '/bootstrap.php';

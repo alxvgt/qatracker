@@ -1,27 +1,29 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Alxvng\QATracker\Configuration;
 
 use Alxvng\QATracker\DataProvider\Model\AbstractDataSerie;
 use Alxvng\QATracker\Helper\Helper;
 use Alxvng\QATracker\Root\Root;
 use RuntimeException;
-use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\Yaml\Yaml;
 
 class Configuration
 {
     public static function exampleConfigPath(): string
     {
-        return Root::internal() . '/.qatracker.dist/config.yaml';
+        return Root::internal().'/.qatracker.dist/config.yaml';
     }
 
     public static function load(?string $configPath = null): array
     {
-        $configPath = $configPath ?? Root::getConfigPath();
+        $configPath ??= Root::getConfigPath();
 
         if (!file_exists($configPath)) {
             $exampleConfig = file_get_contents(static::exampleConfigPath());
+
             throw new RuntimeException(sprintf("File %s does not exists. You should run :\n#> touch .qatracker/config.yaml\n\nNow edit this file to put your custom configuration, example : \n%s", $configPath, $exampleConfig));
         }
 
@@ -36,7 +38,7 @@ class Configuration
         $config = [];
         if (isset($rootConfig['imports'])) {
             foreach ($rootConfig['imports'] as $import) {
-                $config = array_merge_recursive($config, Yaml::parseFile($baseDir . '/' . $import['resource']));
+                $config = array_merge_recursive($config, Yaml::parseFile($baseDir.'/'.$import['resource']));
             }
         }
         $config = array_merge_recursive($config, $rootConfig);
@@ -66,6 +68,59 @@ class Configuration
         $config = static::addIds($config);
 
         return $config;
+    }
+
+    public static function workDir(): string
+    {
+        return self::load()['qatracker']['workDir'] ?? '/tmp/qatracker';
+    }
+
+    public static function projectWorkDir(): string
+    {
+        return self::workDir().'/project';
+    }
+
+    public static function install(): array
+    {
+        return self::load()['qatracker']['install'] ?? [];
+    }
+
+    public static function analyze(): array
+    {
+        return self::load()['qatracker']['analyze'] ?? [];
+    }
+
+    public static function getGeneratedDir(): string
+    {
+        return Root::getConfigDir().'/generated';
+    }
+
+    public static function getReportDir(): string
+    {
+        return self::getGeneratedDir().'/report';
+    }
+
+    public static function getReportFilename(): string
+    {
+        return self::getReportDir().'/index.html';
+    }
+
+    public static function getDataSeries(): array
+    {
+        $config = self::load()['qatracker']['dataSeries'];
+        $config = (new Helper())->interpretArray($config);
+
+        return (new Helper())->interpretArray($config);
+    }
+
+    public static function getCharts(): array
+    {
+        return self::load()['qatracker']['charts'];
+    }
+
+    public static function version(): string
+    {
+        return '0.6.0';
     }
 
     protected static function validateProvider(string $id, array $provider): void
@@ -156,55 +211,5 @@ class Configuration
         $config['qatracker']['charts'] = $charts;
 
         return $config;
-    }
-
-    public static function tmpDir(): string
-    {
-        return self::load()['qatracker']['tmpDir'] ?? '/tmp/qatracker';
-    }
-    public static function projectTmpDir(): string
-    {
-        return self::tmpDir().'/project';
-    }
-
-    public static function install(): array
-    {
-        return self::load()['qatracker']['install'] ?? [];
-    }
-
-    public static function analyze(): array
-    {
-        return self::load()['qatracker']['analyze'] ?? [];
-    }
-
-    public static function getGeneratedDir(): string
-    {
-        return Root::getConfigDir() . '/generated';
-    }
-
-    public static function getReportDir(): string
-    {
-        return self::getGeneratedDir() . '/report';
-    }
-
-    public static function getReportFilename(): string
-    {
-        return self::getReportDir() . '/index.html';
-    }
-
-    public static function getDataSeries():array
-    {
-        $config = self::load()['qatracker']['dataSeries'];
-        $config = (new Helper())->interpretArray($config);
-        return (new Helper())->interpretArray($config);
-    }
-    public static function getCharts():array
-    {
-        return self::load()['qatracker']['charts'];
-    }
-
-    public static function version(): string
-    {
-        return '0.6.0';
     }
 }

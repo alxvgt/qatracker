@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Alxvng\QATracker\Tests\DataProvider;
 
 use Alxvng\QATracker\DataProvider\JsonPathSumProvider;
@@ -7,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class JsonPathSumProviderTest extends TestCase
 {
-    public function testFetchData()
+    public function testFetchData(): void
     {
         $provider = new JsonPathSumProvider(getcwd(), 'tests/resource/log/phpmetrics/log.json', '$.*.mi');
         $result = $provider->fetchData();
